@@ -333,6 +333,55 @@ textarea::placeholder{color:var(--dim)}
 .row span:last-child{color:var(--mut);font-variant-numeric:tabular-nums;
  white-space:nowrap;font-size:14px}
 
+/* ===== FOOD ===== */
+.fhead{margin-bottom:var(--s4)}
+.fsub{margin:0;font-size:15px;color:var(--mut);line-height:1.5;letter-spacing:-.01em;max-width:44ch}
+.eatc{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));
+ border:.5px solid var(--line);border-radius:var(--r-lg);padding:var(--s4);margin-bottom:var(--s2);
+ box-shadow:var(--shadow);transition:.3s var(--ease);position:relative;overflow:hidden}
+.eatc:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:transparent;transition:.3s}
+.eatc.on{border-color:transparent;box-shadow:var(--shadow2),0 0 0 1.5px var(--acc)}
+.eatc.on:before{background:linear-gradient(180deg,var(--c1),var(--c2))}
+.ehead{display:flex;gap:12px;align-items:flex-start;margin-bottom:11px}
+.eemo{font-size:30px;line-height:1;flex:0 0 auto;filter:saturate(1.1)}
+.einfo{flex:1;min-width:0}
+.ename{font-size:19px;font-weight:600;letter-spacing:-.03em;display:flex;align-items:center;
+ gap:8px;flex-wrap:wrap;line-height:1.2}
+.bdg{font-size:10.5px;font-weight:600;letter-spacing:.02em;padding:3px 8px;border-radius:6px;
+ background:var(--line2);color:var(--mut)}
+.bdg.bib{background:var(--redbg);color:var(--red)}
+.bdg.sel{background:var(--accbg);color:var(--acctx)}
+.bdg.warn{background:var(--ambbg);color:var(--amb)}
+.ekind{font-size:13.5px;color:var(--mut);margin-top:3px;letter-spacing:-.01em}
+.pr{color:var(--grn);font-weight:600;letter-spacing:1px}
+.pro{opacity:.28;color:var(--mut)}
+.emeta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px}
+.mchip{font-size:12px;background:var(--surf2);border:.5px solid var(--line2);color:var(--ink2);
+ padding:5px 10px;border-radius:99px;letter-spacing:-.005em;white-space:nowrap}
+.eorder,.enote{margin:0 0 7px;font-size:14px;color:var(--ink2);line-height:1.5;letter-spacing:-.01em}
+.enote{color:var(--mut);font-size:13.5px}
+.eorder b{color:var(--ink);font-weight:600}
+.slots{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:13px 0 0;
+ padding-top:13px;border-top:.5px solid var(--line2)}
+.slab{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;
+ color:var(--dim);width:100%;margin-bottom:2px}
+.slot{font:inherit;font-size:13px;font-weight:500;letter-spacing:-.01em;padding:9px 14px;
+ border-radius:99px;border:.5px dashed var(--line);background:transparent;color:var(--ink2);
+ cursor:pointer;transition:.2s var(--ease);min-height:40px}
+.slot:hover{border-style:solid;border-color:var(--acc);color:var(--acctx)}
+.slot.on{background:var(--btn);border:.5px solid var(--btn);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,90,190,.3)}
+.slot:active{transform:scale(.96)}
+.eatc .acts{margin-top:12px}
+.eatc .btn{min-height:40px;font-size:13.5px;padding:9px 16px;flex:0 1 auto;min-width:0}
+/* added row in the timeline */
+.ev.eatrow:before{background:var(--grn);box-shadow:0 0 0 4px var(--surf),0 0 0 6px var(--grnbg)}
+.ev.eatrow .ti{font-weight:600}
+.mine{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+ background:var(--grnbg);color:var(--grn);padding:2.5px 7px;border-radius:5px;margin-left:8px;
+ vertical-align:2px}
+.badge.fb{background:var(--grn)}
+
 /* ================= NAV ================= */
 nav{position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;justify-content:center;
  background:var(--glass);backdrop-filter:saturate(180%) blur(22px);
@@ -416,6 +465,13 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
     <div id="lst"></div>
   </div>
 
+  <div class="pane" id="p-food">
+    <div class="fhead">
+      <h2 style="margin-top:2px">Suggestions</h2>
+      <p class="fsub">Six places worth eating at. Pick a slot and it drops into that day's plan — nothing is fixed until you add it.</p>
+    </div>
+    <div id="eatlist"></div>
+  </div>
   <div class="pane" id="p-info"></div>
 
   <footer>
@@ -429,6 +485,7 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 <nav><div class="navin">
   <button class="on" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
   <button data-p="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2.2 2.2L19 6.5"/><path d="M20 12.5V18a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h8"/></svg><b>Bookings</b><i class="badge" id="bdg"></i></button>
+  <button data-p="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a2.5 2.5 0 002.5 2.5H9V21M6 3v5M9.5 3v5M17.5 3c-1.3 1.4-2 3.4-2 5.4s.7 3.4 2 4.4V21"/></svg><b>Food</b><i class="badge fb" id="fbdg"></i></button>
   <button data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
 </div></nav>
 
@@ -464,9 +521,7 @@ const DAYS=[
  ["16:30","Head down","Last cable car around 21:00, but don't cut it fine"],
  ["g","50 min","car","Ba Na Hills → villa"],
  ["17:45","Massage, then the beach","My Khe is a 5 min walk"],
- ["g","9 min","walk","Villa → Thìa Gỗ · 53 Phan Thúc Duyện"],
- ["18:15","Dinner at Thìa Gỗ","key","Michelin Bib Gourmand · bánh xèo, phở Nam, lẩu mắm · no bookings, so go early"],
- ["g","15 min","car","Thìa Gỗ → Han River pier"],
+ ["g","15 min","car","Villa → Han River pier"],
  ["19:45","Han River cruise","key","~1 hr · book the sailing that covers the 9pm bridge show"]],
  f:{b:"Decide on the morning",x:"The summit spends a lot of its time inside a cloud and same-day tickets exist. If it's fogged in you're paying full price to look at white nothing — swap to Marble Mountain and Son Tra instead."}},
 
@@ -483,9 +538,7 @@ const DAYS=[
  ["13:30","Museums, markets, wandering","2–3 hrs · ticket covers five heritage sites"],
  ["g","40 min","car","Hoi An → villa"],
  ["16:00","Free time","Massage, beach, nap before the long night"],
- ["g","4 min","walk","Villa → Miss Nhi · 39 An Thượng 30"],
- ["18:30","Early dinner at Miss Nhi","Cheap and fast · bánh xèo is the one · open to midnight"],
- ["g","10 min","car","Miss Nhi → Dragon Bridge · arrive before 20:45"],
+ ["g","10 min","car","Villa → Dragon Bridge · arrive before 20:45"],
  ["20:15","Dragon Bridge bar","key","Bridge shuts to traffic 20:45–21:25"],
  ["21:00","Fire and water show","Fire first, then water · about 15 min total"],
  ["g","15 min","car","Dragon Bridge → An Thuong / clubs"],
@@ -495,17 +548,13 @@ const DAYS=[
 
 {c:"dn",n:4,dow:"Sat",d:"29",t:"🏖️ My Khe & Sky36",s:"The recovery day",
  e:[
- ["10:00","Slow start","No alarm · you've earned it"],
- ["g","4 min","walk","Villa → 2 Ladies Kitchen · 28 An Thượng 4"],
- ["10:45","Brunch at 2 Ladies Kitchen","Bánh mì, ~30 fillings · coconut and salt coffee · made to order, so allow time"],
- ["12:30","Café and bar hopping","An Thuong is walkable from the villa"],
- ["14:30","Market shopping","Han Market or Con Market · until around six"],
+ ["10:30","Slow start","No alarm · you've earned it"],
+ ["11:30","Café and bar hopping","An Thuong is walkable from the villa"],
+ ["14:00","Market shopping","Han Market or Con Market · until around six"],
  ["16:00","Beach bars on My Khe","Sunset is about 18:05"],
- ["g","5 min","walk","Villa → Missteak · 99 Mai Thúc Lân, 2nd floor"],
- ["18:45","Dinner at Missteak","key","Book ahead — small upstairs room · flat iron 355K ₫, rib eye 825K ₫"],
- ["g","15 min","car","Missteak → Novotel, 36 Bach Dang"],
- ["21:00","Sky36","key","36th floor · reservation essential on a holiday Saturday"],
- ["22:30","Bar hop & Vietnamese karaoke","Back around midnight — 6.30am flight run tomorrow"]],
+ ["g","15 min","car","Villa → Novotel, 36 Bach Dang"],
+ ["20:00","Sky36","key","36th floor · reservation essential on a holiday Saturday"],
+ ["21:30","Bar hop & Vietnamese karaoke","Back around midnight — 6.30am flight run tomorrow"]],
  f:{b:"The holiday starts today",x:"29 August is day one of the five-day National Day break. Sky36 needs a reservation, restaurants fill early, and the beach will be busy with domestic tourists."}},
 
 {c:"hc",n:5,dow:"Sun",d:"30",t:"🛫 Fly to Saigon",s:"Da Nang → Ho Chi Minh City",
@@ -521,8 +570,6 @@ const DAYS=[
  ["g","8 min","walk","Hotel → Ban Thanh Market"],
  ["16:15","Ban Thanh Market","Closes ~6pm · haggle to a third of the opening price"],
  ["18:30","Night market takes over outside",""],
- ["g","8 min","walk","Ban Thanh → Bánh Mì Huỳnh Hoa · 26 Lê Thị Riêng"],
- ["18:45","Bánh Mì Huỳnh Hoa","Takeaway only, no seating · one sandwich feeds two · cash · queue up to 30 min"],
  ["20:00","Dinner and drinks","key","Book ahead — holiday weekend"],
  ["g","10 min","walk","Restaurant → Bùi Viện"],
  ["22:30","Bùi Viện Walking Street","No plan required beyond turning up"]],
@@ -530,9 +577,7 @@ const DAYS=[
 
 {c:"hc",n:6,dow:"Mon",d:"31",t:"🪖 Cu Chi Tunnels",s:"Then Saigon Square",
  e:[
- ["05:45","Up","The early start is the whole trick"],
- ["g","3 min","walk","Hotel → Phở Việt Nam · 14 Phạm Hồng Thái"],
- ["06:15","Phở at Phở Việt Nam","Michelin Selected · opens 06:00 · order the mixed bowl, fresh noodles"],
+ ["06:00","Up","The early start is the whole trick"],
  ["07:00","Leave the hotel","key","Pre-booked car or tour pickup"],
  ["g","1 hr 45","car","District 1 → Cu Chi · 60km northwest"],
  ["08:45","Arrive at Cu Chi","110K ₫ entry · site opens 07:00"],
@@ -571,6 +616,51 @@ const DAYS=[
  ["14:00","Duty free if there's time",""],
  ["15:50","Fly","key",""]],
  f:{hot:1,b:"Today is National Day itself",x:"Expect parades and road closures across District 1, not just heavy traffic. Ask the front desk about the route before you leave, and tell the driver Terminal 2 — it's a different building from arrivals."}}
+];
+
+const EATS=[
+{id:"thiago",city:"dn",emo:"🍜",name:"Thìa Gỗ",kind:"Southern Vietnamese",
+ badge:"Bib Gourmand",badgeT:"bib",price:2,
+ addr:"53 Phan Thúc Duyện",walk:9,hours:"10:00–22:00 daily",
+ order:"Bánh xèo, phở Nam, lẩu mắm",spend:"150–300K ₫",
+ note:"No bookings — first come, first served, so go early. Cards carry a 2.75% surcharge.",
+ slots:[{d:2,t:"18:15",label:"Thu 27 · dinner, after Ba Na"},{d:4,t:"12:30",label:"Sat 29 · lunch"}],
+ tel:"02363689005",map:"Thìa+Gỗ+Da+Nang",url:"https://danang.thiagorestaurant.com/"},
+{id:"ladies",city:"dn",emo:"🥖",name:"2 Ladies Kitchen",kind:"Bánh mì & coffee",
+ badge:"",price:1,
+ addr:"28 An Thượng 4",walk:4,hours:"07:30–22:30 daily",
+ order:"Bánh mì, ~30 fillings · salt coffee",spend:"40–80K ₫",
+ note:"Made to order, so not fast. Staff are deaf — order by pointing or notepad.",
+ slots:[{d:4,t:"10:45",label:"Sat 29 · brunch"},{d:3,t:"07:00",label:"Fri 28 · grab-and-go"}],
+ tel:"0905866194",map:"2+Ladies+Kitchen+Da+Nang",url:"https://2ladieskitchen.com/"},
+{id:"missnhi",city:"dn",emo:"🥘",name:"Miss Nhi",kind:"Vietnamese, casual",
+ badge:"",price:1,
+ addr:"39 An Thượng 30",walk:4,hours:"10:00–midnight daily",
+ order:"Bánh xèo, bún bò Huế, phở bò",spend:"60–120K ₫",
+ note:"Cheap, fast, high turnover. Walk-in only.",
+ slots:[{d:3,t:"18:30",label:"Fri 28 · before the Dragon Bridge"},{d:2,t:"18:15",label:"Thu 27 · dinner"}],
+ tel:"0934733656",map:"Miss+Nhi+An+Thuong+Da+Nang",url:""},
+{id:"missteak",city:"dn",emo:"🥩",name:"Missteak",kind:"Steakhouse",
+ badge:"Book ahead",badgeT:"warn",price:3,
+ addr:"99 Mai Thúc Lân, 2nd floor",walk:5,hours:"11:00–23:00 daily",
+ order:"Flat iron 355K · rib eye 825K",spend:"500–900K ₫",
+ note:"Small upstairs room, so book. Check you are booking Da Nang, not the Hội An branch.",
+ slots:[{d:4,t:"18:45",label:"Sat 29 · dinner before Sky36"},{d:2,t:"19:00",label:"Thu 27 · dinner"}],
+ tel:"0702569420",map:"Missteak+Da+Nang",url:"https://www.missteak.co/"},
+{id:"huynhhoa",city:"hc",emo:"🥪",name:"Bánh Mì Huỳnh Hoa",kind:"Bánh mì, takeaway",
+ badge:"Cash only",badgeT:"warn",price:1,
+ addr:"26 Lê Thị Riêng",walk:8,hours:"Late afternoon to late evening",
+ order:"The one sandwich they make",spend:"58–73K ₫",
+ note:"No seating at all. Queue up to 30 min at peak. One sandwich feeds two — ask them to halve it.",
+ slots:[{d:5,t:"18:45",label:"Sun 30 · after Ban Thanh"},{d:7,t:"17:30",label:"Tue 1 · afternoon"}],
+ tel:"0962455517",map:"Banh+Mi+Huynh+Hoa+Ho+Chi+Minh",url:""},
+{id:"phovn",city:"hc",emo:"🍲",name:"Phở Việt Nam",kind:"Phở",
+ badge:"Michelin Selected",badgeT:"sel",price:1,
+ addr:"14 Phạm Hồng Thái",walk:3,hours:"06:00–03:00 daily",
+ order:"Mixed bowl (#5) · fresh not dried noodles",spend:"65–155K ₫",
+ note:"Open almost round the clock, so it works as breakfast or a 2am stop after Bùi Viện.",
+ slots:[{d:6,t:"06:15",label:"Mon 31 · before Cu Chi"},{d:5,t:"23:59",label:"Sun 30 · after Bùi Viện"},{d:7,t:"09:00",label:"Tue 1 · breakfast"}],
+ tel:"0902682214",map:"Pho+Viet+Nam+Pham+Hong+Thai",url:""}
 ];
 
 const BOOK=[
@@ -755,14 +845,6 @@ const INFO=[
  ["💊","Small medical kit","Imodium, rehydration salts, paracetamol, plasters."],
  ["📸","Tailor reference photos","Save pictures of the cuts and cloth you want before Wednesday."],
  ["🧾","Travel insurance","Policy number saved offline, not just in your inbox."]]},
-{h:"Food",emo:"🍜",ic:"M7 2.5v8a2.5 2.5 0 002.5 2.5h0V21.5M7 2.5v5M10 2.5v5M17 2.5c-1.4 1.4-2 3.5-2 5.5s.6 3.5 2 4.5v9",
- type:"food",rows:[
- ["Thìa Gỗ","<b>Michelin Bib Gourmand</b> — not a star. 53 Phan Thúc Duyện, 9 min walk. 10:00–22:00 daily. Bánh xèo, phở Nam, lẩu mắm. ~150–300K ₫. No bookings — first come, first served, so go early. Cards +2.75%. <b>Thu 27th, dinner.</b>"],
- ["2 Ladies Kitchen","28 An Thượng 4, 4 min walk. 07:30–22:30. Bánh mì with ~30 fillings, coconut and salt coffee. Made to order so it is not fast. Staff are deaf — order by pointing or notepad. <b>Sat 29th, brunch.</b>"],
- ["Miss Nhi","39 An Thượng 30, 4 min walk. 10:00–midnight. Cheap Vietnamese, bánh xèo is the signature. Walk-in. <b>Fri 28th, early dinner before the Dragon Bridge.</b>"],
- ["Missteak","99 Mai Thúc Lân, 2nd floor, 5 min walk. 11:00–23:00. Flat iron 355K ₫, rib eye 825K ₫, ~500–900K ₫ a head with a drink. Small room — <b>book ahead</b>, and check you are booking Da Nang not the Hội An branch. <b>Sat 29th, dinner.</b>"],
- ["Bánh Mì Huỳnh Hoa","26 Lê Thị Riêng, 8 min walk from Ben Thanh. Hours are disputed across sources — late afternoon and evening is the safe window. ~58–73K ₫. <b>Takeaway only, no seating</b>, cash, queue up to 30 min. One sandwich feeds two — ask them to halve it. <b>Sun 30th, after the market.</b>"],
- ["Phở Việt Nam","<b>Michelin Selected</b> — a rung below Bib Gourmand. 14 Phạm Hồng Thái, 3 min walk. 06:00–03:00. Fresh not dried noodles; order the mixed bowl. 65–155K ₫. Walk-in. <b>Mon 31st, breakfast before Cu Chi</b> — or after Bùi Viện, it is open to 3am."]]},
 {h:"Money",ic:"M12 2.5v19M16.8 6.8c0-1.7-2.1-2.8-4.8-2.8s-4.8 1-4.8 2.8 2.1 2.5 4.8 3.3 4.8 1.5 4.8 3.3-2.1 2.8-4.8 2.8-4.8-1-4.8-2.8",
  emo:"💰",type:"cols",head:["","Dong","Rupees"],rows:[
  ["Ba Na Hills entry","1M ₫","Rs 11.5K"],
@@ -819,7 +901,7 @@ const INFO=[
 
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
-var st={},nt={},dop={},iop={},filt="all";
+var st={},nt={},dop={},iop={},filt="all",eat={};
 var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
@@ -830,9 +912,9 @@ var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
 var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
 
-function save(){try{localStorage.setItem("vn2026a",JSON.stringify({s:st,n:nt,t:document.documentElement.dataset.theme}))}catch(e){}}
+function save(){try{localStorage.setItem("vn2026a",JSON.stringify({s:st,n:nt,e:eat,t:document.documentElement.dataset.theme}))}catch(e){}}
 function load(){try{var r=localStorage.getItem("vn2026a");if(!r)return;var d=JSON.parse(r);
- Object.assign(st,d.s||{});Object.assign(nt,d.n||{});
+ Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});
  if(d.t)document.documentElement.dataset.theme=d.t}catch(e){}}
 function esc(x){return x}
 function noteHTML(f){return f?'<div class="note'+(f.hot?' hot':'')+'"><b>'+f.b+'</b>'+f.x+'</div>':''}
@@ -841,7 +923,26 @@ function days(){
  var h='<h2><i class="i-dn"></i>Da Nang &middot; 26–30 August</h2>';
  DAYS.forEach(function(d,i){
   if(i===4)h+='<h2><i class="i-hc"></i>Ho Chi Minh City &middot; 30 Aug – 2 Sep</h2>';
-  var ev=d.e.map(function(e){
+  var rows=d.e.slice();
+  EATS.forEach(function(E){
+   var pick=eat[E.id]; if(!pick||pick.d!==d.n) return;
+   rows.push(["EAT",E,pick]);
+  });
+  // keep original order but insert eats at the right clock position
+  if(rows.length>d.e.length){
+   var timed=[],out=[],last="00:00";
+   d.e.forEach(function(e){ if(e[0]!=="g"&&/^\d\d:\d\d$/.test(e[0])) last=e[0]; timed.push([last,e]); });
+   rows.filter(function(r){return r[0]==="EAT"}).forEach(function(r){ timed.push([r[2].t,r]); });
+   timed.sort(function(a,b){return a[0]<b[0]?-1:a[0]>b[0]?1:0});
+   rows=timed.map(function(x){return x[1]});
+  }
+  var ev=rows.map(function(e){
+   if(e[0]==="EAT"){
+    var E=e[1],SL=e[2];
+    return '<div class="ev eatrow"><div class="tm">'+SL.t+'</div>'+
+      '<div class="ti">'+E.emo+' '+E.name+'<span class="mine">added</span></div>'+
+      '<div class="nt">'+E.kind+' · '+E.walk+' min walk · '+E.spend+'</div></div>';
+   }
    if(e[0]==="g"){
     var ic = e[2]==="walk"?WALK : e[2]==="plane"?PLANE : CAR;
     return '<div class="go"><span class="goi">'+ic+'<b>'+e[1]+'</b>'+(e[3]?'<span>'+e[3]+'</span>':'')+'</span></div>';
@@ -927,6 +1028,49 @@ function info(){
  }).join("");
 }
 
+function foodPane(){
+ var byCity={dn:[],hc:[]};
+ EATS.forEach(function(E){byCity[E.city].push(E)});
+ var h="";
+ [["dn","Da Nang & Hoi An","i-dn"],["hc","Ho Chi Minh City","i-hc"]].forEach(function(C){
+  h+='<h2><i class="'+C[2]+'"></i>'+C[1]+'</h2>';
+  byCity[C[0]].forEach(function(E){
+   var chosen=eat[E.id];
+   h+='<div class="eatc'+(chosen?" on":"")+'">'+
+    '<div class="ehead"><span class="eemo">'+E.emo+'</span>'+
+     '<div class="einfo"><div class="ename">'+E.name+
+       (E.badge?'<span class="bdg '+(E.badgeT||"")+'">'+E.badge+'</span>':'')+'</div>'+
+       '<div class="ekind">'+E.kind+' · <span class="pr">'+"₫".repeat(E.price)+'<span class="pro">'+"₫".repeat(3-E.price)+'</span></span></div></div></div>'+
+    '<div class="emeta">'+
+      '<span class="mchip">🚶 '+E.walk+' min</span>'+
+      '<span class="mchip">🕒 '+E.hours+'</span>'+
+      '<span class="mchip">💸 '+E.spend+'</span></div>'+
+    '<p class="eorder"><b>Order:</b> '+E.order+'</p>'+
+    '<p class="enote">'+E.note+'</p>'+
+    '<div class="slots"><span class="slab">Fits into</span>'+
+      E.slots.map(function(sl){
+       var on=chosen&&chosen.d===sl.d&&chosen.t===sl.t;
+       return '<button class="slot'+(on?" on":"")+'" data-e="'+E.id+'" data-d="'+sl.d+'" data-t="'+sl.t+'">'+
+        (on?'✓ ':'+ ')+sl.label+'</button>'}).join("")+
+    '</div>'+
+    '<div class="acts">'+
+      (E.url?'<a class="btn sec" href="'+E.url+'" target="_blank" rel="noopener">Website</a>':'')+
+      (E.tel?'<a class="btn sec" href="tel:'+E.tel+'">Call</a>':'')+
+      '<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+E.map+'" target="_blank" rel="noopener">Map</a>'+
+    '</div></div>';
+  });
+ });
+ $("eatlist").innerHTML=h;
+ $("eatlist").querySelectorAll(".slot").forEach(function(b){
+  b.onclick=function(){
+   var id=b.dataset.e,d=+b.dataset.d,t=b.dataset.t;
+   if(eat[id]&&eat[id].d===d&&eat[id].t===t) delete eat[id];
+   else eat[id]={d:d,t:t};
+   save();foodPane();days();tally();
+  };
+ });
+}
+
 function tally(){
  var t=0,d=0,u=0;
  BOOK.forEach(function(g){g.items.forEach(function(i){t++;if(st[i.id])d++;else if(i.p==="now")u++})});
@@ -937,6 +1081,8 @@ function tally(){
  $("pu").classList.toggle("show",u>0);
  $("pa").classList.toggle("show",t>0&&d===t);
  var bd=$("bdg");bd.textContent=u;bd.classList.toggle("show",u>0);
+ var ec=Object.keys(eat).length,fb=$("fbdg");
+ fb.textContent=ec;fb.classList.toggle("show",ec>0);
 }
 
 function countdown(){
@@ -970,7 +1116,7 @@ $("tt").onclick=function(){
  save();
 };
 
-load();days();book();info();countdown();
+load();days();book();foodPane();info();countdown();
 </script>
 </body>
 </html>
