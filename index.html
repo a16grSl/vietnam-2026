@@ -189,17 +189,16 @@ h2 i{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
 .ev.key .ti{font-weight:600}
 .ev .nt{font-size:13.5px;color:var(--mut);margin-top:3px;letter-spacing:-.005em}
 /* commute leg */
-.go{position:relative;margin:2px 0;padding:7px 0 7px 0}
+.go{position:relative;margin:0;padding:4px 0}
 .go:before{content:"";position:absolute;left:calc(-1 * var(--s5) + 4px);top:6px;bottom:6px;
  width:3px;border-radius:2px;
  background:repeating-linear-gradient(180deg,var(--line) 0 4px,transparent 4px 8px)}
-.goi{display:inline-flex;align-items:center;gap:8px;background:var(--surf2);
- border:.5px solid var(--line2);border-radius:16px;padding:6px 13px 6px 10px;
- font-size:12.5px;color:var(--mut);letter-spacing:-.005em;max-width:100%}
+.goi{display:inline-flex;align-items:center;gap:7px;background:transparent;
+ border:none;padding:2px 0;font-size:12px;color:var(--dim);letter-spacing:-.005em;max-width:100%}
 .goi b{white-space:nowrap}
 .goi span{min-width:0}
-.goi svg{width:13px;height:13px;flex:0 0 auto;color:var(--mut)}
-.goi b{font-weight:600;color:var(--ink2);white-space:nowrap}
+.goi svg{width:12px;height:12px;flex:0 0 auto;color:var(--dim);opacity:.8}
+.goi b{font-weight:600;color:var(--mut);white-space:nowrap}
 
 .note{border-radius:var(--r);padding:var(--s3) var(--s4);margin-top:var(--s4);
  font-size:14.5px;line-height:1.48;color:var(--ink2);background:var(--ambbg);
@@ -332,6 +331,41 @@ textarea::placeholder{color:var(--dim)}
 .row span:first-child{color:var(--ink2)}
 .row span:last-child{color:var(--mut);font-variant-numeric:tabular-nums;
  white-space:nowrap;font-size:14px}
+
+/* ---- day meta strip ---- */
+.dmeta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 var(--s4);padding-bottom:var(--s3);
+ border-bottom:.5px solid var(--line2)}
+.mp{font-size:11.5px;background:var(--surf2);border:.5px solid var(--line2);color:var(--mut);
+ padding:5px 10px;border-radius:99px;white-space:nowrap;letter-spacing:-.005em}
+.mp.on{background:var(--grnbg);border-color:transparent;color:var(--grn);font-weight:600}
+.mp.sug{background:var(--accbg);border-color:transparent;color:var(--acctx);font-weight:600}
+/* ---- time-of-day bands ---- */
+.band{position:relative;margin:16px 0 6px;display:flex;align-items:center}
+.band:first-child{margin-top:2px}
+.band span{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+ color:var(--dim);background:var(--surf);padding-right:10px;position:relative;z-index:1}
+.band:after{content:"";position:absolute;left:0;right:0;height:.5px;background:var(--line2)}
+.day.open .band span{background:var(--surf2)}
+/* ---- duration chip on the time column ---- */
+.dur{display:inline-block;margin-left:7px;font-size:10.5px;font-weight:600;
+ background:var(--line2);color:var(--mut);padding:2px 7px;border-radius:5px;
+ letter-spacing:0;text-transform:none;vertical-align:1px}
+/* ---- food rows in the timeline ---- */
+.ev.food{cursor:pointer;border-radius:11px;margin-left:-10px;padding:9px 10px;
+ transition:background .2s var(--ease)}
+.ev.food:hover{background:var(--surf2)}
+.ev.food:before{left:calc(-1 * var(--s5) + 11px)}
+.ev.food.sug{opacity:.72}
+.ev.food.sug:before{background:transparent;border:2px dashed var(--line2);box-shadow:none;
+ width:7px;height:7px}
+.ev.food.sug .ti{font-weight:400;color:var(--mut)}
+.ev.food.on:before{background:var(--grn);box-shadow:0 0 0 4px var(--surf),0 0 0 6px var(--grnbg)}
+.ev.food.on .ti{font-weight:600}
+.fchip{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+ padding:3px 8px;border-radius:5px;margin-left:8px;vertical-align:1.5px;white-space:nowrap}
+.ev.food.sug .fchip{background:var(--accbg);color:var(--acctx)}
+.ev.food.on .fchip{background:var(--grnbg);color:var(--grn)}
+.ev.food:active{transform:scale(.99)}
 
 /* ===== FOOD ===== */
 .fhead{margin-bottom:var(--s4)}
@@ -924,45 +958,90 @@ function days(){
  var h='<h2><i class="i-dn"></i>Da Nang &middot; 26–30 August</h2>';
  DAYS.forEach(function(d,i){
   if(i===4)h+='<h2><i class="i-hc"></i>Ho Chi Minh City &middot; 30 Aug – 2 Sep</h2>';
-  var rows=d.e.slice();
-  EATS.forEach(function(E){
-   var pick=eat[E.id]; if(!pick||pick.d!==d.n) return;
-   rows.push(["EAT",E,pick]);
+
+  // ---- build a timed list: fixed events, commute legs, chosen + suggested food
+  var seq=[],last="00:00";
+  d.e.forEach(function(e){
+   if(e[0]!=="g"&&/^\d\d:\d\d$/.test(e[0])) last=e[0];
+   seq.push({t:last,kind:e[0]==="g"?"go":"ev",raw:e});
   });
-  // keep original order but insert eats at the right clock position
-  if(rows.length>d.e.length){
-   var timed=[],out=[],last="00:00";
-   d.e.forEach(function(e){ if(e[0]!=="g"&&/^\d\d:\d\d$/.test(e[0])) last=e[0]; timed.push([last,e]); });
-   rows.filter(function(r){return r[0]==="EAT"}).forEach(function(r){ timed.push([r[2].t,r]); });
-   timed.sort(function(a,b){return a[0]<b[0]?-1:a[0]>b[0]?1:0});
-   rows=timed.map(function(x){return x[1]});
-  }
-  var ev=rows.map(function(e){
-   if(e[0]==="EAT"){
-    var E=e[1],SL=e[2];
-    return '<div class="ev eatrow"><div class="tm">'+SL.t+'</div>'+
-      '<div class="ti">'+E.emo+' '+E.name+'<span class="mine">added</span></div>'+
-      '<div class="nt">'+E.kind+' · '+E.walk+' min walk · '+E.spend+'</div></div>';
+  EATS.forEach(function(E){
+   var pick=eat[E.id];
+   if(pick&&pick.d===d.n){ seq.push({t:pick.t,kind:"eat",E:E,sl:pick}); return; }
+   if(pick) return;                       // placed on another day
+   E.slots.forEach(function(sl){ if(sl.d===d.n) seq.push({t:sl.t,kind:"sug",E:E,sl:sl}); });
+  });
+  function key(t){var hh=+t.slice(0,2);return (hh<4?hh+24:hh)*60+ +t.slice(3,5)}
+  seq.forEach(function(r){r.k=key(r.t)});
+  seq.sort(function(a,b){return a.k-b.k});
+
+  // ---- day meta
+  var times=d.e.filter(function(e){return /^\d\d:\d\d$/.test(e[0])}).map(function(e){return e[0]})
+    .sort(function(a,b){var k=function(t){var h=+t.slice(0,2);return (h<4?h+24:h)*60+ +t.slice(3,5)};return k(a)-k(b)});
+  var stops=d.e.filter(function(e){return e[0]!=="g"}).length;
+  var mins=d.e.filter(function(e){return e[0]==="g"}).reduce(function(a,e){
+    var m=e[1].match(/(\d+)\s*hr/), n=e[1].match(/(\d+)\s*min/);
+    return a+(m?+m[1]*60:0)+(n?+n[1]:0)},0);
+  var added=EATS.filter(function(E){return eat[E.id]&&eat[E.id].d===d.n}).length;
+  var open=EATS.filter(function(E){return !eat[E.id]&&E.slots.some(function(x){return x.d===d.n})}).length;
+  var meta='<div class="dmeta">'+
+    '<span class="mp">🕐 '+times[0]+'–'+times[times.length-1]+'</span>'+
+    '<span class="mp">📍 '+stops+' stops</span>'+
+    '<span class="mp">🚗 '+(mins>=60?Math.round(mins/60*10)/10+' hrs':mins+' min')+' moving</span>'+
+    (added?'<span class="mp on">🍽 '+added+' added</span>':'')+
+    (open?'<span class="mp sug">🍽 '+open+' to try</span>':'')+'</div>';
+
+  // ---- render rows with time-of-day bands
+  var band="",out="";
+  function bandOf(k){var hh=Math.floor(k/60);
+    return hh<12?["Morning","🌅"]:hh<17?["Afternoon","☀️"]:hh<22?["Evening","🌆"]:["Late","🌙"]}
+  seq.forEach(function(r){
+   var bn=bandOf(r.k);
+   if(bn[0]!==band){band=bn[0];out+='<div class="band"><span>'+bn[1]+' '+band+'</span></div>'}
+   if(r.kind==="go"){
+    var e=r.raw, ic=e[2]==="walk"?WALK:CAR;
+    out+='<div class="go"><span class="goi">'+ic+'<b>'+e[1]+'</b>'+(e[3]?'<span>'+e[3]+'</span>':'')+'</span></div>';
+    return;
    }
-   if(e[0]==="g"){
-    var ic = e[2]==="walk"?WALK : e[2]==="plane"?PLANE : CAR;
-    return '<div class="go"><span class="goi">'+ic+'<b>'+e[1]+'</b>'+(e[3]?'<span>'+e[3]+'</span>':'')+'</span></div>';
+   if(r.kind==="eat"||r.kind==="sug"){
+    var E=r.E,on=r.kind==="eat";
+    out+='<div class="ev food'+(on?" on":" sug")+'" data-add="'+E.id+'" data-d="'+r.sl.d+'" data-t="'+r.sl.t+'" role="button" tabindex="0">'+
+      '<div class="tm">'+r.t+'</div>'+
+      '<div class="ti">'+E.emo+' '+E.name+
+        '<span class="fchip">'+(on?'✓ added':'+ add')+'</span></div>'+
+      '<div class="nt">'+E.kind+' · '+E.walk+' min walk · '+E.spend+
+        (E.badge?' · '+E.badge:'')+'</div></div>';
+    return;
    }
+   var e=r.raw;
    var key=e[3]==="key"||e[2]==="key";
    var note=(e[3]&&e[3]!=="key")?e[3]:((e[2]&&e[2]!=="key")?e[2]:"");
-   return '<div class="ev'+(key?" key":"")+'"><div class="tm">'+e[0]+'</div>'+
+   var dur="";
+   var dm=note.match(/^(~?\d+[–\-]?\d*\s*(?:hrs?|min|minutes))\b[\s·]*/i);
+   if(dm){dur='<span class="dur">'+dm[1]+'</span>';note=note.slice(dm[0].length)}
+   out+='<div class="ev'+(key?" key":"")+'"><div class="tm">'+e[0]+dur+'</div>'+
      '<div class="ti">'+e[1]+'</div>'+(note?'<div class="nt">'+note+'</div>':'')+'</div>';
-  }).join("");
+  });
+
   h+='<div class="day '+d.c+(dop[d.n]?" open":"")+'" data-d="'+d.n+'">'+
    '<div class="dh" role="button" tabindex="0"><div class="dnum"><b>'+d.d+'</b><i>'+d.dow+'</i></div>'+
    '<div class="dt"><b>'+d.t+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
-   '<div class="db"><div class="dbi"><div class="dbp"><div class="tl">'+ev+'</div>'+noteHTML(d.f)+'</div></div></div></div>';
+   '<div class="db"><div class="dbi"><div class="dbp">'+meta+'<div class="tl">'+out+'</div>'+noteHTML(d.f)+'</div></div></div></div>';
  });
  $("p-days").innerHTML=h;
  $("p-days").querySelectorAll(".dh").forEach(function(x){
   var go=function(){var n=x.parentNode.dataset.d;dop[n]=!dop[n];days()};
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}};
+ });
+ $("p-days").querySelectorAll("[data-add]").forEach(function(x){
+  var go=function(ev){ if(ev)ev.stopPropagation();
+   var id=x.dataset.add,dd=+x.dataset.d,tt=x.dataset.t;
+   if(eat[id]&&eat[id].d===dd&&eat[id].t===tt) delete eat[id]; else eat[id]={d:dd,t:tt};
+   save();days();foodPane();tally();
+  };
+  x.onclick=go;
+  x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
 }
 
