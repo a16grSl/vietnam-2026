@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Vietnam 2026 — Da Nang & Saigon. Itinerary, bookings, essentials.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>Vietnam 2026</title>
+<style>
+/* ================= TOKENS ================= */
+:root{
+  --f: "Helvetica Neue", Helvetica, Arial, "Nimbus Sans", sans-serif;
+  --r-sm:10px; --r:14px; --r-lg:18px; --r-xl:22px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:28px; --s7:40px;
+  --ease:cubic-bezier(.32,.72,0,1);
+  --dur:.42s;
+  --nav:76px;
+  /* light (Apple system) */
+  --bg:#f5f5f7; --surf:#ffffff; --surf2:#fbfbfd; --raise:#ffffff;
+  --line:#d2d2d7; --line2:#e8e8ed;
+  --ink:#1d1d1f; --ink2:#3a3a3d; --mut:#5c5c61; --dim:#6e6e73;
+  --acc:#0071e3; --acc2:#0058b9; --acctx:#0059ba; --btn:#0071e3; --accbg:rgba(0,113,227,.12);
+  --red:#c9372c; --redbg:rgba(201,55,44,.09);
+  --amb:#8a6100; --ambbg:rgba(180,130,10,.11);
+  --grn:#1d7a4a; --grnbg:rgba(29,122,74,.10);
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
+  --shadow2:0 2px 6px rgba(0,0,0,.06),0 14px 40px rgba(0,0,0,.10);
+  --glass:rgba(255,255,255,.72);
+  --dn:#0071e3; --hc:#bf4800;
+  --c1:#0071e3; --c2:#5e5ce6; --c3:#bf5af2; --c4:#ff2d55; --c5:#ff8c00; --c6:#00a3a3;
+  --mesh1:rgba(0,113,227,.16); --mesh2:rgba(94,92,230,.14); --mesh3:rgba(255,45,85,.10);
+  --mesh4:rgba(255,140,0,.10); --heroink:#1d1d1f;
+}
+[data-theme="dark"]{
+  --bg:#000000; --surf:#1c1c1e; --surf2:#161618; --raise:#2c2c2e;
+  --line:#38383a; --line2:#2a2a2c;
+  --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
+  --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
+  --red:#ff6961; --redbg:rgba(255,105,97,.14);
+  --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
+  --grn:#30d158; --grnbg:rgba(48,209,88,.13);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
+  --shadow2:0 2px 8px rgba(0,0,0,.55),0 18px 46px rgba(0,0,0,.5);
+  --glass:rgba(20,20,22,.74);
+  --dn:#5ac8fa; --hc:#ff9f0a;
+  --c1:#0a84ff; --c2:#7d7aff; --c3:#da8fff; --c4:#ff6482; --c5:#ffb340; --c6:#40cbc4;
+  --mesh1:rgba(10,132,255,.30); --mesh2:rgba(125,122,255,.24); --mesh3:rgba(255,100,130,.16);
+  --mesh4:rgba(255,179,64,.14); --heroink:#f5f5f7;
+}
+@media(prefers-color-scheme:dark){
+  [data-theme="auto"]{
+    --bg:#000000; --surf:#1c1c1e; --surf2:#161618; --raise:#2c2c2e;
+    --line:#38383a; --line2:#2a2a2c;
+    --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
+    --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
+    --red:#ff6961; --redbg:rgba(255,105,97,.14);
+    --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
+    --grn:#30d158; --grnbg:rgba(48,209,88,.13);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
+    --shadow2:0 2px 8px rgba(0,0,0,.55),0 18px 46px rgba(0,0,0,.5);
+    --glass:rgba(20,20,22,.74);
+    --dn:#5ac8fa; --hc:#ff9f0a;
+    --c1:#0a84ff; --c2:#7d7aff; --c3:#da8fff; --c4:#ff6482; --c5:#ffb340; --c6:#40cbc4;
+    --mesh1:rgba(10,132,255,.30); --mesh2:rgba(125,122,255,.24); --mesh3:rgba(255,100,130,.16);
+    --mesh4:rgba(255,179,64,.14); --heroink:#f5f5f7;
+  }
+}
+/* ================= BASE ================= */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.47 var(--f);
+ letter-spacing:-.011em;-webkit-font-smoothing:antialiased;
+ padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom));
+ transition:background .35s var(--ease),color .35s var(--ease)}
+::selection{background:var(--acc);color:#fff}
+:focus-visible{outline:2.5px solid var(--acc);outline-offset:3px;border-radius:6px}
+button{font-family:inherit}
+
+/* ================= HEADER ================= */
+.top{position:sticky;top:0;z-index:70;background:var(--glass);
+ backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);
+ border-bottom:.5px solid var(--line);padding:0 var(--s4)}
+.topin{max-width:760px;margin:0 auto;height:50px;display:flex;align-items:center;
+ justify-content:space-between;gap:var(--s3)}
+.brand{font-size:16px;font-weight:600;letter-spacing:-.02em}
+.brand span{color:var(--mut);font-weight:400}
+.tt{width:40px;height:32px;border:none;background:var(--accbg);color:var(--acctx);
+ border-radius:99px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+ transition:background .2s,transform .2s var(--ease);position:relative}
+.tt:after{content:"";position:absolute;inset:-7px -6px}
+.tt:active{transform:scale(.92)}
+.tt svg{width:16px;height:16px}
+.tt .moon{display:none}
+[data-theme="dark"] .tt .sun{display:none}
+[data-theme="dark"] .tt .moon{display:block}
+@media(prefers-color-scheme:dark){
+ [data-theme="auto"] .tt .sun{display:none}
+ [data-theme="auto"] .tt .moon{display:block}
+}
+
+/* ================= HERO ================= */
+.heroWrap{position:relative;overflow:hidden;isolation:isolate}
+.heroWrap:before{content:"";position:absolute;inset:-40% -20% auto -20%;height:190%;z-index:-1;
+ background:
+  radial-gradient(42% 46% at 18% 12%,var(--mesh1),transparent 62%),
+  radial-gradient(38% 44% at 84% 4%,var(--mesh2),transparent 60%),
+  radial-gradient(46% 40% at 70% 62%,var(--mesh3),transparent 62%),
+  radial-gradient(40% 38% at 8% 74%,var(--mesh4),transparent 60%);
+ filter:blur(14px);animation:drift 26s ease-in-out infinite alternate}
+.heroWrap:after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;z-index:-1;
+ background:linear-gradient(180deg,transparent,var(--bg))}
+@keyframes drift{
+ 0%{transform:translate3d(0,0,0) scale(1)}
+ 50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}
+ 100%{transform:translate3d(2%,-1.5%,0) scale(1.03)}}
+.hero{max-width:760px;margin:0 auto;padding:var(--s7) var(--s4) var(--s6);position:relative}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+ color:var(--acctx);margin-bottom:var(--s3)}
+h1{margin:0 0 var(--s3);font-size:46px;line-height:1.05;letter-spacing:-.035em;font-weight:700}
+h1 .l2{display:block;background:linear-gradient(96deg,var(--c1),var(--c2) 42%,var(--c3) 72%,var(--c4));
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ -webkit-text-fill-color:transparent;padding-bottom:.06em}
+.sub{margin:0;color:var(--mut);font-size:19px;line-height:1.42;letter-spacing:-.015em;max-width:30ch}
+.stats{display:flex;gap:var(--s2);margin-top:var(--s6);flex-wrap:wrap}
+.stat{flex:1 1 0;min-width:96px;background:var(--surf);border:.5px solid var(--line);
+ border-radius:var(--r);padding:var(--s3) var(--s4);box-shadow:var(--shadow);
+ position:relative;overflow:hidden}
+.stat:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px}
+.stat:nth-child(1):before{background:linear-gradient(90deg,var(--c1),var(--c2))}
+.stat:nth-child(2):before{background:linear-gradient(90deg,var(--c2),var(--c3))}
+.stat:nth-child(3):before{background:linear-gradient(90deg,var(--c5),var(--c4))}
+.stat b{display:block;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.stat span{font-size:12.5px;color:var(--mut);letter-spacing:-.005em}
+
+/* ================= SHELL ================= */
+.wrap{max-width:760px;margin:0 auto;padding:0 var(--s4) var(--s7)}
+.pane{display:none}
+.pane.on{display:block;animation:rise .44s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h2{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--mut);
+ margin:var(--s6) 0 var(--s3);display:flex;align-items:center;gap:var(--s2)}
+h2:first-child{margin-top:var(--s2)}
+h2 i{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.i-dn{background:linear-gradient(135deg,var(--c1),var(--c2))}
+.i-hc{background:linear-gradient(135deg,var(--c5),var(--c4))}
+
+/* ================= DAY ================= */
+.day{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));border:.5px solid var(--line);border-radius:var(--r-lg);
+ margin-bottom:var(--s2);overflow:hidden;box-shadow:var(--shadow);
+ transition:box-shadow .3s var(--ease),transform .3s var(--ease)}
+.day.open{box-shadow:var(--shadow2)}
+.dh{display:flex;gap:var(--s3);padding:var(--s4);cursor:pointer;align-items:center;
+ min-height:72px;transition:background .2s}
+.dh:active{background:var(--surf2)}
+.dnum{width:50px;height:54px;flex:0 0 auto;border-radius:var(--r-sm);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ background:var(--surf2);border:.5px solid var(--line2);transition:.3s var(--ease)}
+.day.dn .dnum{background-color:var(--c1);background-image:linear-gradient(155deg,var(--c1),var(--c2));border-color:transparent;color:#fff;
+ box-shadow:0 3px 10px rgba(0,113,227,.28)}
+.day.hc .dnum{background-color:var(--c4);background-image:linear-gradient(155deg,var(--c5),var(--c4));border-color:transparent;color:#fff;
+ box-shadow:0 3px 10px rgba(255,45,85,.26)}
+.dnum b{font-size:21px;font-weight:600;letter-spacing:-.04em;line-height:1}
+.dnum i{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.07em;
+ font-weight:600;opacity:.75;margin-top:3px}
+.dt{flex:1;min-width:0}
+.dt b{display:block;font-size:18px;font-weight:600;letter-spacing:-.025em;margin-bottom:2px}
+.dt span{font-size:14px;color:var(--mut);letter-spacing:-.01em}
+.chev{color:var(--mut);flex:0 0 auto;transition:transform .38s var(--ease)}
+.chev svg{width:18px;height:18px;display:block}
+.day.open .chev{transform:rotate(90deg);color:var(--acc)}
+.db{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur) var(--ease)}
+.day.open .db{grid-template-rows:1fr}
+.dbi{overflow:hidden}
+.dbp{padding:0 var(--s4) var(--s5)}
+
+/* timeline */
+.tl{position:relative;padding-left:var(--s5)}
+.tl:before{content:"";position:absolute;left:5px;top:14px;bottom:16px;width:1.5px;
+ background:var(--line);border-radius:2px}
+.ev{position:relative;padding:9px 0}
+.ev:before{content:"";position:absolute;left:calc(-1 * var(--s5) + 1px);top:15px;
+ width:9px;height:9px;border-radius:50%;background:var(--line);
+ box-shadow:0 0 0 4px var(--surf)}
+.ev.key:before{background:var(--acc);box-shadow:0 0 0 4px var(--surf),0 0 0 6px var(--accbg)}
+.ev .tm{font-size:12.5px;font-weight:600;color:var(--mut);letter-spacing:.01em;
+ font-variant-numeric:tabular-nums}
+.ev .ti{font-size:16px;margin-top:1px;letter-spacing:-.015em}
+.ev.key .ti{font-weight:600}
+.ev .nt{font-size:13.5px;color:var(--mut);margin-top:3px;letter-spacing:-.005em}
+/* commute leg */
+.go{position:relative;margin:2px 0;padding:7px 0 7px 0}
+.go:before{content:"";position:absolute;left:calc(-1 * var(--s5) + 4px);top:6px;bottom:6px;
+ width:3px;border-radius:2px;
+ background:repeating-linear-gradient(180deg,var(--line) 0 4px,transparent 4px 8px)}
+.goi{display:inline-flex;align-items:center;gap:8px;background:var(--surf2);
+ border:.5px solid var(--line2);border-radius:16px;padding:6px 13px 6px 10px;
+ font-size:12.5px;color:var(--mut);letter-spacing:-.005em;max-width:100%}
+.goi b{white-space:nowrap}
+.goi span{min-width:0}
+.goi svg{width:13px;height:13px;flex:0 0 auto;color:var(--mut)}
+.goi b{font-weight:600;color:var(--ink2);white-space:nowrap}
+
+.note{border-radius:var(--r);padding:var(--s3) var(--s4);margin-top:var(--s4);
+ font-size:14.5px;line-height:1.48;color:var(--ink2);background:var(--ambbg);
+ letter-spacing:-.008em}
+.note.hot{background:var(--redbg)}
+.note b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+ font-weight:700;color:var(--amb);margin-bottom:3px}
+.note.hot b{color:var(--red)}
+
+/* ================= BOOKINGS ================= */
+.prog{background:var(--surf);border:.5px solid var(--line);border-radius:var(--r-lg);
+ padding:var(--s4);margin-bottom:var(--s3);box-shadow:var(--shadow);
+ position:sticky;top:58px;z-index:20}
+.pr1{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s3)}
+.pr1 .big{font-size:22px;font-weight:600;letter-spacing:-.03em}
+.pr1 .big em{font-style:normal;color:var(--mut);font-weight:400;font-size:15px}
+.pct{font-size:13px;font-weight:600;color:var(--acctx);letter-spacing:-.01em}
+.bar{height:6px;background:var(--line2);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background-color:var(--c1);
+ background-image:linear-gradient(90deg,var(--c1),var(--c2) 55%,var(--c3));
+ transition:width .7s var(--ease)}
+.pmsg{font-size:13.5px;font-weight:500;margin-top:var(--s3);display:none;
+ align-items:center;gap:7px;letter-spacing:-.008em}
+.pmsg.show{display:flex}
+.pmsg.r{color:var(--red)} .pmsg.g{color:var(--grn)}
+.pmsg i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 auto}
+
+.segs{display:flex;gap:var(--s1);background:var(--line2);padding:3px;border-radius:11px;
+ margin-bottom:var(--s3);overflow-x:auto;scrollbar-width:none}
+.segs::-webkit-scrollbar{display:none}
+.segs button{flex:1 0 auto;border:none;background:transparent;color:var(--mut);
+ font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:8px;cursor:pointer;
+ white-space:nowrap;letter-spacing:-.01em;transition:.22s var(--ease);min-height:36px}
+.segs button.on{background:var(--surf);color:var(--ink);font-weight:600;box-shadow:var(--shadow)}
+
+.it{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));border:.5px solid var(--line);border-radius:var(--r-lg);
+ margin-bottom:var(--s2);overflow:hidden;box-shadow:var(--shadow);transition:.3s var(--ease)}
+.it.open{box-shadow:var(--shadow2)}
+.it.done{opacity:.5}
+.ih{display:flex;gap:var(--s3);padding:var(--s4);align-items:flex-start;min-height:64px}
+.bx{width:26px;height:26px;border:1.8px solid var(--line);border-radius:50%;flex:0 0 auto;
+ margin-top:1px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+ position:relative;z-index:2;transition:.25s var(--ease);background:transparent}
+.bx:after{content:"";position:absolute;inset:-13px -12px -13px -14px}
+.bx svg{width:13px;height:13px;opacity:0;transform:scale(.3);transition:.28s var(--ease)}
+.it.done .bx{background:var(--grn);border-color:var(--grn)}
+.it.done .bx svg{opacity:1;transform:scale(1)}
+.itx{flex:1;min-width:0;cursor:pointer}
+.itt{font-size:17px;font-weight:600;letter-spacing:-.022em;margin-bottom:2px}
+.it.done .itt{text-decoration:line-through;text-decoration-color:var(--dim)}
+.itw{font-size:13.5px;color:var(--mut);letter-spacing:-.008em}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;
+ letter-spacing:.01em;padding:3px 8px;border-radius:6px;margin-left:8px;vertical-align:2px}
+.t-now{background:var(--redbg);color:var(--red)}
+.t-soon{background:var(--ambbg);color:var(--amb)}
+.t-walk{background:var(--grnbg);color:var(--grn)}
+.ib{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur) var(--ease)}
+.it.open .ib{grid-template-rows:1fr}
+.ibi{overflow:hidden}
+.ibp{padding:0 var(--s4) var(--s4) 58px}
+
+dl{margin:0;display:grid;grid-template-columns:106px 1fr;gap:0}
+dt{padding:8px 12px 8px 0;font-size:13.5px;color:var(--mut);border-top:.5px solid var(--line2);
+ letter-spacing:-.005em}
+dd{padding:8px 0;margin:0;font-size:14.5px;border-top:.5px solid var(--line2);
+ letter-spacing:-.01em;color:var(--ink2)}
+dt:first-of-type,dl>dt:first-child+dd{border-top:none}
+dd b{font-weight:600;color:var(--ink)}
+
+.acts{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;
+ text-decoration:none;font-size:14.5px;font-weight:500;letter-spacing:-.015em;
+ padding:11px 18px;border-radius:99px;min-height:44px;
+ background-color:var(--btn);background-image:linear-gradient(135deg,var(--btn),#0a5fc4);
+ color:#fff;border:none;transition:.22s var(--ease);box-shadow:0 2px 8px rgba(0,90,190,.28)}
+.btn:hover{background-color:var(--acc2);background-image:linear-gradient(135deg,var(--acc2),#064a9e)}
+.btn:active{transform:scale(.97)}
+.btn svg{width:13px;height:13px;flex:0 0 auto}
+.btn.sec{background:var(--accbg);color:var(--acctx)}
+.btn.sec:hover{background:var(--acc);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink2);border:.5px solid var(--line)}
+.btn.ghost:hover{background:var(--surf2);color:var(--ink)}
+.none{font-size:13.5px;color:var(--mut);margin-top:var(--s4)}
+textarea{width:100%;margin-top:var(--s3);border:.5px solid var(--line);border-radius:var(--r);
+ padding:11px 13px;font:inherit;font-size:14.5px;resize:vertical;min-height:46px;
+ background:var(--surf2);color:var(--ink);letter-spacing:-.01em}
+textarea:focus{outline:none;border-color:var(--acc);background:var(--surf)}
+textarea::placeholder{color:var(--dim)}
+
+/* ================= INFO ================= */
+.card{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));border:.5px solid var(--line);border-radius:var(--r-lg);
+ padding:var(--s5) var(--s4);margin-bottom:var(--s2);box-shadow:var(--shadow)}
+.card h3{margin:0 0 var(--s3);font-size:19px;font-weight:600;letter-spacing:-.025em;
+ display:flex;align-items:center;gap:10px}
+.card h3 i{width:30px;height:30px;border-radius:9px;background:var(--accbg);color:var(--acc);
+ display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.card h3 i svg{width:16px;height:16px}
+.card p{margin:0 0 10px;font-size:15px;color:var(--ink2);letter-spacing:-.01em;line-height:1.5}
+.card p:last-child{margin-bottom:0}
+.card ul{margin:0;padding-left:20px;font-size:15px;color:var(--ink2);letter-spacing:-.01em}
+.card li{margin-bottom:9px;line-height:1.5}
+.card li:last-child{margin-bottom:0}
+.card b{font-weight:600;color:var(--ink)}
+.eat{padding:12px 0;border-top:.5px solid var(--line2)}
+.eat:first-child{border-top:none;padding-top:0}
+.eat:last-child{padding-bottom:0}
+.eat b{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.02em;margin-bottom:3px;color:var(--ink)}
+.eat p{margin:0;font-size:14px;color:var(--ink2);line-height:1.5;letter-spacing:-.008em}
+.card:nth-of-type(7) h3 i{background:linear-gradient(150deg,var(--c4),var(--c5))}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);
+ padding:11px 0;border-top:.5px solid var(--line2);font-size:15px;letter-spacing:-.01em}
+.row:first-of-type{border-top:none;padding-top:0}
+.row span:first-child{color:var(--ink2)}
+.row span:last-child{color:var(--mut);font-variant-numeric:tabular-nums;
+ white-space:nowrap;font-size:14px}
+
+/* ================= NAV ================= */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;justify-content:center;
+ background:var(--glass);backdrop-filter:saturate(180%) blur(22px);
+ -webkit-backdrop-filter:saturate(180%) blur(22px);
+ border-top:.5px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.navin{display:flex;width:100%;max-width:520px}
+nav button{flex:1;background:none;border:none;padding:9px 4px 10px;color:var(--mut);
+ cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;
+ position:relative;min-height:56px;transition:color .22s}
+nav button svg{width:24px;height:24px;transition:transform .3s var(--ease)}
+nav button b{font-size:10.5px;font-weight:500;letter-spacing:-.005em}
+nav button.on{color:var(--acc)}
+nav button.on svg{transform:scale(1.06)}
+nav button:active svg{transform:scale(.9)}
+.badge{position:absolute;top:5px;left:calc(50% + 7px);background:var(--red);color:#fff;
+ font-size:10px;font-weight:600;min-width:17px;height:17px;border-radius:99px;
+ display:none;align-items:center;justify-content:center;padding:0 5px}
+.badge.show{display:flex}
+
+footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
+ padding:var(--s6) var(--s3) 0;letter-spacing:-.005em}
+.reset{background:none;border:.5px solid var(--line);color:var(--mut);font:inherit;
+ font-size:12.5px;cursor:pointer;margin-top:var(--s4);padding:8px 16px;border-radius:99px;
+ min-height:36px;transition:.2s}
+.reset:hover{border-color:var(--red);color:var(--red)}
+
+@media(max-width:520px){
+ .hero{padding:var(--s6) var(--s4) var(--s5)} h1{font-size:36px}
+ .sub{font-size:17px} .stat b{font-size:22px}
+ .ibp{padding-left:var(--s4)}
+ dl{grid-template-columns:92px 1fr} dt{font-size:12.5px} dd{font-size:14px}
+ .btn{flex:1 1 auto;min-width:140px}
+ .prog{top:56px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topin">
+    <div class="brand">Vietnam <span>2026</span></div>
+    <button class="tt" id="tt" aria-label="Switch between light and dark">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.6A8.6 8.6 0 019.4 3.5a8.6 8.6 0 1011.1 11.1z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="heroWrap"><div class="hero">
+  <div class="eyebrow">26 August &ndash; 2 September 2026</div>
+  <h1>Da Nang<span class="l2">&amp; Saigon</span></h1>
+  <p class="sub">Eight days. Hoi An lanterns, Ba Na Hills, the Cu Chi tunnels, and whatever else survives contact with the group.</p>
+  <div class="stats">
+    <div class="stat"><b id="s1">&mdash;</b><span id="s1l">days to go</span></div>
+    <div class="stat"><b>8</b><span>days, 2 cities</span></div>
+    <div class="stat"><b id="s3">0/16</b><span>booked</span></div>
+  </div>
+</div></div>
+
+<div class="wrap">
+  <div class="pane on" id="p-days"></div>
+
+  <div class="pane" id="p-book">
+    <div class="prog">
+      <div class="pr1">
+        <div class="big"><span id="nd">0</span><em> of <span id="nt">0</span> booked</em></div>
+        <div class="pct" id="pc">0%</div>
+      </div>
+      <div class="bar"><div class="fill" id="fl"></div></div>
+      <div class="pmsg r" id="pu"><i></i><span id="put"></span></div>
+      <div class="pmsg g" id="pa"><i></i><span>All booked. Nothing left to chase.</span></div>
+    </div>
+    <div class="segs">
+      <button class="on" data-f="all">All</button>
+      <button data-f="now">Book now</button>
+      <button data-f="soon">Soon</button>
+      <button data-f="walk">Walk up</button>
+      <button data-f="todo">Outstanding</button>
+    </div>
+    <div id="lst"></div>
+  </div>
+
+  <div class="pane" id="p-info"></div>
+
+  <footer>
+    100,000 VND &asymp; Rs. 1,150&ndash;1,200 &middot; prices checked August 2026<br>
+    National Day holiday 29 Aug &ndash; 2 Sep, so hours can shift. Call ahead for anything critical.<br>
+    Ticks and notes save on this device.
+    <br><button class="reset" id="reset">Reset all ticks</button>
+  </footer>
+</div>
+
+<nav><div class="navin">
+  <button class="on" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
+  <button data-p="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2.2 2.2L19 6.5"/><path d="M20 12.5V18a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h8"/></svg><b>Bookings</b><i class="badge" id="bdg"></i></button>
+  <button data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
+</div></nav>
+
+<script>
+/* g = commute leg: [minutes, mode, detail] */
+const DAYS=[
+{c:"dn",n:1,dow:"Wed",d:"26",t:"Land & Lantern Festival",s:"Da Nang → Hoi An",
+ e:[
+ ["15:00","Land at Da Nang airport","Terminal 1, domestic-sized and quick"],
+ ["g","20 min","car","Airport → villa · ~10km · Grab ~120,000 ₫"],
+ ["15:45","Drop bags, quick refresh","Allow 30–45 min"],
+ ["g","40 min","car","Villa → Hoi An · 30km coastal road · Grab ~300,000 ₫"],
+ ["17:00","Arrive Hoi An old town","Park at An Hoi bridge side"],
+ ["17:30","Lantern boat on the Hoai River","key","15 min on the water · 170,000 ₫ for 1–3"],
+ ["18:15","Tailor — give measurements","key","Do this tonight or the suit won't make Friday"],
+ ["19:15","Walk the old town","Japanese Bridge, museums, lantern streets"],
+ ["20:30","Night food market","Cao lầu, white rose dumplings, banh mi Phuong"],
+ ["g","40 min","car","Hoi An → villa"],
+ ["22:00","Back at the villa","6.30am start tomorrow"]],
+ f:{b:"Tonight only",x:"26 August is the actual full-moon lantern festival — the one night a month it runs. Boats can't be pre-booked, so buy at a riverside booth. Go just after sunset for the shorter queue; peak crush is 7–8.30pm."}},
+
+{c:"dn",n:2,dow:"Thu",d:"27",t:"Ba Na Hills",s:"Golden Bridge & the mountain",
+ e:[
+ ["06:00","Up","Coffee at the villa"],
+ ["g","50 min","car","Villa → Ba Na Hills · 35km · pre-book, ~650,000 ₫ return"],
+ ["07:20","Arrive — ahead of the coaches","key","Gates open 07:00"],
+ ["07:40","Cable car up","15–20 min · record-holding, genuinely the best bit"],
+ ["08:10","Golden Bridge","key","30–60 min · busiest 10am–2pm, so you're ahead of it"],
+ ["09:30","Linh Ung Pagoda & gardens","Quiet, and the views are better than the bridge"],
+ ["10:30","Alpine coaster","70,000 ₫ extra, worth it"],
+ ["12:00","French Village & lunch","Buffet if you bought the 1,300,000 ₫ ticket"],
+ ["13:30","Fantasy Park","Indoor arcade · skip if the weather's good"],
+ ["16:30","Head down","Last cable car around 21:00, but don't cut it fine"],
+ ["g","50 min","car","Ba Na Hills → villa"],
+ ["17:45","Massage, then the beach","My Khe is a 5 min walk"],
+ ["g","9 min","walk","Villa → Thìa Gỗ · 53 Phan Thúc Duyện"],
+ ["18:15","Dinner at Thìa Gỗ","key","Michelin Bib Gourmand · bánh xèo, phở Nam, lẩu mắm · no bookings, so go early"],
+ ["g","15 min","car","Thìa Gỗ → Han River pier"],
+ ["19:45","Han River cruise","key","~1 hr · book the sailing that covers the 9pm bridge show"]],
+ f:{b:"Decide on the morning",x:"The summit spends a lot of its time inside a cloud and same-day tickets exist. If it's fogged in you're paying full price to look at white nothing — swap to Marble Mountain and Son Tra instead."}},
+
+{c:"dn",n:3,dow:"Fri",d:"28",t:"Hoi An & a late one",s:"Basket boats to nightclubs",
+ e:[
+ ["06:45","Up and out",""],
+ ["g","35 min","car","Villa → Cam Thanh coconut forest"],
+ ["07:45","Bay Mau basket boats","100,000 ₫ all-in · cool light, no crowds yet"],
+ ["g","15 min","car","Cam Thanh → The Duck Stop"],
+ ["09:15","The Duck Stop","100,000 ₫ · closed 12–1 for the ducks' rest"],
+ ["g","15 min","car","Duck Stop → old town"],
+ ["10:45","Collect the tailoring","key","Try everything on before you leave the shop"],
+ ["12:00","Lunch in the old town",""],
+ ["13:30","Museums, markets, wandering","2–3 hrs · ticket covers five heritage sites"],
+ ["g","40 min","car","Hoi An → villa"],
+ ["16:00","Free time","Massage, beach, nap before the long night"],
+ ["g","4 min","walk","Villa → Miss Nhi · 39 An Thượng 30"],
+ ["18:30","Early dinner at Miss Nhi","Cheap and fast · bánh xèo is the one · open to midnight"],
+ ["g","10 min","car","Miss Nhi → Dragon Bridge · arrive before 20:45"],
+ ["20:15","Dragon Bridge bar","key","Bridge shuts to traffic 20:45–21:25"],
+ ["21:00","Fire and water show","Fire first, then water · about 15 min total"],
+ ["g","15 min","car","Dragon Bridge → An Thuong / clubs"],
+ ["23:30","On to the clubs","New Phương Đông, or An Thuong for bars"],
+ ["02:30","Back at the villa","Tomorrow is deliberately free"]],
+ f:{hot:1,b:"Be seated before 8.45pm",x:"The bridge closes to traffic 20:45–21:25. Turn up at 8.30 by car and you'll be walking the last stretch through the crowd. None of the rooftops take online bookings — ring them."}},
+
+{c:"dn",n:4,dow:"Sat",d:"29",t:"My Khe & Sky36",s:"The recovery day",
+ e:[
+ ["10:00","Slow start","No alarm · you've earned it"],
+ ["g","4 min","walk","Villa → 2 Ladies Kitchen · 28 An Thượng 4"],
+ ["10:45","Brunch at 2 Ladies Kitchen","Bánh mì, ~30 fillings · coconut and salt coffee · made to order, so allow time"],
+ ["12:30","Café and bar hopping","An Thuong is walkable from the villa"],
+ ["14:30","Market shopping","Han Market or Con Market · until around six"],
+ ["16:00","Beach bars on My Khe","Sunset is about 18:05"],
+ ["g","5 min","walk","Villa → Missteak · 99 Mai Thúc Lân, 2nd floor"],
+ ["18:45","Dinner at Missteak","key","Book ahead — small upstairs room · flat iron 355,000 ₫, rib eye 825,000 ₫"],
+ ["g","15 min","car","Missteak → Novotel, 36 Bach Dang"],
+ ["21:00","Sky36","key","36th floor · reservation essential on a holiday Saturday"],
+ ["22:30","Bar hop & Vietnamese karaoke","Back around midnight — 6.30am flight run tomorrow"]],
+ f:{b:"The holiday starts today",x:"29 August is day one of the five-day National Day break. Sky36 needs a reservation, restaurants fill early, and the beach will be busy with domestic tourists."}},
+
+{c:"hc",n:5,dow:"Sun",d:"30",t:"Fly to Saigon",s:"Da Nang → Ho Chi Minh City",
+ e:[
+ ["06:30","Up","Bags packed the night before"],
+ ["g","20 min","car","Villa → Da Nang airport (DAD)"],
+ ["08:20","At the airport","2 hrs before a domestic flight in holiday week"],
+ ["10:50","Fly","key","1 hr 20 min in the air"],
+ ["12:15","Land in Saigon","T3 for Vietnam Airlines or Bamboo, otherwise T1"],
+ ["g","45 min","car","Airport → District 1 · ~8km but the traffic is the traffic"],
+ ["13:45","Check in, drop bags",""],
+ ["14:30","Late lunch near the hotel",""],
+ ["g","8 min","walk","Hotel → Ban Thanh Market"],
+ ["16:15","Ban Thanh Market","Closes ~6pm · haggle to a third of the opening price"],
+ ["18:30","Night market takes over outside",""],
+ ["g","8 min","walk","Ban Thanh → Bánh Mì Huỳnh Hoa · 26 Lê Thị Riêng"],
+ ["18:45","Bánh Mì Huỳnh Hoa","Takeaway only, no seating · one sandwich feeds two · cash · queue up to 30 min"],
+ ["20:00","Dinner and drinks","key","Book ahead — holiday weekend"],
+ ["g","10 min","walk","Restaurant → Bùi Viện"],
+ ["22:30","Bùi Viện Walking Street","No plan required beyond turning up"]],
+ f:{b:"Haggle at Ban Thanh",x:"Opening prices run three to four times what you should pay. Good for dupes, silk and coffee. The night market outside runs later and is better for food than the indoor hall."}},
+
+{c:"hc",n:6,dow:"Mon",d:"31",t:"Cu Chi Tunnels",s:"Then Saigon Square",
+ e:[
+ ["05:45","Up","The early start is the whole trick"],
+ ["g","3 min","walk","Hotel → Phở Việt Nam · 14 Phạm Hồng Thái"],
+ ["06:15","Phở at Phở Việt Nam","Michelin Selected · opens 06:00 · order the mixed bowl, fresh noodles"],
+ ["07:00","Leave the hotel","key","Pre-booked car or tour pickup"],
+ ["g","1 hr 45","car","District 1 → Cu Chi · 60km northwest"],
+ ["08:45","Arrive at Cu Chi","110,000 ₫ entry · site opens 07:00"],
+ ["09:00","Tunnels, traps, command bunkers","2–2.5 hrs · shooting range is ~US$2 a round, optional"],
+ ["11:30","Head back","Beat the afternoon heat and the coach traffic"],
+ ["g","1 hr 45","car","Cu Chi → District 1"],
+ ["13:15","Late lunch in District 1",""],
+ ["15:00","Saigon Square shopping","Two floors of it · haggle here too"],
+ ["18:00","Back to the hotel","Shower, regroup"],
+ ["20:00","Dinner, drinks, chill","Quieter night — museums tomorrow"]],
+ f:{hot:1,b:"The one that must be booked",x:"Peak of the national holiday. Tours and private cars sell out. A private car is US$40–60 return for the group and lets you set your own pace; a group tour is US$15–25 a head with hotel pickup."}},
+
+{c:"hc",n:7,dow:"Tue",d:"1",t:"Cafés & culture",s:"Deliberately loose",
+ e:[
+ ["09:00","Slow start","Egg coffee somewhere with aircon"],
+ ["g","10 min","car","Hotel → War Remnants Museum"],
+ ["10:00","War Remnants Museum","40,000 ₫ · ticket desk shuts 11:00–13:00 · allow 1.5–2 hrs"],
+ ["g","12 min","walk","Museum → Notre-Dame & Post Office"],
+ ["12:30","Central Post Office & Notre-Dame","Cathedral has been under restoration — exterior only"],
+ ["13:15","Lunch nearby",""],
+ ["g","6 min","walk","Post Office → Independence Palace"],
+ ["14:00","Independence Palace","40,000 ₫ · last tickets 15:30 · the bunker is the good part"],
+ ["16:00","Massage or hair spa","District 1 is full of them"],
+ ["18:00","Last of the shopping",""],
+ ["20:00","Easy dinner","key","Nothing risky — you're flying tomorrow"]],
+ f:{b:"All walkable",x:"The museum, Post Office, Notre-Dame and the Palace sit within about a kilometre of each other. Pick and choose — nobody has to do all four. Check hours the day before; 1 September is inside the holiday."}},
+
+{c:"hc",n:8,dow:"Wed",d:"2",t:"Home",s:"National Day departure",
+ e:[
+ ["08:00","Last-minute shopping","Coffee and souvenirs near the hotel"],
+ ["09:30","Pack, check out","Leave bags at reception if you want an extra hour"],
+ ["10:30","Leave the hotel","key","Earlier if reception reports closures"],
+ ["g","45 min","car","District 1 → Tan Son Nhat Terminal 2"],
+ ["11:30","At the airport","International departures — T2, not the terminal you landed at"],
+ ["12:00","Check in","key","Allow the full three hours"],
+ ["14:00","Duty free if there's time",""],
+ ["15:50","Fly","key",""]],
+ f:{hot:1,b:"Today is National Day itself",x:"Expect parades and road closures across District 1, not just heavy traffic. Ask the front desk about the route before you leave, and tell the driver Terminal 2 — it's a different building from arrivals."}}
+];
+
+const BOOK=[
+{g:"Da Nang & Hoi An",items:[
+{id:"tailor",p:"now",t:"Book a Hoi An tailor",w:"Measure Wed 26th → collect Fri 28th",
+ r:[["Turnaround","Two clear days is the minimum. Confirm the Friday collection <b>before</b> paying a deposit."],
+    ["Cost","Two-piece suit US$150–350 depending on cloth. Shirts US$25–40."],
+    ["Tip","Email measurements ahead and they'll have something cut when you arrive."],
+    ["Where","Most sit on Tran Phu and Le Loi in the old town."]],
+ l:[["Yaly Couture","https://yalycouture.com/en",1],["A Dong Silk","https://adongsilk.com/",0],
+    ["Compare on TripAdvisor","https://www.tripadvisor.com/Attractions-g298082-Activities-c26-Hoi_An_Quang_Nam_Province.html",0]],
+ map:["Hoi An old town","Tran+Phu+Street+Hoi+An"],
+ f:{hot:1,b:"No slack in this one",x:"Measurements must happen Wednesday for a Friday collection. Skip the fitting and there is no suit."}},
+
+{id:"dragon",p:"now",t:"Table for the Dragon Bridge show",w:"Friday 28 Aug, 9pm",
+ r:[["Show","Fri, Sat, Sun at 21:00 · fire then water · about 15 min"],
+    ["Arrive by","20:45 — the bridge shuts to traffic 20:45–21:25"],
+    ["NYX Sky Lounge","21F HAIAN Riverfront, 182 Bach Dang · 16:30–24:00"],
+    ["Top View Bar","19F Vanda Hotel, 3 Nguyen Van Linh · 16:00–23:00"],
+    ["Endless Summer","Wink Riverside, 351 Tran Hung Dao · 16:30–00:30"],
+    ["Lagoon Rooftop","3/39 Ha Thi Than, Son Tra · 16:30–23:30"],
+    ["ON! Bar","5F, 206 Bach Dang · 19:30–02:00"]],
+ tel:[["NYX","02363573888"],["Top View","0941797997"],["Endless Summer","0978746709"],
+      ["Lagoon","0912922897"],["ON!","0905407799"]],
+ map:["Dragon Bridge","Dragon+Bridge+Da+Nang"],
+ f:{hot:1,b:"Phone only",x:"None of these take online bookings. Ring them, and confirm the show is running that night while you're on the call."}},
+
+{id:"sky36",p:"now",t:"Reserve Sky36",w:"Saturday 29 Aug, 8pm",
+ r:[["Where","36F Novotel Premier Han River, 36–38 Bach Dang"],
+    ["Hours","18:00–02:00 · DJs from 21:00"],
+    ["Expect","A minimum spend. Highest rooftop in the city, priced to match."],
+    ["Dress","Smart casual — no flip-flops or vests"]],
+ l:[["Book at sky36.vn","https://sky36.vn/",1]],
+ tel:[["Sky36","0901151536"]], map:["Sky36","Sky36+Da+Nang"]},
+
+{id:"bana",p:"soon",t:"Ba Na Hills tickets",w:"Thu 27 Aug — or decide that morning",
+ r:[["Before 3pm","<b>1,000,000 ₫</b> per adult"],
+    ["With lunch","1,300,000 ₫ · buffet included"],
+    ["After 3pm","1,050,000 ₫ · includes dinner, fewer crowds, cooler"],
+    ["Included","Return cable car, Golden Bridge, French Village, Fantasy Park, gardens"],
+    ["Pay extra","Alpine coaster 70,000 · wax museum 100,000 · wine cellar 100–300,000"],
+    ["Getting there","35km, ~50 min. Pre-book the return — taxis are scarce coming down. ~650,000 ₫ for the car."],
+    ["Open","07:00–22:00 · cable cars stop earlier in bad weather"]],
+ l:[["Official — Sun World","https://booking.sunworld.vn/en",1],
+    ["Klook","https://www.klook.com/en-US/activity/13283-ba-na-hills-ticket-da-nang/",0],
+    ["KKday","https://www.kkday.com/en/product/26212-ba-na-hills-da-nang-cable-car-ticket",0],
+    ["Private car","https://www.klook.com/activity/6367-da-nang-private-transfer/",0]],
+ map:["Ba Na Hills","Sun+World+Ba+Na+Hills"],
+ f:{b:"The one you can leave late",x:"Same-day tickets exist and the summit is often clouded in. Look at the mountain on the morning before committing."}},
+
+{id:"cruise",p:"soon",t:"Han River evening cruise",w:"Thursday 27 Aug, ~8pm",
+ r:[["What","About an hour past the Dragon and Love bridges, all lit up"],
+    ["Price","From ~US$3 plain, ~US$12 with dinner"],
+    ["Boats","Vinh Anh and Poseidon are the two main operators"],
+    ["Pier","36 Bach Dang · same street as Sky36"],
+    ["Timing","Pick a sailing that has you on the water for the 21:00 bridge show"]],
+ l:[["Klook — evening cruise","https://www.klook.com/activity/28414-han-river-evening-cruise-da-nang/",1],
+    ["Klook — Poseidon","https://www.klook.com/en-US/activity/95290-poseidon-cruise-han-river-da-nang/",0],
+    ["KKday — with dinner","https://www.kkday.com/en-id/product/36431",0],
+    ["GetYourGuide","https://www.getyourguide.com/da-nang-l939/da-nang-han-river-cruise-and-champa-dance-t469912/",0]],
+ map:["Han River pier","36+Bach+Dang+Da+Nang"]},
+
+{id:"duck",p:"soon",t:"Book the Duck Stop",w:"Friday 28 Aug, 9.15am",
+ r:[["Price","<b>100,000 ₫</b> per person · farm entry free"],
+    ["Hours","08:30–17:00 · closed 12:00–13:00 while the ducks rest"],
+    ["What","Herd ducks, feed them, the famous duck foot massage. About an hour."],
+    ["Heads up","Two Duck Stops in Vietnam — the original is in Phong Nha, 250km north"]],
+ l:[["Book direct","https://duckstophoian.com/",1],
+    ["GetYourGuide","https://www.getyourguide.com/hoi-an-l831/hoi-an-duck-stop-eco-farm-experience-with-duck-feeding-t1209925/",0]],
+ tel:[["Duck Stop","+84328666645"]], map:["Duck Stop Hoi An","Duck+Stop+Hoi+An"]},
+
+{id:"basket",p:"soon",t:"Bay Mau basket boats",w:"Friday 28 Aug, 7.45am",
+ r:[["Price","<b>100,000 ₫</b> all-in — 30,000 entry + 70,000 boat"],
+    ["Best time","08:00–10:00 or 15:00–16:30. No shade on the water midday."],
+    ["How long","About 45 min including the spinning-boat routine"],
+    ["Getting there","Cam Thanh, ~35 min from the villa, 15 min from Hoi An"]],
+ l:[["GetYourGuide — duck farm + boat","https://www.getyourguide.com/hoi-an-l831/hoi-an-duck-farm-coconut-boat-tour-t1328956/",1],
+    ["Klook — Hoi An","https://www.klook.com/en-US/destination/c75-hoi-an/",0]],
+ map:["Bay Mau coconut forest","Bay+Mau+Coconut+Forest+Hoi+An"],
+ f:{hot:1,b:"Known scam spot",x:"Ignore motorbike touts and don't follow an unknown driver to an 'official' pier. Unlicensed boats charge 150–200,000+ for a worse trip. Hold the 100,000 figure and go to a proper station."}},
+
+{id:"transfer",p:"soon",t:"Airport transfer, 30 Aug",w:"Leave the villa 07:15",
+ r:[["Flight","10:50 to Ho Chi Minh City"],
+    ["Journey","~20 min, 10km. Allow more in holiday week."],
+    ["Cost","Grab ~120,000 ₫, private car ~US$8–12"],
+    ["Alternative","The villa will arrange a car if you ask the night before"]],
+ l:[["Klook — DAD transfers","https://www.klook.com/en-US/airport-transfers/service/dad-da-nang-international-airport/",1],
+    ["KKday — private transfer","https://www.kkday.com/en/product/10079-private-transfer-between-da-nang-airport-and-da-nang-city-centre",0]],
+ map:["Da Nang airport","Da+Nang+International+Airport"]},
+
+{id:"lantern",p:"walk",t:"Lantern boat, Hoi An",w:"Wednesday 26 Aug, from sunset",
+ r:[["Price","170,000 ₫ for 1–3 · 220,000 ₫ for 4–5"],
+    ["Where","Six booths along the Hoai River — Japanese Bridge, An Hoi Bridge, night market"],
+    ["Runs","Sunset (~18:05) to 21:30–22:00 · ride is about 15 min"],
+    ["Payment","Cash in dong at the booth"]],
+ map:["Hoai River, Hoi An","Hoai+River+Hoi+An"],
+ f:{b:"Cannot be booked online",x:"Several sites claim otherwise — they're wrong. Go just after sunset for light and a shorter queue. Peak crush is 19:00–20:30, worse on a full moon."}},
+
+{id:"marble",p:"walk",t:"Marble Mountain",w:"Spare-day option",
+ r:[["Entry","40,000 ₫ · lift 15,000 ₫ each way"],
+    ["Am Phu cave","20,000 ₫ extra — the 'hell cave', worth it"],
+    ["Hours","07:30–17:00 · cash only in dong"],
+    ["Best time","Early morning or late afternoon. Queues 09:00–15:00."],
+    ["Getting there","20 min from the villa, on the way to Hoi An"]],
+ map:["Marble Mountains","Marble+Mountains+Da+Nang"]}
+]},
+
+{g:"Ho Chi Minh City",items:[
+{id:"cuchi",p:"now",t:"Book Cu Chi Tunnels",w:"Monday 31 Aug — the urgent one",
+ r:[["Entry","110,000 ₫ · site open 07:00–17:00"],
+    ["Ben Dinh","60km · closer, busier, more reconstructed for visitors"],
+    ["Ben Duoc","70km · quieter, more authentic, the better call"],
+    ["Journey","1 hr 45 each way, traffic depending"],
+    ["Group tour","US$15–25pp including hotel pickup"],
+    ["Private car","US$40–60 return — better for a group, you set the pace"],
+    ["Extras","Shooting range ~US$2 a round, paid on site"]],
+ l:[["Klook — half-day tour","https://www.klook.com/en-US/activity/1471-cu-chi-tunnels-experience-ho-chi-minh-city/",1],
+    ["GetYourGuide — all tours","https://www.getyourguide.com/cu-chi-tunnels-l3671/",0],
+    ["Viator","https://www.viator.com/Ho-Chi-Minh-City/d352",0]],
+ map:["Cu Chi Tunnels","Cu+Chi+Tunnels"],
+ f:{hot:1,b:"Peak holiday week",x:"29 Aug – 2 Sep is a five-day national break and this is the middle of it. Tours and private cars sell out. The 07:00 departure beats both the crowds and the heat."}},
+
+{id:"dinner",p:"now",t:"Reserve dinner, 30th & 31st",w:"District 1, holiday weekend",
+ r:[["Why","Restaurants fill early across the break — walk-ins get turned away"],
+    ["Sunday 30th","Near Bùi Viện so you can roll straight on"],
+    ["Monday 31st","Anywhere quieter — it's a long day at Cu Chi"],
+    ["Budget","A good sit-down dinner runs 300–600,000 ₫ a head with drinks"]],
+ l:[["TripAdvisor — best in Saigon","https://www.tripadvisor.com/Restaurants-g293925-Ho_Chi_Minh_City.html",1],
+    ["Viator — food tours","https://www.viator.com/Ho-Chi-Minh-City/d352",0]],
+ map:["District 1","District+1+Ho+Chi+Minh+City"]},
+
+{id:"depart",p:"now",t:"Confirm the departure run",w:"Wednesday 2 Sep, flight 15:50",
+ r:[["Terminal","International is <b>T2</b>. You land at T3 or T1 — a different building."],
+    ["Plan","Leave the hotel 10:30, at the airport by 11:30"],
+    ["Journey","~45 min for 8km. National Day makes that unpredictable."],
+    ["Traffic","Parades and road closures in District 1, not just congestion"],
+    ["Check-in","Allow three hours — gates have been known to close 45 min out"]],
+ l:[["Klook — SGN transfers","https://www.klook.com/en-US/airport-transfers/service/sgn-tan-son-nhat-international-airport/",1]],
+ map:["Tan Son Nhat T2","Tan+Son+Nhat+International+Airport+Terminal+2"],
+ f:{hot:1,b:"Check the route that morning",x:"Ask the front desk about closures before you leave, and tell the driver Terminal 2."}},
+
+{id:"museum",p:"walk",t:"War Remnants Museum",w:"Tuesday 1 Sep, morning",
+ r:[["Price","40,000 ₫ · cash in VND only at the gate"],
+    ["Open","07:30–17:30 daily"],
+    ["Ticket desk","07:30–11:00, then 13:00–17:00 only"],
+    ["Where","28 Vo Van Tan, District 3"],
+    ["Allow","1.5–2 hrs · it is heavy going, be ready for that"]],
+ map:["War Remnants Museum","War+Remnants+Museum+Ho+Chi+Minh+City"],
+ f:{b:"Mind the ticket window",x:"Arrive at 11.30 and you're waiting until one o'clock. Hours may shift over the holiday — worth a check the day before."}},
+
+{id:"palace",p:"walk",t:"Independence Palace",w:"Tuesday 1 Sep, afternoon",
+ r:[["Price","40,000 ₫ · 65,000 ₫ with the exhibit"],
+    ["Open","08:00–16:30 · last tickets 15:30"],
+    ["Where","135 Nam Ky Khoi Nghia · 6 min walk from the Post Office"],
+    ["Don't miss","The underground command bunker — the best part"]],
+ map:["Independence Palace","Independence+Palace+Ho+Chi+Minh+City"]},
+
+{id:"banthanh",p:"walk",t:"Ban Thanh Market",w:"Sunday 30 Aug, afternoon",
+ r:[["Hours","~06:00–18:00 · night market outside runs to ~23:00"],
+    ["Haggling","Opening prices run three to four times the real one"],
+    ["Good for","Dupes, silk, coffee, spices, tat for people back home"],
+    ["Where","8 min walk from most District 1 hotels"]],
+ map:["Ben Thanh Market","Ben+Thanh+Market"]}
+]}];
+
+const INFO=[
+{h:"Food",ic:"M7 2.5v8a2.5 2.5 0 002.5 2.5h0V21.5M7 2.5v5M10 2.5v5M17 2.5c-1.4 1.4-2 3.5-2 5.5s.6 3.5 2 4.5v9",
+ type:"food",rows:[
+ ["Thìa Gỗ","<b>Michelin Bib Gourmand</b> — not a star. 53 Phan Thúc Duyện, 9 min walk. 10:00–22:00 daily. Bánh xèo, phở Nam, lẩu mắm. ~150–300,000 ₫. No bookings — first come, first served, so go early. Cards +2.75%. <b>Thu 27th, dinner.</b>"],
+ ["2 Ladies Kitchen","28 An Thượng 4, 4 min walk. 07:30–22:30. Bánh mì with ~30 fillings, coconut and salt coffee. Made to order so it is not fast. Staff are deaf — order by pointing or notepad. <b>Sat 29th, brunch.</b>"],
+ ["Miss Nhi","39 An Thượng 30, 4 min walk. 10:00–midnight. Cheap Vietnamese, bánh xèo is the signature. Walk-in. <b>Fri 28th, early dinner before the Dragon Bridge.</b>"],
+ ["Missteak","99 Mai Thúc Lân, 2nd floor, 5 min walk. 11:00–23:00. Flat iron 355,000 ₫, rib eye 825,000 ₫, ~500–900,000 ₫ a head with a drink. Small room — <b>book ahead</b>, and check you are booking Da Nang not the Hội An branch. <b>Sat 29th, dinner.</b>"],
+ ["Bánh Mì Huỳnh Hoa","26 Lê Thị Riêng, 8 min walk from Ben Thanh. Hours are disputed across sources — late afternoon and evening is the safe window. ~58–73,000 ₫. <b>Takeaway only, no seating</b>, cash, queue up to 30 min. One sandwich feeds two — ask them to halve it. <b>Sun 30th, after the market.</b>"],
+ ["Phở Việt Nam","<b>Michelin Selected</b> — a rung below Bib Gourmand. 14 Phạm Hồng Thái, 3 min walk. 06:00–03:00. Fresh not dried noodles; order the mixed bowl. 65–155,000 ₫. Walk-in. <b>Mon 31st, breakfast before Cu Chi</b> — or after Bùi Viện, it is open to 3am."]]},
+{h:"Money",ic:"M12 2.5v19M16.8 6.8c0-1.7-2.1-2.8-4.8-2.8s-4.8 1-4.8 2.8 2.1 2.5 4.8 3.3 4.8 1.5 4.8 3.3-2.1 2.8-4.8 2.8-4.8-1-4.8-2.8",
+ type:"rows",rows:[["Ba Na Hills entry","1,000,000 ₫ · Rs. 11,500"],
+ ["Ba Na return taxi, split","~650,000 ₫ · Rs. 7,500"],
+ ["Villa → Hoi An by Grab","~300,000 ₫ · Rs. 3,450"],
+ ["Cu Chi entry","110,000 ₫ · Rs. 1,270"],
+ ["Duck Stop","100,000 ₫ · Rs. 1,150"],["Basket boat","100,000 ₫ · Rs. 1,150"],
+ ["Lantern boat, 1–3","170,000 ₫ · Rs. 1,950"],["Marble Mountain","40,000 ₫ · Rs. 460"],
+ ["War Remnants Museum","40,000 ₫ · Rs. 460"],["Independence Palace","40,000 ₫ · Rs. 460"],
+ ["Dinner out, per head","300–600,000 ₫ · Rs. 3,500–7,000"]]},
+
+{h:"Getting around",ic:"M5 17.5h14M6.5 17.5v2M17.5 17.5v2M4.2 12.5l1.4-4.6A2.4 2.4 0 018 6h8a2.4 2.4 0 012.4 1.9l1.4 4.6M4 12.5h16v3.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 16z",
+ type:"list",rows:[
+ "<b>Da Nang airport → villa</b> — 20 min, ~120,000 ₫.",
+ "<b>Villa → Hoi An</b> — 40 min on the coastal road, ~300,000 ₫ by Grab.",
+ "<b>Villa → Ba Na Hills</b> — 50 min, 35km. Pre-book the return; taxis are scarce coming down.",
+ "<b>Villa → Dragon Bridge</b> — 10 min, but the bridge closes to traffic 20:45.",
+ "<b>Saigon airport → District 1</b> — 45 min for 8km. The traffic is the traffic.",
+ "<b>District 1 → Cu Chi</b> — 1 hr 45 each way, 60km northwest.",
+ "Museum, Post Office, Notre-Dame and the Palace are all within a kilometre — walk it."]},
+
+{h:"The holiday",ic:"M8 2.5v4M16 2.5v4M3.5 10.5h17M6 4.5h12a2.5 2.5 0 012.5 2.5v12a2.5 2.5 0 01-2.5 2.5H6a2.5 2.5 0 01-2.5-2.5V7A2.5 2.5 0 016 4.5z",
+ type:"text",rows:[
+ "Vietnam's National Day break runs <b>Saturday 29 August to Wednesday 2 September 2026</b> — five days, confirmed by the government.",
+ "Your whole Saigon leg sits inside it, and the last two Da Nang days too. Fuller flights, busier hotels, heavier traffic, packed nightlife.",
+ "Anything marked <b>Book now</b> genuinely means now. Cu Chi and restaurants are the ones that bite."]},
+
+{h:"Airports",ic:"M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z",
+ type:"list",rows:[
+ "<b>Da Nang (DAD)</b> — 20 min from the villa. Small and quick; 2 hrs is plenty.",
+ "<b>Saigon arrival, 30 Aug</b> — domestic. Terminal 3 for Vietnam Airlines and Bamboo, otherwise Terminal 1.",
+ "<b>Saigon departure, 2 Sep</b> — international, <b>Terminal 2</b>. Different building from arrivals.",
+ "Allow the full three hours on 2 September. Gates have been known to close 45 minutes before departure."]},
+
+{h:"If a day falls through",ic:"M21 12a9 9 0 11-6.2-8.6M21 3.5v6h-6",type:"list",rows:[
+ "<b>Marble Mountain</b> — 3–4 hrs, 20 min out, best early or at sunset. 40,000 ₫.",
+ "<b>Son Tra peninsula</b> — scenic drive, Lady Buddha, viewpoints over the bay.",
+ "<b>Beach bars on My Khe</b> — five minutes on foot, the reliable washout fallback.",
+ "Both Da Nang options are the natural swap if Ba Na Hills is clouded in."]},
+
+{h:"Practical",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
+ type:"list",rows:[
+ "Carry cash — museums, boat booths and market stalls are dong only.",
+ "<b>100,000 and 1,000,000 notes look almost identical.</b> Count twice.",
+ "Haggle at markets. Open at a third of the asking price and settle near half.",
+ "Tap any address on this page to open it in Maps.",
+ "Sunset is around 18:05 all week — useful for the beach and the lantern boats."]}
+];
+
+/* ================= APP ================= */
+var $=function(i){return document.getElementById(i)};
+var st={},nt={},dop={},iop={},filt="all";
+var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
+var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
+var PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+var CHV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+var CAR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M4.3 12.5l1.2-4A2.2 2.2 0 017.6 7h8.8a2.2 2.2 0 012.1 1.5l1.2 4M4 12.5h16V16H4z"/><circle cx="7.5" cy="16" r="1"/><circle cx="16.5" cy="16" r="1"/></svg>';
+var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4.2" r="1.8"/><path d="M12 21l-1.5-5.5L8 13l1-5 3.5-1.2 2.5 3 2.5 1M10.5 15.5L8 21"/></svg>';
+var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
+var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
+
+function save(){try{localStorage.setItem("vn2026a",JSON.stringify({s:st,n:nt,t:document.documentElement.dataset.theme}))}catch(e){}}
+function load(){try{var r=localStorage.getItem("vn2026a");if(!r)return;var d=JSON.parse(r);
+ Object.assign(st,d.s||{});Object.assign(nt,d.n||{});
+ if(d.t)document.documentElement.dataset.theme=d.t}catch(e){}}
+function esc(x){return x}
+function noteHTML(f){return f?'<div class="note'+(f.hot?' hot':'')+'"><b>'+f.b+'</b>'+f.x+'</div>':''}
+
+function days(){
+ var h='<h2><i class="i-dn"></i>Da Nang &middot; 26–30 August</h2>';
+ DAYS.forEach(function(d,i){
+  if(i===4)h+='<h2><i class="i-hc"></i>Ho Chi Minh City &middot; 30 Aug – 2 Sep</h2>';
+  var ev=d.e.map(function(e){
+   if(e[0]==="g"){
+    var ic = e[2]==="walk"?WALK : e[2]==="plane"?PLANE : CAR;
+    return '<div class="go"><span class="goi">'+ic+'<b>'+e[1]+'</b>'+(e[3]?'<span>'+e[3]+'</span>':'')+'</span></div>';
+   }
+   var key=e[3]==="key"||e[2]==="key";
+   var note=(e[3]&&e[3]!=="key")?e[3]:((e[2]&&e[2]!=="key")?e[2]:"");
+   return '<div class="ev'+(key?" key":"")+'"><div class="tm">'+e[0]+'</div>'+
+     '<div class="ti">'+e[1]+'</div>'+(note?'<div class="nt">'+note+'</div>':'')+'</div>';
+  }).join("");
+  h+='<div class="day '+d.c+(dop[d.n]?" open":"")+'" data-d="'+d.n+'">'+
+   '<div class="dh" role="button" tabindex="0"><div class="dnum"><b>'+d.d+'</b><i>'+d.dow+'</i></div>'+
+   '<div class="dt"><b>'+d.t+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
+   '<div class="db"><div class="dbi"><div class="dbp"><div class="tl">'+ev+'</div>'+noteHTML(d.f)+'</div></div></div></div>';
+ });
+ $("p-days").innerHTML=h;
+ $("p-days").querySelectorAll(".dh").forEach(function(x){
+  var go=function(){var n=x.parentNode.dataset.d;dop[n]=!dop[n];days()};
+  x.onclick=go;
+  x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}};
+ });
+}
+
+function acts(it){
+ var a="";
+ if(it.l)a+=it.l.map(function(l){
+  return '<a class="btn'+(l[2]?"":" sec")+'" href="'+l[1]+'" target="_blank" rel="noopener">'+EXT+l[0]+'</a>'}).join("");
+ if(it.tel)a+=it.tel.map(function(t){
+  return '<a class="btn sec" href="tel:'+t[1]+'">'+PHN+t[0]+'</a>'}).join("");
+ if(it.map)a+='<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+it.map[1]+'" target="_blank" rel="noopener">'+PIN+it.map[0]+'</a>';
+ return a?'<div class="acts">'+a+'</div>':'<div class="none">Nothing to book — just turn up.</div>';
+}
+
+function book(){
+ var h="";
+ BOOK.forEach(function(g){
+  var els=g.items.filter(function(it){var d=!!st[it.id];
+   if(filt==="todo")return !d; if(filt==="all")return true; return it.p===filt});
+  if(!els.length)return;
+  h+='<h2>'+g.g+'</h2>';
+  els.forEach(function(it){
+   var d=!!st[it.id];
+   var dl='<dl>'+it.r.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>'}).join("")+'</dl>';
+   h+='<div class="it'+(d?" done":"")+(iop[it.id]?" open":"")+'">'+
+    '<div class="ih"><div class="bx" data-c="'+it.id+'" role="checkbox" tabindex="0" aria-checked="'+d+'" aria-label="Mark '+it.t+' booked">'+TICK+'</div>'+
+    '<div class="itx" data-t="'+it.id+'" role="button" tabindex="0"><div class="itt">'+it.t+
+    '<span class="tag '+TAG[it.p][1]+'">'+TAG[it.p][0]+'</span></div>'+
+    '<div class="itw">'+it.w+'</div></div></div>'+
+    '<div class="ib"><div class="ibi"><div class="ibp">'+dl+acts(it)+noteHTML(it.f)+
+    '<textarea placeholder="Notes — confirmation number, who you spoke to…" data-n="'+it.id+'">'+(nt[it.id]||"")+'</textarea>'+
+    '</div></div></div></div>';
+  });
+ });
+ $("lst").innerHTML=h||'<div class="card"><p>Nothing here — try another filter.</p></div>';
+ $("lst").querySelectorAll(".bx").forEach(function(b){
+  var go=function(e){if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];save();book()};
+  b.onclick=go;
+  b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go(e)}};
+ });
+ $("lst").querySelectorAll(".itx").forEach(function(x){
+  var go=function(){iop[x.dataset.t]=!iop[x.dataset.t];book()};
+  x.onclick=go;
+  x.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}};
+ });
+ $("lst").querySelectorAll("textarea").forEach(function(t){
+  t.onclick=function(e){e.stopPropagation()};
+  t.oninput=function(){nt[t.dataset.n]=t.value;save()}});
+ tally();
+}
+
+function info(){
+ $("p-info").innerHTML=INFO.map(function(s){
+  var b="";
+  if(s.type==="rows")b=s.rows.map(function(r){return '<div class="row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'}).join("");
+  else if(s.type==="food")b=s.rows.map(function(r){return '<div class="eat"><b>'+r[0]+'</b><p>'+r[1]+'</p></div>'}).join("");
+  else if(s.type==="list")b='<ul>'+s.rows.map(function(r){return '<li>'+r+'</li>'}).join("")+'</ul>';
+  else b=s.rows.map(function(r){return '<p>'+r+'</p>'}).join("");
+  return '<div class="card"><h3><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="'+s.ic+'"/></svg></i>'+s.h+'</h3>'+b+'</div>'
+ }).join("");
+}
+
+function tally(){
+ var t=0,d=0,u=0;
+ BOOK.forEach(function(g){g.items.forEach(function(i){t++;if(st[i.id])d++;else if(i.p==="now")u++})});
+ $("nd").textContent=d;$("nt").textContent=t;$("s3").textContent=d+"/"+t;
+ var p=t?Math.round(d/t*100):0;
+ $("pc").textContent=p+"%";$("fl").style.width=p+"%";
+ $("put").textContent=u+" urgent "+(u===1?"item":"items")+" outstanding";
+ $("pu").classList.toggle("show",u>0);
+ $("pa").classList.toggle("show",t>0&&d===t);
+ var bd=$("bdg");bd.textContent=u;bd.classList.toggle("show",u>0);
+}
+
+function countdown(){
+ var go=new Date(2026,7,26,15,0,0),end=new Date(2026,8,2,15,50,0),now=new Date();
+ var dd=Math.ceil((go-now)/86400000);
+ if(dd>0){$("s1").textContent=dd;$("s1l").textContent=dd===1?"day to go":"days to go"}
+ else if(now<=end){var n=Math.floor((now-go)/86400000)+1;
+  $("s1").textContent="Day "+n;$("s1l").textContent="of the trip"}
+ else{$("s1").textContent="✓";$("s1l").textContent="that was that"}
+}
+
+document.querySelectorAll("nav button").forEach(function(b){
+ b.onclick=function(){
+  document.querySelectorAll("nav button").forEach(function(x){x.classList.remove("on")});
+  document.querySelectorAll(".pane").forEach(function(x){x.classList.remove("on")});
+  b.classList.add("on");$("p-"+b.dataset.p).classList.add("on");
+  var w=document.querySelector(".wrap");
+  var y=window.pageYOffset||document.documentElement.scrollTop;
+  var top=w.getBoundingClientRect().top+y-58;
+  if(y>top)window.scrollTo({top:top,behavior:"smooth"});
+ }});
+document.querySelectorAll(".segs button").forEach(function(b){
+ b.onclick=function(){
+  document.querySelectorAll(".segs button").forEach(function(x){x.classList.remove("on")});
+  b.classList.add("on");filt=b.dataset.f;book()}});
+$("reset").onclick=function(){for(var k in st)delete st[k];save();book()};
+$("tt").onclick=function(){
+ var el=document.documentElement, cur=el.dataset.theme;
+ var isDark = cur==="dark" || (cur==="auto" && matchMedia("(prefers-color-scheme:dark)").matches);
+ el.dataset.theme = isDark ? "light" : "dark";
+ save();
+};
+
+load();days();book();info();countdown();
+</script>
+</body>
+</html>
