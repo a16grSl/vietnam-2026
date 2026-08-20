@@ -26,7 +26,7 @@
   --grn:#1d7a4a; --grnbg:rgba(29,122,74,.10);
   --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
   --shadow2:0 2px 6px rgba(0,0,0,.06),0 14px 40px rgba(0,0,0,.10);
-  --glass:rgba(255,255,255,.72);
+  --glass:rgba(255,255,255,.72); --edge:rgba(0,0,0,.055); --bezel:rgba(0,0,0,.035); --bzline:rgba(0,0,0,.06); --inhi:rgba(255,255,255,.9);
   --dn:#0071e3; --hc:#bf4800;
   --c1:#0071e3; --c2:#5e5ce6; --c3:#bf5af2; --c4:#ff2d55; --c5:#ff8c00; --c6:#00a3a3;
   --mesh1:rgba(0,113,227,.16); --mesh2:rgba(94,92,230,.14); --mesh3:rgba(255,45,85,.10);
@@ -42,7 +42,7 @@
   --grn:#30d158; --grnbg:rgba(48,209,88,.13);
   --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
   --shadow2:0 2px 8px rgba(0,0,0,.55),0 18px 46px rgba(0,0,0,.5);
-  --glass:rgba(20,20,22,.74);
+  --glass:rgba(20,20,22,.74); --edge:rgba(0,0,0,.4); --bezel:rgba(255,255,255,.045); --bzline:rgba(255,255,255,.09); --inhi:rgba(255,255,255,.08);
   --dn:#5ac8fa; --hc:#ff9f0a;
   --c1:#0a84ff; --c2:#7d7aff; --c3:#da8fff; --c4:#ff6482; --c5:#ffb340; --c6:#40cbc4;
   --mesh1:rgba(10,132,255,.30); --mesh2:rgba(125,122,255,.24); --mesh3:rgba(255,100,130,.16);
@@ -59,7 +59,7 @@
     --grn:#30d158; --grnbg:rgba(48,209,88,.13);
     --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
     --shadow2:0 2px 8px rgba(0,0,0,.55),0 18px 46px rgba(0,0,0,.5);
-    --glass:rgba(20,20,22,.74);
+    --glass:rgba(20,20,22,.74); --edge:rgba(0,0,0,.4); --bezel:rgba(255,255,255,.045); --bzline:rgba(255,255,255,.09); --inhi:rgba(255,255,255,.08); --edge:rgba(0,0,0,.4); --bezel:rgba(255,255,255,.045); --bzline:rgba(255,255,255,.09); --inhi:rgba(255,255,255,.08);
     --dn:#5ac8fa; --hc:#ff9f0a;
     --c1:#0a84ff; --c2:#7d7aff; --c3:#da8fff; --c4:#ff6482; --c5:#ffb340; --c6:#40cbc4;
     --mesh1:rgba(10,132,255,.30); --mesh2:rgba(125,122,255,.24); --mesh3:rgba(255,100,130,.16);
@@ -70,7 +70,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.47 var(--f);
- letter-spacing:-.011em;-webkit-font-smoothing:antialiased;
+ letter-spacing:-.011em;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;text-rendering:optimizeLegibility;
  padding-bottom:var(--s7);
  transition:background .35s var(--ease),color .35s var(--ease)}
 ::selection{background:var(--acc);color:#fff}
@@ -80,7 +80,11 @@ button{font-family:inherit}
 /* ================= HEADER ================= */
 .top{position:sticky;top:0;z-index:70;padding-top:0;background:var(--glass);
  backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);
- border-bottom:.5px solid var(--line);padding:0 var(--s4)}
+ padding:0 var(--s4)}
+.top:after{content:"";position:absolute;left:0;right:0;top:100%;height:16px;pointer-events:none;
+ background:linear-gradient(180deg,var(--edge),transparent);
+ opacity:0;transition:opacity .28s var(--ease)}
+.top.edge:after{opacity:1}
 .topin{max-width:760px;margin:0 auto;height:50px;display:flex;align-items:center;
  justify-content:space-between;gap:var(--s3)}
 .brand{font-size:16px;font-weight:600;letter-spacing:-.02em}
@@ -123,13 +127,12 @@ h1 .l2{display:block;background:linear-gradient(96deg,var(--c1),var(--c2) 42%,va
  -webkit-text-fill-color:transparent;padding-bottom:.06em}
 .sub{margin:0;color:var(--mut);font-size:19px;line-height:1.42;letter-spacing:-.015em;max-width:30ch}
 .stats{display:flex;gap:var(--s2);margin-top:var(--s6);flex-wrap:wrap}
-.stat{flex:1 1 0;min-width:96px;background:var(--surf);border:.5px solid var(--line);
- border-radius:var(--r);padding:var(--s3) var(--s4);box-shadow:var(--shadow);
- position:relative;overflow:hidden}
-.stat:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px}
-.stat:nth-child(1):before{background:linear-gradient(90deg,var(--c1),var(--c2))}
-.stat:nth-child(2):before{background:linear-gradient(90deg,var(--c2),var(--c3))}
-.stat:nth-child(3):before{background:linear-gradient(90deg,var(--c5),var(--c4))}
+.stat{flex:1 1 0;min-width:96px;position:relative}
+.stat .core{position:relative;overflow:hidden}
+.stat .core:before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.stat:nth-child(1) .core:before{background:linear-gradient(90deg,var(--c1),var(--c2))}
+.stat:nth-child(2) .core:before{background:linear-gradient(90deg,var(--c2),var(--c3))}
+.stat:nth-child(3) .core:before{background:linear-gradient(90deg,var(--c5),var(--c4))}
 .stat b{display:block;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
 .stat span{font-size:12.5px;color:var(--mut);letter-spacing:-.005em}
 
@@ -428,8 +431,7 @@ button.mp.tog.on{background-color:var(--accbg);border-color:transparent}
 .bn{font-size:12.5px;font-weight:400;color:var(--mut);line-height:1.45;margin-top:4px}
 .bv{text-align:right;font-size:15px;font-weight:640;letter-spacing:-.02em;white-space:nowrap}
 .bv span{display:block;font-size:11.5px;font-weight:500;color:var(--mut);margin-top:1px}
-.btot{margin-top:18px;padding:14px 15px;border-radius:15px;background-color:var(--surf);
- background-image:linear-gradient(180deg,var(--surf),var(--surf2));border:.5px solid var(--line)}
+.btot{margin-top:18px}
 .btr{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:baseline;
  padding:7px 0;font-size:13.5px;color:var(--ink2)}
 .btr b{font-size:15px;font-weight:640;color:var(--ink);text-align:right}
@@ -454,6 +456,96 @@ button.mp.tog.on{background-color:var(--accbg);border-color:transparent}
  box-shadow:var(--shadow2);opacity:0;transform:translateY(12px);transition:.32s var(--ease)}
 .toast.go{opacity:1;transform:none}
 @media(min-width:560px){.toast{left:auto;right:20px;max-width:380px}}
+
+/* ================= FLUIDITY, MATERIALS, ACCESSIBILITY ================= */
+
+/* --- tab indicator: a real pill that tracks the gesture --- */
+.tabs{position:relative}
+#tabind{position:absolute;top:0;left:0;border-radius:12px;
+ background:var(--accbg);pointer-events:none;will-change:transform;z-index:0;
+ transform-origin:0 50%;opacity:0}
+#tabind.ready{opacity:1}
+.tabs button{position:relative;z-index:1}
+.tabs button.on{background:transparent}
+
+/* --- pane transport --- */
+.wrap{position:relative;overflow-x:clip}
+.pane.on{animation:none}
+.pane.tracking{will-change:transform}
+
+/* --- press feedback: instant, on pointer-down --- */
+.day .dh:active,.it .ih:active{background:var(--surf2)}
+.ev.act:active,.ev.food:active{transform:scale(.985);transition:transform .09s ease-out}
+.eatc:active,.idc:active,.brow:active{transform:scale(.993);transition:transform .09s ease-out}
+.btn:active{transform:scale(.975)}
+.jday:active,.mapr a:active,.pbtn:active,.slot:active,.idb:active,.stp:active,.bck:active{transform:scale(.95)}
+.day:active{transform:scale(.997)}
+
+/* --- double bezel: a machined tray holding a glass plate --- */
+.stats{gap:var(--s2)}
+.stat{background:var(--bezel);border:.5px solid var(--bzline);padding:5px;
+ border-radius:calc(var(--r) + 5px);box-shadow:none}
+.stat .core{background-color:var(--surf);
+ background-image:linear-gradient(180deg,var(--surf),var(--surf2));
+ border-radius:var(--r);padding:13px 13px 14px;height:100%;
+ box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 0 var(--inhi)}
+.btot{background:var(--bezel);border:.5px solid var(--bzline);padding:5px;
+ border-radius:calc(var(--r-lg) + 5px)}
+.btot .core{background-color:var(--surf);
+ background-image:linear-gradient(180deg,var(--surf),var(--surf2));
+ border-radius:var(--r-lg);padding:13px 15px;
+ box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 0 var(--inhi)}
+
+/* --- button-in-button trailing icon --- */
+.btn{gap:9px;padding-right:7px}
+.btn.noic{padding-right:18px}
+.bic{width:26px;height:26px;border-radius:99px;flex:0 0 auto;
+ display:inline-flex;align-items:center;justify-content:center;
+ background:rgba(0,0,0,.20);box-shadow:inset 0 1px 1px rgba(0,0,0,.14);
+ transition:transform .3s var(--ease),background .3s var(--ease)}
+.btn.sec .bic,.btn.ghost .bic{background:var(--surf);box-shadow:inset 0 1px 0 var(--inhi)}
+.btn.sec:hover .bic,.btn.ghost:hover .bic{background:var(--surf)}
+.btn:hover .bic{transform:translate(2px,-1px) scale(1.06);background:rgba(0,0,0,.28)}
+.btn .bic svg{width:12px;height:12px}
+
+/* --- entry reveal --- */
+.rv{opacity:0;transform:translateY(14px)}
+.rv.in{opacity:1;transform:none;
+ transition:opacity .62s var(--ease),transform .62s var(--ease)}
+
+/* --- toast materialises rather than fades --- */
+.toast{backdrop-filter:blur(0px);transform:translateY(14px) scale(.96)}
+.toast.go{backdrop-filter:blur(12px);transform:none scale(1)}
+
+/* --- reduced transparency: frost becomes solid --- */
+@media(prefers-reduced-transparency:reduce){
+ .top{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:.5px solid var(--line)}
+ .top:after{display:none}
+ .heroWrap:before{display:none}
+ .toast{backdrop-filter:none}
+}
+
+/* --- more contrast: solid surfaces, defined edges --- */
+@media(prefers-contrast:more){
+ .day,.it,.card,.eatc,.idc,.brow,.stat .core{border-color:var(--ink2)}
+ .mp,.mchip,.fchip,.pbtn,.mapr a{border:.5px solid var(--ink2)}
+ .heroWrap:before{opacity:.4}
+}
+
+/* --- reduced motion: gentler, non-vestibular equivalents --- */
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+  transition-duration:.14s!important}
+ .heroWrap:before{animation:none}
+ .rv{opacity:1;transform:none}
+ .pane.on{animation:none}
+ .db{transition:none}
+ .toast{transform:none;backdrop-filter:none}
+ .ev.act:active,.eatc:active,.idc:active,.brow:active,.day:active,.btn:active,
+ .jday:active,.mapr a:active,.pbtn:active,.slot:active,.idb:active,.stp:active,.bck:active{transform:none}
+}
 /* ---- ideas ---- */
 .idc{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));
  border:.5px solid var(--line);border-radius:var(--r-lg);padding:var(--s4);margin-bottom:var(--s2);
@@ -638,9 +730,9 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
   <h1>Da Nang<span class="l2">&amp; Saigon</span></h1>
   <p class="sub">Serenity Villa in Da Nang, El Pino Realm in Saigon. Eight days. Hoi An lanterns, Ba Na Hills, the Cu Chi tunnels, and whatever else survives contact with the group.</p>
   <div class="stats">
-    <div class="stat"><b id="s1">&mdash;</b><span id="s1l">days to go</span></div>
-    <div class="stat"><b>8</b><span>days, 2 cities</span></div>
-    <div class="stat"><b id="s3">0/16</b><span>booked</span></div>
+    <div class="stat"><div class="core"><b id="s1">&mdash;</b><span id="s1l">days to go</span></div></div>
+    <div class="stat"><div class="core"><b>8</b><span>days, 2 cities</span></div></div>
+    <div class="stat"><div class="core"><b id="s3">0/16</b><span>booked</span></div></div>
   </div>
 </div></div>
 
@@ -1258,6 +1350,9 @@ var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
 var PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+var ARR='<i class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></i>';
+var TEL='<i class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></i>';
+var MAP='<i class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></i>';
 var CHV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
 var CAR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M4.3 12.5l1.2-4A2.2 2.2 0 017.6 7h8.8a2.2 2.2 0 012.1 1.5l1.2 4M4 12.5h16V16H4z"/><circle cx="7.5" cy="16" r="1"/><circle cx="16.5" cy="16" r="1"/></svg>';
 var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4.2" r="1.8"/><path d="M12 21l-1.5-5.5L8 13l1-5 3.5-1.2 2.5 3 2.5 1M10.5 15.5L8 21"/></svg>';
@@ -1426,8 +1521,9 @@ function days(){
    '<div class="db"><div class="dbi"><div class="dbp">'+sw+meta+'<div class="tl">'+out+'</div>'+mapb+noteHTML(d.f)+dnb+'</div></div></div></div>';
  });
  $("p-days").innerHTML=h;
+ if(typeof reveal==="function")reveal("p-days",".day");
  $("p-days").querySelectorAll(".dh").forEach(function(x){
-  var go=function(){var n=x.parentNode.dataset.d;dop[n]=!dop[n];days()};
+  var go=function(){var n=x.parentNode.dataset.d;dop[n]=!dop[n];hap("select");days()};
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}};
  });
@@ -1435,7 +1531,7 @@ function days(){
   x.onclick=function(ev){ev.stopPropagation();
    var n=+x.dataset.pd,ix=+x.dataset.pi;
    if(ix)plan[n]=ix; else delete plan[n];
-   save();days();};
+   hap("commit");save();days();};
  });
  $("p-days").querySelectorAll("[data-g]").forEach(function(x){
   x.onclick=function(ev){ev.stopPropagation();var n=x.dataset.g;gdet[n]=!gdet[n];days();};
@@ -1457,7 +1553,7 @@ function days(){
   var go=function(ev){ if(ev)ev.stopPropagation();
    var id=x.dataset.add,dd=+x.dataset.d,tt=x.dataset.t;
    if(eat[id]&&eat[id].d===dd&&eat[id].t===tt) delete eat[id]; else eat[id]={d:dd,t:tt};
-   save();days();foodPane();tally();
+   hap("commit");save();days();foodPane();tally();
   };
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
@@ -1487,10 +1583,10 @@ function dayForBooking(id){
 function acts(it){
  var a="";
  if(it.l)a+=it.l.map(function(l){
-  return '<a class="btn'+(l[2]?"":" sec")+'" href="'+l[1]+'" target="_blank" rel="noopener">'+EXT+l[0]+'</a>'}).join("");
+  return '<a class="btn'+(l[2]?"":" sec")+'" href="'+l[1]+'" target="_blank" rel="noopener"><span>'+l[0]+'</span>'+ARR+'</a>'}).join("");
  if(it.tel)a+=it.tel.map(function(t){
-  return '<a class="btn sec" href="tel:'+t[1]+'">'+PHN+t[0]+'</a>'}).join("");
- if(it.map)a+='<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+it.map[1]+'" target="_blank" rel="noopener">'+PIN+it.map[0]+'</a>';
+  return '<a class="btn sec" href="tel:'+t[1]+'"><span>'+t[0]+'</span>'+TEL+'</a>'}).join("");
+ if(it.map)a+='<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+it.map[1]+'" target="_blank" rel="noopener"><span>'+it.map[0]+'</span>'+MAP+'</a>';
  return a?'<div class="acts">'+a+'</div>':'<div class="none">Nothing to book — just turn up.</div>';
 }
 
@@ -1515,9 +1611,10 @@ function book(){
     '</div></div></div></div>';
   });
  });
+ if(typeof reveal==="function")setTimeout(function(){reveal("p-book",".it")},0);
  $("lst").innerHTML=h||'<div class="card"><p>Nothing here — try another filter.</p></div>';
  $("lst").querySelectorAll(".bx").forEach(function(b){
-  var go=function(e){if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];save();book()};
+  var go=function(e){if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];hap("commit");save();book()};
   b.onclick=go;
   b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go(e)}};
  });
@@ -1577,19 +1674,20 @@ function foodPane(){
         (on?'✓ ':'+ ')+sl.label+'</button>'}).join("")+
     '</div>'+
     '<div class="acts">'+
-      (E.url?'<a class="btn sec" href="'+E.url+'" target="_blank" rel="noopener">Website</a>':'')+
-      (E.tel?'<a class="btn sec" href="tel:'+E.tel+'">Call</a>':'')+
-      '<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+E.map+'" target="_blank" rel="noopener">Map</a>'+
+      (E.url?'<a class="btn sec" href="'+E.url+'" target="_blank" rel="noopener"><span>Website</span>'+ARR+'</a>':'')+
+      (E.tel?'<a class="btn sec" href="tel:'+E.tel+'"><span>Call</span>'+TEL+'</a>':'')+
+      '<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+E.map+'" target="_blank" rel="noopener"><span>Map</span>'+MAP+'</a>'+
     '</div></div>';
   });
  });
  $("eatlist").innerHTML=h;
+ if(typeof reveal==="function")reveal("p-food",".eatc");
  $("eatlist").querySelectorAll(".slot").forEach(function(b){
   b.onclick=function(){
    var id=b.dataset.e,d=+b.dataset.d,t=b.dataset.t;
    if(eat[id]&&eat[id].d===d&&eat[id].t===t) delete eat[id];
    else eat[id]={d:d,t:t};
-   save();foodPane();days();tally();
+   hap("commit");save();foodPane();days();tally();
   };
  });
 }
@@ -1615,11 +1713,12 @@ function ideaPane(){
   });
  });
  $("idealist").innerHTML=h;
+ if(typeof reveal==="function")reveal("p-idea",".idc");
  $("idealist").querySelectorAll(".idb").forEach(function(b){
   b.onclick=function(){
    var i=b.dataset.i,v=b.dataset.v;
    if(idea[i]===v) delete idea[i]; else idea[i]=v;
-   save();ideaPane();tally();
+   hap("select");save();ideaPane();tally();
   };
  });
 }
@@ -1658,30 +1757,30 @@ function budget(){
  COSTS.forEach(function(g){g.items.forEach(function(it){
   if(pay[it.id])paidSum+=(it.u==="group"?it.v/grp:it.v)})});
  var left=perHead+perHeadOpt-paidSum;
- h+='<div class="btot">'+
+ h+='<div class="btot"><div class="core">'+
   '<div class="btr"><span>Core, per person</span><b>'+fmtV(Math.round(perHead))+'</b><i>'+fmtR(perHead)+'</i></div>'+
   '<div class="btr"><span>Optional (tailoring, shopping)</span><b>'+fmtV(Math.round(perHeadOpt))+'</b><i>'+fmtR(perHeadOpt)+'</i></div>'+
   '<div class="btr big"><span>Everything, per person</span><b>'+fmtV(Math.round(perHead+perHeadOpt))+'</b><i>'+fmtR(perHead+perHeadOpt)+'</i></div>'+
   '<div class="btr"><span>Marked paid</span><b>'+fmtV(Math.round(paidSum))+'</b><i>'+fmtR(paidSum)+'</i></div>'+
   '<div class="btr big"><span>Still to pay</span><b>'+fmtV(Math.round(left))+'</b><i>'+fmtR(left)+'</i></div>'+
   '<div class="btr grp"><span>Whole group, everything</span><b>'+fmtV(Math.round((perHead+perHeadOpt)*grp))+'</b><i>'+fmtR((perHead+perHeadOpt)*grp)+'</i></div>'+
- '</div>'+
+ '</div></div>'+
  '<p class="bdis">Estimates, not quotes. Flights and accommodation are excluded — add them yourself. Rupees at 1M ₫ = Rs 11.5K.</p>';
  $("budget").innerHTML=h;
  $("budget").querySelectorAll("[data-p]").forEach(function(b){
-  b.onclick=function(){var k=b.dataset.p;if(pay[k])delete pay[k];else pay[k]=1;save();budget()}});
+  b.onclick=function(){var k=b.dataset.p;if(pay[k])delete pay[k];else pay[k]=1;hap("commit");save();budget()}});
  $("budget").querySelectorAll("[data-gs]").forEach(function(b){
-  b.onclick=function(){grp=Math.max(1,Math.min(20,grp+ +b.dataset.gs));save();budget()}});
+  b.onclick=function(){grp=Math.max(1,Math.min(20,grp+ +b.dataset.gs));hap("select");save();budget()}});
 }
 
 function sharePane(){
  var el=$("sharebox"); if(!el)return;
  el.innerHTML='<p class="shp">Everything you tick lives on this phone only. To hand your version to the group, copy the link below and send it. Whoever opens it gets your ticks, food picks, plans, votes and notes — it overwrites theirs, so agree who keeps the master copy.</p>'+
-  '<div class="acts"><button class="btn" id="cplink">Copy share link</button>'+
-  '<button class="btn sec" id="cpcode">Copy code only</button></div>'+
+  '<div class="acts"><button class="btn noic" id="cplink">Copy share link</button>'+
+  '<button class="btn sec noic" id="cpcode">Copy code only</button></div>'+
   '<label class="shl">Paste someone else’s code here</label>'+
   '<textarea id="inbox" placeholder="Paste the code, then press Apply"></textarea>'+
-  '<div class="acts"><button class="btn sec" id="applyc">Apply</button></div>'+
+  '<div class="acts"><button class="btn sec noic" id="applyc">Apply</button></div>'+
   '<div class="shmsg" id="shmsg"></div>';
  function msg(t,ok){var m=$("shmsg");m.textContent=t;m.className="shmsg show "+(ok?"g":"r");
   setTimeout(function(){m.className="shmsg"},4000)}
@@ -1733,16 +1832,7 @@ function countdown(){
  else{$("s1").textContent="✓";$("s1l").textContent="that was that"}
 }
 
-document.querySelectorAll("#tabs button").forEach(function(b){
- b.onclick=function(){
-  document.querySelectorAll("#tabs button").forEach(function(x){x.classList.remove("on")});
-  document.querySelectorAll(".pane").forEach(function(x){x.classList.remove("on")});
-  b.classList.add("on");$("p-"+b.dataset.p).classList.add("on");
-  var w=document.querySelector(".wrap");
-  var y=window.pageYOffset||document.documentElement.scrollTop;
-  var top=w.getBoundingClientRect().top+y-58;
-  if(y>top)window.scrollTo({top:top,behavior:"smooth"});
- }});
+/* tab switching is handled in the fluid layer below */
 document.querySelectorAll(".segs button").forEach(function(b){
  b.onclick=function(){
   document.querySelectorAll(".segs button").forEach(function(x){x.classList.remove("on")});
@@ -1754,6 +1844,220 @@ $("tt").onclick=function(){
  el.dataset.theme = isDark ? "light" : "dark";
  save();
 };
+
+
+/* ================= FLUID LAYER =================
+   Springs, 1:1 gesture tracking, velocity handoff, momentum projection.
+   Everything here degrades to nothing under prefers-reduced-motion. */
+var RM=matchMedia("(prefers-reduced-motion: reduce)");
+function reduced(){return RM.matches}
+
+/* --- spring: Apple's damping-ratio + response parameterisation ---
+   Interruptible by construction: retarget keeps the live value AND velocity,
+   so a reversal blends instead of hitting a brick wall. */
+function Spring(apply,opt){
+ opt=opt||{};
+ var self={v:0,x:0,to:0,running:false,raf:0,
+  damping:opt.damping==null?1:opt.damping,
+  response:opt.response||0.4};
+ var last=0;
+ function step(now){
+  if(!last)last=now;
+  var dt=Math.min((now-last)/1000,1/30); last=now;
+  var w=2*Math.PI/self.response;              // natural frequency
+  var k=w*w, c=2*self.damping*w;              // stiffness, damping coefficient
+  var a=-k*(self.x-self.to)-c*self.v;
+  self.v+=a*dt; self.x+=self.v*dt;
+  if(Math.abs(self.x-self.to)<0.15&&Math.abs(self.v)<0.6){
+   self.x=self.to; self.v=0; self.running=false; last=0; apply(self.x,true); return;
+  }
+  apply(self.x,false);
+  self.raf=requestAnimationFrame(step);
+ }
+ self.set=function(x){self.stop();self.x=x;self.v=0;apply(x,true)};
+ self.stop=function(){if(self.raf)cancelAnimationFrame(self.raf);self.raf=0;self.running=false;last=0};
+ /* retarget from the presentation value, carrying velocity through */
+ self.go=function(to,vel,o){
+  self.to=to;
+  if(vel!=null)self.v=vel;
+  if(o){if(o.damping!=null)self.damping=o.damping;if(o.response!=null)self.response=o.response}
+  if(reduced()){self.set(to);return}
+  if(!self.running){self.running=true;last=0;self.raf=requestAnimationFrame(step)}
+ };
+ return self;
+}
+
+/* Apple's momentum projection (exponential decay, not v^2/2a) */
+function project(v,d){d=d||0.998;return (v/1000)*d/(1-d)}
+
+/* progressive resistance at a boundary */
+function rubber(over,dim,c){c=c||0.55;return (over*dim*c)/(dim+c*Math.abs(over))}
+
+/* --- haptics: only on commit, only where it earns its place --- */
+function hap(kind){
+ if(!navigator.vibrate)return;                 /* no-op on iOS Safari */
+ try{navigator.vibrate(kind==="commit"?[14]:kind==="select"?[7]:[6,40,10])}catch(e){}
+}
+
+/* --- header scroll edge: no divider until content is actually underneath --- */
+(function(){
+ var top=document.querySelector(".top"),tick=false;
+ function upd(){top.classList.toggle("edge",(window.pageYOffset||document.documentElement.scrollTop)>4);tick=false}
+ addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+ upd();
+})();
+
+/* --- the tab indicator, and swiping between panes ---------------------- */
+var TABS=[].slice.call(document.querySelectorAll("#tabs button"));
+var IND=document.createElement("div"); IND.id="tabind";
+document.getElementById("tabs").appendChild(IND);
+var indBase=1,indSpring=null,paneSpring=null,curTab=0;
+
+function tabGeom(i){
+ var b=TABS[i];
+ return {x:b.offsetLeft,w:b.offsetWidth,y:b.offsetTop,h:b.offsetHeight};
+}
+function layoutInd(){
+ var g=tabGeom(0);
+ indBase=g.w||1;
+ IND.style.width=indBase+"px";
+ IND.style.height=g.h+"px";
+ IND.style.top=g.y+"px";
+ IND.classList.add("ready");
+ applyInd(curTab);
+}
+function applyInd(pos){                      /* pos is a float across tab indices */
+ var i=Math.max(0,Math.min(TABS.length-1,pos));
+ var lo=Math.floor(i),hi=Math.min(TABS.length-1,lo+1),f=i-lo;
+ var a=tabGeom(lo),b=tabGeom(hi);
+ var x=a.x+(b.x-a.x)*f, w=a.w+(b.w-a.w)*f;
+ IND.style.transform="translate3d("+x+"px,0,0) scaleX("+(w/indBase)+")";
+}
+indSpring=Spring(function(v){applyInd(v)},{damping:1,response:0.34});
+
+var PANES=TABS.map(function(b){return document.getElementById("p-"+b.dataset.p)});
+function paneEl(){return PANES[curTab]}
+paneSpring=Spring(function(v,done){
+ var el=paneEl(); if(!el)return;
+ el.style.transform=v?"translate3d("+v+"px,0,0)":"";
+ if(done){el.style.transform="";el.classList.remove("tracking")}
+},{damping:1,response:0.4});
+
+function showTab(i,dir,vel){
+ if(i===curTab)return;
+ var from=paneEl(), to=PANES[i];
+ var w=window.innerWidth;
+ TABS.forEach(function(x,ix){x.classList.toggle("on",ix===i)});
+ from.classList.remove("on"); from.style.transform="";
+ to.classList.add("on");
+ curTab=i;
+ indSpring.go(i,null,{damping:1,response:0.34});
+ if(reduced()){to.style.transform="";return}
+ /* the new pane arrives from the side the gesture pulled from,
+    carrying the release velocity so there is no seam */
+ paneSpring.stop();
+ to.classList.add("tracking");
+ paneSpring.set(dir*w*0.32);
+ paneSpring.go(0,vel||0,{damping:vel?0.85:1,response:0.42});
+}
+
+TABS.forEach(function(b,i){
+ b.addEventListener("pointerdown",function(){hap("select")});
+ b.onclick=function(){
+  var dir=i>curTab?1:-1;
+  showTab(i,dir,0);
+  var w=document.querySelector(".wrap");
+  var y=window.pageYOffset||document.documentElement.scrollTop;
+  var t=w.getBoundingClientRect().top+y-58;
+  if(y>t)window.scrollTo({top:t,behavior:reduced()?"auto":"smooth"});
+ };
+});
+addEventListener("resize",layoutInd);
+layoutInd();
+
+/* --- horizontal swipe between panes: 1:1 tracking, rubber-banded edges,
+       momentum projection at release, interruptible at any point --- */
+(function(){
+ var wrap=document.querySelector(".wrap");
+ var surf=document.body;
+ var id=null,x0=0,y0=0,dx=0,locked=null,hist=[],el=null;
+ var NO="input,textarea,select,button,a,[data-add],[data-tl],[contenteditable],.top";
+
+ surf.addEventListener("pointerdown",function(e){
+  if(e.pointerType==="mouse"&&e.button!==0)return;
+  if(e.target.closest(NO))return;
+  if(reduced())return;
+  id=e.pointerId;x0=e.clientX;y0=e.clientY;dx=0;locked=null;
+  hist=[{x:e.clientX,t:e.timeStamp}];
+  el=paneEl();
+  paneSpring.stop();
+ },{passive:true});
+
+ surf.addEventListener("pointermove",function(e){
+  if(e.pointerId!==id)return;
+  var ddx=e.clientX-x0, ddy=e.clientY-y0;
+  if(locked===null){
+   if(Math.abs(ddx)<10&&Math.abs(ddy)<10)return;   /* hysteresis */
+   locked=Math.abs(ddx)>Math.abs(ddy)*1.25?"x":"y";
+   if(locked==="x"){el.classList.add("tracking");try{surf.setPointerCapture(id)}catch(err){}}
+  }
+  if(locked!=="x")return;
+  e.preventDefault&&e.cancelable&&e.preventDefault();
+  hist.push({x:e.clientX,t:e.timeStamp}); if(hist.length>6)hist.shift();
+  var w=window.innerWidth;
+  /* no neighbour that way? resist instead of stopping dead */
+  var atEdge=(ddx>0&&curTab===0)||(ddx<0&&curTab===TABS.length-1);
+  dx=atEdge?rubber(ddx,w):ddx*0.92;
+  el.style.transform="translate3d("+dx+"px,0,0)";
+  if(!atEdge)applyInd(curTab-(dx/w)*1.15);
+ },{passive:false});
+
+ function release(e){
+  if(e.pointerId!==id)return;
+  id=null;
+  if(locked!=="x"){locked=null;return}
+  locked=null;
+  try{surf.releasePointerCapture(e.pointerId)}catch(err){}
+  var w=window.innerWidth;
+  var a=hist[0],b=hist[hist.length-1];
+  var dt=Math.max(b.t-a.t,1);
+  var v=(b.x-a.x)/dt*1000;                       /* px per second */
+  /* project where the flick was going, then decide from that, not from
+     where the finger happened to stop */
+  var landed=dx+project(v);
+  var dir=landed>0?-1:1;                          /* pull right -> previous tab */
+  var next=curTab+dir;
+  if(Math.abs(landed)>w*0.28&&next>=0&&next<TABS.length){
+   paneSpring.set(dx);
+   var out=dir>0?-w*0.34:w*0.34;
+   el.style.transform="translate3d("+dx+"px,0,0)";
+   showTab(next,dir,v*0.35);
+   hap("select");
+  }else{
+   paneSpring.set(dx);
+   paneSpring.go(0,v,{damping:1,response:0.36});
+   indSpring.set(curTab-(dx/w)*1.15);
+   indSpring.go(curTab,null,{damping:1,response:0.3});
+  }
+  dx=0;
+ }
+ surf.addEventListener("pointerup",release,{passive:true});
+ surf.addEventListener("pointercancel",release,{passive:true});
+})();
+
+/* --- entry reveal: once per pane, never on re-render --- */
+var revealed={};
+function reveal(paneId,sel){
+ if(reduced()||revealed[paneId])return;
+ revealed[paneId]=1;
+ var host=document.getElementById(paneId); if(!host)return;
+ var items=[].slice.call(host.querySelectorAll(sel)).slice(0,14);
+ if(!items.length)return;
+ items.forEach(function(el,i){
+  el.classList.add("rv");
+  setTimeout(function(){el.classList.add("in")},40+i*34);
+ });
+}
 
 load();days();book();foodPane();ideaPane();info();countdown();budget();sharePane();
 
