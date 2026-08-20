@@ -296,19 +296,36 @@ textarea::placeholder{color:var(--dim)}
  display:flex;align-items:center;gap:10px}
 .card h3 i{width:30px;height:30px;border-radius:9px;background:var(--accbg);color:var(--acc);
  display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-.card h3 i svg{width:16px;height:16px}
 .card p{margin:0 0 10px;font-size:15px;color:var(--ink2);letter-spacing:-.01em;line-height:1.5}
 .card p:last-child{margin-bottom:0}
 .card ul{margin:0;padding-left:20px;font-size:15px;color:var(--ink2);letter-spacing:-.01em}
 .card li{margin-bottom:9px;line-height:1.5}
 .card li:last-child{margin-bottom:0}
 .card b{font-weight:600;color:var(--ink)}
+.mtb{display:grid;grid-template-columns:1fr auto auto;gap:0 14px;align-items:baseline}
+.mch{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);
+ padding-bottom:8px;border-bottom:.5px solid var(--line);text-align:right}
+.mch:first-child{text-align:left}
+.mcl{font-size:14.5px;color:var(--ink2);padding:9px 0;border-top:.5px solid var(--line2);letter-spacing:-.01em}
+.mcv{font-size:14px;padding:9px 0;border-top:.5px solid var(--line2);text-align:right;
+ font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;color:var(--ink)}
+.mcv.rs{color:var(--mut);font-weight:400}
+.mtb>.mch{border-top:none}
+.pk{display:flex;gap:12px;padding:12px 0;border-top:.5px solid var(--line2);align-items:flex-start}
+.pk:first-child{border-top:none;padding-top:0}
+.pk:last-child{padding-bottom:0}
+.pe{font-size:20px;line-height:1.3;flex:0 0 26px}
+.pk>div>b{display:block;font-size:15px;font-weight:600;letter-spacing:-.02em;margin-bottom:2px;color:var(--ink)}
+.pk p b{display:inline;font-size:inherit;color:var(--ink);font-weight:600}
+.pk p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.5;letter-spacing:-.008em}
+.hem{font-size:18px;line-height:1}
+@media(max-width:400px){.mtb{gap:0 9px}.mcl{font-size:13.5px}.mcv{font-size:13px}}
 .eat{padding:12px 0;border-top:.5px solid var(--line2)}
 .eat:first-child{border-top:none;padding-top:0}
 .eat:last-child{padding-bottom:0}
-.eat b{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.02em;margin-bottom:3px;color:var(--ink)}
+.eat>b{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.02em;margin-bottom:3px;color:var(--ink)}
+.eat p b{display:inline;color:var(--ink);font-weight:600}
 .eat p{margin:0;font-size:14px;color:var(--ink2);line-height:1.5;letter-spacing:-.008em}
-.card:nth-of-type(7) h3 i{background:linear-gradient(150deg,var(--c4),var(--c5))}
 .row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);
  padding:11px 0;border-top:.5px solid var(--line2);font-size:15px;letter-spacing:-.01em}
 .row:first-of-type{border-top:none;padding-top:0}
@@ -402,7 +419,7 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
   <div class="pane" id="p-info"></div>
 
   <footer>
-    100,000 VND &asymp; Rs. 1,150&ndash;1,200 &middot; prices checked August 2026<br>
+    100K &#8363; &asymp; Rs 1,150&ndash;1,200 &middot; prices checked August 2026<br>
     National Day holiday 29 Aug &ndash; 2 Sep, so hours can shift. Call ahead for anything critical.<br>
     Ticks and notes save on this device.
     <br><button class="reset" id="reset">Reset all ticks</button>
@@ -418,14 +435,14 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 <script>
 /* g = commute leg: [minutes, mode, detail] */
 const DAYS=[
-{c:"dn",n:1,dow:"Wed",d:"26",t:"Land & Lantern Festival",s:"Da Nang → Hoi An",
+{c:"dn",n:1,dow:"Wed",d:"26",t:"🏮 Land & Lantern Festival",s:"Da Nang → Hoi An",
  e:[
  ["15:00","Land at Da Nang airport","Terminal 1, domestic-sized and quick"],
- ["g","20 min","car","Airport → villa · ~10km · Grab ~120,000 ₫"],
+ ["g","20 min","car","Airport → villa · ~10km · Grab ~120K ₫"],
  ["15:45","Drop bags, quick refresh","Allow 30–45 min"],
- ["g","40 min","car","Villa → Hoi An · 30km coastal road · Grab ~300,000 ₫"],
+ ["g","40 min","car","Villa → Hoi An · 30km coastal road · Grab ~300K ₫"],
  ["17:00","Arrive Hoi An old town","Park at An Hoi bridge side"],
- ["17:30","Lantern boat on the Hoai River","key","15 min on the water · 170,000 ₫ for 1–3"],
+ ["17:30","Lantern boat on the Hoai River","key","15 min on the water · 170K ₫ for 1–3"],
  ["18:15","Tailor — give measurements","key","Do this tonight or the suit won't make Friday"],
  ["19:15","Walk the old town","Japanese Bridge, museums, lantern streets"],
  ["20:30","Night food market","Cao lầu, white rose dumplings, banh mi Phuong"],
@@ -433,16 +450,16 @@ const DAYS=[
  ["22:00","Back at the villa","6.30am start tomorrow"]],
  f:{b:"Tonight only",x:"26 August is the actual full-moon lantern festival — the one night a month it runs. Boats can't be pre-booked, so buy at a riverside booth. Go just after sunset for the shorter queue; peak crush is 7–8.30pm."}},
 
-{c:"dn",n:2,dow:"Thu",d:"27",t:"Ba Na Hills",s:"Golden Bridge & the mountain",
+{c:"dn",n:2,dow:"Thu",d:"27",t:"🌉 Ba Na Hills",s:"Golden Bridge & the mountain",
  e:[
  ["06:00","Up","Coffee at the villa"],
- ["g","50 min","car","Villa → Ba Na Hills · 35km · pre-book, ~650,000 ₫ return"],
+ ["g","50 min","car","Villa → Ba Na Hills · 35km · pre-book, ~650K ₫ return"],
  ["07:20","Arrive — ahead of the coaches","key","Gates open 07:00"],
  ["07:40","Cable car up","15–20 min · record-holding, genuinely the best bit"],
  ["08:10","Golden Bridge","key","30–60 min · busiest 10am–2pm, so you're ahead of it"],
  ["09:30","Linh Ung Pagoda & gardens","Quiet, and the views are better than the bridge"],
- ["10:30","Alpine coaster","70,000 ₫ extra, worth it"],
- ["12:00","French Village & lunch","Buffet if you bought the 1,300,000 ₫ ticket"],
+ ["10:30","Alpine coaster","70K ₫ extra, worth it"],
+ ["12:00","French Village & lunch","Buffet if you bought the 1.3M ₫ ticket"],
  ["13:30","Fantasy Park","Indoor arcade · skip if the weather's good"],
  ["16:30","Head down","Last cable car around 21:00, but don't cut it fine"],
  ["g","50 min","car","Ba Na Hills → villa"],
@@ -453,13 +470,13 @@ const DAYS=[
  ["19:45","Han River cruise","key","~1 hr · book the sailing that covers the 9pm bridge show"]],
  f:{b:"Decide on the morning",x:"The summit spends a lot of its time inside a cloud and same-day tickets exist. If it's fogged in you're paying full price to look at white nothing — swap to Marble Mountain and Son Tra instead."}},
 
-{c:"dn",n:3,dow:"Fri",d:"28",t:"Hoi An & a late one",s:"Basket boats to nightclubs",
+{c:"dn",n:3,dow:"Fri",d:"28",t:"🪷 Hoi An & a late one",s:"Basket boats to nightclubs",
  e:[
  ["06:45","Up and out",""],
  ["g","35 min","car","Villa → Cam Thanh coconut forest"],
- ["07:45","Bay Mau basket boats","100,000 ₫ all-in · cool light, no crowds yet"],
+ ["07:45","Bay Mau basket boats","100K ₫ all-in · cool light, no crowds yet"],
  ["g","15 min","car","Cam Thanh → The Duck Stop"],
- ["09:15","The Duck Stop","100,000 ₫ · closed 12–1 for the ducks' rest"],
+ ["09:15","The Duck Stop","100K ₫ · closed 12–1 for the ducks' rest"],
  ["g","15 min","car","Duck Stop → old town"],
  ["10:45","Collect the tailoring","key","Try everything on before you leave the shop"],
  ["12:00","Lunch in the old town",""],
@@ -476,7 +493,7 @@ const DAYS=[
  ["02:30","Back at the villa","Tomorrow is deliberately free"]],
  f:{hot:1,b:"Be seated before 8.45pm",x:"The bridge closes to traffic 20:45–21:25. Turn up at 8.30 by car and you'll be walking the last stretch through the crowd. None of the rooftops take online bookings — ring them."}},
 
-{c:"dn",n:4,dow:"Sat",d:"29",t:"My Khe & Sky36",s:"The recovery day",
+{c:"dn",n:4,dow:"Sat",d:"29",t:"🏖️ My Khe & Sky36",s:"The recovery day",
  e:[
  ["10:00","Slow start","No alarm · you've earned it"],
  ["g","4 min","walk","Villa → 2 Ladies Kitchen · 28 An Thượng 4"],
@@ -485,13 +502,13 @@ const DAYS=[
  ["14:30","Market shopping","Han Market or Con Market · until around six"],
  ["16:00","Beach bars on My Khe","Sunset is about 18:05"],
  ["g","5 min","walk","Villa → Missteak · 99 Mai Thúc Lân, 2nd floor"],
- ["18:45","Dinner at Missteak","key","Book ahead — small upstairs room · flat iron 355,000 ₫, rib eye 825,000 ₫"],
+ ["18:45","Dinner at Missteak","key","Book ahead — small upstairs room · flat iron 355K ₫, rib eye 825K ₫"],
  ["g","15 min","car","Missteak → Novotel, 36 Bach Dang"],
  ["21:00","Sky36","key","36th floor · reservation essential on a holiday Saturday"],
  ["22:30","Bar hop & Vietnamese karaoke","Back around midnight — 6.30am flight run tomorrow"]],
  f:{b:"The holiday starts today",x:"29 August is day one of the five-day National Day break. Sky36 needs a reservation, restaurants fill early, and the beach will be busy with domestic tourists."}},
 
-{c:"hc",n:5,dow:"Sun",d:"30",t:"Fly to Saigon",s:"Da Nang → Ho Chi Minh City",
+{c:"hc",n:5,dow:"Sun",d:"30",t:"🛫 Fly to Saigon",s:"Da Nang → Ho Chi Minh City",
  e:[
  ["06:30","Up","Bags packed the night before"],
  ["g","20 min","car","Villa → Da Nang airport (DAD)"],
@@ -511,14 +528,14 @@ const DAYS=[
  ["22:30","Bùi Viện Walking Street","No plan required beyond turning up"]],
  f:{b:"Haggle at Ban Thanh",x:"Opening prices run three to four times what you should pay. Good for dupes, silk and coffee. The night market outside runs later and is better for food than the indoor hall."}},
 
-{c:"hc",n:6,dow:"Mon",d:"31",t:"Cu Chi Tunnels",s:"Then Saigon Square",
+{c:"hc",n:6,dow:"Mon",d:"31",t:"🪖 Cu Chi Tunnels",s:"Then Saigon Square",
  e:[
  ["05:45","Up","The early start is the whole trick"],
  ["g","3 min","walk","Hotel → Phở Việt Nam · 14 Phạm Hồng Thái"],
  ["06:15","Phở at Phở Việt Nam","Michelin Selected · opens 06:00 · order the mixed bowl, fresh noodles"],
  ["07:00","Leave the hotel","key","Pre-booked car or tour pickup"],
  ["g","1 hr 45","car","District 1 → Cu Chi · 60km northwest"],
- ["08:45","Arrive at Cu Chi","110,000 ₫ entry · site opens 07:00"],
+ ["08:45","Arrive at Cu Chi","110K ₫ entry · site opens 07:00"],
  ["09:00","Tunnels, traps, command bunkers","2–2.5 hrs · shooting range is ~US$2 a round, optional"],
  ["11:30","Head back","Beat the afternoon heat and the coach traffic"],
  ["g","1 hr 45","car","Cu Chi → District 1"],
@@ -528,22 +545,22 @@ const DAYS=[
  ["20:00","Dinner, drinks, chill","Quieter night — museums tomorrow"]],
  f:{hot:1,b:"The one that must be booked",x:"Peak of the national holiday. Tours and private cars sell out. A private car is US$40–60 return for the group and lets you set your own pace; a group tour is US$15–25 a head with hotel pickup."}},
 
-{c:"hc",n:7,dow:"Tue",d:"1",t:"Cafés & culture",s:"Deliberately loose",
+{c:"hc",n:7,dow:"Tue",d:"1",t:"☕ Cafés & culture",s:"Deliberately loose",
  e:[
  ["09:00","Slow start","Egg coffee somewhere with aircon"],
  ["g","10 min","car","Hotel → War Remnants Museum"],
- ["10:00","War Remnants Museum","40,000 ₫ · ticket desk shuts 11:00–13:00 · allow 1.5–2 hrs"],
+ ["10:00","War Remnants Museum","40K ₫ · ticket desk shuts 11:00–13:00 · allow 1.5–2 hrs"],
  ["g","12 min","walk","Museum → Notre-Dame & Post Office"],
  ["12:30","Central Post Office & Notre-Dame","Cathedral has been under restoration — exterior only"],
  ["13:15","Lunch nearby",""],
  ["g","6 min","walk","Post Office → Independence Palace"],
- ["14:00","Independence Palace","40,000 ₫ · last tickets 15:30 · the bunker is the good part"],
+ ["14:00","Independence Palace","40K ₫ · last tickets 15:30 · the bunker is the good part"],
  ["16:00","Massage or hair spa","District 1 is full of them"],
  ["18:00","Last of the shopping",""],
  ["20:00","Easy dinner","key","Nothing risky — you're flying tomorrow"]],
  f:{b:"All walkable",x:"The museum, Post Office, Notre-Dame and the Palace sit within about a kilometre of each other. Pick and choose — nobody has to do all four. Check hours the day before; 1 September is inside the holiday."}},
 
-{c:"hc",n:8,dow:"Wed",d:"2",t:"Home",s:"National Day departure",
+{c:"hc",n:8,dow:"Wed",d:"2",t:"🧳 Home",s:"National Day departure",
  e:[
  ["08:00","Last-minute shopping","Coffee and souvenirs near the hotel"],
  ["09:30","Pack, check out","Leave bags at reception if you want an extra hour"],
@@ -558,7 +575,7 @@ const DAYS=[
 
 const BOOK=[
 {g:"Da Nang & Hoi An",items:[
-{id:"tailor",p:"now",t:"Book a Hoi An tailor",w:"Measure Wed 26th → collect Fri 28th",
+{id:"tailor",p:"now",t:"🧵 Book a Hoi An tailor",w:"Measure Wed 26th → collect Fri 28th",
  r:[["Turnaround","Two clear days is the minimum. Confirm the Friday collection <b>before</b> paying a deposit."],
     ["Cost","Two-piece suit US$150–350 depending on cloth. Shirts US$25–40."],
     ["Tip","Email measurements ahead and they'll have something cut when you arrive."],
@@ -568,7 +585,7 @@ const BOOK=[
  map:["Hoi An old town","Tran+Phu+Street+Hoi+An"],
  f:{hot:1,b:"No slack in this one",x:"Measurements must happen Wednesday for a Friday collection. Skip the fitting and there is no suit."}},
 
-{id:"dragon",p:"now",t:"Table for the Dragon Bridge show",w:"Friday 28 Aug, 9pm",
+{id:"dragon",p:"now",t:"🐉 Table for the Dragon Bridge show",w:"Friday 28 Aug, 9pm",
  r:[["Show","Fri, Sat, Sun at 21:00 · fire then water · about 15 min"],
     ["Arrive by","20:45 — the bridge shuts to traffic 20:45–21:25"],
     ["NYX Sky Lounge","21F HAIAN Riverfront, 182 Bach Dang · 16:30–24:00"],
@@ -581,7 +598,7 @@ const BOOK=[
  map:["Dragon Bridge","Dragon+Bridge+Da+Nang"],
  f:{hot:1,b:"Phone only",x:"None of these take online bookings. Ring them, and confirm the show is running that night while you're on the call."}},
 
-{id:"sky36",p:"now",t:"Reserve Sky36",w:"Saturday 29 Aug, 8pm",
+{id:"sky36",p:"now",t:"🍸 Reserve Sky36",w:"Saturday 29 Aug, 8pm",
  r:[["Where","36F Novotel Premier Han River, 36–38 Bach Dang"],
     ["Hours","18:00–02:00 · DJs from 21:00"],
     ["Expect","A minimum spend. Highest rooftop in the city, priced to match."],
@@ -589,13 +606,13 @@ const BOOK=[
  l:[["Book at sky36.vn","https://sky36.vn/",1]],
  tel:[["Sky36","0901151536"]], map:["Sky36","Sky36+Da+Nang"]},
 
-{id:"bana",p:"soon",t:"Ba Na Hills tickets",w:"Thu 27 Aug — or decide that morning",
- r:[["Before 3pm","<b>1,000,000 ₫</b> per adult"],
-    ["With lunch","1,300,000 ₫ · buffet included"],
-    ["After 3pm","1,050,000 ₫ · includes dinner, fewer crowds, cooler"],
+{id:"bana",p:"soon",t:"🚡 Ba Na Hills tickets",w:"Thu 27 Aug — or decide that morning",
+ r:[["Before 3pm","<b>1M ₫</b> per adult"],
+    ["With lunch","1.3M ₫ · buffet included"],
+    ["After 3pm","1.05M ₫ · includes dinner, fewer crowds, cooler"],
     ["Included","Return cable car, Golden Bridge, French Village, Fantasy Park, gardens"],
-    ["Pay extra","Alpine coaster 70,000 · wax museum 100,000 · wine cellar 100–300,000"],
-    ["Getting there","35km, ~50 min. Pre-book the return — taxis are scarce coming down. ~650,000 ₫ for the car."],
+    ["Pay extra","Alpine coaster 70K · wax museum 100K · wine cellar 100–300K"],
+    ["Getting there","35km, ~50 min. Pre-book the return — taxis are scarce coming down. ~650K ₫ for the car."],
     ["Open","07:00–22:00 · cable cars stop earlier in bad weather"]],
  l:[["Official — Sun World","https://booking.sunworld.vn/en",1],
     ["Klook","https://www.klook.com/en-US/activity/13283-ba-na-hills-ticket-da-nang/",0],
@@ -604,7 +621,7 @@ const BOOK=[
  map:["Ba Na Hills","Sun+World+Ba+Na+Hills"],
  f:{b:"The one you can leave late",x:"Same-day tickets exist and the summit is often clouded in. Look at the mountain on the morning before committing."}},
 
-{id:"cruise",p:"soon",t:"Han River evening cruise",w:"Thursday 27 Aug, ~8pm",
+{id:"cruise",p:"soon",t:"🚢 Han River evening cruise",w:"Thursday 27 Aug, ~8pm",
  r:[["What","About an hour past the Dragon and Love bridges, all lit up"],
     ["Price","From ~US$3 plain, ~US$12 with dinner"],
     ["Boats","Vinh Anh and Poseidon are the two main operators"],
@@ -616,8 +633,8 @@ const BOOK=[
     ["GetYourGuide","https://www.getyourguide.com/da-nang-l939/da-nang-han-river-cruise-and-champa-dance-t469912/",0]],
  map:["Han River pier","36+Bach+Dang+Da+Nang"]},
 
-{id:"duck",p:"soon",t:"Book the Duck Stop",w:"Friday 28 Aug, 9.15am",
- r:[["Price","<b>100,000 ₫</b> per person · farm entry free"],
+{id:"duck",p:"soon",t:"🦆 Book the Duck Stop",w:"Friday 28 Aug, 9.15am",
+ r:[["Price","<b>100K ₫</b> per person · farm entry free"],
     ["Hours","08:30–17:00 · closed 12:00–13:00 while the ducks rest"],
     ["What","Herd ducks, feed them, the famous duck foot massage. About an hour."],
     ["Heads up","Two Duck Stops in Vietnam — the original is in Phong Nha, 250km north"]],
@@ -625,36 +642,36 @@ const BOOK=[
     ["GetYourGuide","https://www.getyourguide.com/hoi-an-l831/hoi-an-duck-stop-eco-farm-experience-with-duck-feeding-t1209925/",0]],
  tel:[["Duck Stop","+84328666645"]], map:["Duck Stop Hoi An","Duck+Stop+Hoi+An"]},
 
-{id:"basket",p:"soon",t:"Bay Mau basket boats",w:"Friday 28 Aug, 7.45am",
- r:[["Price","<b>100,000 ₫</b> all-in — 30,000 entry + 70,000 boat"],
+{id:"basket",p:"soon",t:"🛶 Bay Mau basket boats",w:"Friday 28 Aug, 7.45am",
+ r:[["Price","<b>100K ₫</b> all-in — 30K entry + 70K boat"],
     ["Best time","08:00–10:00 or 15:00–16:30. No shade on the water midday."],
     ["How long","About 45 min including the spinning-boat routine"],
     ["Getting there","Cam Thanh, ~35 min from the villa, 15 min from Hoi An"]],
  l:[["GetYourGuide — duck farm + boat","https://www.getyourguide.com/hoi-an-l831/hoi-an-duck-farm-coconut-boat-tour-t1328956/",1],
     ["Klook — Hoi An","https://www.klook.com/en-US/destination/c75-hoi-an/",0]],
  map:["Bay Mau coconut forest","Bay+Mau+Coconut+Forest+Hoi+An"],
- f:{hot:1,b:"Known scam spot",x:"Ignore motorbike touts and don't follow an unknown driver to an 'official' pier. Unlicensed boats charge 150–200,000+ for a worse trip. Hold the 100,000 figure and go to a proper station."}},
+ f:{hot:1,b:"Known scam spot",x:"Ignore motorbike touts and don't follow an unknown driver to an 'official' pier. Unlicensed boats charge 150–200K+ for a worse trip. Hold the 100K figure and go to a proper station."}},
 
-{id:"transfer",p:"soon",t:"Airport transfer, 30 Aug",w:"Leave the villa 07:15",
+{id:"transfer",p:"soon",t:"🚗 Airport transfer, 30 Aug",w:"Leave the villa 07:15",
  r:[["Flight","10:50 to Ho Chi Minh City"],
     ["Journey","~20 min, 10km. Allow more in holiday week."],
-    ["Cost","Grab ~120,000 ₫, private car ~US$8–12"],
+    ["Cost","Grab ~120K ₫, private car ~US$8–12"],
     ["Alternative","The villa will arrange a car if you ask the night before"]],
  l:[["Klook — DAD transfers","https://www.klook.com/en-US/airport-transfers/service/dad-da-nang-international-airport/",1],
     ["KKday — private transfer","https://www.kkday.com/en/product/10079-private-transfer-between-da-nang-airport-and-da-nang-city-centre",0]],
  map:["Da Nang airport","Da+Nang+International+Airport"]},
 
-{id:"lantern",p:"walk",t:"Lantern boat, Hoi An",w:"Wednesday 26 Aug, from sunset",
- r:[["Price","170,000 ₫ for 1–3 · 220,000 ₫ for 4–5"],
+{id:"lantern",p:"walk",t:"🏮 Lantern boat, Hoi An",w:"Wednesday 26 Aug, from sunset",
+ r:[["Price","170K ₫ for 1–3 · 220K ₫ for 4–5"],
     ["Where","Six booths along the Hoai River — Japanese Bridge, An Hoi Bridge, night market"],
     ["Runs","Sunset (~18:05) to 21:30–22:00 · ride is about 15 min"],
     ["Payment","Cash in dong at the booth"]],
  map:["Hoai River, Hoi An","Hoai+River+Hoi+An"],
  f:{b:"Cannot be booked online",x:"Several sites claim otherwise — they're wrong. Go just after sunset for light and a shorter queue. Peak crush is 19:00–20:30, worse on a full moon."}},
 
-{id:"marble",p:"walk",t:"Marble Mountain",w:"Spare-day option",
- r:[["Entry","40,000 ₫ · lift 15,000 ₫ each way"],
-    ["Am Phu cave","20,000 ₫ extra — the 'hell cave', worth it"],
+{id:"marble",p:"walk",t:"⛰️ Marble Mountain",w:"Spare-day option",
+ r:[["Entry","40K ₫ · lift 15K ₫ each way"],
+    ["Am Phu cave","20K ₫ extra — the 'hell cave', worth it"],
     ["Hours","07:30–17:00 · cash only in dong"],
     ["Best time","Early morning or late afternoon. Queues 09:00–15:00."],
     ["Getting there","20 min from the villa, on the way to Hoi An"]],
@@ -662,8 +679,8 @@ const BOOK=[
 ]},
 
 {g:"Ho Chi Minh City",items:[
-{id:"cuchi",p:"now",t:"Book Cu Chi Tunnels",w:"Monday 31 Aug — the urgent one",
- r:[["Entry","110,000 ₫ · site open 07:00–17:00"],
+{id:"cuchi",p:"now",t:"🪖 Book Cu Chi Tunnels",w:"Monday 31 Aug — the urgent one",
+ r:[["Entry","110K ₫ · site open 07:00–17:00"],
     ["Ben Dinh","60km · closer, busier, more reconstructed for visitors"],
     ["Ben Duoc","70km · quieter, more authentic, the better call"],
     ["Journey","1 hr 45 each way, traffic depending"],
@@ -676,16 +693,16 @@ const BOOK=[
  map:["Cu Chi Tunnels","Cu+Chi+Tunnels"],
  f:{hot:1,b:"Peak holiday week",x:"29 Aug – 2 Sep is a five-day national break and this is the middle of it. Tours and private cars sell out. The 07:00 departure beats both the crowds and the heat."}},
 
-{id:"dinner",p:"now",t:"Reserve dinner, 30th & 31st",w:"District 1, holiday weekend",
+{id:"dinner",p:"now",t:"🍽️ Reserve dinner, 30th & 31st",w:"District 1, holiday weekend",
  r:[["Why","Restaurants fill early across the break — walk-ins get turned away"],
     ["Sunday 30th","Near Bùi Viện so you can roll straight on"],
     ["Monday 31st","Anywhere quieter — it's a long day at Cu Chi"],
-    ["Budget","A good sit-down dinner runs 300–600,000 ₫ a head with drinks"]],
+    ["Budget","A good sit-down dinner runs 300–600K ₫ a head with drinks"]],
  l:[["TripAdvisor — best in Saigon","https://www.tripadvisor.com/Restaurants-g293925-Ho_Chi_Minh_City.html",1],
     ["Viator — food tours","https://www.viator.com/Ho-Chi-Minh-City/d352",0]],
  map:["District 1","District+1+Ho+Chi+Minh+City"]},
 
-{id:"depart",p:"now",t:"Confirm the departure run",w:"Wednesday 2 Sep, flight 15:50",
+{id:"depart",p:"now",t:"🛫 Confirm the departure run",w:"Wednesday 2 Sep, flight 15:50",
  r:[["Terminal","International is <b>T2</b>. You land at T3 or T1 — a different building."],
     ["Plan","Leave the hotel 10:30, at the airport by 11:30"],
     ["Journey","~45 min for 8km. National Day makes that unpredictable."],
@@ -695,8 +712,8 @@ const BOOK=[
  map:["Tan Son Nhat T2","Tan+Son+Nhat+International+Airport+Terminal+2"],
  f:{hot:1,b:"Check the route that morning",x:"Ask the front desk about closures before you leave, and tell the driver Terminal 2."}},
 
-{id:"museum",p:"walk",t:"War Remnants Museum",w:"Tuesday 1 Sep, morning",
- r:[["Price","40,000 ₫ · cash in VND only at the gate"],
+{id:"museum",p:"walk",t:"🏛️ War Remnants Museum",w:"Tuesday 1 Sep, morning",
+ r:[["Price","40K ₫ · cash in VND only at the gate"],
     ["Open","07:30–17:30 daily"],
     ["Ticket desk","07:30–11:00, then 13:00–17:00 only"],
     ["Where","28 Vo Van Tan, District 3"],
@@ -704,14 +721,14 @@ const BOOK=[
  map:["War Remnants Museum","War+Remnants+Museum+Ho+Chi+Minh+City"],
  f:{b:"Mind the ticket window",x:"Arrive at 11.30 and you're waiting until one o'clock. Hours may shift over the holiday — worth a check the day before."}},
 
-{id:"palace",p:"walk",t:"Independence Palace",w:"Tuesday 1 Sep, afternoon",
- r:[["Price","40,000 ₫ · 65,000 ₫ with the exhibit"],
+{id:"palace",p:"walk",t:"🏛️ Independence Palace",w:"Tuesday 1 Sep, afternoon",
+ r:[["Price","40K ₫ · 65K ₫ with the exhibit"],
     ["Open","08:00–16:30 · last tickets 15:30"],
     ["Where","135 Nam Ky Khoi Nghia · 6 min walk from the Post Office"],
     ["Don't miss","The underground command bunker — the best part"]],
  map:["Independence Palace","Independence+Palace+Ho+Chi+Minh+City"]},
 
-{id:"banthanh",p:"walk",t:"Ban Thanh Market",w:"Sunday 30 Aug, afternoon",
+{id:"banthanh",p:"walk",t:"🛍️ Ban Thanh Market",w:"Sunday 30 Aug, afternoon",
  r:[["Hours","~06:00–18:00 · night market outside runs to ~23:00"],
     ["Haggling","Opening prices run three to four times the real one"],
     ["Good for","Dupes, silk, coffee, spices, tat for people back home"],
@@ -720,57 +737,81 @@ const BOOK=[
 ]}];
 
 const INFO=[
-{h:"Food",ic:"M7 2.5v8a2.5 2.5 0 002.5 2.5h0V21.5M7 2.5v5M10 2.5v5M17 2.5c-1.4 1.4-2 3.5-2 5.5s.6 3.5 2 4.5v9",
+{h:"Before you fly",ic:"M9 6.5V4.2A1.7 1.7 0 0110.7 2.5h2.6A1.7 1.7 0 0115 4.2v2.3M4.5 6.5h15A1.5 1.5 0 0121 8v11.5a2 2 0 01-2 2H5a2 2 0 01-2-2V8a1.5 1.5 0 011.5-1.5z",
+ emo:"🎒",type:"pack",rows:[
+ ["🛂","Passport","Must have <b>6 months validity</b> beyond 26 August"],
+ ["📄","Vietnam e-visa ✅","Sorted. Two things left: check the <b>name and passport number on it match your passport exactly</b> — a typo means refused boarding — and confirm the entry date covers 26 August. Save a PDF offline."],
+ ["🖨️","Printed copies","E-visa printout, villa and hotel addresses, flight confirmations. Phones die."],
+ ["💳","Cards and cash","Tell the bank you're travelling. Bring some USD to change — rates at the airport are poor."],
+ ["📱","Grab + connectivity","Grab installed and card added before you land. eSIM or roaming sorted."],
+ ["🎧","AirPods","1hr 20 flight to Saigon, plus two long Cu Chi legs. Non-negotiable."],
+ ["🔋","Power bank","Carry-on only — never in checked luggage."],
+ ["🔌","Adapter","220V, types A, C and F. Most villas have universal sockets but don't bet on it."],
+ ["👟","Proper shoes","Cu Chi tunnels and Marble Mountain are not flip-flop jobs."],
+ ["👕","One long-sleeve","Temples want covered shoulders, and the aircon is arctic."],
+ ["☂️","Poncho or small umbrella","Late August is rainy season. It arrives fast and leaves fast."],
+ ["🦟","Insect repellent","Cu Chi and the coconut forest, especially early and late."],
+ ["🧴","Sun cream and a hat","Ba Na Hills at altitude will burn you without you noticing."],
+ ["💊","Small medical kit","Imodium, rehydration salts, paracetamol, plasters."],
+ ["📸","Tailor reference photos","Save pictures of the cuts and cloth you want before Wednesday."],
+ ["🧾","Travel insurance","Policy number saved offline, not just in your inbox."]]},
+{h:"Food",emo:"🍜",ic:"M7 2.5v8a2.5 2.5 0 002.5 2.5h0V21.5M7 2.5v5M10 2.5v5M17 2.5c-1.4 1.4-2 3.5-2 5.5s.6 3.5 2 4.5v9",
  type:"food",rows:[
- ["Thìa Gỗ","<b>Michelin Bib Gourmand</b> — not a star. 53 Phan Thúc Duyện, 9 min walk. 10:00–22:00 daily. Bánh xèo, phở Nam, lẩu mắm. ~150–300,000 ₫. No bookings — first come, first served, so go early. Cards +2.75%. <b>Thu 27th, dinner.</b>"],
+ ["Thìa Gỗ","<b>Michelin Bib Gourmand</b> — not a star. 53 Phan Thúc Duyện, 9 min walk. 10:00–22:00 daily. Bánh xèo, phở Nam, lẩu mắm. ~150–300K ₫. No bookings — first come, first served, so go early. Cards +2.75%. <b>Thu 27th, dinner.</b>"],
  ["2 Ladies Kitchen","28 An Thượng 4, 4 min walk. 07:30–22:30. Bánh mì with ~30 fillings, coconut and salt coffee. Made to order so it is not fast. Staff are deaf — order by pointing or notepad. <b>Sat 29th, brunch.</b>"],
  ["Miss Nhi","39 An Thượng 30, 4 min walk. 10:00–midnight. Cheap Vietnamese, bánh xèo is the signature. Walk-in. <b>Fri 28th, early dinner before the Dragon Bridge.</b>"],
- ["Missteak","99 Mai Thúc Lân, 2nd floor, 5 min walk. 11:00–23:00. Flat iron 355,000 ₫, rib eye 825,000 ₫, ~500–900,000 ₫ a head with a drink. Small room — <b>book ahead</b>, and check you are booking Da Nang not the Hội An branch. <b>Sat 29th, dinner.</b>"],
- ["Bánh Mì Huỳnh Hoa","26 Lê Thị Riêng, 8 min walk from Ben Thanh. Hours are disputed across sources — late afternoon and evening is the safe window. ~58–73,000 ₫. <b>Takeaway only, no seating</b>, cash, queue up to 30 min. One sandwich feeds two — ask them to halve it. <b>Sun 30th, after the market.</b>"],
- ["Phở Việt Nam","<b>Michelin Selected</b> — a rung below Bib Gourmand. 14 Phạm Hồng Thái, 3 min walk. 06:00–03:00. Fresh not dried noodles; order the mixed bowl. 65–155,000 ₫. Walk-in. <b>Mon 31st, breakfast before Cu Chi</b> — or after Bùi Viện, it is open to 3am."]]},
+ ["Missteak","99 Mai Thúc Lân, 2nd floor, 5 min walk. 11:00–23:00. Flat iron 355K ₫, rib eye 825K ₫, ~500–900K ₫ a head with a drink. Small room — <b>book ahead</b>, and check you are booking Da Nang not the Hội An branch. <b>Sat 29th, dinner.</b>"],
+ ["Bánh Mì Huỳnh Hoa","26 Lê Thị Riêng, 8 min walk from Ben Thanh. Hours are disputed across sources — late afternoon and evening is the safe window. ~58–73K ₫. <b>Takeaway only, no seating</b>, cash, queue up to 30 min. One sandwich feeds two — ask them to halve it. <b>Sun 30th, after the market.</b>"],
+ ["Phở Việt Nam","<b>Michelin Selected</b> — a rung below Bib Gourmand. 14 Phạm Hồng Thái, 3 min walk. 06:00–03:00. Fresh not dried noodles; order the mixed bowl. 65–155K ₫. Walk-in. <b>Mon 31st, breakfast before Cu Chi</b> — or after Bùi Viện, it is open to 3am."]]},
 {h:"Money",ic:"M12 2.5v19M16.8 6.8c0-1.7-2.1-2.8-4.8-2.8s-4.8 1-4.8 2.8 2.1 2.5 4.8 3.3 4.8 1.5 4.8 3.3-2.1 2.8-4.8 2.8-4.8-1-4.8-2.8",
- type:"rows",rows:[["Ba Na Hills entry","1,000,000 ₫ · Rs. 11,500"],
- ["Ba Na return taxi, split","~650,000 ₫ · Rs. 7,500"],
- ["Villa → Hoi An by Grab","~300,000 ₫ · Rs. 3,450"],
- ["Cu Chi entry","110,000 ₫ · Rs. 1,270"],
- ["Duck Stop","100,000 ₫ · Rs. 1,150"],["Basket boat","100,000 ₫ · Rs. 1,150"],
- ["Lantern boat, 1–3","170,000 ₫ · Rs. 1,950"],["Marble Mountain","40,000 ₫ · Rs. 460"],
- ["War Remnants Museum","40,000 ₫ · Rs. 460"],["Independence Palace","40,000 ₫ · Rs. 460"],
- ["Dinner out, per head","300–600,000 ₫ · Rs. 3,500–7,000"]]},
-
-{h:"Getting around",ic:"M5 17.5h14M6.5 17.5v2M17.5 17.5v2M4.2 12.5l1.4-4.6A2.4 2.4 0 018 6h8a2.4 2.4 0 012.4 1.9l1.4 4.6M4 12.5h16v3.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 16z",
+ emo:"💰",type:"cols",head:["","Dong","Rupees"],rows:[
+ ["Ba Na Hills entry","1M ₫","Rs 11.5K"],
+ ["Ba Na taxi, split","650K ₫","Rs 7.5K"],
+ ["Villa → Hoi An, Grab","300K ₫","Rs 3.5K"],
+ ["Missteak, per head","500–900K ₫","Rs 5.8–10.4K"],
+ ["Dinner out, per head","300–600K ₫","Rs 3.5–7K"],
+ ["Lantern boat, 1–3","170K ₫","Rs 2K"],
+ ["Phở, per bowl","65–155K ₫","Rs 750–1.8K"],
+ ["Bánh mì","60–75K ₫","Rs 700–860"],
+ ["Cu Chi entry","110K ₫","Rs 1.3K"],
+ ["Duck Stop","100K ₫","Rs 1.2K"],
+ ["Basket boat","100K ₫","Rs 1.2K"],
+ ["Marble Mountain","40K ₫","Rs 460"],
+ ["War Remnants Museum","40K ₫","Rs 460"],
+ ["Independence Palace","40K ₫","Rs 460"]]},
+{h:"Getting around",emo:"🚕",ic:"M5 17.5h14M6.5 17.5v2M17.5 17.5v2M4.2 12.5l1.4-4.6A2.4 2.4 0 018 6h8a2.4 2.4 0 012.4 1.9l1.4 4.6M4 12.5h16v3.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 16z",
  type:"list",rows:[
- "<b>Da Nang airport → villa</b> — 20 min, ~120,000 ₫.",
- "<b>Villa → Hoi An</b> — 40 min on the coastal road, ~300,000 ₫ by Grab.",
+ "<b>Da Nang airport → villa</b> — 20 min, ~120K ₫.",
+ "<b>Villa → Hoi An</b> — 40 min on the coastal road, ~300K ₫ by Grab.",
  "<b>Villa → Ba Na Hills</b> — 50 min, 35km. Pre-book the return; taxis are scarce coming down.",
  "<b>Villa → Dragon Bridge</b> — 10 min, but the bridge closes to traffic 20:45.",
  "<b>Saigon airport → District 1</b> — 45 min for 8km. The traffic is the traffic.",
  "<b>District 1 → Cu Chi</b> — 1 hr 45 each way, 60km northwest.",
  "Museum, Post Office, Notre-Dame and the Palace are all within a kilometre — walk it."]},
 
-{h:"The holiday",ic:"M8 2.5v4M16 2.5v4M3.5 10.5h17M6 4.5h12a2.5 2.5 0 012.5 2.5v12a2.5 2.5 0 01-2.5 2.5H6a2.5 2.5 0 01-2.5-2.5V7A2.5 2.5 0 016 4.5z",
+{h:"The holiday",emo:"🎏",ic:"M8 2.5v4M16 2.5v4M3.5 10.5h17M6 4.5h12a2.5 2.5 0 012.5 2.5v12a2.5 2.5 0 01-2.5 2.5H6a2.5 2.5 0 01-2.5-2.5V7A2.5 2.5 0 016 4.5z",
  type:"text",rows:[
  "Vietnam's National Day break runs <b>Saturday 29 August to Wednesday 2 September 2026</b> — five days, confirmed by the government.",
  "Your whole Saigon leg sits inside it, and the last two Da Nang days too. Fuller flights, busier hotels, heavier traffic, packed nightlife.",
  "Anything marked <b>Book now</b> genuinely means now. Cu Chi and restaurants are the ones that bite."]},
 
-{h:"Airports",ic:"M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z",
+{h:"Airports",emo:"✈️",ic:"M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z",
  type:"list",rows:[
  "<b>Da Nang (DAD)</b> — 20 min from the villa. Small and quick; 2 hrs is plenty.",
  "<b>Saigon arrival, 30 Aug</b> — domestic. Terminal 3 for Vietnam Airlines and Bamboo, otherwise Terminal 1.",
  "<b>Saigon departure, 2 Sep</b> — international, <b>Terminal 2</b>. Different building from arrivals.",
  "Allow the full three hours on 2 September. Gates have been known to close 45 minutes before departure."]},
 
-{h:"If a day falls through",ic:"M21 12a9 9 0 11-6.2-8.6M21 3.5v6h-6",type:"list",rows:[
- "<b>Marble Mountain</b> — 3–4 hrs, 20 min out, best early or at sunset. 40,000 ₫.",
+{h:"If a day falls through",emo:"🌧️",ic:"M21 12a9 9 0 11-6.2-8.6M21 3.5v6h-6",type:"list",rows:[
+ "<b>Marble Mountain</b> — 3–4 hrs, 20 min out, best early or at sunset. 40K ₫.",
  "<b>Son Tra peninsula</b> — scenic drive, Lady Buddha, viewpoints over the bay.",
  "<b>Beach bars on My Khe</b> — five minutes on foot, the reliable washout fallback.",
  "Both Da Nang options are the natural swap if Ba Na Hills is clouded in."]},
 
-{h:"Practical",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
+{h:"Practical",emo:"🧭",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
  type:"list",rows:[
  "Carry cash — museums, boat booths and market stalls are dong only.",
- "<b>100,000 and 1,000,000 notes look almost identical.</b> Count twice.",
+ "<b>100K and 1M notes look almost identical.</b> Count twice.",
  "Haggle at markets. Open at a third of the asking price and settle near half.",
  "Tap any address on this page to open it in Maps.",
  "Sunset is around 18:05 all week — useful for the beach and the lantern boats."]}
@@ -874,10 +915,15 @@ function info(){
  $("p-info").innerHTML=INFO.map(function(s){
   var b="";
   if(s.type==="rows")b=s.rows.map(function(r){return '<div class="row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'}).join("");
+  else if(s.type==="cols"){
+   b='<div class="mtb"><div class="mch"></div><div class="mch">'+s.head[1]+'</div><div class="mch">'+s.head[2]+'</div>'+
+     s.rows.map(function(r){return '<div class="mcl">'+r[0]+'</div><div class="mcv">'+r[1]+'</div><div class="mcv rs">'+r[2]+'</div>'}).join("")+'</div>';
+  }
+  else if(s.type==="pack")b=s.rows.map(function(r){return '<div class="pk"><span class="pe">'+r[0]+'</span><div><b>'+r[1]+'</b><p>'+r[2]+'</p></div></div>'}).join("");
   else if(s.type==="food")b=s.rows.map(function(r){return '<div class="eat"><b>'+r[0]+'</b><p>'+r[1]+'</p></div>'}).join("");
   else if(s.type==="list")b='<ul>'+s.rows.map(function(r){return '<li>'+r+'</li>'}).join("")+'</ul>';
   else b=s.rows.map(function(r){return '<p>'+r+'</p>'}).join("");
-  return '<div class="card"><h3><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="'+s.ic+'"/></svg></i>'+s.h+'</h3>'+b+'</div>'
+  return '<div class="card"><h3><i>'+(s.emo||'')+'</i>'+s.h+'</h3>'+b+'</div>'
  }).join("");
 }
 
