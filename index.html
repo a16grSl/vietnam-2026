@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-theme="auto">
+<html lang="en-GB" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="VT-AW-2026 — Da Nang &amp; Saigon. Itinerary, bookings, essentials.">
-<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f5f7">
 <title>VT-AW-2026</title>
 <style>
 @font-face{
@@ -658,6 +657,108 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 /* ---- Geist tabular figures where numbers must align ---- */
 .tm,.dnum b,.stat .core b,.mcv,.mcv.rs,.bv,.bv span,.btr b,.btr i,.pct,.big,.dur,.mp{
  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ---- dark-mode hint ---- */
+.ttw{display:flex;align-items:center;gap:7px}
+.tth{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--dim);
+ opacity:.85;transition:opacity .5s var(--ease);white-space:nowrap}
+.tth.used{opacity:0;pointer-events:none}
+@media(max-width:360px){.tth{display:none}}
+
+/* ---- emergency ---- */
+.card.sos:before{background-color:var(--surf);
+ background-image:linear-gradient(180deg,var(--redbg),var(--surf) 62%)}
+.sosg{margin-top:18px}
+.sosg h4{margin:0 0 10px;font-size:11.5px;font-weight:700;text-transform:uppercase;
+ letter-spacing:.09em;color:var(--dim)}
+.sosr{display:grid;gap:9px;padding:13px 0;border-top:.5px solid var(--line2)}
+.sosg .sosr:first-of-type{border-top:0;padding-top:2px}
+.sost b{font-size:15.5px;font-weight:640;letter-spacing:-.015em;display:block;margin-bottom:3px}
+.sost p{margin:0;font-size:13.5px;line-height:1.5;color:var(--mut)}
+.sosa{display:flex;flex-wrap:wrap;gap:7px}
+.btn.sos{background-color:var(--red);background-image:none;
+ box-shadow:0 2px 10px rgba(201,55,44,.3);font-variant-numeric:tabular-nums;
+ font-weight:650;letter-spacing:.01em;color:#fff}
+[data-theme="dark"] .btn.sos{color:var(--onfill)}
+.btn.tiny{min-height:38px;padding:8px 15px;font-size:13px}
+.soso{margin:0;padding-left:20px}
+.soso li{font-size:14px;line-height:1.55;color:var(--ink2);margin-bottom:9px}
+#sosnote{width:100%;min-height:76px;font:inherit;font-size:14px;line-height:1.5;padding:11px 12px;
+ border-radius:11px;border:.5px solid var(--line);background:var(--surf2);color:var(--ink);resize:vertical}
+
+/* ---- address chips ---- */
+.vgrid{display:flex;flex-wrap:wrap;gap:7px}
+.vch{font:inherit;font-size:13px;font-weight:550;letter-spacing:-.008em;
+ padding:9px 13px;border-radius:99px;min-height:40px;cursor:pointer;
+ border:.5px solid var(--line);background:var(--surf2);color:var(--ink2);
+ display:inline-flex;align-items:center;gap:6px;transition:.2s var(--ease);position:relative}
+.vch:after{content:"";position:absolute;inset:-4px -2px}
+.vch:active{transform:scale(.96)}
+.vch i{font-style:normal;font-size:10.5px;font-weight:650;color:var(--acctx)}
+.vch.need{border-style:dashed;border-color:var(--acc);color:var(--acctx)}
+.vch.add{border-style:dashed;color:var(--dim)}
+
+/* ---- the driver sheet ---- */
+.drv{position:fixed;inset:0;z-index:var(--z-toast);display:flex;align-items:flex-end;
+ justify-content:center;padding:14px;background:rgba(10,12,18,.5);
+ backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+ opacity:0;transition:opacity .3s var(--ease)}
+.drv.go{opacity:1}
+.drvi{width:100%;max-width:560px;background-color:var(--surf);
+ background-image:linear-gradient(180deg,var(--surf),var(--surf2));
+ border-radius:var(--r-2xl);padding:22px 20px 18px;box-shadow:var(--shadow2);
+ border:.5px solid var(--bzline);
+ transform:translateY(26px) scale(.97);transition:transform .42s var(--ease)}
+.drv.go .drvi{transform:none}
+.drvl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+ color:var(--dim);margin-bottom:12px;text-align:center}
+.drvt{font-size:27px;line-height:1.28;font-weight:600;letter-spacing:-.02em;
+ text-align:center;color:var(--ink);margin-bottom:12px;word-break:break-word}
+.drvs{font-size:13.5px;color:var(--mut);text-align:center;margin-bottom:18px}
+.drvb{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.drvb .btn{flex:1 1 auto;min-width:120px}
+.drvn{font-size:12.5px;line-height:1.5;color:var(--mut);text-align:center;margin:15px 0 13px}
+.btn.wide{width:100%}
+@media(min-width:560px){.drv{align-items:center}}
+
+/* ---- place buttons inherit the link look ---- */
+button.pl{font:inherit;cursor:pointer}
+.mapr button.pl{font-size:12.5px;font-weight:550;padding:8px 12px;border-radius:99px;min-height:36px;
+ display:inline-flex;align-items:center;color:var(--ink2);
+ background:var(--surf2);border:.5px solid var(--line);position:relative}
+.mapr button.pl:after{content:"";position:absolute;inset:-5px -2px}
+.mapr button.pl:active{transform:scale(.97)}
+.inact button.pl.inl{display:inline-flex;align-items:center;gap:6px;
+ font-size:12.5px;font-weight:600;padding:8px 12px;border-radius:99px;
+ background-color:var(--accbg);color:var(--acctx);border:none;min-height:36px}
+.inact button.pl.inl svg{width:12px;height:12px}
+
+/* ---- copy for whatsapp ---- */
+.wax{margin-top:14px;padding-top:13px;border-top:.5px solid var(--line2)}
+.wax .btn{width:100%}
+
+/* ---- expenses ---- */
+.crewrow{margin-bottom:14px}
+.crewl{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.splist{margin-top:14px}
+.sprow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
+ padding:12px 13px;border-radius:13px;background-color:var(--surf);
+ border:.5px solid var(--line);margin-bottom:6px}
+.spt b{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.012em}
+.spt span{font-size:12.5px;color:var(--mut)}
+.spv{text-align:right;font-size:15px;font-weight:640;white-space:nowrap;
+ font-variant-numeric:tabular-nums}
+.spv i{display:block;font-style:normal;font-size:11.5px;font-weight:500;color:var(--mut)}
+.spx{width:28px;height:28px;border-radius:99px;border:.5px solid var(--line);
+ background:transparent;color:var(--dim);font-size:17px;line-height:1;cursor:pointer;
+ position:relative;flex:0 0 auto}
+.spx:after{content:"";position:absolute;inset:-8px}
+.setl{border-top:.5px solid var(--line2);margin-top:11px;padding-top:12px}
+.setl h5{margin:0 0 9px;font-size:11.5px;font-weight:700;text-transform:uppercase;
+ letter-spacing:.08em;color:var(--dim)}
+.setr{font-size:15px;font-weight:600;letter-spacing:-.015em;padding:6px 0;
+ font-variant-numeric:tabular-nums}
+.toast.bad{background:var(--red);color:#fff}
 /* ---- ideas ---- */
 .idc{margin-bottom:var(--s3);box-shadow:var(--shadow);transition:.25s var(--ease)}
 .idt{font-size:17px;font-weight:620;letter-spacing:-.025em;margin-bottom:7px;line-height:1.3}
@@ -818,10 +919,11 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 <div class="topwrap"><header class="top">
   <div class="topin">
     <div class="brand">VT-AW<span>-2026</span></div>
+    <div class="ttw"><span class="tth" id="tth">dark mode</span>
     <button class="tt" id="tt" aria-label="Switch between light and dark">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.6A8.6 8.6 0 019.4 3.5a8.6 8.6 0 1011.1 11.1z"/></svg>
-    </button>
+    </button></div>
   </div>
     <div class="tabs" id="tabs">
       <button class="on" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
@@ -873,6 +975,11 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <p class="fsub">Per person, split across the group. Tick things off as they're paid.</p>
     </div>
     <div id="budget"></div>
+    <div class="fhead" style="margin-top:34px">
+      <h2 style="margin-top:2px"><span class="eb">🧾 Who paid what</span></h2>
+      <p class="fsub">Log it as it happens and the maths at the end is done. This is the argument you avoid on the last night.</p>
+    </div>
+    <div id="spendbox"></div>
   </div>
 
   <div class="pane" id="p-food">
@@ -890,6 +997,8 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
     <div id="idealist"></div>
   </div>
   <div class="pane" id="p-info">
+    <div class="card sos"><h3><i>🚨</i>If something goes wrong</h3><div id="sosbox"></div></div>
+    <div class="card"><h3><i>🗺️</i>Show the driver</h3><div id="addrbox"></div></div>
     <div class="card share"><h3><i>🔗</i>Share with the group</h3><div id="sharebox"></div></div>
     <div id="infolist"></div>
   </div>
@@ -1366,6 +1475,7 @@ const INFO=[
  ["🦟","Insect repellent","Cu Chi and the coconut forest, especially early and late."],
  ["🧴","Sun cream and a hat","Ba Na Hills at altitude will burn you without you noticing."],
  ["💊","Small medical kit","Imodium, rehydration salts, paracetamol, plasters."],
+ ["🗺️","Offline maps, both cities","In Google Maps, search Da Nang, tap the name, then <b>Download offline map</b>. Do the same for Ho Chi Minh City. Do it on wifi before you fly — every address in this app then works with no signal."],
  ["📸","Tailor reference photos","Save pictures of the cuts and cloth you want before Wednesday."],
  ["🧾","Travel insurance","Policy number saved offline, not just in your inbox."]]},
 {h:"Money",ic:"M12 2.5v19M16.8 6.8c0-1.7-2.1-2.8-4.8-2.8s-4.8 1-4.8 2.8 2.1 2.5 4.8 3.3 4.8 1.5 4.8 3.3-2.1 2.8-4.8 2.8-4.8-1-4.8-2.8",
@@ -1480,9 +1590,73 @@ const COSTS=[
  {id:"c-shop",t:"🛍️ Shopping and souvenirs",v:2000000,u:"head",o:1,n:"Entirely up to you."},
  {id:"c-tips",t:"💵 Tips, cash buffer",v:500000,u:"head"}]}];
 
+
+/* ---- emergency: verified 20 Aug 2026 ---- */
+const SOS=[
+{g:"Call first",items:[
+ {t:"Ambulance",n:"115",w:"Free from any phone. Operators may not speak English — say the district name and repeat the address slowly."},
+ {t:"Police",n:"113",w:"Free. For theft you will also need a written report for insurance — ask for it at the ward station."},
+ {t:"Fire",n:"114",w:"Free."},
+ {t:"Search & rescue",n:"112",w:"Free. Floods, sea, mountains."}]},
+{g:"Hospitals with English-speaking doctors",items:[
+ {t:"Family Medical Practice — Da Nang",n:"+84913917303",w:"96–98 Nguyễn Văn Linh, Hải Châu. <b>24-hour emergency line</b>; the clinic itself is Mon–Sat 08:00–17:00, Sun 08:00–12:00.",
+  vn:"96–98 Nguyễn Văn Linh, Hải Châu, Đà Nẵng",map:"Family+Medical+Practice+Da+Nang"},
+ {t:"FV Hospital — Saigon",n:"+842835113500",w:"6 Nguyễn Lương Bằng, District 7. Full A&E, the one to go to for anything serious in HCMC. About 25 min from District 1.",
+  vn:"Bệnh viện FV, 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh",map:"FV+Hospital+Ho+Chi+Minh"},
+ {t:"Family Medical Practice — Saigon",n:"+842837449000",w:"Diamond Plaza, 34 Lê Duẩn, District 1. <b>24-hour emergency line</b>, and it is walking distance from the hotel.",
+  vn:"Family Medical Practice, Diamond Plaza, 34 Lê Duẩn, Quận 1",map:"Family+Medical+Practice+Diamond+Plaza"}]},
+{g:"If a passport goes missing",items:[
+ {t:"Sri Lankan Embassy, Hanoi",n:"+842437341894",w:"55B Trần Phú, Ba Đình, Hà Nội · slemb.hanoi@mfa.gov.lk<br><b>There is no consulate in Da Nang or Saigon</b> — everything goes through Hanoi, so start the call early in the day.",
+  vn:"Đại sứ quán Sri Lanka, 55B Trần Phú, Ba Đình, Hà Nội",map:"Sri+Lanka+Embassy+Hanoi"}]}];
+const SOSSTEPS=[
+ "Police report at the nearest ward station <b>the same day</b> — the embassy and your insurer will both ask for it.",
+ "Photos of the passport, the e-visa and the entry stamp. Take them <b>now</b>, before you fly.",
+ "Ring the embassy in Hanoi for an emergency travel document. Allow days, not hours, over the National Day break.",
+ "Tell the airline early — an ETD usually needs the ticket reissuing.",
+ "Insurance first, not last: most policies want to authorise treatment before you pay."];
+
+/* ---- Vietnamese address cards: hold the phone up to the driver ---- */
+const VNA=[
+ {k:"Da Nang",v:[
+  ["Serenity Villa (our villa)","",1],
+  ["Da Nang airport","Sân bay quốc tế Đà Nẵng"],
+  ["Ba Na Hills","Khu du lịch Sun World Bà Nà Hills, Hoà Ninh, Hoà Vang, Đà Nẵng"],
+  ["Marble Mountain","Danh thắng Ngũ Hành Sơn, 81 Huyền Trân Công Chúa, Hoà Hải, Đà Nẵng"],
+  ["Son Tra / Lady Buddha","Chùa Linh Ứng Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng"],
+  ["Dragon Bridge","Cầu Rồng, Bạch Đằng, Hải Châu, Đà Nẵng"],
+  ["Sky36","Sky36, tầng 36, khách sạn Novotel, 36 Bạch Đằng, Hải Châu, Đà Nẵng"],
+  ["Han River pier","Bến du thuyền sông Hàn, 36 Bạch Đằng, Hải Châu, Đà Nẵng"],
+  ["My Khe beach","Bãi biển Mỹ Khê, Phước Mỹ, Sơn Trà, Đà Nẵng"],
+  ["Han Market","Chợ Hàn, 119 Trần Phú, Hải Châu, Đà Nẵng"],
+  ["Thìa Gỗ","Nhà hàng Thìa Gỗ, 53 Phan Thúc Duyện, Đà Nẵng"],
+  ["Missteak","Missteak, 99 Mai Thúc Lân, Ngũ Hành Sơn, Đà Nẵng"],
+  ["2 Ladies Kitchen","2 Ladies Kitchen, 28 An Thượng 4, Bắc Mỹ Phú, Đà Nẵng"],
+  ["Miss Nhi","Miss Nhi, 39 An Thượng 30, Bắc Mỹ Phú, Đà Nẵng"],
+  ["Hai Van Pass","Đèo Hải Vân, quận Liên Chiểu, Đà Nẵng"],
+  ["Family Medical Practice","Family Medical Practice, 96–98 Nguyễn Văn Linh, Hải Châu, Đà Nẵng"]]},
+ {k:"Hoi An",v:[
+  ["Hoi An old town","Phố cổ Hội An, phường Minh An, Hội An, Quảng Nam"],
+  ["An Hoi bridge (boats)","Cầu An Hội, Hội An, Quảng Nam"],
+  ["Bay Mau coconut forest","Rừng dừa Bảy Mẫu, thôn Vạn Lăng, Cẩm Thanh, Hội An"],
+  ["The Duck Stop","The Duck Stop, Cẩm Thanh, Hội An, Quảng Nam"],
+  ["Tailors (Trần Phú)","Đường Trần Phú, phường Minh An, Hội An, Quảng Nam"],
+  ["Bánh mì Phượng","Bánh mì Phượng, 2B Phan Châu Trinh, phường Minh An, Hội An"]]},
+ {k:"Saigon",v:[
+  ["El Pino Realm (our hotel)","",1],
+  ["Tan Son Nhat — international","Sân bay Tân Sơn Nhất, ga quốc tế T2, Tân Bình, TP. Hồ Chí Minh"],
+  ["Cu Chi — Bến Dược","Địa đạo Bến Dược, xã Phú Mỹ Hưng, huyện Củ Chi, TP. Hồ Chí Minh"],
+  ["War Remnants Museum","Bảo tàng Chứng tích Chiến tranh, 28 Võ Văn Tần, Quận 3"],
+  ["Independence Palace","Dinh Độc Lập, 135 Nam Kỳ Khởi Nghĩa, Quận 1"],
+  ["Ben Thanh Market","Chợ Bến Thành, Lê Lợi, Quận 1, TP. Hồ Chí Minh"],
+  ["Bui Vien street","Phố đi bộ Bùi Viện, Phạm Ngũ Lão, Quận 1"],
+  ["Bánh Mì Huỳnh Hoa","Bánh Mì Huỳnh Hoa, 26 Lê Thị Riêng, Quận 1"],
+  ["Phở Việt Nam","Phở Việt Nam, 14 Phạm Hồng Thái, Quận 1"],
+  ["FV Hospital","Bệnh viện FV, 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh"]]}];
+
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
 var st={},nt={},dop={},iop={},filt="all",eat={},idea={},plan={},dnote={},pay={},grp=6,gdet={};
+var own={},shift={},spend=[],crew=[],addr={},TS={};
 var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
@@ -1496,19 +1670,61 @@ var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
 var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
 
-function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp}}
+function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp,o:own,sh:shift,sp:spend,cr:crew,ad:addr,ts:TS}}
 function save(){try{var o=stateObj();o.t=document.documentElement.dataset.theme;
  localStorage.setItem("vn2026a",JSON.stringify(o))}catch(e){}}
-function applyState(d){
- Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});Object.assign(idea,d.i||{});
- Object.assign(plan,d.p||{});Object.assign(dnote,d.dn||{});Object.assign(pay,d.y||{});
- if(d.g)grp=d.g;}
+/* per-key timestamps so two people can merge instead of clobbering */
+function stamp(k){TS[k]=Date.now()}
+function mergeMap(local,incoming,ns,inTS){
+ var changed=[];
+ Object.keys(incoming||{}).forEach(function(k){
+  var key=ns+"."+k;
+  var mine=TS[key]||0, theirs=(inTS||{})[key]||0;
+  if(theirs>=mine && JSON.stringify(local[k])!==JSON.stringify(incoming[k])){
+   local[k]=incoming[k]; TS[key]=theirs||Date.now(); changed.push(k);
+  }
+ });
+ /* deletions they made after your last touch */
+ Object.keys(local).forEach(function(k){
+  if(k in (incoming||{}))return;
+  var key=ns+"."+k;
+  if(((inTS||{})[key]||0)>(TS[key]||0)){delete local[k];changed.push(k)}
+ });
+ return changed.length;
+}
+function applyState(d,merge){
+ if(!merge){
+  Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});Object.assign(idea,d.i||{});
+  Object.assign(plan,d.p||{});Object.assign(dnote,d.dn||{});Object.assign(pay,d.y||{});
+  Object.assign(own,d.o||{});Object.assign(shift,d.sh||{});Object.assign(addr,d.ad||{});
+  if(d.sp)spend=d.sp; if(d.cr)crew=d.cr; if(d.g)grp=d.g;
+  Object.assign(TS,d.ts||{});
+  return -1;
+ }
+ var n=0, inTS=d.ts||{};
+ n+=mergeMap(st,d.s,"s",inTS); n+=mergeMap(nt,d.n,"n",inTS);
+ n+=mergeMap(eat,d.e,"e",inTS); n+=mergeMap(idea,d.i,"i",inTS);
+ n+=mergeMap(plan,d.p,"p",inTS); n+=mergeMap(dnote,d.dn,"dn",inTS);
+ n+=mergeMap(pay,d.y,"y",inTS); n+=mergeMap(own,d.o,"o",inTS);
+ n+=mergeMap(shift,d.sh,"sh",inTS); n+=mergeMap(addr,d.ad,"ad",inTS);
+ /* expenses are an append-only log — union by id, newest wins per id */
+ if(d.sp&&d.sp.length){
+  var byId={}; spend.forEach(function(x){byId[x.id]=x});
+  d.sp.forEach(function(x){ if(!byId[x.id]||(x.at||0)>(byId[x.id].at||0)){byId[x.id]=x;n++} });
+  spend=Object.keys(byId).map(function(k){return byId[k]}).sort(function(a,b){return (a.at||0)-(b.at||0)});
+ }
+ if(d.cr&&d.cr.length){
+  d.cr.forEach(function(nm){if(crew.indexOf(nm)<0){crew.push(nm);n++}});
+ }
+ if(d.g&&d.g!==grp&&((inTS["g"]||0)>=(TS["g"]||0))){grp=d.g;n++}
+ return n;
+}
 function load(){try{var r=localStorage.getItem("vn2026a");if(r){var d=JSON.parse(r);applyState(d);
  if(d.t)document.documentElement.dataset.theme=d.t}}catch(e){}
  try{var m=location.hash.match(/[#&]s=([A-Za-z0-9_\-]+)/);
-  if(m){var inc=decode(m[1]); if(inc){applyState(inc);save();
+  if(m){var inc=decode(m[1]); if(inc){var n=applyState(inc,true);save();
    history.replaceState(null,"",location.pathname+location.search);
-   window.__synced=1}}}catch(e){}}
+   window.__synced=(n===0?"nothing new":n+" change"+(n===1?"":"s"))}}}catch(e){}}
 
 /* ---- share codes: state -> url-safe base64 ---- */
 function encode(o){
@@ -1632,7 +1848,7 @@ function days(){
      (open2?'<div class="inact">'+
         (B.l?B.l.map(function(l){return '<a href="'+l[1]+'" target="_blank" rel="noopener">'+EXT+l[0]+'</a>'}).join(''):'')+
         (B.tel?B.tel.map(function(t){return '<a href="tel:'+t[1]+'">'+PHN+t[0]+'</a>'}).join(''):'')+
-        (B.map?'<a href="https://www.google.com/maps/search/?api=1&query='+B.map[1]+'" target="_blank" rel="noopener">'+PIN+B.map[0]+'</a>':'')+
+        (B.map?'<button class="pl inl" data-pl="'+encodeURIComponent(B.map[0])+'" data-pq="'+B.map[1]+'">'+PIN+B.map[0]+'</button>':'')+
         '<a class="jb" href="#" data-jb="'+lid+'">'+CHV+'Open the booking</a>'+
       '</div>':'')+
      '</div>';
@@ -1641,12 +1857,13 @@ function days(){
   // ---- map row
   var pins=PINS[d.n]||[],org=BASE[d.c];
   var mapb='<div class="mapr"><span class="mlab">'+PIN+'Map</span>'+
-   pins.map(function(p){return '<a href="https://www.google.com/maps/search/?api=1&query='+p[1]+'" target="_blank" rel="noopener">'+p[0]+'</a>'}).join("")+
+   pins.map(function(p){return '<button class="pl" data-pl="'+encodeURIComponent(p[0])+'" data-pq="'+p[1]+'">'+p[0]+'</button>'}).join("")+
    (pins.length>1?'<a class="rt" href="https://www.google.com/maps/dir/?api=1&origin='+org+'&destination='+org+
      '&waypoints='+pins.map(function(p){return p[1]}).join("%7C")+'&travelmode=driving" target="_blank" rel="noopener">Route the whole day</a>':'')+
    '</div>';
 
   // ---- day note
+  var wa='<div class="wax"><button class="btn sec noic" data-wa="'+d.n+'">Copy this day for WhatsApp</button></div>';
   var dnb='<div class="dnote"><label>\ud83d\udcdd Notes for the day \u2014 what you spent, who paid, what to remember</label>'+
     '<textarea data-dn="'+d.n+'" placeholder="e.g. Harith paid the Cu Chi car, 1.6M. Everyone owes him 265K.">'+
     (dnote[d.n]||"").replace(/</g,"&lt;")+'</textarea></div>';
@@ -1655,7 +1872,7 @@ function days(){
   h+='<div class="day '+d.c+(dop[d.n]?" open":"")+(isT?" today":"")+'" data-d="'+d.n+'" id="day'+d.n+'">'+
    '<div class="dh" role="button" tabindex="0"><div class="dnum"><b>'+d.d+'</b><i>'+d.dow+'</i></div>'+
    '<div class="dt"><b>'+d.t+(isT?'<span class="tdy">Today</span>':'')+(pi?'<span class="tdy alt">'+d.alts[pi-1].label+'</span>':'')+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
-   '<div class="db"><div class="dbi"><div class="dbp">'+sw+meta+'<div class="tl">'+out+'</div>'+mapb+noteHTML(d.f)+dnb+'</div></div></div></div>';
+   '<div class="db"><div class="dbi"><div class="dbp">'+sw+meta+'<div class="tl">'+out+'</div>'+mapb+noteHTML(d.f)+wa+dnb+'</div></div></div></div>';
  });
  $("p-days").innerHTML=h;
  if(typeof reveal==="function")reveal("p-days",".day");
@@ -1668,7 +1885,7 @@ function days(){
   x.onclick=function(ev){ev.stopPropagation();
    var n=+x.dataset.pd,ix=+x.dataset.pi;
    if(ix)plan[n]=ix; else delete plan[n];
-   hap("commit");save();days();};
+   stamp("p."+n);hap("commit");save();days();};
  });
  $("p-days").querySelectorAll("[data-g]").forEach(function(x){
   x.onclick=function(ev){ev.stopPropagation();var n=x.dataset.g;gdet[n]=!gdet[n];days();};
@@ -1682,21 +1899,32 @@ function days(){
  $("p-days").querySelectorAll("[data-jb]").forEach(function(x){
   x.onclick=function(ev){ev.preventDefault();ev.stopPropagation();openBooking(x.dataset.jb)};
  });
+ $("p-days").querySelectorAll("[data-wa]").forEach(function(b){
+  b.onclick=function(e){e.stopPropagation();
+   var d=DAYS.filter(function(x){return x.n===+b.dataset.wa})[0];
+   copyText(dayText(d),"Today's plan");hap("commit");};
+ });
  $("p-days").querySelectorAll("[data-dn]").forEach(function(t){
   t.onclick=function(e){e.stopPropagation()};
-  t.oninput=function(){dnote[t.dataset.dn]=t.value;save()};
+  t.oninput=function(){dnote[t.dataset.dn]=t.value;stamp("dn."+t.dataset.dn);save()};
  });
  $("p-days").querySelectorAll("[data-add]").forEach(function(x){
   var go=function(ev){ if(ev)ev.stopPropagation();
    var id=x.dataset.add,dd=+x.dataset.d,tt=x.dataset.t;
    if(eat[id]&&eat[id].d===dd&&eat[id].t===tt) delete eat[id]; else eat[id]={d:dd,t:tt};
-   hap("commit");save();days();foodPane();tally();
+   stamp("e."+id);hap("commit");save();days();foodPane();tally();
   };
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
 }
 
+document.addEventListener("click",function(e){
+ var b=e.target.closest?e.target.closest(".pl"):null;
+ if(!b)return;
+ e.preventDefault();e.stopPropagation();
+ placeSheet(decodeURIComponent(b.dataset.pl||""), b.dataset.pq||"");
+});
 function goTab(p){var b=document.querySelector('#tabs button[data-p="'+p+'"]');if(b)b.click()}
 function openBooking(id){
  filt="all";
@@ -1723,7 +1951,7 @@ function acts(it){
   return '<a class="btn'+(l[2]?"":" sec")+'" href="'+l[1]+'" target="_blank" rel="noopener"><span>'+l[0]+'</span>'+ARR+'</a>'}).join("");
  if(it.tel)a+=it.tel.map(function(t){
   return '<a class="btn sec" href="tel:'+t[1]+'"><span>'+t[0]+'</span>'+TEL+'</a>'}).join("");
- if(it.map)a+='<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+it.map[1]+'" target="_blank" rel="noopener"><span>'+it.map[0]+'</span>'+MAP+'</a>';
+ if(it.map)a+='<button class="btn ghost pl" data-pl="'+encodeURIComponent(it.map[0])+'" data-pq="'+it.map[1]+'"><span>'+it.map[0]+'</span>'+MAP+'</button>';
  return a?'<div class="acts">'+a+'</div>':'<div class="none">Nothing to book — just turn up.</div>';
 }
 
@@ -1753,7 +1981,7 @@ function book(){
  if(typeof reveal==="function")setTimeout(function(){reveal("p-book",".it")},0);
  $("lst").innerHTML=h||'<div class="card"><p>Nothing here — try another filter.</p></div>';
  $("lst").querySelectorAll(".bx").forEach(function(b){
-  var go=function(e){if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];hap("commit");save();book()};
+  var go=function(e){if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];stamp("s."+b.dataset.c);hap("commit");save();book()};
   b.onclick=go;
   b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go(e)}};
  });
@@ -1767,7 +1995,7 @@ function book(){
  });
  $("lst").querySelectorAll("textarea").forEach(function(t){
   t.onclick=function(e){e.stopPropagation()};
-  t.oninput=function(){nt[t.dataset.n]=t.value;save()}});
+  t.oninput=function(){nt[t.dataset.n]=t.value;stamp("n."+t.dataset.n);save()}});
  tally();
 }
 
@@ -1816,7 +2044,7 @@ function foodPane(){
     '<div class="acts">'+
       (E.url?'<a class="btn sec" href="'+E.url+'" target="_blank" rel="noopener"><span>Website</span>'+ARR+'</a>':'')+
       (E.tel?'<a class="btn sec" href="tel:'+E.tel+'"><span>Call</span>'+TEL+'</a>':'')+
-      '<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query='+E.map+'" target="_blank" rel="noopener"><span>Map</span>'+MAP+'</a>'+
+      '<button class="btn ghost pl" data-pl="'+encodeURIComponent(E.name)+'" data-pq="'+E.map+'"><span>Map</span>'+MAP+'</button>'+
     '</div></div>';
   });
  });
@@ -1827,7 +2055,7 @@ function foodPane(){
    var id=b.dataset.e,d=+b.dataset.d,t=b.dataset.t;
    if(eat[id]&&eat[id].d===d&&eat[id].t===t) delete eat[id];
    else eat[id]={d:d,t:t};
-   hap("commit");save();foodPane();days();tally();
+   stamp("e."+id);hap("commit");save();foodPane();days();tally();
   };
  });
 }
@@ -1858,7 +2086,7 @@ function ideaPane(){
   b.onclick=function(){
    var i=b.dataset.i,v=b.dataset.v;
    if(idea[i]===v) delete idea[i]; else idea[i]=v;
-   hap("select");save();ideaPane();tally();
+   stamp("i."+i);hap("select");save();ideaPane();tally();
   };
  });
 }
@@ -1909,19 +2137,20 @@ function budget(){
  $("budget").innerHTML=h;
  if(typeof reveal==="function")reveal("p-book",".bsec");
  $("budget").querySelectorAll("[data-p]").forEach(function(b){
-  b.onclick=function(){var k=b.dataset.p;if(pay[k])delete pay[k];else pay[k]=1;hap("commit");save();budget()}});
+  b.onclick=function(){var k=b.dataset.p;if(pay[k])delete pay[k];else pay[k]=1;stamp("y."+k);hap("commit");save();budget()}});
  $("budget").querySelectorAll("[data-gs]").forEach(function(b){
-  b.onclick=function(){grp=Math.max(1,Math.min(20,grp+ +b.dataset.gs));hap("select");save();budget()}});
+  b.onclick=function(){grp=Math.max(1,Math.min(20,grp+ +b.dataset.gs));stamp("g");hap("select");save();budget()}});
 }
 
 function sharePane(){
  var el=$("sharebox"); if(!el)return;
- el.innerHTML='<p class="shp">Everything you tick lives on this phone only. To hand your version to the group, copy the link below and send it. Whoever opens it gets your ticks, food picks, plans, votes and notes — it overwrites theirs, so agree who keeps the master copy.</p>'+
+ el.innerHTML='<p class="shp">Everything you tick lives on this phone. Send this link to the group and their copy <b>merges</b> with yours \u2014 newest edit per item wins, so two people can both tick things and nothing gets lost. Send it again whenever you have done a few.</p>'+
   '<div class="acts"><button class="btn noic" id="cplink">Copy share link</button>'+
   '<button class="btn sec noic" id="cpcode">Copy code only</button></div>'+
   '<label class="shl">Paste someone else’s code here</label>'+
   '<textarea id="inbox" placeholder="Paste the code, then press Apply"></textarea>'+
-  '<div class="acts"><button class="btn sec noic" id="applyc">Apply</button></div>'+
+  '<div class="acts"><button class="btn sec noic" id="applyc">Merge it in</button></div>'+
+  '<div class="acts" style="margin-top:16px"><button class="btn ghost noic" id="icsb">Add the fixed points to my calendar</button></div>'+
   '<div class="shmsg" id="shmsg"></div>';
  function msg(t,ok){var m=$("shmsg");m.textContent=t;m.className="shmsg show "+(ok?"g":"r");
   setTimeout(function(){m.className="shmsg"},4000)}
@@ -1937,13 +2166,323 @@ function sharePane(){
  }
  $("cplink").onclick=function(){copy(shareLink(),"Link")};
  $("cpcode").onclick=function(){copy(shareCode(),"Code")};
+ var ib=$("icsb"); if(ib)ib.onclick=downloadICS;
  $("applyc").onclick=function(){
   var v=$("inbox").value.trim();
   var m2=v.match(/[#&]s=([A-Za-z0-9_\-]+)/); if(m2)v=m2[1];
   var d=decode(v);
   if(!d||typeof d!=="object"){msg("That code didn’t read. Copy the whole thing.",0);return}
-  applyState(d);save();days();book();foodPane();ideaPane();budget();tally();
-  msg("Applied. Everything is now in sync with that code.",1);
+  var n=applyState(d,true);save();days();book();foodPane();ideaPane();budget();spendPane();sosPane();addrPane();tally();
+  msg(n===0?"Already in sync \u2014 nothing new in that code.":("Merged. "+n+" change"+(n===1?"":"s")+" came across."),1);
+ };
+}
+
+/* ================= TOOLS ================= */
+/* map query -> Vietnamese address, so every pin works with no signal */
+var VNLOOK=(function(){
+ var m={};
+ VNA.forEach(function(c){c.v.forEach(function(a){ if(a[1])m[a[0].toLowerCase()]=a[1] })});
+ var alias={
+  "hoai river, hoi an":"an hoi bridge (boats)","hoai river boats":"an hoi bridge (boats)",
+  "hoai river":"an hoi bridge (boats)","hoi an old town":"hoi an old town",
+  "cu chi — ben duoc":"cu chi — bến dược","cu chi - ben duoc":"cu chi — bến dược",
+  "ben duoc":"cu chi — bến dược","banh mi phuong":"bánh mì phượng",
+  "2 ladies kitchen":"2 ladies kitchen","miss nhi":"miss nhi","hai van pass":"hai van pass",
+  "sun world ba na hills":"ba na hills","ba na hills":"ba na hills",
+  "golden bridge":"ba na hills","marble mountains":"marble mountain",
+  "cu chi — bến dược":"cu chi — bến dược","cu chi tunnels":"cu chi — bến dược",
+  "war remnants museum":"war remnants museum","independence palace":"independence palace",
+  "ben thanh market":"ben thanh market","ban thanh market":"ben thanh market",
+  "bui vien street":"bui vien street","dragon bridge":"dragon bridge",
+  "sky36":"sky36","han river pier":"han river pier","my khe beach":"my khe beach",
+  "han market":"han market","da nang airport":"da nang airport",
+  "tan son nhat t2":"tan son nhat — international","tan son nhat":"tan son nhat — international",
+  "bay mau coconut forest":"bay mau coconut forest","the duck stop":"the duck stop",
+  "duck stop":"the duck stop","son tra / lady buddha":"son tra / lady buddha",
+  "japanese bridge":"hoi an old town","tailor":"tailors (trần phú)",
+  "hoi an, hoi an":"hoi an old town","an thuong bars":"my khe beach",
+  "district 1":"ben thanh market","saigon square":"ben thanh market",
+  "central post office":"independence palace","notre-dame":"independence palace",
+  "thìa gỗ":"thìa gỗ","missteak":"missteak",
+  "bánh mì huỳnh hoa":"bánh mì huỳnh hoa","phở việt nam":"phở việt nam",
+  "hoi an, quang nam":"hoi an old town"
+ };
+ return function(label){
+  if(!label)return "";
+  var L=String(label).toLowerCase().trim();
+  if(m[L])return m[L];
+  var a=alias[L]; if(a&&m[a])return m[a];
+  var hit="";
+  Object.keys(m).forEach(function(k){ if(!hit && (L.indexOf(k)>-1||k.indexOf(L)>-1)) hit=m[k] });
+  if(!hit)Object.keys(alias).forEach(function(k){ if(!hit && L.indexOf(k)>-1 && m[alias[k]]) hit=m[alias[k]] });
+  return hit;
+ };
+})();
+function placeSheet(label,query){
+ var vn=VNLOOK(label)||VNLOOK(String(query||"").replace(/\+/g," "));
+ driverCard(label, vn||label, query||label);
+}
+
+function copyText(t,label){
+ function done(ok){ toast(ok?(label+" copied — paste it into the group chat."):"Copy failed. Long-press to select instead.",ok) }
+ if(navigator.clipboard&&navigator.clipboard.writeText){
+  navigator.clipboard.writeText(t).then(function(){done(1)},function(){fb()});
+ } else fb();
+ function fb(){var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity=0;
+  document.body.appendChild(ta);ta.select();
+  var ok=false;try{ok=document.execCommand("copy")}catch(e){}
+  document.body.removeChild(ta);done(ok)}
+}
+function toast(msg,ok){
+ var old=document.querySelector(".toast");if(old)old.remove();
+ var b=document.createElement("div");b.className="toast"+(ok?"":" bad");b.textContent=msg;
+ document.body.appendChild(b);requestAnimationFrame(function(){b.classList.add("go")});
+ setTimeout(function(){b.classList.remove("go");setTimeout(function(){b.remove()},400)},4200);
+}
+
+/* ---- time shift: the flight is late, move the rest of the day ---- */
+function shiftOf(n){return +(shift[n]||0)}
+function addMin(t,m){
+ if(!/^\d\d:\d\d$/.test(t))return t;
+ var v=(+t.slice(0,2))*60+(+t.slice(3,5))+m;
+ v=((v%1440)+1440)%1440;
+ return String(Math.floor(v/60)).padStart(2,"0")+":"+String(v%60).padStart(2,"0");
+}
+
+/* ---- plain-text day, for WhatsApp ---- */
+function dayText(d){
+ var pi=d.alts?(plan[d.n]||0):0, EV=pi?d.alts[pi-1].e:d.e, off=shiftOf(d.n);
+ var L=[];
+ L.push(d.t.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu,"").trim()+" — "+d.dow+" "+d.d);
+ if(pi)L.push("Plan: "+d.alts[pi-1].label);
+ if(off)L.push("Running "+(off>0?off+" min late":Math.abs(off)+" min early")+" — times below already adjusted");
+ L.push("");
+ EV.forEach(function(e){
+  if(e[0]==="g"){L.push("   ~"+e[1]+" "+(e[2]==="walk"?"walk":"drive")+(e[3]?" ("+e[3].split("\u00b7")[0].trim()+")":""));return}
+  var note=(e[3]&&e[3]!=="key")?e[3]:((e[2]&&e[2]!=="key")?e[2]:"");
+  L.push(addMin(e[0],off)+"  "+e[1]+(note?" — "+note.replace(/<[^>]+>/g,""):""));
+ });
+ EATS.forEach(function(E){var p=eat[E.id];if(p&&p.d===d.n)L.push(addMin(p.t,off)+"  \ud83c\udf7d "+E.name+" ("+E.spend+")")});
+ var mine=BOOK.reduce(function(a,g){return a.concat(g.items)},[]).filter(function(it){
+   var D=dayForBooking(it.id);return D&&D.n===d.n&&!st[it.id]});
+ if(mine.length){L.push("");L.push("Still not booked: "+mine.map(function(x){return x.t.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu,"").trim()}).join(", "))}
+ L.push("");L.push(location.origin+location.pathname);
+ return L.join("\n");
+}
+
+/* ---- calendar: the fixed points, as .ics ---- */
+function icsDate(dayN,hhmm){
+ var d=tripDate(dayN), p=hhmm.split(":");
+ var dt=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate(),+p[0],+p[1]));
+ dt.setUTCMinutes(dt.getUTCMinutes()-420);           /* Vietnam is UTC+7 */
+ return dt.toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
+}
+function buildICS(){
+ var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//VT-AW-2026//EN","CALSCALE:GREGORIAN"];
+ var n=0;
+ DAYS.forEach(function(d){
+  var pi=d.alts?(plan[d.n]||0):0, EV=pi?d.alts[pi-1].e:d.e, off=shiftOf(d.n);
+  EV.forEach(function(e){
+   var key=e[3]==="key"||e[2]==="key";
+   if(e[0]==="g"||!key)return;
+   var t=addMin(e[0],off);
+   var note=(e[3]&&e[3]!=="key")?e[3]:((e[2]&&e[2]!=="key")?e[2]:"");
+   n++;
+   L.push("BEGIN:VEVENT","UID:vtaw"+d.n+"-"+n+"@vt-aw-2026",
+    "DTSTAMP:"+icsDate(1,"09:00"),
+    "DTSTART:"+icsDate(d.n,t),"DTEND:"+icsDate(d.n,addMin(t,60)),
+    "SUMMARY:"+e[1].replace(/[,;]/g," "),
+    "DESCRIPTION:"+String(note).replace(/<[^>]+>/g,"").replace(/[,;]/g," "),
+    "END:VEVENT");
+  });
+ });
+ L.push("END:VCALENDAR");
+ return L.join("\r\n");
+}
+function downloadICS(){
+ var blob=new Blob([buildICS()],{type:"text/calendar;charset=utf-8"});
+ var a=document.createElement("a");a.href=URL.createObjectURL(blob);
+ a.download="VT-AW-2026.ics";document.body.appendChild(a);a.click();
+ setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},800);
+ toast("Calendar downloaded — open it to add the fixed points to your phone.",1);
+}
+
+/* ---- show the driver ---- */
+var drvOpen=null;
+/* A place sheet that is useful with ZERO signal: the Vietnamese address is in the
+   cached page, so it renders offline. geo: hands it to whatever offline map app
+   they have; the Google link is the online path. */
+function driverCard(label,vn,q){
+ if(drvOpen)drvOpen();
+ var geo="geo:0,0?q="+encodeURIComponent(vn||label);
+ var gmap="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q||vn||label);
+ var w=document.createElement("div");w.className="drv";
+ w.innerHTML='<div class="drvi" role="dialog" aria-label="'+label+'">'+
+  '<div class="drvl">Hold this up to the driver</div>'+
+  '<div class="drvt">'+(vn||label)+'</div>'+
+  '<div class="drvs">'+label+'</div>'+
+  '<div class="drvb">'+
+   '<a class="btn noic" href="'+geo+'">Open in a map app</a>'+
+   '<button class="btn sec noic" id="drvc">Copy address</button>'+
+   '<a class="btn ghost noic" href="'+gmap+'" target="_blank" rel="noopener">Google Maps</a>'+
+  '</div>'+
+  '<p class="drvn">The address above needs no signal — it is stored in the app. <b>Open in a map app</b> will use your offline maps if you downloaded them.</p>'+
+  '<button class="btn ghost noic wide" id="drvx">Close</button></div>';
+ document.body.appendChild(w);requestAnimationFrame(function(){w.classList.add("go")});
+ var close=function(){w.classList.remove("go");setTimeout(function(){w.remove();drvOpen=null},320)};
+ w.querySelector("#drvx").onclick=close;
+ w.querySelector("#drvc").onclick=function(){copyText(vn||label,"Address")};
+ w.onclick=function(e){if(e.target===w)close()};
+ drvOpen=close;
+}
+function sosPane(){
+ var el=$("sosbox"); if(!el)return;
+ var h='<p class="shp">Vietnamese emergency lines are free from any phone, including one with no credit. Operators may not speak much English — say the district first, then the street, slowly.</p>';
+ SOS.forEach(function(g){
+  h+='<div class="sosg"><h4>'+g.g+'</h4>';
+  g.items.forEach(function(i){
+   h+='<div class="sosr">'+
+    '<div class="sost"><b>'+i.t+'</b><p>'+i.w+'</p></div>'+
+    '<div class="sosa"><a class="btn noic sos" href="tel:'+i.n+'">'+i.n.replace(/^\+84/,"+84 ")+'</a>'+
+     (i.vn?'<button class="btn sec noic tiny" data-vn="'+encodeURIComponent(i.vn)+'" data-vl="'+i.t+'" data-mq="'+(i.map||'')+'">Show driver</button>':'')+
+     (i.map?'<a class="btn ghost noic tiny" href="https://www.google.com/maps/search/?api=1&query='+i.map+'" target="_blank" rel="noopener">Map</a>':'')+
+    '</div></div>';
+  });
+  h+='</div>';
+ });
+ h+='<div class="sosg"><h4>Lost passport — in order</h4><ol class="soso">'+
+   SOSSTEPS.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ol></div>';
+ h+='<div class="sosg"><h4>Your own details</h4>'+
+   '<label class="shl">Insurance policy numbers, emergency contacts, anything you would want at 3am</label>'+
+   '<textarea id="sosnote" placeholder="e.g. Aki — AXA 88-2231-114, +44 7700 900123 (mum). Harith — Allianz 55-9087."></textarea>'+
+   '<p class="bdis">Saved on this phone and carried in your share link. Fill it in before you fly.</p></div>';
+ el.innerHTML=h;
+ el.querySelectorAll("[data-vn]").forEach(function(b){
+  b.onclick=function(){driverCard(b.dataset.vl,decodeURIComponent(b.dataset.vn),b.dataset.mq||'')}});
+ var ta=el.querySelector("#sosnote");
+ ta.value=addr["_sos"]||"";
+ ta.oninput=function(){addr["_sos"]=ta.value;stamp("ad._sos");save()};
+}
+
+function addrPane(){
+ var el=$("addrbox"); if(!el)return;
+ var h='<p class="shp">Vietnamese drivers often cannot read English addresses, and Grab pins drift. Tap a place and hold the phone up.</p>';
+ VNA.forEach(function(c){
+  h+='<div class="sosg"><h4>'+c.k+'</h4><div class="vgrid">';
+  c.v.forEach(function(a,i){
+   var key=c.k+"|"+i, custom=addr[key]||"";
+   var vn=a[1]||custom;
+   h+='<button class="vch'+(a[2]&&!custom?" need":"")+'" data-vk="'+key+'" data-vl="'+a[0]+'" data-vn="'+encodeURIComponent(vn)+'" data-edit="'+(a[2]?1:0)+'">'+
+     a[0]+(a[2]&&!custom?'<i>tap to add</i>':'')+'</button>';
+  });
+  h+='</div></div>';
+ });
+ el.innerHTML=h;
+ el.querySelectorAll("[data-vk]").forEach(function(b){
+  b.onclick=function(){
+   var vn=decodeURIComponent(b.dataset.vn);
+   if(b.dataset.edit==="1"){
+    var cur=addr[b.dataset.vk]||"";
+    var v=prompt("Paste the Vietnamese address for "+b.dataset.vl+"\n(copy it from the booking confirmation)",cur);
+    if(v!==null){addr[b.dataset.vk]=v.trim();stamp("ad."+b.dataset.vk);save();addrPane();
+      if(v.trim())driverCard(b.dataset.vl,v.trim())}
+    return;
+   }
+   if(!vn){toast("No address saved for that one yet.",0);return}
+   driverCard(b.dataset.vl,vn);
+  };
+ });
+}
+
+/* ---- who paid what ---- */
+function money(v){return fmtV(Math.round(v))}
+function crewNames(){ return crew.length?crew:["You","Harith","3","4","5","6"].slice(0,grp) }
+function spendPane(){
+ var el=$("spendbox"); if(!el)return;
+ var names=crewNames();
+ var h='<div class="crewrow"><span class="shl" style="margin:0">Who is on the trip</span>'+
+   '<div class="crewl">'+names.map(function(n,i){
+     return '<button class="vch" data-cn="'+i+'">'+n+'</button>'}).join("")+
+   '<button class="vch add" data-cadd="1">+ add</button></div></div>';
+ h+='<div class="acts"><button class="btn noic" id="addsp">Log a payment</button></div>';
+ if(!spend.length){
+  h+='<div class="none">Nothing logged yet. Every time someone pays for the group — the Cu Chi car, a dinner, the lantern boats — log it here and the maths at the end is done for you.</div>';
+ }else{
+  h+='<div class="splist">'+spend.slice().reverse().map(function(x){
+   return '<div class="sprow"><div class="spt"><b>'+x.w+'</b>'+
+     '<span>'+x.by+' paid \u00b7 split '+(x.n||names.length)+' ways</span></div>'+
+     '<div class="spv">'+money(x.v)+'<i>'+money(x.v/(x.n||names.length))+' each</i></div>'+
+     '<button class="spx" data-del="'+x.id+'" aria-label="Delete">\u00d7</button></div>';
+  }).join("")+'</div>';
+  /* settle up */
+  var paid={},total=0;
+  names.forEach(function(n){paid[n]=0});
+  spend.forEach(function(x){paid[x.by]=(paid[x.by]||0)+x.v;total+=x.v});
+  var share=total/names.length;
+  var bal=names.map(function(n){return {n:n,b:(paid[n]||0)-share}}).sort(function(a,b){return a.b-b.b});
+  var owe=bal.filter(function(x){return x.b<-1000}).map(function(x){return {n:x.n,b:-x.b}});
+  var get=bal.filter(function(x){return x.b>1000}).map(function(x){return {n:x.n,b:x.b}});
+  var moves=[],gi=0;
+  owe.forEach(function(o){
+   var left=o.b;
+   while(left>1000&&gi<get.length){
+    var take=Math.min(left,get[gi].b);
+    if(take>1000)moves.push(o.n+" \u2192 "+get[gi].n+"  "+money(take));
+    left-=take;get[gi].b-=take;
+    if(get[gi].b<=1000)gi++;
+   }
+  });
+  h+='<div class="btot"><div class="core">'+
+    '<div class="btr"><span>Spent for the group</span><b>'+money(total)+'</b><i>'+fmtR(total)+'</i></div>'+
+    '<div class="btr big"><span>Fair share each</span><b>'+money(share)+'</b><i>'+fmtR(share)+'</i></div>'+
+    (moves.length?'<div class="setl"><h5>Settle up</h5>'+moves.map(function(m){return '<div class="setr">'+m+'</div>'}).join("")+'</div>'
+      :'<div class="setl"><h5>Settle up</h5><div class="setr">All square.</div></div>')+
+   '</div></div>'+
+   '<div class="acts"><button class="btn sec noic" id="cpsp">Copy the settle-up</button></div>';
+ }
+ el.innerHTML=h;
+ $("addsp").onclick=function(){
+  var names=crewNames();
+  var w=prompt("What was it? (e.g. Cu Chi car, dinner at Missteak)");
+  if(!w)return;
+  var raw=prompt("How much, in dong? You can write 1.6m or 450k","");
+  if(!raw)return;
+  var v=String(raw).trim().toLowerCase().replace(/[, ₫]/g,"");
+  var mul=/m$/.test(v)?1e6:/k$/.test(v)?1e3:1;
+  v=parseFloat(v)*mul;
+  if(!isFinite(v)||v<=0){toast("Could not read that amount.",0);return}
+  var by=prompt("Who paid?\n"+names.map(function(n,i){return (i+1)+". "+n}).join("\n"),"1");
+  var idx=parseInt(by,10);
+  var who=(idx>=1&&idx<=names.length)?names[idx-1]:(by||names[0]);
+  spend.push({id:"e"+Date.now()+Math.floor(Math.random()*1000),w:w,v:v,by:who,n:names.length,at:Date.now()});
+  hap("commit");save();spendPane();
+ };
+ var cp=$("cpsp");
+ if(cp)cp.onclick=function(){
+  var names=crewNames(),paid={},total=0;
+  names.forEach(function(n){paid[n]=0});
+  spend.forEach(function(x){paid[x.by]=(paid[x.by]||0)+x.v;total+=x.v});
+  var share=total/names.length;
+  var L=["Vietnam \u2014 who owes what","","Total spent for the group: "+money(total),"Fair share each: "+money(share),""];
+  names.forEach(function(n){var b=(paid[n]||0)-share;
+   L.push(n+": paid "+money(paid[n]||0)+" \u2192 "+(b>=0?"is owed "+money(b):"owes "+money(-b)))});
+  copyText(L.join("\n"),"Settle-up");
+ };
+ el.querySelectorAll("[data-del]").forEach(function(b){
+  b.onclick=function(){spend=spend.filter(function(x){return x.id!==b.dataset.del});save();spendPane()}});
+ el.querySelectorAll("[data-cn]").forEach(function(b){
+  b.onclick=function(){
+   var names=crewNames(),i=+b.dataset.cn;
+   var v=prompt("Name",names[i]);
+   if(v===null)return;
+   var c=names.slice(); c[i]=v.trim()||c[i]; crew=c; grp=c.length; stamp("g"); save(); spendPane(); budget();
+  }});
+ var ad=el.querySelector("[data-cadd]");
+ if(ad)ad.onclick=function(){
+  var c=crewNames().slice();
+  var v=prompt("Name of the person to add");
+  if(!v)return;
+  c.push(v.trim()); crew=c; grp=c.length; stamp("g"); save(); spendPane(); budget();
  };
 }
 
@@ -1979,11 +2518,21 @@ document.querySelectorAll(".segs button").forEach(function(b){
   document.querySelectorAll(".segs button").forEach(function(x){x.classList.remove("on")});
   b.classList.add("on");filt=b.dataset.f;book()}});
 $("reset").onclick=function(){for(var k in st)delete st[k];save();book()};
+function themeHint(){
+ var el=document.documentElement, cur=el.dataset.theme;
+ var isDark = cur==="dark" || (cur==="auto" && matchMedia("(prefers-color-scheme:dark)").matches);
+ var h=$("tth"); if(!h)return;
+ h.textContent = isDark ? "light mode" : "dark mode";
+ h.classList.toggle("used", !!localStorage.getItem("vn2026thm"));
+}
 $("tt").onclick=function(){
  var el=document.documentElement, cur=el.dataset.theme;
  var isDark = cur==="dark" || (cur==="auto" && matchMedia("(prefers-color-scheme:dark)").matches);
  el.dataset.theme = isDark ? "light" : "dark";
- save();
+ try{localStorage.setItem("vn2026thm","1")}catch(e){}
+ var m=document.querySelector('meta[name="theme-color"]');
+ if(m)m.setAttribute("content", isDark ? "#f5f5f7" : "#000000");
+ themeHint(); hap("select"); save();
 };
 
 
@@ -2221,7 +2770,7 @@ function reveal(paneId,sel){
  });
 }
 
-load();days();book();foodPane();ideaPane();info();countdown();budget();sharePane();
+load();days();book();foodPane();ideaPane();info();countdown();budget();sharePane();sosPane();addrPane();spendPane();themeHint();
 
 /* open on today once the trip has started */
 (function(){var n=todayN();
