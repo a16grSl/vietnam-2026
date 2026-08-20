@@ -8,9 +8,16 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>VT-AW-2026</title>
 <style>
+@font-face{
+ font-family:"Geist";
+ src:url("geist.woff2") format("woff2-variations"),url("geist.woff2") format("woff2");
+ font-weight:100 900;
+ font-style:normal;
+ font-display:swap;
+}
 /* ================= TOKENS ================= */
 :root{
-  --f: "Helvetica Neue", Helvetica, Arial, "Nimbus Sans", sans-serif;
+  --f: "Geist", "Helvetica Neue", Helvetica, "Nimbus Sans", system-ui, sans-serif;
   --r-sm:11px; --r:16px; --r-lg:22px; --r-xl:28px; --r-2xl:32px;
   --bz:5px;                       /* bezel tray padding — inner radius = outer - bz */
   --z-nav:70; --z-toast:90; --z-grain:5;
@@ -75,7 +82,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.47 var(--f);
- letter-spacing:-.011em;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;text-rendering:optimizeLegibility;
+ letter-spacing:-.004em;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;text-rendering:optimizeLegibility;
  padding-bottom:var(--s7);
  transition:background .35s var(--ease),color .35s var(--ease)}
 ::selection{background:var(--acc);color:#fff}
@@ -133,7 +140,7 @@ h1{margin:0 0 var(--s3);font-size:46px;line-height:1.05;letter-spacing:-.035em;f
 h1 .l2{display:block;background:linear-gradient(96deg,var(--c1),var(--c2) 42%,var(--c3) 72%,var(--c4));
  -webkit-background-clip:text;background-clip:text;color:transparent;
  -webkit-text-fill-color:transparent;padding-bottom:.06em}
-.sub{margin:0;color:var(--mut);font-size:19px;line-height:1.42;letter-spacing:-.015em;max-width:30ch}
+.sub{margin:0;color:var(--mut);font-size:19px;line-height:1.4;letter-spacing:-.012em;max-width:30ch}
 .stats{display:flex;gap:var(--s2);margin-top:var(--s6);flex-wrap:wrap}
 .stat{flex:1 1 0;min-width:96px;position:relative}
 .stat .core{position:relative;overflow:hidden}
@@ -615,6 +622,42 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 .card{padding:calc(var(--s5) + var(--bz)) calc(var(--s4) + var(--bz))}
 .day,.it{padding:var(--bz)}
 .eatc>*,.idc>*,.card>*,.day>*,.it>*{position:relative;z-index:1}
+
+/* ---- booking row affordance ---- */
+.ih{align-items:flex-start}
+.ichev{align-self:center}
+.ichev{color:var(--dim);flex:0 0 auto;align-self:center;
+ transition:transform .38s var(--ease),color .3s var(--ease)}
+.ichev svg{width:17px;height:17px;display:block}
+.it.open .ichev{transform:rotate(90deg);color:var(--acc)}
+.more{display:inline-flex;align-items:center;gap:4px;margin-top:7px;
+ font-size:11.5px;font-weight:650;letter-spacing:.01em;color:var(--acctx);
+ background-color:var(--accbg);padding:4px 6px 4px 10px;border-radius:99px;
+ transition:.25s var(--ease)}
+.more svg{width:11px;height:11px;transition:transform .38s var(--ease)}
+.it.open .more{background-color:var(--line2);color:var(--ink2)}
+.it.open .more svg{transform:rotate(90deg)}
+.it.done .more{opacity:.7}
+.itx:active .more{transform:scale(.97)}
+
+/* ---- how-to strip ---- */
+.howto{display:grid;grid-template-columns:auto 1fr;gap:9px 11px;align-items:start;
+ margin:0 0 var(--s4);padding:calc(var(--s4) + var(--bz));
+ background:var(--bezel);border:.5px solid var(--bzline);
+ border-radius:calc(var(--r) + var(--bz));position:relative}
+.howto:before{content:"";position:absolute;inset:var(--bz);z-index:0;
+ border-radius:var(--r);background-color:var(--surf);
+ background-image:linear-gradient(180deg,var(--surf),var(--surf2));
+ box-shadow:inset 0 1px 0 var(--inhi)}
+.howto>*{position:relative;z-index:1}
+.howto p{margin:0;font-size:13.5px;line-height:1.45;color:var(--mut);letter-spacing:-.008em}
+.howto p b{color:var(--ink2);font-weight:600}
+.hi{width:19px;height:19px;border-radius:50%;flex:0 0 auto;margin-top:1px;
+ display:flex;align-items:center;justify-content:center;
+ font-size:10.5px;font-weight:700;background-color:var(--accbg);color:var(--acctx)}
+/* ---- Geist tabular figures where numbers must align ---- */
+.tm,.dnum b,.stat .core b,.mcv,.mcv.rs,.bv,.bv span,.btr b,.btr i,.pct,.big,.dur,.mp{
+ font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
 /* ---- ideas ---- */
 .idc{margin-bottom:var(--s3);box-shadow:var(--shadow);transition:.25s var(--ease)}
 .idt{font-size:17px;font-weight:620;letter-spacing:-.025em;margin-bottom:7px;line-height:1.3}
@@ -764,6 +807,7 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="preload" href="geist.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0071e3">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -811,6 +855,10 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <div class="bar"><div class="fill" id="fl"></div></div>
       <div class="pmsg r" id="pu"><i></i><span id="put"></span></div>
       <div class="pmsg g" id="pa"><i></i><span>All booked. Nothing left to chase.</span></div>
+    </div>
+    <div class="howto">
+      <span class="hi">1</span><p><b>Tick the circle</b> when something is actually booked.</p>
+      <span class="hi">2</span><p><b>Tap the row</b> to open prices, booking links, phone numbers and a notes box.</p>
     </div>
     <div class="segs">
       <button class="on" data-f="all">All</button>
@@ -867,7 +915,7 @@ const DAYS=[
  ["15:45","Drop bags, quick refresh","Allow 30–45 min"],
  ["g","45 min","car","Villa → Hoi An · 23km coastal road · Grab ~330K ₫"],
  ["17:15","Arrive Hoi An old town","key","Cars are barred from the old town 15:00–21:30 — get dropped at the An Hoi bridge and walk in"],
- ["17:30","Lantern boat on the Hoai River","key","15 min on the water · 170K ₫ for 1–3"],
+ ["17:30","Lantern boat on the Hoai River","key","15–20 min on the water · two boats for six · 150–220K ₫ each"],
  ["18:15","Tailor — give measurements","key","Do this tonight or the suit won't make Friday. Ask for a Thursday interim fitting while you're there."],
  ["19:15","Walk the old town","Japanese Bridge, museums, lantern streets"],
  ["20:30","Night food market","Cao lầu, white rose dumplings, banh mi Phuong"],
@@ -930,9 +978,9 @@ const DAYS=[
  e:[
  ["06:45","Up and out",""],
  ["g","38 min","car","Villa → Cẩm Thanh coconut forest · 22km"],
- ["07:45","Bay Mau basket boats","100K ₫ all-in · cool light, no crowds yet"],
+ ["07:45","Bay Mau basket boats","90–100K ₫ a head all-in · agree the total before you board"],
  ["g","14 min","car","Cẩm Thanh → The Duck Stop · 6.5km"],
- ["09:15","The Duck Stop","100K ₫ · closed 12–1 for the ducks' rest"],
+ ["09:15","The Duck Stop","100K ₫ · open 08:30–17:00 · closed 12–1 for the ducks' rest"],
  ["g","11 min","car","Duck Stop → old town · 4.2km"],
  ["10:45","Collect the tailoring","key","Try everything on in the shop \u2014 leave an hour for alterations"],
  ["12:00","Lunch in the old town",""],
@@ -1131,8 +1179,8 @@ const EATS=[
 const BOOK=[
 {g:"Da Nang & Hoi An",items:[
 {id:"tailor",p:"now",t:"🧵 Book a Hoi An tailor",w:"Measure Wed 26th → collect Fri 28th",
- r:[["Turnaround","Two clear days is the minimum. Confirm the Friday collection <b>before</b> paying a deposit."],
-    ["Cost","A Dong from US$150, wool US$250–400 · Kimmy from US$180 · Bebe US$200–250 · Yaly US$250–400. Shirts US$25–40."],
+ r:[["Turnaround","A Dong says 24–48 hrs is possible but <b>prefers 2–3 days.</b> Two clear days is the floor, not a comfortable schedule. Confirm the Friday collection before paying a deposit."],
+    ["Cost","A Dong from US$150, wool US$250–400 · Kimmy from US$180 · Bebe US$200–250 · Yaly US$250–400. Shirts US$25–40. <b>Price bands, not quotes</b> — the cloth decides."],
     ["Second fitting","A Dong and Bebe publish a fitting as part of the standard process at no extra charge. Ask for the Thursday slot when you give measurements."],
     ["Holiday staffing","No shop has published National Day hours. With a five-day break and a tight turnaround, <b>ring before the cloth is cut.</b>"],
     ["Tip","Email measurements ahead and they'll have something cut when you arrive."],
@@ -1143,7 +1191,7 @@ const BOOK=[
  f:{hot:1,b:"No slack in this one",x:"Measurements must happen Wednesday for a Friday collection. Skip the fitting and there is no suit."}},
 
 {id:"dragon",p:"now",t:"🐉 Table for the Dragon Bridge show",w:"Friday 28 Aug, 9pm",
- r:[["Show","Fri, Sat, Sun at 21:00 · fire then water · about 15 min"],
+ r:[["Cost","No cover charge at any of the four rooftops — you pay for drinks. Budget <b>300–500K ₫ a head.</b> Estimate, not a quote."],["Show","Fri, Sat, Sun at 21:00 · fire then water · about 15 min"],
     ["Arrive by","20:45 — the bridge shuts to traffic 20:45–21:25"],
     ["NYX Sky Lounge","21F HAIAN Riverfront, 182 Bach Dang · 16:30–24:00"],
     ["Top View Bar","19F Vanda Hotel, 3 Nguyen Van Linh · 16:00–23:00"],
@@ -1220,12 +1268,14 @@ const BOOK=[
  map:["Da Nang airport","Da+Nang+International+Airport"]},
 
 {id:"lantern",p:"walk",t:"🏮 Lantern boat, Hoi An",w:"Wednesday 26 Aug, from sunset",
- r:[["Price","170K ₫ for 1–3 · 220K ₫ for 4–5"],
+ r:[["Price","150–170K ₫ for 1–3 · 200–220K ₫ for 4–5, <b>per boat</b>"],
+    ["Six people = two boats","The bigger boats cap at 4–5. Budget for two, and decide who goes with whom before you are standing at the booth."],
     ["Where","Six booths along the Hoai River — Japanese Bridge, An Hoi Bridge, night market"],
-    ["Runs","Sunset (~18:05) to 21:30–22:00 · ride is about 15 min"],
+    ["Runs","Sunset (18:02) to 21:30–22:00 · ride is about 15–20 min"],
     ["Payment","Cash in dong at the booth"]],
+ l:[["Online sellers do exist","https://hoianlanternboat.com/",0]],
  map:["Hoai River, Hoi An","Hoai+River+Hoi+An"],
- f:{b:"Cannot be booked online",x:"Several sites claim otherwise — they're wrong. Go just after sunset for light and a shorter queue. Peak crush is 19:00–20:30, worse on a full moon."}},
+ f:{b:"Correction — online booking does exist",x:"I previously told you these cannot be booked online. That was wrong: private sellers now market pre-bookable lantern-boat products. The riverside booth is still what most people use and is bought in person, but you are not forced to. Go just after sunset for the light and a shorter queue. Peak crush is 19:00–20:30, worse on a full moon."}},
 
 {id:"marble",p:"walk",t:"⛰️ Marble Mountain",w:"Spare-day option",
  r:[["Entry","40K ₫ · lift 15K ₫ each way"],
@@ -1240,7 +1290,8 @@ const BOOK=[
 
 {g:"Ho Chi Minh City",items:[
 {id:"cuchi",p:"now",t:"🪖 Book Cu Chi Tunnels",w:"Monday 31 Aug — the urgent one",
- r:[["Entry","110K ₫ · site open 07:00–17:00"],
+ r:[["Entry","<b>Quoted between 90K and 135K ₫ for foreigners</b> depending on source. The operator's 2026 notice reads 35K site + 100K guiding = 135K. Budget 135K and you will not be short."],
+    ["Hours","07:00–17:00 daily, holidays included · last entry 16:00"],
     ["Ben Dinh","60km · closer, busier, more reconstructed for visitors"],
     ["Ben Duoc","70km · quieter, more authentic, the better call"],
     ["Journey","1 hr 25 to Bến Đình, 1 hr 45 to Bến Dược · up to 2 hrs back at peak"],
@@ -1252,7 +1303,7 @@ const BOOK=[
  l:[["Klook — half-day tour","https://www.klook.com/en-US/activity/1471-cu-chi-tunnels-experience-ho-chi-minh-city/",1],
     ["GetYourGuide — all tours","https://www.getyourguide.com/cu-chi-tunnels-l3671/",0],
     ["Viator","https://www.viator.com/Ho-Chi-Minh-City/d352",0]],
- map:["Cu Chi Tunnels","Cu+Chi+Tunnels"],
+ map:["Cu Chi — Bến Dược","Cu+Chi+Tunnel+Ben+Duoc"],
  f:{hot:1,b:"Peak holiday week",x:"29 Aug – 2 Sep is a five-day national break and this is the middle of it. Tours and private cars sell out. The 07:00 departure beats both the crowds and the heat."}},
 
 {id:"dinner",p:"now",t:"🍽️ Reserve dinner, 30th & 31st",w:"District 1, holiday weekend",
@@ -1265,7 +1316,7 @@ const BOOK=[
  map:["District 1","District+1+Ho+Chi+Minh+City"]},
 
 {id:"depart",p:"now",t:"🛫 Confirm the departure run",w:"Wednesday 2 Sep, flight 15:50",
- r:[["Terminal","International is <b>T2</b>. You land at T3 or T1 — a different building."],
+ r:[["Cost","Grab for the group ~250–300K ₫; a booked car 350–450K. Estimate — confirm when you book."],["Terminal","International is <b>T2</b>. You land at T3 or T1 — a different building."],
     ["Plan","Leave the hotel 10:30, at the airport by 11:45"],
     ["Journey","40–75 min road time. Budget <b>60–90 min door to terminal</b>."],
     ["The real risk is the airport, not the parade","No 2026 closure plan has been published. In 2024 and 2025 the District 1 closures were <b>evening</b> fireworks road closures, not a morning lockdown. What the traffic police did warn about was congestion around the airport itself."],
@@ -1688,10 +1739,12 @@ function book(){
    var dl='<dl>'+it.r.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>'}).join("")+'</dl>';
    h+='<div class="it'+(d?" done":"")+(iop[it.id]?" open":"")+'">'+
     '<div class="ih"><div class="bx" data-c="'+it.id+'" role="checkbox" tabindex="0" aria-checked="'+d+'" aria-label="Mark '+it.t+' booked">'+TICK+'</div>'+
-    '<div class="itx" data-t="'+it.id+'" role="button" tabindex="0"><div class="itt">'+it.t+
+    '<div class="itx" data-t="'+it.id+'" role="button" tabindex="0" aria-expanded="'+(!!iop[it.id])+'"><div class="itt">'+it.t+
     '<span class="tag '+TAG[it.p][1]+'">'+TAG[it.p][0]+'</span></div>'+
     '<div class="itw">'+it.w+(function(){var D=dayForBooking(it.id);
-      return D?'<button class="jday" data-jd="'+D.n+'">'+D.dow+' '+D.d+' \u2192</button>':''})()+'</div></div></div>'+
+      return D?'<button class="jday" data-jd="'+D.n+'">'+D.dow+' '+D.d+' \u2192</button>':''})()+'</div>'+
+    '<div class="more"><span>'+(iop[it.id]?'Hide details':(it.l||it.tel?'Prices, links & numbers':'Details'))+'</span>'+CHV+'</div>'+
+    '</div><div class="ichev">'+CHV+'</div></div>'+
     '<div class="ib"><div class="ibi"><div class="ibp">'+dl+acts(it)+noteHTML(it.f)+
     '<textarea placeholder="Notes — confirmation number, who you spoke to…" data-n="'+it.id+'">'+(nt[it.id]||"")+'</textarea>'+
     '</div></div></div></div>';
