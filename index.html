@@ -759,6 +759,11 @@ button.pl{font:inherit;cursor:pointer}
 .setr{font-size:15px;font-weight:600;letter-spacing:-.015em;padding:6px 0;
  font-variant-numeric:tabular-nums}
 .toast.bad{background:var(--red);color:#fff}
+.drvt.empty{font-size:19px;font-weight:500;color:var(--mut);line-height:1.4}
+.drvw{font-size:13px;line-height:1.5;color:var(--ink2);text-align:center;
+ background-color:var(--accbg);border-radius:12px;padding:12px 13px;margin:0 0 14px}
+.drvw .btn{margin-top:10px}
+.mapr button.pl.home{background-color:var(--accbg);color:var(--acctx);border-color:transparent;font-weight:650}
 /* ---- ideas ---- */
 .idc{margin-bottom:var(--s3);box-shadow:var(--shadow);transition:.25s var(--ease)}
 .idt{font-size:17px;font-weight:620;letter-spacing:-.025em;margin-bottom:7px;line-height:1.3}
@@ -1559,7 +1564,17 @@ const PINS={
 6:[["Cu Chi — Ben Duoc","Cu+Chi+Tunnel+Ben+Duoc"],["Saigon Square","Saigon+Square+Ho+Chi+Minh"],["District 1","District+1+Ho+Chi+Minh+City"]],
 7:[["War Remnants Museum","War+Remnants+Museum"],["Central Post Office","Saigon+Central+Post+Office"],["Notre-Dame","Notre+Dame+Cathedral+Saigon"],["Independence Palace","Independence+Palace+Ho+Chi+Minh"]],
 8:[["Tan Son Nhat T2","Tan+Son+Nhat+International+Airport+Terminal+2"]]};
+/* The two exact Google pins Aki sent — a name search can resolve to the wrong property,
+   these cannot. Used for the map button; the route builder needs a text origin, so it
+   prefers the saved Vietnamese address and falls back to the name. */
+const HOME={
+ dn:{name:"Serenity Villa",city:"Da Nang",pin:"https://maps.app.goo.gl/CrFS1WDRqULmnJb38",
+     q:"Serenity+Villa+Da+Nang",key:"Da Nang|0"},
+ hc:{name:"El Pino Realm",city:"Saigon",pin:"https://maps.app.goo.gl/bVEzfNUZxMuy4N5JA",
+     q:"El+Pino+Realm+Ho+Chi+Minh+City",key:"Saigon|0"}};
+function homeAddr(c){return (addr[HOME[c].key]||"").trim()}
 const BASE={dn:"Serenity+Villa+Da+Nang",hc:"El+Pino+Realm+Ho+Chi+Minh+City"};
+function baseFor(c){var a=homeAddr(c);return a?encodeURIComponent(a):BASE[c]}
 
 /* ---- budget: estimates only, per head unless marked group ---- */
 const RS=0.01262;                      /* XE mid-market, 20 Aug 2026: 1M \u20ab = Rs 12,620 */
@@ -1855,10 +1870,12 @@ function days(){
   });
 
   // ---- map row
-  var pins=PINS[d.n]||[],org=BASE[d.c];
+  var H=HOME[d.c];
+  var pins=[[H.name+" (base)",H.q]].concat(PINS[d.n]||[]);
+  var org=baseFor(d.c);
   var mapb='<div class="mapr"><span class="mlab">'+PIN+'Map</span>'+
-   pins.map(function(p){return '<button class="pl" data-pl="'+encodeURIComponent(p[0])+'" data-pq="'+p[1]+'">'+p[0]+'</button>'}).join("")+
-   (pins.length>1?'<a class="rt" href="https://www.google.com/maps/dir/?api=1&origin='+org+'&destination='+org+
+   pins.map(function(p,pi){return '<button class="pl'+(pi===0?' home':'')+'" data-pl="'+encodeURIComponent(p[0])+'" data-pq="'+p[1]+'">'+p[0]+'</button>'}).join("")+
+   (pins.length>2?'<a class="rt" href="https://www.google.com/maps/dir/?api=1&origin='+org+'&destination='+org+
      '&waypoints='+pins.map(function(p){return p[1]}).join("%7C")+'&travelmode=driving" target="_blank" rel="noopener">Route the whole day</a>':'')+
    '</div>';
 
@@ -2219,6 +2236,9 @@ var VNLOOK=(function(){
  };
 })();
 function placeSheet(label,query){
+ var H=null;
+ ["dn","hc"].forEach(function(c){ if(String(label).indexOf(HOME[c].name)===0) H=HOME[c] });
+ if(H){ driverCard(H.name, homeAddr(H===HOME.dn?"dn":"hc"), null, H); return }
  var vn=VNLOOK(label)||VNLOOK(String(query||"").replace(/\+/g," "));
  driverCard(label, vn||label, query||label);
 }
@@ -2312,26 +2332,35 @@ var drvOpen=null;
 /* A place sheet that is useful with ZERO signal: the Vietnamese address is in the
    cached page, so it renders offline. geo: hands it to whatever offline map app
    they have; the Google link is the online path. */
-function driverCard(label,vn,q){
+function driverCard(label,vn,q,H){
  if(drvOpen)drvOpen();
  var geo="geo:0,0?q="+encodeURIComponent(vn||label);
- var gmap="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q||vn||label);
+ var gmap=H?H.pin:("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q||vn||label));
  var w=document.createElement("div");w.className="drv";
  w.innerHTML='<div class="drvi" role="dialog" aria-label="'+label+'">'+
   '<div class="drvl">Hold this up to the driver</div>'+
-  '<div class="drvt">'+(vn||label)+'</div>'+
-  '<div class="drvs">'+label+'</div>'+
+  '<div class="drvt'+(vn?"":" empty")+'">'+(vn||"No Vietnamese address saved yet")+'</div>'+
+  '<div class="drvs">'+label+(H?' \u00b7 '+H.city:'')+'</div>'+
+  (H&&!vn?'<p class="drvw">Open the booking confirmation, copy the Vietnamese address and paste it in \u2014 this is the one you will show a driver most nights.<br><button class="btn sec noic" id="drvadd">Paste it now</button></p>':'')+
   '<div class="drvb">'+
    '<a class="btn noic" href="'+geo+'">Open in a map app</a>'+
    '<button class="btn sec noic" id="drvc">Copy address</button>'+
-   '<a class="btn ghost noic" href="'+gmap+'" target="_blank" rel="noopener">Google Maps</a>'+
+   '<a class="btn ghost noic" href="'+gmap+'" target="_blank" rel="noopener">'+(H?'Open the exact pin':'Google Maps')+'</a>'+
   '</div>'+
   '<p class="drvn">The address above needs no signal — it is stored in the app. <b>Open in a map app</b> will use your offline maps if you downloaded them.</p>'+
   '<button class="btn ghost noic wide" id="drvx">Close</button></div>';
  document.body.appendChild(w);requestAnimationFrame(function(){w.classList.add("go")});
  var close=function(){w.classList.remove("go");setTimeout(function(){w.remove();drvOpen=null},320)};
  w.querySelector("#drvx").onclick=close;
- w.querySelector("#drvc").onclick=function(){copyText(vn||label,"Address")};
+ w.querySelector("#drvc").onclick=function(){
+  if(!vn){toast("Nothing to copy yet — paste the address first.",0);return}
+  copyText(vn,"Address")};
+ var ab=w.querySelector("#drvadd");
+ if(ab)ab.onclick=function(){
+  var v=prompt("Paste the Vietnamese address for "+H.name+"\n(from the booking confirmation)","");
+  if(v&&v.trim()){addr[H.key]=v.trim();stamp("ad."+H.key);save();addrPane();days();close();
+   setTimeout(function(){driverCard(H.name,v.trim(),null,H)},340)}
+ };
  w.onclick=function(e){if(e.target===w)close()};
  drvOpen=close;
 }
@@ -2373,7 +2402,7 @@ function addrPane(){
    var key=c.k+"|"+i, custom=addr[key]||"";
    var vn=a[1]||custom;
    h+='<button class="vch'+(a[2]&&!custom?" need":"")+'" data-vk="'+key+'" data-vl="'+a[0]+'" data-vn="'+encodeURIComponent(vn)+'" data-edit="'+(a[2]?1:0)+'">'+
-     a[0]+(a[2]&&!custom?'<i>tap to add</i>':'')+'</button>';
+     a[0]+(a[2]?(custom?'<i>\u2713</i>':'<i>tap to add</i>'):'')+'</button>';
   });
   h+='</div></div>';
  });
@@ -2388,6 +2417,9 @@ function addrPane(){
       if(v.trim())driverCard(b.dataset.vl,v.trim())}
     return;
    }
+   var HH=null;
+   ["dn","hc"].forEach(function(c){ if(HOME[c].key===b.dataset.vk) HH=HOME[c] });
+   if(HH){driverCard(HH.name,vn,null,HH);return}
    if(!vn){toast("No address saved for that one yet.",0);return}
    driverCard(b.dataset.vl,vn);
   };
