@@ -21,7 +21,7 @@
   --line:#d2d2d7; --line2:#e8e8ed;
   --ink:#1d1d1f; --ink2:#3a3a3d; --mut:#5c5c61; --dim:#6e6e73;
   --acc:#0071e3; --acc2:#0058b9; --acctx:#0059ba; --btn:#0071e3; --accbg:rgba(0,113,227,.12);
-  --red:#c9372c; --redbg:rgba(201,55,44,.09); --onfill:#fff;
+  --red:#c9372c; --redbg:rgba(201,55,44,.09); --onfill:#fff; --altc:#7d3ab8;
   --amb:#8a6100; --ambbg:rgba(180,130,10,.11);
   --grn:#1d7a4a; --grnbg:rgba(29,122,74,.10);
   --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
@@ -37,7 +37,7 @@
   --line:#38383a; --line2:#2a2a2c;
   --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
   --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
-  --red:#ff6961; --redbg:rgba(255,105,97,.14); --onfill:#14141a;
+  --red:#ff6961; --redbg:rgba(255,105,97,.14); --onfill:#14141a; --altc:#da8fff;
   --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
   --grn:#30d158; --grnbg:rgba(48,209,88,.13);
   --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
@@ -54,7 +54,7 @@
     --line:#38383a; --line2:#2a2a2c;
     --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
     --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
-    --red:#ff6961; --redbg:rgba(255,105,97,.14); --onfill:#14141a;
+    --red:#ff6961; --redbg:rgba(255,105,97,.14); --onfill:#14141a; --altc:#da8fff;
     --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
     --grn:#30d158; --grnbg:rgba(48,209,88,.13);
     --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
@@ -358,6 +358,102 @@ textarea::placeholder{color:var(--dim)}
  .tabs button svg{width:19px;height:19px}
  .tbdg.show{position:absolute;top:3px;right:calc(50% - 20px);font-size:9px;min-width:15px;height:15px}
 }
+
+/* ---- plans, commutes, map, day notes ---- */
+.plans{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
+.plab{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-right:2px}
+.pbtn{font:inherit;font-size:12.5px;font-weight:550;padding:8px 13px;border-radius:99px;min-height:38px;
+ border:.5px solid var(--line);background:var(--surf2);color:var(--ink2);cursor:pointer;transition:.18s var(--ease)}
+.pbtn.on{background:var(--btn);border-color:var(--btn);color:#fff;font-weight:650}
+.pbtn:active{transform:scale(.97)}
+.pnote{font-size:13px;line-height:1.5;color:var(--ink2);background-color:var(--accbg);
+ border-left:2.5px solid var(--acc);border-radius:0 9px 9px 0;padding:9px 12px;margin:0 0 12px}
+button.mp.tog{font:inherit;cursor:pointer;border:.5px solid var(--line);display:inline-flex;align-items:center;gap:5px}
+button.mp.tog i{font-style:normal;font-size:10.5px;color:var(--acctx);font-weight:650}
+button.mp.tog.on{background-color:var(--accbg);border-color:transparent}
+.go.min .goi span{display:none}
+.mapr{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:14px 0 0;
+ padding-top:13px;border-top:.5px solid var(--line2)}
+.mlab{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;
+ text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+.mlab svg{width:13px;height:13px}
+.mapr a{font-size:12.5px;font-weight:550;padding:8px 12px;border-radius:99px;min-height:36px;
+ display:inline-flex;align-items:center;text-decoration:none;color:var(--ink2);
+ background:var(--surf2);border:.5px solid var(--line);position:relative}
+.mapr a:after{content:"";position:absolute;inset:-5px -2px}
+.mapr a:active{transform:scale(.97)}
+.mapr a.rt{background-color:var(--accbg);color:var(--acctx);border-color:transparent;font-weight:650}
+.dnote{margin-top:14px}
+.dnote label{display:block;font-size:11.5px;font-weight:650;color:var(--dim);margin-bottom:6px}
+.dnote textarea{width:100%;min-height:64px;font:inherit;font-size:14px;line-height:1.5;
+ padding:11px 12px;border-radius:11px;border:.5px solid var(--line);background:var(--surf2);
+ color:var(--ink);resize:vertical}
+.lk.ok{background-color:var(--grnbg);color:var(--grn)}
+.ev.bkd .ti{opacity:.92}
+.inact a.jb{background-color:var(--accbg);color:var(--acctx);border-color:transparent}
+.jday{font:inherit;font-size:11.5px;font-weight:650;margin-left:8px;padding:5px 11px;border-radius:99px;
+ border:.5px solid var(--line);background:var(--surf2);color:var(--acctx);cursor:pointer;
+ min-height:30px;position:relative}
+.jday:after{content:"";position:absolute;inset:-9px -6px}
+.jday:active{transform:scale(.96)}
+.idc.built{opacity:1}
+.idst.built{background-color:var(--accbg);color:var(--acctx)}
+.iddn{margin:10px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink2);
+ background-color:var(--grnbg);border-radius:9px;padding:9px 11px}
+.iddn b{color:var(--grn)}
+
+/* ---- budget ---- */
+.bgrp{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink2);margin:0 0 14px}
+.bgrp b{font-size:17px;font-weight:650;min-width:20px;text-align:center;color:var(--ink)}
+.stp{font:inherit;font-size:17px;line-height:1;width:34px;height:34px;border-radius:99px;
+ border:.5px solid var(--line);background:var(--surf2);color:var(--ink);cursor:pointer;position:relative}
+.stp:after{content:"";position:absolute;inset:-7px}
+.stp:active{transform:scale(.94)}
+.bsec{margin-bottom:16px}
+.bsec h4{margin:0 0 8px;font-size:11.5px;font-weight:700;text-transform:uppercase;
+ letter-spacing:.07em;color:var(--dim)}
+.brow{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;
+ padding:11px 13px;border-radius:13px;background-color:var(--surf);
+ border:.5px solid var(--line);margin-bottom:6px}
+.brow.paid{opacity:.6}
+.brow.paid .bt{text-decoration:line-through;text-decoration-color:var(--line2)}
+.bck{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line2);background:transparent;
+ color:#fff;font-size:14px;line-height:1;cursor:pointer;padding:0;margin-top:1px;position:relative}
+.bck:after{content:"";position:absolute;inset:-11px -10px}
+.brow.paid .bck{background:var(--grn);border-color:var(--grn);color:var(--onfill)}
+.bt{font-size:14.5px;font-weight:550;letter-spacing:-.01em;line-height:1.35}
+.bopt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+ background-color:var(--ambbg);color:var(--amb);padding:2px 6px;border-radius:5px;margin-left:7px}
+.bgr{display:block;font-size:11.5px;font-weight:500;color:var(--dim);margin-top:2px}
+.bn{font-size:12.5px;font-weight:400;color:var(--mut);line-height:1.45;margin-top:4px}
+.bv{text-align:right;font-size:15px;font-weight:640;letter-spacing:-.02em;white-space:nowrap}
+.bv span{display:block;font-size:11.5px;font-weight:500;color:var(--mut);margin-top:1px}
+.btot{margin-top:18px;padding:14px 15px;border-radius:15px;background-color:var(--surf);
+ background-image:linear-gradient(180deg,var(--surf),var(--surf2));border:.5px solid var(--line)}
+.btr{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:baseline;
+ padding:7px 0;font-size:13.5px;color:var(--ink2)}
+.btr b{font-size:15px;font-weight:640;color:var(--ink);text-align:right}
+.btr i{font-style:normal;font-size:12px;color:var(--mut);min-width:66px;text-align:right}
+.btr.big{border-top:.5px solid var(--line2);margin-top:3px;padding-top:11px}
+.btr.big b{font-size:18px;letter-spacing:-.03em}
+.btr.grp{border-top:.5px solid var(--line2);margin-top:3px;padding-top:11px;color:var(--dim)}
+.bdis{font-size:12.5px;line-height:1.5;color:var(--mut);margin:12px 2px 0}
+
+/* ---- share ---- */
+.shp{font-size:14px;line-height:1.55;color:var(--ink2);margin:0 0 14px}
+.shl{display:block;font-size:11.5px;font-weight:650;color:var(--dim);margin:16px 0 6px}
+#inbox{width:100%;min-height:70px;font:inherit;font-size:13px;line-height:1.45;padding:11px 12px;
+ border-radius:11px;border:.5px solid var(--line);background:var(--surf2);color:var(--ink);resize:vertical;
+ word-break:break-all}
+.shmsg{display:none;margin-top:12px;font-size:13.5px;font-weight:550;padding:10px 12px;border-radius:10px}
+.shmsg.show{display:block}
+.shmsg.g{background-color:var(--grnbg);color:var(--grn)}
+.shmsg.r{background-color:var(--redbg);color:var(--red)}
+.toast{position:fixed;left:14px;right:14px;bottom:18px;z-index:60;padding:13px 15px;border-radius:14px;
+ background:var(--ink);color:var(--bg);font-size:13.5px;font-weight:550;line-height:1.4;
+ box-shadow:var(--shadow2);opacity:0;transform:translateY(12px);transition:.32s var(--ease)}
+.toast.go{opacity:1;transform:none}
+@media(min-width:560px){.toast{left:auto;right:20px;max-width:380px}}
 /* ---- ideas ---- */
 .idc{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));
  border:.5px solid var(--line);border-radius:var(--r-lg);padding:var(--s4);margin-bottom:var(--s2);
@@ -407,7 +503,9 @@ textarea::placeholder{color:var(--dim)}
 /* ---- today marker ---- */
 .day.today{box-shadow:var(--shadow2),0 0 0 1.5px var(--acc)}
 .tdy{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
- background:var(--acc);color:var(--onfill);padding:3px 8px;border-radius:5px;margin-left:8px;vertical-align:2px}
+ background:var(--acc);color:var(--onfill);padding:3px 8px;border-radius:5px;margin-left:8px;vertical-align:2px;
+ display:inline-block;line-height:1.4}
+.tdy.alt{background:var(--altc);color:var(--onfill)}
 
 /* ---- day meta strip ---- */
 .dmeta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 var(--s4);padding-bottom:var(--s3);
@@ -512,6 +610,9 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0071e3">
+<link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 
@@ -564,6 +665,11 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <button data-f="todo">Outstanding</button>
     </div>
     <div id="lst"></div>
+    <div class="fhead" style="margin-top:34px">
+      <h2 style="margin-top:2px">💷 What it costs</h2>
+      <p class="fsub">Per person, split across the group. Tick things off as they're paid.</p>
+    </div>
+    <div id="budget"></div>
   </div>
 
   <div class="pane" id="p-food">
@@ -580,13 +686,16 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
     </div>
     <div id="idealist"></div>
   </div>
-  <div class="pane" id="p-info"></div>
+  <div class="pane" id="p-info">
+    <div class="card share"><h3><i>🔗</i>Share with the group</h3><div id="sharebox"></div></div>
+    <div id="infolist"></div>
+  </div>
 
   <footer>
     100K &#8363; &asymp; Rs 1,150&ndash;1,200 &middot; prices checked August 2026<br>
     Travel times from Google Maps, 20 August 2026, measured from Serenity Villa and El Pino Realm.<br>
     National Day holiday 29 Aug &ndash; 2 Sep, so hours can shift. Call ahead for anything critical.<br>
-    Ticks and notes save on this device.
+    Ticks and notes save on this device — use Share with the group to pass them on.
     <br><button class="reset" id="reset">Reset all ticks</button>
   </footer>
 </div>
@@ -604,7 +713,7 @@ const DAYS=[
  ["g","45 min","car","Villa → Hoi An · 23km coastal road · Grab ~330K ₫"],
  ["17:15","Arrive Hoi An old town","Park at An Hoi bridge side"],
  ["17:30","Lantern boat on the Hoai River","key","15 min on the water · 170K ₫ for 1–3"],
- ["18:15","Tailor — give measurements","key","Do this tonight or the suit won't make Friday"],
+ ["18:15","Tailor — give measurements","key","Do this tonight or the suit won't make Friday. Ask for a Thursday interim fitting while you're there."],
  ["19:15","Walk the old town","Japanese Bridge, museums, lantern streets"],
  ["20:30","Night food market","Cao lầu, white rose dumplings, banh mi Phuong"],
  ["g","45 min","car","Hoi An → villa · 23km"],
@@ -627,7 +736,40 @@ const DAYS=[
  ["17:45","Massage, then the beach","My Khe is a 5 min walk"],
  ["g","12 min","car","Villa → Han River pier · 5.2km"],
  ["19:45","Han River cruise","key","~1 hr · book the sailing that covers the 9pm bridge show"]],
- f:{b:"Decide on the morning",x:"The summit spends a lot of its time inside a cloud and same-day tickets exist. If it's fogged in you're paying full price to look at white nothing — swap to Marble Mountain and Son Tra instead."}},
+ alts:[
+ {id:"banapm",label:"Afternoon ticket",note:"1,050K \u20ab after 15:00, dinner buffet included. No 6am alarm and the coaches have gone — but you lose the clear-weather morning window and the Han River cruise.",
+  e:[
+  ["09:00","Slow start at the villa","Coffee, no alarm"],
+  ["g","45 min","car","Villa \u2192 Hoi An \u00b7 23km \u00b7 Grab ~330K \u20ab"],
+  ["10:00","Interim tailor fitting","key","The whole reason this plan works \u2014 arrange it Wednesday night"],
+  ["11:00","Coffee and the old town","Quieter than the evening crush"],
+  ["g","45 min","car","Hoi An \u2192 villa \u00b7 23km"],
+  ["12:30","Lunch near the villa",""],
+  ["13:30","Rest before the mountain",""],
+  ["g","48 min","car","Villa \u2192 Ba Na Hills \u00b7 29km \u00b7 Grab ~430K \u20ab"],
+  ["15:00","Arrive on the after-3pm ticket","key","1,050K \u20ab \u00b7 includes the dinner buffet"],
+  ["15:30","Cable car up","15\u201320 min"],
+  ["16:00","Golden Bridge","key","30\u201360 min \u00b7 the coach parties have gone"],
+  ["17:00","French Village, gardens, alpine coaster","Coaster is 70K \u20ab extra"],
+  ["18:00","Dinner buffet","Included in this ticket"],
+  ["19:15","The village lit up","The best hour up there"],
+  ["g","48 min","car","Ba Na Hills \u2192 villa \u00b7 29km"],
+  ["21:15","Back at the villa","Move the Han River cruise to Saturday or drop it"]]},
+ {id:"sontra",label:"S\u01a1n Tr\u00e0 fallback",note:"The swap if Thursday morning is clouded in. Keeps the Han River cruise, costs almost nothing, and you decide at 07:00 by looking at the mountain.",
+  e:[
+  ["08:00","Look at the mountain, then decide","key","If the summit is in cloud, this is the day"],
+  ["g","25 min","car","Villa \u2192 S\u01a1n Tr\u00e0 \u00b7 9km \u00b7 Grab ~140K \u20ab"],
+  ["08:45","Linh \u1ee8ng Pagoda & Lady Buddha","key","Free \u00b7 67m statue, views straight down the bay"],
+  ["10:00","B\u00e3i B\u1ee5t and the coast viewpoints","Stop where it looks good \u2014 no schedule"],
+  ["11:00","\u0110\u1ec9nh B\u00e0n C\u1edd summit","The chess-playing god and the best view in Da Nang"],
+  ["g","35 min","car","S\u01a1n Tr\u00e0 \u2192 Marble Mountain \u00b7 20km"],
+  ["12:30","Lunch at My Khe",""],
+  ["14:00","Marble Mountain","40K \u20ab entry \u00b7 15K lift \u00b7 caves, \u00c2m Ph\u1ee7, summit"],
+  ["g","15 min","car","Marble Mountain \u2192 villa \u00b7 7km"],
+  ["16:00","Massage, then the beach","My Khe is a 5 min walk"],
+  ["g","12 min","car","Villa \u2192 Han River pier \u00b7 5.2km"],
+  ["19:45","Han River cruise","key","~1 hr \u00b7 unchanged from the main plan"]]}],
+ f:{b:"Decide on the morning",x:"The summit spends a lot of its time inside a cloud and same-day tickets exist. If it's fogged in you're paying full price to look at white nothing \u2014 switch to the S\u01a1n Tr\u00e0 plan above."}},
 
 {c:"dn",n:3,dow:"Fri",d:"28",t:"🪷 Hoi An & a late one",s:"Basket boats to nightclubs",
  e:[
@@ -637,7 +779,7 @@ const DAYS=[
  ["g","14 min","car","Cẩm Thanh → The Duck Stop · 6.5km"],
  ["09:15","The Duck Stop","100K ₫ · closed 12–1 for the ducks' rest"],
  ["g","11 min","car","Duck Stop → old town · 4.2km"],
- ["10:45","Collect the tailoring","key","Try everything on before you leave the shop"],
+ ["10:45","Collect the tailoring","key","Try everything on in the shop \u2014 leave an hour for alterations"],
  ["12:00","Lunch in the old town",""],
  ["13:30","Museums, markets, wandering","2–3 hrs · ticket covers five heritage sites"],
  ["g","45 min","car","Hoi An → villa · 23km"],
@@ -654,11 +796,31 @@ const DAYS=[
  e:[
  ["10:30","Slow start","No alarm · you've earned it"],
  ["11:30","Café and bar hopping","An Thuong is walkable from the villa"],
- ["14:00","Market shopping","Han Market or Con Market · until around six"],
- ["16:00","Beach bars on My Khe","Sunset is about 18:05"],
+ ["13:30","Market shopping","Han Market or Con Market · until around six"],
+ ["g","15 min","car","Villa → Marble Mountain · 7km · Grab ~110K ₫"],
+ ["16:15","Marble Mountain","key","40K ₫ entry · 15K lift · caves, Âm Phủ, summit"],
+ ["17:40","Sunset from the summit","Sunset is about 18:05 · last lift down 17:30, so take the steps"],
+ ["g","15 min","car","Marble Mountain → villa · 7km"],
+ ["18:45","Back, shower, change",""],
  ["g","12 min","car","Villa → Novotel, 36 Bạch Đằng · 5.2km"],
  ["20:00","Sky36","key","36th floor · reservation essential on a holiday Saturday"],
  ["21:30","Bar hop & Vietnamese karaoke","Back around midnight — 6.30am flight run tomorrow"]],
+ alts:[
+ {id:"haivan",label:"Hải Vân Pass",note:"Swaps the recovery day for one of the best coastal roads in Asia. Roughly seven hours out including lunch. Only take this if Friday night ended early — and keep the Sky36 booking either way.",
+  e:[
+  ["08:30","Up and out","Private car with a driver is the sane option · ~US$60 for the day"],
+  ["g","45 min","car","Villa → south end of the Hải Vân Pass · 25km"],
+  ["09:30","Start the climb","Pull over wherever it looks good — that is the point"],
+  ["10:15","Hải Vân Gate","key","The old French fort at the top of the pass · free"],
+  ["g","30 min","car","Pass → Lăng Cô · 15km down the north side"],
+  ["11:30","Lăng Cô lagoon and beach",""],
+  ["12:30","Seafood lunch at Lăng Cô","Cheap, fresh, and the reason to come this far"],
+  ["g","20 min","car","Lăng Cô → Elephant Springs · 12km"],
+  ["14:00","Elephant Springs","Optional · freshwater pools, 20K ₫"],
+  ["g","75 min","car","Back to the villa · 60km via the tunnel"],
+  ["16:30","Back, rest, shower",""],
+  ["g","12 min","car","Villa → Novotel, 36 Bạch Đằng · 5.2km"],
+  ["20:00","Sky36","key","Keep the reservation — it is the one fixed point today"]]}],
  f:{b:"The holiday starts today",x:"29 August is day one of the five-day National Day break. Sky36 needs a reservation, restaurants fill early, and the beach will be busy with domestic tourists."}},
 
 {c:"hc",n:5,dow:"Sun",d:"30",t:"🛫 Fly to Saigon",s:"Da Nang → Ho Chi Minh City",
@@ -683,16 +845,16 @@ const DAYS=[
  e:[
  ["06:00","Up","The early start is the whole trick"],
  ["07:00","Leave the hotel","key","Pre-booked car or tour pickup"],
- ["g","1 hr 25","car","Hotel → Củ Chi Bến Đình · 48km · Bến Dược is 1 hr 45"],
- ["08:25","Arrive at Cu Chi","110K ₫ entry · site opens 07:00"],
+ ["g","1 hr 45","car","Hotel → Củ Chi Bến Dược · 58km · Bến Đình is 20 min closer"],
+ ["08:45","Arrive at Cu Chi","key","Bến Dược · 110K ₫ entry · site opens 07:00"],
  ["09:00","Tunnels, traps, command bunkers","2–2.5 hrs · shooting range is ~US$2 a round, optional"],
- ["11:30","Head back","Beat the afternoon heat and the coach traffic"],
- ["g","1 hr 25","car","Củ Chi → hotel · up to 2 hrs at peak"],
- ["13:15","Late lunch in District 1",""],
+ ["11:45","Head back","Beat the afternoon heat and the coach traffic"],
+ ["g","1 hr 45","car","Củ Chi → hotel · up to 2 hrs 15 at peak"],
+ ["13:45","Late lunch in District 1",""],
  ["15:00","Saigon Square shopping","Two floors of it · haggle here too"],
  ["18:00","Back to the hotel","Shower, regroup"],
  ["20:00","Dinner, drinks, chill","Quieter night — museums tomorrow"]],
- f:{hot:1,b:"The one that must be booked",x:"Peak of the national holiday. Tours and private cars sell out. A private car is US$40–60 return for the group and lets you set your own pace; a group tour is US$15–25 a head with hotel pickup."}},
+ f:{hot:1,b:"The one that must be booked",x:"Peak of the national holiday. Tours and private cars sell out. Switched to <b>Bến Dược</b> — 40 min more driving each way, but it is the local-facing site and the coach parties nearly all go to Bến Đình. Tell the driver Bến Dược explicitly; most default to Bến Đình. A private car is US$50–70 return for the group; a group tour is US$15–25 a head but almost all go to Bến Đình."}},
 
 {c:"hc",n:7,dow:"Tue",d:"1",t:"☕ Cafés & culture",s:"Deliberately loose",
  e:[
@@ -726,42 +888,42 @@ const IDEAS=[
 {g:"Trip changes",items:[
 {id:"benduoc",t:"Switch Cu Chi to Bến Dược",
  w:"Quieter, more authentic, far fewer coach parties. Costs you 40 min extra driving each way (1 hr 45 vs 1 hr 25) and about 130K ₫ more each way.",
- why:"You'll be there on the busiest holiday Monday of the year. Bến Đình is where every tour bus goes."},
+ why:"You'll be there on the busiest holiday Monday of the year. Bến Đình is where every tour bus goes.",dn:"Done — Monday now goes to Bến Dược. Driving times, distance, cost and the booking card all updated."},
 {id:"banapm",t:"Take the after-3pm Ba Na ticket",
  w:"1,050K ₫ instead of 1,000K, but it includes the dinner buffet, the crowds have gone and it's cooler. Kills the 6am start.",
- why:"Trades the early morning for a cheaper effective price and a much better experience — but you lose the clear-weather morning window."},
+ why:"Trades the early morning for a cheaper effective price and a much better experience — but you lose the clear-weather morning window.",dn:"Built as a switchable plan on Thursday. Open day 27 and tap <b>Afternoon ticket</b>. The early start is still Plan A because it is the only one that guarantees a clear-weather window."},
 {id:"marble",t:"Marble Mountain at sunset on Saturday",
  w:"It's 10 min from the villa and Saturday is empty until Sky36 at 21:00. Entry 40K ₫, lift 15K.",
- why:"Verified as much closer than I first assumed. Saturday has a four-hour hole in it."},
+ why:"Verified as much closer than I first assumed. Saturday has a four-hour hole in it.",dn:"Done — Marble Mountain is in Saturday at 16:15, with the summit for sunset. Market shopping moved half an hour earlier."},
 {id:"sontra",t:"Son Tra + Lady Buddha as the Ba Na fallback",
  w:"If Thursday morning is clouded in, this is the swap. Scenic drive, big views, roughly half a day.",
- why:"Ba Na sits in cloud often. Having the fallback decided in advance stops the day being wasted arguing."},
+ why:"Ba Na sits in cloud often. Having the fallback decided in advance stops the day being wasted arguing.",dn:"Built as a switchable plan on Thursday. Tap <b>Sơn Trà fallback</b> on the morning if the summit is in cloud — it keeps the Han River cruise."},
 {id:"tailor2",t:"Book a second tailor fitting",
  w:"Ask for a Thursday interim fitting when you give measurements on Wednesday.",
- why:"Two days is the minimum turnaround. A mid-point fitting is the difference between a suit that fits and one you never wear."},
+ why:"Two days is the minimum turnaround. A mid-point fitting is the difference between a suit that fits and one you never wear.",dn:"Done — Wednesday's measuring now says to ask for a Thursday fitting, and the tailor booking card carries it. The afternoon Ba Na plan has the fitting built in at 10:00."},
 {id:"haivan",t:"Hải Vân Pass drive",
  w:"Half a day, one of the best coastal roads in Asia. Would have to displace something.",
- why:"Nothing in the current plan uses the mountain road north. Only worth it if a day collapses."}
+ why:"Nothing in the current plan uses the mountain road north. Only worth it if a day collapses.",dn:"Built as a switchable plan on Saturday. Tap <b>Hải Vân Pass</b> on day 29. It keeps the Sky36 booking at 20:00."}
 ]},
 {g:"Site features I could build",items:[
 {id:"offline",t:"Make it work offline",
  w:"Turn it into an installable app that caches itself, so it opens with no signal and adds to your home screen.",
- why:"You'll be on patchy roaming in Vietnam. Right now a dead connection means no itinerary."},
+ why:"You'll be on patchy roaming in Vietnam. Right now a dead connection means no itinerary.",dn:"Done — the site installs to your home screen and works with no signal. Open it once on wifi before you fly."},
 {id:"shared",t:"Shared state across the group",
  w:"Everyone sees the same ticks and food picks. Needs a small backend — a day's work rather than an hour's.",
- why:"Currently every person's ticks are private to their phone, so Harith booking Cu Chi doesn't show for anyone else."},
+ why:"Currently every person's ticks are private to their phone, so Harith booking Cu Chi doesn't show for anyone else.",dn:"Done, without a backend. Essentials → Share with the group gives you a link that carries your whole state to anyone who opens it."},
 {id:"budget",t:"Running budget tracker",
  w:"Totals what's booked and what's still to pay, per person and for the group, in both currencies.",
- why:"The Money tab lists prices but never adds them up. You have no idea what the trip costs until it's over."},
+ why:"The Money tab lists prices but never adds them up. You have no idea what the trip costs until it's over.",dn:"Done — Bookings tab, below the checklist. Per person and for the group, in dong and rupees, with a paid tick on each line."},
 {id:"today",t:"Opens on today once you're travelling",
  w:"From 26 August it opens straight to the current day instead of the top of the list.",
- why:"During the trip you want today, not a list of eight days."},
+ why:"During the trip you want today, not a list of eight days.",dn:"Done — from 26 August it opens on the current day, expanded and scrolled to."},
 {id:"photos",t:"Notes and receipts per day",
  w:"Attach photos and receipts against each day for splitting costs afterwards.",
- why:"Six people, a week of cash spending, and no record is a recipe for a bad conversation at the end."},
+ why:"Six people, a week of cash spending, and no record is a recipe for a bad conversation at the end.",dn:"Done for notes — every day now has a notes box for spending and who paid. Photo attachment is not possible without a backend, so use your camera roll."},
 {id:"map",t:"A map view",
  w:"One map per city with everything pinned, so you can see what's near you rather than reading addresses.",
- why:"Every place currently links out to Maps one at a time. You can't see clusters."}
+ why:"Every place currently links out to Maps one at a time. You can't see clusters.",dn:"Done — every day has a map row with its pins plus a <b>Route the whole day</b> link that chains them from the villa or the hotel."}
 ]}];
 
 const EATS=[
@@ -814,6 +976,7 @@ const BOOK=[
 {id:"tailor",p:"now",t:"🧵 Book a Hoi An tailor",w:"Measure Wed 26th → collect Fri 28th",
  r:[["Turnaround","Two clear days is the minimum. Confirm the Friday collection <b>before</b> paying a deposit."],
     ["Cost","Two-piece suit US$150–350 depending on cloth. Shirts US$25–40."],
+    ["Second fitting","Ask for a Thursday interim fitting when you give measurements. It is the difference between a suit that fits and one you never wear."],
     ["Tip","Email measurements ahead and they'll have something cut when you arrive."],
     ["Where","Most sit on Tran Phu and Le Loi in the old town."]],
  l:[["Yaly Couture","https://yalycouture.com/en",1],["A Dong Silk","https://adongsilk.com/",0],
@@ -910,7 +1073,8 @@ const BOOK=[
     ["Am Phu cave","20K ₫ extra — the 'hell cave', worth it"],
     ["Hours","07:30–17:00 · cash only in dong"],
     ["Best time","Early morning or late afternoon. Queues 09:00–15:00."],
-    ["Getting there","10 min from the villa, 5.7km south · on the way to Hoi An"]],
+    ["Getting there","10 min from the villa, 5.7km south · on the way to Hoi An"],
+    ["Now in the plan","Saturday 29th, 16:15, for sunset from the summit."]],
  map:["Marble Mountains","Marble+Mountains+Da+Nang"]}
 ]},
 
@@ -921,7 +1085,7 @@ const BOOK=[
     ["Ben Duoc","70km · quieter, more authentic, the better call"],
     ["Journey","1 hr 25 to Bến Đình, 1 hr 45 to Bến Dược · up to 2 hrs back at peak"],
     ["Group tour","US$15–25pp including hotel pickup"],
-    ["Private car","US$40–60 return — better for a group, you set the pace"],
+    ["Private car","US$50–70 return to Bến Dược — better for a group, you set the pace"],
     ["Extras","Shooting range ~US$2 a round, paid on site"]],
  l:[["Klook — half-day tour","https://www.klook.com/en-US/activity/1471-cu-chi-tunnels-experience-ho-chi-minh-city/",1],
     ["GetYourGuide — all tours","https://www.getyourguide.com/cu-chi-tunnels-l3671/",0],
@@ -1045,9 +1209,51 @@ const INFO=[
  "Sunset is around 18:05 all week — useful for the beach and the lantern boats."]}
 ];
 
+
+/* ---- map pins per day ---- */
+const PINS={
+1:[["Da Nang airport","Da+Nang+International+Airport"],["Hoi An old town","Hoi+An+Ancient+Town"],["Hoai River boats","Hoai+River+Hoi+An"],["Japanese Bridge","Japanese+Covered+Bridge+Hoi+An"],["Banh Mi Phuong","Banh+Mi+Phuong+Hoi+An"]],
+2:[["Ba Na Hills","Ba+Na+Hills+Da+Nang"],["Golden Bridge","Golden+Bridge+Ba+Na+Hills"],["Son Tra / Lady Buddha","Linh+Ung+Pagoda+Son+Tra"],["Marble Mountains","Marble+Mountains+Da+Nang"],["Han River pier","Han+River+Cruise+Pier+Da+Nang"]],
+3:[["Bay Mau coconut forest","Bay+Mau+Coconut+Forest+Hoi+An"],["The Duck Stop","The+Duck+Stop+Hoi+An"],["Hoi An old town","Hoi+An+Ancient+Town"],["Dragon Bridge","Dragon+Bridge+Da+Nang"],["An Thuong bars","An+Thuong+Da+Nang"]],
+4:[["Han Market","Han+Market+Da+Nang"],["My Khe beach","My+Khe+Beach+Da+Nang"],["Marble Mountains","Marble+Mountains+Da+Nang"],["Hai Van Pass","Hai+Van+Pass"],["Sky36","Sky36+Da+Nang"]],
+5:[["Da Nang airport","Da+Nang+International+Airport"],["Tan Son Nhat","Tan+Son+Nhat+International+Airport"],["Ben Thanh Market","Ben+Thanh+Market+Ho+Chi+Minh"],["Bui Vien street","Bui+Vien+Walking+Street"]],
+6:[["Cu Chi — Ben Duoc","Cu+Chi+Tunnel+Ben+Duoc"],["Saigon Square","Saigon+Square+Ho+Chi+Minh"],["District 1","District+1+Ho+Chi+Minh+City"]],
+7:[["War Remnants Museum","War+Remnants+Museum"],["Central Post Office","Saigon+Central+Post+Office"],["Notre-Dame","Notre+Dame+Cathedral+Saigon"],["Independence Palace","Independence+Palace+Ho+Chi+Minh"]],
+8:[["Tan Son Nhat T2","Tan+Son+Nhat+International+Airport+Terminal+2"]]};
+const BASE={dn:"Serenity+Villa+Da+Nang",hc:"El+Pino+Realm+Ho+Chi+Minh+City"};
+
+/* ---- budget: estimates only, per head unless marked group ---- */
+const RS=0.0115;                       /* 1 dong = 0.0115 rupees */
+const COSTS=[
+{g:"Da Nang & Hoi An",items:[
+ {id:"c-tailor",t:"🧵 Tailoring",v:6400000,u:"head",o:1,n:"Two-piece suit, mid cloth. Shirts 600–1,000K each."},
+ {id:"c-bana",t:"🚡 Ba Na Hills entry",v:1000000,u:"head",n:"1,050K on the after-3pm ticket, buffet included."},
+ {id:"c-banacar",t:"🚗 Ba Na return car",v:860000,u:"group",n:"Grab each way. A booked car for the day is ~1.2M."},
+ {id:"c-cruise",t:"🚢 Han River cruise",v:200000,u:"head"},
+ {id:"c-lantern",t:"🏮 Lantern boats",v:340000,u:"group",n:"170K a boat, 1–3 people per boat."},
+ {id:"c-duck",t:"🦆 The Duck Stop",v:100000,u:"head"},
+ {id:"c-basket",t:"🛶 Basket boats",v:100000,u:"head"},
+ {id:"c-marble",t:"⛰️ Marble Mountain",v:75000,u:"head",n:"40K entry, 15K lift, 20K for Âm Phủ cave."},
+ {id:"c-dragon",t:"🐉 Rooftop drinks, Friday",v:400000,u:"head"},
+ {id:"c-sky36",t:"🍸 Sky36, Saturday",v:500000,u:"head",n:"Minimum spend in practice."},
+ {id:"c-hoiancar",t:"🚗 Hoi An runs and local Grabs",v:2000000,u:"group",n:"Four days of moving about."},
+ {id:"c-transfer",t:"✈️ Airport transfer, 30 Aug",v:300000,u:"group"}]},
+{g:"Ho Chi Minh City",items:[
+ {id:"c-cuchi",t:"🪖 Cu Chi entry",v:110000,u:"head"},
+ {id:"c-cuchicar",t:"🚗 Cu Chi private car (Bến Dược)",v:1600000,u:"group",n:"US$50–70 for the day. A group tour is 400–650K a head instead."},
+ {id:"c-museum",t:"🏛️ War Remnants Museum",v:40000,u:"head"},
+ {id:"c-palace",t:"🏛️ Independence Palace",v:40000,u:"head"},
+ {id:"c-dinners",t:"🍽️ Two booked dinners",v:1000000,u:"head",n:"500K a head a night in District 1."},
+ {id:"c-sgncar",t:"🚗 Saigon Grabs",v:800000,u:"group"},
+ {id:"c-depart",t:"🛫 Departure run, 2 Sep",v:250000,u:"group",n:"National Day. Book it, do not hail it."}]},
+{g:"Day to day",items:[
+ {id:"c-food",t:"🍜 Food and drink, 8 days",v:5600000,u:"head",n:"700K a day. Street food days are half that; Missteak alone is 900K."},
+ {id:"c-shop",t:"🛍️ Shopping and souvenirs",v:2000000,u:"head",o:1,n:"Entirely up to you."},
+ {id:"c-tips",t:"💵 Tips, cash buffer",v:500000,u:"head"}]}];
+
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
-var st={},nt={},dop={},iop={},filt="all",eat={},idea={};
+var st={},nt={},dop={},iop={},filt="all",eat={},idea={},plan={},dnote={},pay={},grp=6,gdet={};
 var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
@@ -1058,10 +1264,31 @@ var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
 var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
 
-function save(){try{localStorage.setItem("vn2026a",JSON.stringify({s:st,n:nt,e:eat,i:idea,t:document.documentElement.dataset.theme}))}catch(e){}}
-function load(){try{var r=localStorage.getItem("vn2026a");if(!r)return;var d=JSON.parse(r);
+function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp}}
+function save(){try{var o=stateObj();o.t=document.documentElement.dataset.theme;
+ localStorage.setItem("vn2026a",JSON.stringify(o))}catch(e){}}
+function applyState(d){
  Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});Object.assign(idea,d.i||{});
- if(d.t)document.documentElement.dataset.theme=d.t}catch(e){}}
+ Object.assign(plan,d.p||{});Object.assign(dnote,d.dn||{});Object.assign(pay,d.y||{});
+ if(d.g)grp=d.g;}
+function load(){try{var r=localStorage.getItem("vn2026a");if(r){var d=JSON.parse(r);applyState(d);
+ if(d.t)document.documentElement.dataset.theme=d.t}}catch(e){}
+ try{var m=location.hash.match(/[#&]s=([A-Za-z0-9_\-]+)/);
+  if(m){var inc=decode(m[1]); if(inc){applyState(inc);save();
+   history.replaceState(null,"",location.pathname+location.search);
+   window.__synced=1}}}catch(e){}}
+
+/* ---- share codes: state -> url-safe base64 ---- */
+function encode(o){
+ var j=JSON.stringify(o);
+ var b=btoa(unescape(encodeURIComponent(j)));
+ return b.replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");}
+function decode(c){try{
+ var b=c.replace(/-/g,"+").replace(/_/g,"/");
+ while(b.length%4)b+="=";
+ return JSON.parse(decodeURIComponent(escape(atob(b))));}catch(e){return null}}
+function shareCode(){return encode(stateObj())}
+function shareLink(){return location.origin+location.pathname+"#s="+shareCode()}
 function esc(x){return x}
 function noteHTML(f){return f?'<div class="note'+(f.hot?' hot':'')+'"><b>'+f.b+'</b>'+f.x+'</div>':''}
 
@@ -1074,21 +1301,29 @@ var LINKS=[["Lantern boat","lantern"],["Tailor","tailor"],["Collect the tailorin
 function linkFor(title){for(var i=0;i<LINKS.length;i++){if(title.indexOf(LINKS[i][0])>-1)return LINKS[i][1]}return null}
 function bookById(id){var r=null;BOOK.forEach(function(g){g.items.forEach(function(x){if(x.id===id)r=x})});return r}
 
+function tripDate(n){return new Date(2026,7,25+n)}
+function isToday(n){var t=new Date(),d=tripDate(n);
+ return t.getFullYear()===d.getFullYear()&&t.getMonth()===d.getMonth()&&t.getDate()===d.getDate()}
+function todayN(){for(var i=1;i<=8;i++)if(isToday(i))return i;return 0}
+
 function days(){
- var h='<h2><i class="i-dn"></i>Da Nang &middot; 26–30 August</h2>';
+ var h='<h2><i class="i-dn"></i>Da Nang &middot; 26\u201330 August</h2>';
  DAYS.forEach(function(d,i){
-  if(i===4)h+='<h2><i class="i-hc"></i>Ho Chi Minh City &middot; 30 Aug – 2 Sep</h2>';
+  if(i===4)h+='<h2><i class="i-hc"></i>Ho Chi Minh City &middot; 30 Aug \u2013 2 Sep</h2>';
+  var pi=d.alts?(plan[d.n]||0):0;
+  var EV=pi?d.alts[pi-1].e:d.e;
+  var altNote=pi?d.alts[pi-1].note:"";
 
   // ---- build a timed list: fixed events, commute legs, chosen + suggested food
   var seq=[],last="00:00";
-  d.e.forEach(function(e){
+  EV.forEach(function(e){
    if(e[0]!=="g"&&/^\d\d:\d\d$/.test(e[0])) last=e[0];
    seq.push({t:last,kind:e[0]==="g"?"go":"ev",raw:e});
   });
   EATS.forEach(function(E){
    var pick=eat[E.id];
    if(pick&&pick.d===d.n){ seq.push({t:pick.t,kind:"eat",E:E,sl:pick}); return; }
-   if(pick) return;                       // placed on another day
+   if(pick) return;
    E.slots.forEach(function(sl){ if(sl.d===d.n) seq.push({t:sl.t,kind:"sug",E:E,sl:sl}); });
   });
   function key(t){var hh=+t.slice(0,2);return (hh<4?hh+24:hh)*60+ +t.slice(3,5)}
@@ -1096,25 +1331,36 @@ function days(){
   seq.sort(function(a,b){return a.k-b.k});
 
   // ---- day meta
-  var times=d.e.filter(function(e){return /^\d\d:\d\d$/.test(e[0])}).map(function(e){return e[0]})
+  var times=EV.filter(function(e){return /^\d\d:\d\d$/.test(e[0])}).map(function(e){return e[0]})
     .sort(function(a,b){var k=function(t){var h=+t.slice(0,2);return (h<4?h+24:h)*60+ +t.slice(3,5)};return k(a)-k(b)});
-  var stops=d.e.filter(function(e){return e[0]!=="g"}).length;
-  var mins=d.e.filter(function(e){return e[0]==="g"}).reduce(function(a,e){
+  var stops=EV.filter(function(e){return e[0]!=="g"}).length;
+  var mins=EV.filter(function(e){return e[0]==="g"}).reduce(function(a,e){
     var m=e[1].match(/(\d+)\s*hr/), n=e[1].match(/(\d+)\s*min/);
     return a+(m?+m[1]*60:0)+(n?+n[1]:0)},0);
   var added=EATS.filter(function(E){return eat[E.id]&&eat[E.id].d===d.n}).length;
   var open=EATS.filter(function(E){return !eat[E.id]&&E.slots.some(function(x){return x.d===d.n})}).length;
   var meta='<div class="dmeta">'+
-    '<span class="mp">🕐 '+times[0]+'–'+times[times.length-1]+'</span>'+
-    '<span class="mp">📍 '+stops+' stops</span>'+
-    '<span class="mp">🚗 '+(mins>=60?Math.round(mins/60*10)/10+' hrs':mins+' min')+' moving</span>'+
-    (added?'<span class="mp on">🍽 '+added+' added</span>':'')+
-    (open?'<span class="mp sug">🍽 '+open+' to try</span>':'')+'</div>';
+    '<span class="mp">\ud83d\udd50 '+times[0]+'\u2013'+times[times.length-1]+'</span>'+
+    '<span class="mp">\ud83d\udccd '+stops+' stops</span>'+
+    '<button class="mp tog'+(gdet[d.n]?" on":"")+'" data-g="'+d.n+'">\ud83d\ude97 '+
+      (mins>=60?Math.round(mins/60*10)/10+' hrs':mins+' min')+' moving'+
+      '<i>'+(gdet[d.n]?'hide legs':'show legs')+'</i></button>'+
+    (added?'<span class="mp on">\ud83c\udf7d '+added+' added</span>':'')+
+    (open?'<span class="mp sug">\ud83c\udf7d '+open+' to try</span>':'')+'</div>';
 
-  // ---- render rows with time-of-day bands
+  // ---- plan switcher
+  var sw="";
+  if(d.alts){
+   var names=["As planned"].concat(d.alts.map(function(a){return a.label}));
+   sw='<div class="plans"><span class="plab">Plan</span>'+
+     names.map(function(nm,ix){return '<button class="pbtn'+(ix===pi?" on":"")+'" data-pd="'+d.n+'" data-pi="'+ix+'">'+nm+'</button>'}).join("")+
+     '</div>'+(altNote?'<div class="pnote">'+altNote+'</div>':'');
+  }
+
+  // ---- rows
   var band="",out="";
   function bandOf(k){var hh=Math.floor(k/60);
-    return hh<12?["Morning","🌅"]:hh<17?["Afternoon","☀️"]:hh<22?["Evening","🌆"]:["Late","🌙"]}
+    return hh<12?["Morning","\ud83c\udf05"]:hh<17?["Afternoon","\u2600\ufe0f"]:hh<22?["Evening","\ud83c\udf06"]:["Late","\ud83c\udf19"]}
   seq.forEach(function(r,ix){
    if(ix>0){var prev=seq[ix-1], d1=r.k-prev.k;
     if(d1>=100 && prev.kind!=="go" && r.kind!=="go"){
@@ -1124,7 +1370,8 @@ function days(){
    if(bn[0]!==band){band=bn[0];out+='<div class="band"><span>'+bn[1]+' '+band+'</span></div>'}
    if(r.kind==="go"){
     var e=r.raw, ic=e[2]==="walk"?WALK:CAR;
-    out+='<div class="go"><span class="goi">'+ic+'<b>'+e[1]+'</b>'+(e[3]?'<span>'+e[3]+'</span>':'')+'</span></div>';
+    out+='<div class="go'+(gdet[d.n]?"":" min")+'"><span class="goi">'+ic+'<b>'+e[1]+'</b>'+
+      (e[3]&&gdet[d.n]?'<span>'+e[3]+'</span>':'')+'</span></div>';
     return;
    }
    if(r.kind==="eat"||r.kind==="sug"){
@@ -1132,36 +1379,51 @@ function days(){
     out+='<div class="ev food'+(on?" on":" sug")+'" data-add="'+E.id+'" data-d="'+r.sl.d+'" data-t="'+r.sl.t+'" role="button" tabindex="0">'+
       '<div class="tm">'+r.t+'</div>'+
       '<div class="ti">'+E.emo+' '+E.name+
-        '<span class="fchip">'+(on?'✓ added':'+ add')+'</span></div>'+
-      '<div class="nt">'+E.kind+' · '+E.walk+' min walk · '+E.spend+
-        (E.badge?' · '+E.badge:'')+'</div></div>';
+        '<span class="fchip">'+(on?'\u2713 added':'+ add')+'</span></div>'+
+      '<div class="nt">'+E.kind+' \u00b7 '+E.walk+' min walk \u00b7 '+E.spend+
+        (E.badge?' \u00b7 '+E.badge:'')+'</div></div>';
     return;
    }
    var e=r.raw;
-   var key=e[3]==="key"||e[2]==="key";
+   var kk=e[3]==="key"||e[2]==="key";
    var note=(e[3]&&e[3]!=="key")?e[3]:((e[2]&&e[2]!=="key")?e[2]:"");
    var dur="";
-   var dm=note.match(/^(~?\d+[–\-]?\d*\s*(?:hrs?|min|minutes))\b[\s·]*/i);
+   var dm=note.match(/^(~?\d+[\u2013\-]?\d*\s*(?:hrs?|min|minutes))\b[\s\u00b7]*/i);
    if(dm){dur='<span class="dur">'+dm[1]+'</span>';note=note.slice(dm[0].length)}
    var lid=linkFor(e[1]), B=lid?bookById(lid):null;
+   var done=B&&st[lid];
    var open2=B&&iop["tl-"+d.n+"-"+lid];
-   out+='<div class="ev'+(key?" key":"")+(B?" act":"")+'"'+(B?' data-tl="'+d.n+'-'+lid+'" role="button" tabindex="0"':'')+'>'+
+   out+='<div class="ev'+(kk?" key":"")+(B?" act":"")+(done?" bkd":"")+'"'+(B?' data-tl="'+d.n+'-'+lid+'" role="button" tabindex="0"':'')+'>'+
      '<div class="tm">'+e[0]+dur+'</div>'+
-     '<div class="ti">'+e[1]+(B?'<span class="lk">'+(open2?'hide':'book')+'</span>':'')+'</div>'+
+     '<div class="ti">'+e[1]+(B?'<span class="lk'+(done?" ok":"")+'">'+(done?'\u2713 booked':(open2?'hide':'book'))+'</span>':'')+'</div>'+
      (note?'<div class="nt">'+note+'</div>':'')+
      (open2?'<div class="inact">'+
         (B.l?B.l.map(function(l){return '<a href="'+l[1]+'" target="_blank" rel="noopener">'+EXT+l[0]+'</a>'}).join(''):'')+
         (B.tel?B.tel.map(function(t){return '<a href="tel:'+t[1]+'">'+PHN+t[0]+'</a>'}).join(''):'')+
         (B.map?'<a href="https://www.google.com/maps/search/?api=1&query='+B.map[1]+'" target="_blank" rel="noopener">'+PIN+B.map[0]+'</a>':'')+
+        '<a class="jb" href="#" data-jb="'+lid+'">'+CHV+'Open the booking</a>'+
       '</div>':'')+
      '</div>';
   });
 
-  var td=new Date(), isT=(td.getFullYear()===2026)&&((td.getMonth()===7&&td.getDate()===25+d.n)||(td.getMonth()===8&&25+d.n>31&&td.getDate()===25+d.n-31));
-  h+='<div class="day '+d.c+(dop[d.n]?" open":"")+(isT?" today":"")+'" data-d="'+d.n+'">'+
+  // ---- map row
+  var pins=PINS[d.n]||[],org=BASE[d.c];
+  var mapb='<div class="mapr"><span class="mlab">'+PIN+'Map</span>'+
+   pins.map(function(p){return '<a href="https://www.google.com/maps/search/?api=1&query='+p[1]+'" target="_blank" rel="noopener">'+p[0]+'</a>'}).join("")+
+   (pins.length>1?'<a class="rt" href="https://www.google.com/maps/dir/?api=1&origin='+org+'&destination='+org+
+     '&waypoints='+pins.map(function(p){return p[1]}).join("%7C")+'&travelmode=driving" target="_blank" rel="noopener">Route the whole day</a>':'')+
+   '</div>';
+
+  // ---- day note
+  var dnb='<div class="dnote"><label>\ud83d\udcdd Notes for the day \u2014 what you spent, who paid, what to remember</label>'+
+    '<textarea data-dn="'+d.n+'" placeholder="e.g. Harith paid the Cu Chi car, 1.6M. Everyone owes him 265K.">'+
+    (dnote[d.n]||"").replace(/</g,"&lt;")+'</textarea></div>';
+
+  var isT=isToday(d.n);
+  h+='<div class="day '+d.c+(dop[d.n]?" open":"")+(isT?" today":"")+'" data-d="'+d.n+'" id="day'+d.n+'">'+
    '<div class="dh" role="button" tabindex="0"><div class="dnum"><b>'+d.d+'</b><i>'+d.dow+'</i></div>'+
-   '<div class="dt"><b>'+d.t+(isT?'<span class="tdy">Today</span>':'')+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
-   '<div class="db"><div class="dbi"><div class="dbp">'+meta+'<div class="tl">'+out+'</div>'+noteHTML(d.f)+'</div></div></div></div>';
+   '<div class="dt"><b>'+d.t+(isT?'<span class="tdy">Today</span>':'')+(pi?'<span class="tdy alt">'+d.alts[pi-1].label+'</span>':'')+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
+   '<div class="db"><div class="dbi"><div class="dbp">'+sw+meta+'<div class="tl">'+out+'</div>'+mapb+noteHTML(d.f)+dnb+'</div></div></div></div>';
  });
  $("p-days").innerHTML=h;
  $("p-days").querySelectorAll(".dh").forEach(function(x){
@@ -1169,11 +1431,27 @@ function days(){
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}};
  });
+ $("p-days").querySelectorAll("[data-pd]").forEach(function(x){
+  x.onclick=function(ev){ev.stopPropagation();
+   var n=+x.dataset.pd,ix=+x.dataset.pi;
+   if(ix)plan[n]=ix; else delete plan[n];
+   save();days();};
+ });
+ $("p-days").querySelectorAll("[data-g]").forEach(function(x){
+  x.onclick=function(ev){ev.stopPropagation();var n=x.dataset.g;gdet[n]=!gdet[n];days();};
+ });
  $("p-days").querySelectorAll("[data-tl]").forEach(function(x){
   var go=function(ev){ if(ev)ev.stopPropagation();
    var k="tl-"+x.dataset.tl; iop[k]=!iop[k]; days(); };
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
+ });
+ $("p-days").querySelectorAll("[data-jb]").forEach(function(x){
+  x.onclick=function(ev){ev.preventDefault();ev.stopPropagation();openBooking(x.dataset.jb)};
+ });
+ $("p-days").querySelectorAll("[data-dn]").forEach(function(t){
+  t.onclick=function(e){e.stopPropagation()};
+  t.oninput=function(){dnote[t.dataset.dn]=t.value;save()};
  });
  $("p-days").querySelectorAll("[data-add]").forEach(function(x){
   var go=function(ev){ if(ev)ev.stopPropagation();
@@ -1184,6 +1462,26 @@ function days(){
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
+}
+
+function goTab(p){var b=document.querySelector('#tabs button[data-p="'+p+'"]');if(b)b.click()}
+function openBooking(id){
+ filt="all";
+ document.querySelectorAll(".segs button").forEach(function(x){x.classList.toggle("on",x.dataset.f==="all")});
+ iop[id]=true; goTab("book"); book();
+ setTimeout(function(){var el=document.querySelector('[data-t="'+id+'"]');
+  if(el)el.scrollIntoView({behavior:"smooth",block:"center"})},60);
+}
+function openDay(n){
+ dop[n]=true; goTab("days"); days();
+ setTimeout(function(){var el=$("day"+n);
+  if(el)el.scrollIntoView({behavior:"smooth",block:"start"})},60);
+}
+function dayForBooking(id){
+ for(var i=0;i<DAYS.length;i++){var d=DAYS[i];
+  var evs=d.e.concat((d.alts||[]).reduce(function(a,x){return a.concat(x.e)},[]));
+  for(var j=0;j<evs.length;j++){if(evs[j][0]!=="g"&&linkFor(evs[j][1])===id)return d}}
+ return null;
 }
 
 function acts(it){
@@ -1210,7 +1508,8 @@ function book(){
     '<div class="ih"><div class="bx" data-c="'+it.id+'" role="checkbox" tabindex="0" aria-checked="'+d+'" aria-label="Mark '+it.t+' booked">'+TICK+'</div>'+
     '<div class="itx" data-t="'+it.id+'" role="button" tabindex="0"><div class="itt">'+it.t+
     '<span class="tag '+TAG[it.p][1]+'">'+TAG[it.p][0]+'</span></div>'+
-    '<div class="itw">'+it.w+'</div></div></div>'+
+    '<div class="itw">'+it.w+(function(){var D=dayForBooking(it.id);
+      return D?'<button class="jday" data-jd="'+D.n+'">'+D.dow+' '+D.d+' \u2192</button>':''})()+'</div></div></div>'+
     '<div class="ib"><div class="ibi"><div class="ibp">'+dl+acts(it)+noteHTML(it.f)+
     '<textarea placeholder="Notes — confirmation number, who you spoke to…" data-n="'+it.id+'">'+(nt[it.id]||"")+'</textarea>'+
     '</div></div></div></div>';
@@ -1227,6 +1526,9 @@ function book(){
   x.onclick=go;
   x.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}};
  });
+ $("lst").querySelectorAll("[data-jd]").forEach(function(b){
+  b.onclick=function(e){e.stopPropagation();openDay(+b.dataset.jd)};
+ });
  $("lst").querySelectorAll("textarea").forEach(function(t){
   t.onclick=function(e){e.stopPropagation()};
   t.oninput=function(){nt[t.dataset.n]=t.value;save()}});
@@ -1234,7 +1536,7 @@ function book(){
 }
 
 function info(){
- $("p-info").innerHTML=INFO.map(function(s){
+ $("infolist").innerHTML=INFO.map(function(s){
   var b="";
   if(s.type==="rows")b=s.rows.map(function(r){return '<div class="row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'}).join("");
   else if(s.type==="cols"){
@@ -1293,19 +1595,22 @@ function foodPane(){
 }
 
 function ideaPane(){
- var h="";
+ var h='';
  IDEAS.forEach(function(g){
   h+='<h2>'+g.g+'</h2>';
   g.items.forEach(function(it){
    var v=idea[it.id]||"";
-   h+='<div class="idc '+(v||"")+'">'+
-    '<div class="idt">'+it.t+(v?'<span class="idst '+v+'">'+(v==="yes"?"Do it":v==="no"?"Skip":"Maybe")+'</span>':'')+'</div>'+
+   var dn=it.dn;
+   h+='<div class="idc '+(dn?"built ":"")+(v||"")+'">'+
+    '<div class="idt">'+it.t+
+      (dn?'<span class="idst built">Built</span>':(v?'<span class="idst '+v+'">'+(v==="yes"?"Do it":v==="no"?"Skip":"Maybe")+'</span>':''))+'</div>'+
     '<p class="idw">'+it.w+'</p>'+
     '<p class="idy"><b>Why:</b> '+it.why+'</p>'+
+    (dn?'<p class="iddn"><b>✓ What I did:</b> '+dn+'</p>':'')+
     '<div class="idbtns">'+
       ['yes','maybe','no'].map(function(k){
        return '<button class="idb '+k+(v===k?" on":"")+'" data-i="'+it.id+'" data-v="'+k+'">'+
-         (k==="yes"?"✓ Do it":k==="maybe"?"~ Maybe":"✕ Skip")+'</button>'}).join("")+
+         (k==="yes"?(dn?"✓ Keep":"✓ Do it"):k==="maybe"?"~ Maybe":(dn?"✕ Undo":"✕ Skip"))+'</button>'}).join("")+
     '</div></div>';
   });
  });
@@ -1317,6 +1622,89 @@ function ideaPane(){
    save();ideaPane();tally();
   };
  });
+}
+
+function fmtV(v){
+ if(v>=1000000)return (Math.round(v/100000)/10).toString().replace(/\.0$/,"")+"M ₫";
+ if(v>=1000)return Math.round(v/1000)+"K ₫";
+ return v+" ₫";}
+function fmtR(v){var r=v*RS;
+ if(r>=1000000)return "Rs "+(Math.round(r/100000)/10).toString().replace(/\.0$/,"")+"M";
+ if(r>=1000)return "Rs "+(Math.round(r/100)/10).toString().replace(/\.0$/,"")+"K";
+ return "Rs "+Math.round(r);}
+
+function budget(){
+ var perHead=0,perHeadOpt=0,h="";
+ h+='<div class="bgrp"><span>Splitting between</span>'+
+   '<button class="stp" data-gs="-1">−</button><b id="gsz">'+grp+'</b>'+
+   '<button class="stp" data-gs="1">+</button><span>people</span></div>';
+ COSTS.forEach(function(g){
+  h+='<div class="bsec"><h4>'+g.g+'</h4>';
+  g.items.forEach(function(it){
+   var head=it.u==="group"?it.v/grp:it.v;
+   if(it.o)perHeadOpt+=head; else perHead+=head;
+   var paid=!!pay[it.id];
+   h+='<div class="brow'+(paid?" paid":"")+'">'+
+     '<button class="bck" data-p="'+it.id+'" aria-label="Mark paid">'+(paid?'✓':'')+'</button>'+
+     '<div class="bt">'+it.t+(it.o?'<span class="bopt">optional</span>':'')+
+       (it.u==="group"?'<span class="bgr">'+fmtV(it.v)+' for the group</span>':'')+
+       (it.n?'<div class="bn">'+it.n+'</div>':'')+'</div>'+
+     '<div class="bv">'+fmtV(Math.round(head))+'<span>'+fmtR(head)+'</span></div>'+
+   '</div>';
+  });
+  h+='</div>';
+ });
+ var paidSum=0;
+ COSTS.forEach(function(g){g.items.forEach(function(it){
+  if(pay[it.id])paidSum+=(it.u==="group"?it.v/grp:it.v)})});
+ var left=perHead+perHeadOpt-paidSum;
+ h+='<div class="btot">'+
+  '<div class="btr"><span>Core, per person</span><b>'+fmtV(Math.round(perHead))+'</b><i>'+fmtR(perHead)+'</i></div>'+
+  '<div class="btr"><span>Optional (tailoring, shopping)</span><b>'+fmtV(Math.round(perHeadOpt))+'</b><i>'+fmtR(perHeadOpt)+'</i></div>'+
+  '<div class="btr big"><span>Everything, per person</span><b>'+fmtV(Math.round(perHead+perHeadOpt))+'</b><i>'+fmtR(perHead+perHeadOpt)+'</i></div>'+
+  '<div class="btr"><span>Marked paid</span><b>'+fmtV(Math.round(paidSum))+'</b><i>'+fmtR(paidSum)+'</i></div>'+
+  '<div class="btr big"><span>Still to pay</span><b>'+fmtV(Math.round(left))+'</b><i>'+fmtR(left)+'</i></div>'+
+  '<div class="btr grp"><span>Whole group, everything</span><b>'+fmtV(Math.round((perHead+perHeadOpt)*grp))+'</b><i>'+fmtR((perHead+perHeadOpt)*grp)+'</i></div>'+
+ '</div>'+
+ '<p class="bdis">Estimates, not quotes. Flights and accommodation are excluded — add them yourself. Rupees at 1M ₫ = Rs 11.5K.</p>';
+ $("budget").innerHTML=h;
+ $("budget").querySelectorAll("[data-p]").forEach(function(b){
+  b.onclick=function(){var k=b.dataset.p;if(pay[k])delete pay[k];else pay[k]=1;save();budget()}});
+ $("budget").querySelectorAll("[data-gs]").forEach(function(b){
+  b.onclick=function(){grp=Math.max(1,Math.min(20,grp+ +b.dataset.gs));save();budget()}});
+}
+
+function sharePane(){
+ var el=$("sharebox"); if(!el)return;
+ el.innerHTML='<p class="shp">Everything you tick lives on this phone only. To hand your version to the group, copy the link below and send it. Whoever opens it gets your ticks, food picks, plans, votes and notes — it overwrites theirs, so agree who keeps the master copy.</p>'+
+  '<div class="acts"><button class="btn" id="cplink">Copy share link</button>'+
+  '<button class="btn sec" id="cpcode">Copy code only</button></div>'+
+  '<label class="shl">Paste someone else’s code here</label>'+
+  '<textarea id="inbox" placeholder="Paste the code, then press Apply"></textarea>'+
+  '<div class="acts"><button class="btn sec" id="applyc">Apply</button></div>'+
+  '<div class="shmsg" id="shmsg"></div>';
+ function msg(t,ok){var m=$("shmsg");m.textContent=t;m.className="shmsg show "+(ok?"g":"r");
+  setTimeout(function(){m.className="shmsg"},4000)}
+ function copy(t,label){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+   navigator.clipboard.writeText(t).then(function(){msg(label+" copied.",1)},function(){fallback(t,label)});
+  } else fallback(t,label);
+ }
+ function fallback(t,label){
+  var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);
+  ta.select();try{document.execCommand("copy");msg(label+" copied.",1)}catch(e){msg("Copy failed — select it by hand.",0)}
+  document.body.removeChild(ta);
+ }
+ $("cplink").onclick=function(){copy(shareLink(),"Link")};
+ $("cpcode").onclick=function(){copy(shareCode(),"Code")};
+ $("applyc").onclick=function(){
+  var v=$("inbox").value.trim();
+  var m2=v.match(/[#&]s=([A-Za-z0-9_\-]+)/); if(m2)v=m2[1];
+  var d=decode(v);
+  if(!d||typeof d!=="object"){msg("That code didn’t read. Copy the whole thing.",0);return}
+  applyState(d);save();days();book();foodPane();ideaPane();budget();tally();
+  msg("Applied. Everything is now in sync with that code.",1);
+ };
 }
 
 function tally(){
@@ -1331,8 +1719,8 @@ function tally(){
  var bd=$("bdg");bd.textContent=u;bd.classList.toggle("show",u>0);
  var ec=Object.keys(eat).length,fb=$("fbdg");
  fb.textContent=ec;fb.classList.toggle("show",ec>0);
- var total=IDEAS.reduce(function(a,g){return a+g.items.length},0);
- var undec=total-Object.keys(idea).length, ib=$("ibdg");
+ var pend=0;IDEAS.forEach(function(g){g.items.forEach(function(i){if(!i.dn&&!idea[i.id])pend++})});
+ var undec=pend, ib=$("ibdg");
  ib.textContent=undec; ib.classList.toggle("show",undec>0);
 }
 
@@ -1367,7 +1755,20 @@ $("tt").onclick=function(){
  save();
 };
 
-load();days();book();foodPane();ideaPane();info();countdown();
+load();days();book();foodPane();ideaPane();info();countdown();budget();sharePane();
+
+/* open on today once the trip has started */
+(function(){var n=todayN();
+ if(n){dop[n]=true;days();
+  setTimeout(function(){var el=$("day"+n);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})},300);}
+ if(window.__synced){var b=document.createElement("div");b.className="toast";
+  b.textContent="Loaded someone else’s copy — ticks, plans and notes are now theirs.";
+  document.body.appendChild(b);setTimeout(function(){b.classList.add("go")},60);
+  setTimeout(function(){b.remove()},6000);}
+})();
+
+if("serviceWorker" in navigator){window.addEventListener("load",function(){
+ navigator.serviceWorker.register("sw.js").catch(function(){})})}
 </script>
 </body>
 </html>
