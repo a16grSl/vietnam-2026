@@ -803,7 +803,7 @@ const DAYS=[
  ["g","15 min","car","DAD → villa · 5.8km · Grab ~90K ₫"],
  ["15:45","Drop bags, quick refresh","Allow 30–45 min"],
  ["g","45 min","car","Villa → Hoi An · 23km coastal road · Grab ~330K ₫"],
- ["17:15","Arrive Hoi An old town","Park at An Hoi bridge side"],
+ ["17:15","Arrive Hoi An old town","key","Cars are barred from the old town 15:00–21:30 — get dropped at the An Hoi bridge and walk in"],
  ["17:30","Lantern boat on the Hoai River","key","15 min on the water · 170K ₫ for 1–3"],
  ["18:15","Tailor — give measurements","key","Do this tonight or the suit won't make Friday. Ask for a Thursday interim fitting while you're there."],
  ["19:15","Walk the old town","Japanese Bridge, museums, lantern streets"],
@@ -888,11 +888,13 @@ const DAYS=[
  e:[
  ["10:30","Slow start","No alarm · you've earned it"],
  ["11:30","Café and bar hopping","An Thuong is walkable from the villa"],
- ["13:30","Market shopping","Han Market or Con Market · until around six"],
+ ["13:00","Market shopping","Han Market or Con Market · until around six"],
  ["g","15 min","car","Villa → Marble Mountain · 7km · Grab ~110K ₫"],
- ["16:15","Marble Mountain","key","40K ₫ entry · 15K lift · caves, Âm Phủ, summit"],
- ["17:40","Sunset from the summit","Sunset is about 18:05 · last lift down 17:30, so take the steps"],
- ["g","15 min","car","Marble Mountain → villa · 7km"],
+ ["14:15","Marble Mountain","key","40K ₫ entry · 15K lift · caves, Âm Phủ, summit · last entry 16:00"],
+ ["16:15","Down and out","The lift stops at 17:00 and staff clear the site by 17:30"],
+ ["g","15 min","car","Marble Mountain → My Khe beach · 6km"],
+ ["16:45","Beach bars on My Khe","key","Sunset is 18:03 — this is where you watch it, not the mountain"],
+ ["g","5 min","walk","Beach → villa · 400m"],
  ["18:45","Back, shower, change",""],
  ["g","12 min","car","Villa → Novotel, 36 Bạch Đằng · 5.2km"],
  ["20:00","Sky36","key","36th floor · reservation essential on a holiday Saturday"],
@@ -935,11 +937,11 @@ const DAYS=[
 
 {c:"hc",n:6,dow:"Mon",d:"31",t:"🪖 Cu Chi Tunnels",s:"Then Saigon Square",
  e:[
- ["06:00","Up","The early start is the whole trick"],
- ["07:00","Leave the hotel","key","Pre-booked car or tour pickup"],
- ["g","1 hr 45","car","Hotel → Củ Chi Bến Dược · 58km · Bến Đình is 20 min closer"],
- ["08:45","Arrive at Cu Chi","key","Bến Dược · 110K ₫ entry · site opens 07:00"],
- ["09:00","Tunnels, traps, command bunkers","2–2.5 hrs · shooting range is ~US$2 a round, optional"],
+ ["05:45","Up","The early start is the whole trick"],
+ ["06:30","Leave the hotel","key","Pre-booked car · half an hour earlier than normal, it is a holiday Monday"],
+ ["g","1 hr 45","car","Hotel → Củ Chi Bến Dược · 58km · allow 2–2.5 hrs on the holiday"],
+ ["08:45","Arrive at Cu Chi","key","Bến Dược · 110–150K ₫ entry · opens 07:00 · last entry 16:00"],
+ ["09:00","Tunnels, traps, command bunkers","2–2.5 hrs · the shooting range is at Bến Đình, not here"],
  ["11:45","Head back","Beat the afternoon heat and the coach traffic"],
  ["g","1 hr 45","car","Củ Chi → hotel · up to 2 hrs 15 at peak"],
  ["13:45","Late lunch in District 1",""],
@@ -986,7 +988,7 @@ const IDEAS=[
  why:"Trades the early morning for a cheaper effective price and a much better experience — but you lose the clear-weather morning window.",dn:"Built as a switchable plan on Thursday. Open day 27 and tap <b>Afternoon ticket</b>. The early start is still Plan A because it is the only one that guarantees a clear-weather window."},
 {id:"marble",t:"Marble Mountain at sunset on Saturday",
  w:"It's 10 min from the villa and Saturday is empty until Sky36 at 21:00. Entry 40K ₫, lift 15K.",
- why:"Verified as much closer than I first assumed. Saturday has a four-hour hole in it.",dn:"Done — Marble Mountain is in Saturday at 16:15, with the summit for sunset. Market shopping moved half an hour earlier."},
+ why:"Verified as much closer than I first assumed. Saturday has a four-hour hole in it.",dn:"Done, but <b>not at sunset</b>. Verified against two independent sources: last entry is 16:00, the lift stops at 17:00 and staff clear the mountain by 17:30 — sunset on the 29th is 18:03. It is now in Saturday at 14:15, with the beach at 16:45 for the actual sunset."},
 {id:"sontra",t:"Son Tra + Lady Buddha as the Ba Na fallback",
  w:"If Thursday morning is clouded in, this is the swap. Scenic drive, big views, roughly half a day.",
  why:"Ba Na sits in cloud often. Having the fallback decided in advance stops the day being wasted arguing.",dn:"Built as a switchable plan on Thursday. Tap <b>Sơn Trà fallback</b> on the morning if the summit is in cloud — it keeps the Han River cruise."},
@@ -1049,7 +1051,7 @@ const EATS=[
  tel:"0702569420",map:"Missteak+Da+Nang",url:"https://www.missteak.co/"},
 {id:"huynhhoa",city:"hc",emo:"🥪",name:"Bánh Mì Huỳnh Hoa",kind:"Bánh mì, takeaway",
  badge:"Cash only",badgeT:"warn",price:1,
- addr:"26 Lê Thị Riêng",walk:9,hours:"Late afternoon to late evening",
+ addr:"26 Lê Thị Riêng",walk:9,hours:"14:00–23:00 daily",
  order:"The one sandwich they make",spend:"58–73K ₫",
  note:"No seating at all. Queue up to 30 min at peak. One sandwich feeds two — ask them to halve it.",
  slots:[{d:5,t:"18:45",label:"Sun 30 · after Ban Thanh"},{d:7,t:"17:30",label:"Tue 1 · afternoon"}],
@@ -1090,7 +1092,7 @@ const BOOK=[
  f:{hot:1,b:"Phone only",x:"None of these take online bookings. Ring them, and confirm the show is running that night while you're on the call."}},
 
 {id:"sky36",p:"now",t:"🍸 Reserve Sky36",w:"Saturday 29 Aug, 8pm",
- r:[["Where","36F Novotel Premier Han River, 36–38 Bach Dang"],
+ r:[["Holiday minimum","One source puts holiday-weekend table minimums at around 2M ₫ — about 330K a head for six. <b>Unconfirmed</b>: ask when you ring."],["Where","36F Novotel Premier Han River, 36–38 Bach Dang"],
     ["Hours","18:00–02:00 · DJs from 21:00"],
     ["Expect","A minimum spend. Highest rooftop in the city, priced to match."],
     ["Dress","Smart casual — no flip-flops or vests"]],
@@ -1163,10 +1165,11 @@ const BOOK=[
 {id:"marble",p:"walk",t:"⛰️ Marble Mountain",w:"Spare-day option",
  r:[["Entry","40K ₫ · lift 15K ₫ each way"],
     ["Am Phu cave","20K ₫ extra — the 'hell cave', worth it"],
-    ["Hours","07:30–17:00 · cash only in dong"],
-    ["Best time","Early morning or late afternoon. Queues 09:00–15:00."],
+    ["Hours","07:00–17:00 · <b>last entry 16:00</b> · lift stops 17:00 · staff clear the site by 17:30"],
+    ["Not for sunset","Sunset on the 29th is 18:03 — half an hour after they clear the mountain. Watch it from My Khe instead."],
+    ["Best time","Early morning or from 14:00. Queues 09:00–15:00."],
     ["Getting there","10 min from the villa, 5.7km south · on the way to Hoi An"],
-    ["Now in the plan","Saturday 29th, 16:15, for sunset from the summit."]],
+    ["Now in the plan","Saturday 29th, 14:15, then the beach for sunset."]],
  map:["Marble Mountains","Marble+Mountains+Da+Nang"]}
 ]},
 
@@ -1178,7 +1181,8 @@ const BOOK=[
     ["Journey","1 hr 25 to Bến Đình, 1 hr 45 to Bến Dược · up to 2 hrs back at peak"],
     ["Group tour","US$15–25pp including hotel pickup"],
     ["Private car","US$50–70 return to Bến Dược — better for a group, you set the pace"],
-    ["Extras","Shooting range ~US$2 a round, paid on site"]],
+    ["Shooting range","At <b>Bến Đình only</b> — one source says it does not run at Bến Dược. Do not promise it to anyone."],
+    ["Holiday journey","Allow 2–2.5 hrs each way on 31 August, not the usual 1 hr 45. Leaving at 06:30 buys the margin."]],
  l:[["Klook — half-day tour","https://www.klook.com/en-US/activity/1471-cu-chi-tunnels-experience-ho-chi-minh-city/",1],
     ["GetYourGuide — all tours","https://www.getyourguide.com/cu-chi-tunnels-l3671/",0],
     ["Viator","https://www.viator.com/Ho-Chi-Minh-City/d352",0]],
@@ -1292,13 +1296,24 @@ const INFO=[
  "<b>Beach bars on My Khe</b> — five minutes on foot, the reliable washout fallback.",
  "Both Da Nang options are the natural swap if Ba Na Hills is clouded in."]},
 
+{h:"What's actually been checked",emo:"🔍",ic:"M11 4a7 7 0 105.2 11.7L21 20.5M11 4a7 7 0 010 14",
+ type:"pack",rows:[
+ ["✅","Verified against a primary or operator source",
+  "Marble Mountain fees and hours \u00b7 Ba Na 1M \u20ab standard and 1.05M \u20ab after-15:00 with the buffet \u00b7 Th\u00eca G\u1ed7 address and phone \u00b7 B\u00e1nh M\u00ec Hu\u1ef3nh Hoa opens 14:00 \u00b7 War Remnants ticket desk shuts 11:00\u201313:00 \u00b7 Marble Mountain closes before sunset."],
+ ["⚠️","Reported, not confirmed",
+  "C\u1ee7 Chi entry (110\u2013150K \u20ab depending on source) \u00b7 the shooting range may be B\u1ebfn \u0110\u00ecnh only \u00b7 Sky36 holiday minimum spend \u00b7 basket-boat tipping \u00b7 lantern boat price \u00b7 National Day road closures."],
+ ["❌","Don't trust a research report that says otherwise",
+  "One AI report gave Ba Na as 900K/850K (wrong), Hu\u1ef3nh Hoa as opening at 06:00 (it opens at 14:00), and Th\u00eca G\u1ed7 at the wrong address with the wrong phone number \u2014 all marked \u201cverified\u201d, several citing city-government sites that publish none of it. Ring the place."],
+ ["📞","Worth one phone call each",
+  "Sky36 (minimum spend), the tailor (Thursday fitting), the C\u1ee7 Chi driver (say B\u1ebfn D\u01b0\u1ee3c out loud), and the H\u00e0n River cruise (the sailing that sits by the bridge at 21:00)."]]},
+
 {h:"Practical",emo:"🧭",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
  type:"list",rows:[
  "Carry cash — museums, boat booths and market stalls are dong only.",
  "<b>100K and 1M notes look almost identical.</b> Count twice.",
  "Haggle at markets. Open at a third of the asking price and settle near half.",
  "Tap any address on this page to open it in Maps.",
- "Sunset is around 18:05 all week — useful for the beach and the lantern boats."]}
+ "Sunset is 18:03 on the 29th and within a couple of minutes of that all week."]}
 ];
 
 
