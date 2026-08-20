@@ -21,7 +21,7 @@
   --line:#d2d2d7; --line2:#e8e8ed;
   --ink:#1d1d1f; --ink2:#3a3a3d; --mut:#5c5c61; --dim:#6e6e73;
   --acc:#0071e3; --acc2:#0058b9; --acctx:#0059ba; --btn:#0071e3; --accbg:rgba(0,113,227,.12);
-  --red:#c9372c; --redbg:rgba(201,55,44,.09);
+  --red:#c9372c; --redbg:rgba(201,55,44,.09); --onfill:#fff;
   --amb:#8a6100; --ambbg:rgba(180,130,10,.11);
   --grn:#1d7a4a; --grnbg:rgba(29,122,74,.10);
   --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
@@ -37,7 +37,7 @@
   --line:#38383a; --line2:#2a2a2c;
   --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
   --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
-  --red:#ff6961; --redbg:rgba(255,105,97,.14);
+  --red:#ff6961; --redbg:rgba(255,105,97,.14); --onfill:#14141a;
   --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
   --grn:#30d158; --grnbg:rgba(48,209,88,.13);
   --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
@@ -54,7 +54,7 @@
     --line:#38383a; --line2:#2a2a2c;
     --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
     --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
-    --red:#ff6961; --redbg:rgba(255,105,97,.14);
+    --red:#ff6961; --redbg:rgba(255,105,97,.14); --onfill:#14141a;
     --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
     --grn:#30d158; --grnbg:rgba(48,209,88,.13);
     --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.44);
@@ -71,14 +71,14 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.47 var(--f);
  letter-spacing:-.011em;-webkit-font-smoothing:antialiased;
- padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom));
+ padding-bottom:var(--s7);
  transition:background .35s var(--ease),color .35s var(--ease)}
 ::selection{background:var(--acc);color:#fff}
 :focus-visible{outline:2.5px solid var(--acc);outline-offset:3px;border-radius:6px}
 button{font-family:inherit}
 
 /* ================= HEADER ================= */
-.top{position:sticky;top:0;z-index:70;background:var(--glass);
+.top{position:sticky;top:0;z-index:70;padding-top:0;background:var(--glass);
  backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);
  border-bottom:.5px solid var(--line);padding:0 var(--s4)}
 .topin{max-width:760px;margin:0 auto;height:50px;display:flex;align-items:center;
@@ -156,9 +156,9 @@ h2 i{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
 .dnum{width:50px;height:54px;flex:0 0 auto;border-radius:var(--r-sm);
  display:flex;flex-direction:column;align-items:center;justify-content:center;
  background:var(--surf2);border:.5px solid var(--line2);transition:.3s var(--ease)}
-.day.dn .dnum{background-color:var(--c1);background-image:linear-gradient(155deg,var(--c1),var(--c2));border-color:transparent;color:#fff;
+.day.dn .dnum{background-color:var(--c1);background-image:linear-gradient(155deg,var(--c1),var(--c2));border-color:transparent;color:var(--onfill);
  box-shadow:0 3px 10px rgba(0,113,227,.28)}
-.day.hc .dnum{background-color:var(--c4);background-image:linear-gradient(155deg,var(--c5),var(--c4));border-color:transparent;color:#fff;
+.day.hc .dnum{background-color:var(--c4);background-image:linear-gradient(155deg,var(--c5),var(--c4));border-color:transparent;color:var(--onfill);
  box-shadow:0 3px 10px rgba(255,45,85,.26)}
 .dnum b{font-size:21px;font-weight:600;letter-spacing:-.04em;line-height:1}
 .dnum i{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.07em;
@@ -210,8 +210,7 @@ h2 i{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
 
 /* ================= BOOKINGS ================= */
 .prog{background:var(--surf);border:.5px solid var(--line);border-radius:var(--r-lg);
- padding:var(--s4);margin-bottom:var(--s3);box-shadow:var(--shadow);
- position:sticky;top:58px;z-index:20}
+ padding:var(--s4);margin-bottom:var(--s3);box-shadow:var(--shadow)}
 .pr1{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s3)}
 .pr1 .big{font-size:22px;font-weight:600;letter-spacing:-.03em}
 .pr1 .big em{font-style:normal;color:var(--mut);font-weight:400;font-size:15px}
@@ -278,7 +277,7 @@ dd b{font-weight:600;color:var(--ink)}
 .btn:active{transform:scale(.97)}
 .btn svg{width:13px;height:13px;flex:0 0 auto}
 .btn.sec{background:var(--accbg);color:var(--acctx)}
-.btn.sec:hover{background:var(--acc);color:#fff}
+.btn.sec:hover{background:var(--acc);color:var(--onfill)}
 .btn.ghost{background:transparent;color:var(--ink2);border:.5px solid var(--line)}
 .btn.ghost:hover{background:var(--surf2);color:var(--ink)}
 .none{font-size:13.5px;color:var(--mut);margin-top:var(--s4)}
@@ -331,6 +330,84 @@ textarea::placeholder{color:var(--dim)}
 .row span:first-child{color:var(--ink2)}
 .row span:last-child{color:var(--mut);font-variant-numeric:tabular-nums;
  white-space:nowrap;font-size:14px}
+
+/* ---- top tabs ---- */
+.tabs{max-width:760px;margin:0 auto;display:flex;gap:2px;padding:0 0 8px;overflow-x:auto;
+ scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:1 0 auto;background:none;border:none;font:inherit;cursor:pointer;
+ display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 14px;
+ border-radius:10px;color:var(--mut);min-height:42px;position:relative;
+ transition:.2s var(--ease);white-space:nowrap}
+.tabs button svg{width:17px;height:17px;flex:0 0 auto}
+.tabs button b{font-size:13.5px;font-weight:550;letter-spacing:-.015em}
+.tabs button:hover{color:var(--ink);background:var(--surf2)}
+.tabs button.on{background:var(--accbg);color:var(--acctx);font-weight:650}
+.tabs button.on b{font-weight:650}
+.tbdg{background:var(--red);color:var(--onfill);font-size:10px;font-weight:700;min-width:17px;height:17px;
+ border-radius:99px;display:none;align-items:center;justify-content:center;padding:0 5px;
+ font-style:normal}
+.tbdg.gr{background:var(--grn)}
+.tbdg.show{display:flex}
+@media(max-width:640px){
+ .tabs{gap:0;overflow:visible}
+ .tabs button{flex:1 1 0;min-width:0;flex-direction:column;gap:3px;padding:7px 2px 6px;
+  border-radius:12px;min-height:48px}
+ .tabs button b{font-size:10.5px;font-weight:600;letter-spacing:-.01em;
+  overflow:hidden;text-overflow:ellipsis;max-width:100%}
+ .tabs button svg{width:19px;height:19px}
+ .tbdg.show{position:absolute;top:3px;right:calc(50% - 20px);font-size:9px;min-width:15px;height:15px}
+}
+/* ---- ideas ---- */
+.idc{background-color:var(--surf);background-image:linear-gradient(180deg,var(--surf),var(--surf2));
+ border:.5px solid var(--line);border-radius:var(--r-lg);padding:var(--s4);margin-bottom:var(--s2);
+ box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.25s var(--ease)}
+.idc:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:transparent}
+.idc.yes:before{background:var(--grn)} .idc.no:before{background:var(--red)}
+.idc.maybe:before{background:var(--amb)}
+.idc.no{opacity:.55}
+.idt{font-size:17px;font-weight:620;letter-spacing:-.025em;margin-bottom:7px;line-height:1.3}
+.idst{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+ padding:3px 8px;border-radius:5px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+.idst.yes{background:var(--grnbg);color:var(--grn)}
+.idst.no{background:var(--redbg);color:var(--red)}
+.idst.maybe{background:var(--ambbg);color:var(--amb)}
+.idw{margin:0 0 8px;font-size:14.5px;color:var(--ink2);line-height:1.5;letter-spacing:-.01em}
+.idy{margin:0;font-size:13.5px;color:var(--mut);line-height:1.5;letter-spacing:-.008em}
+.idy b{color:var(--ink2);font-weight:600}
+.idbtns{display:flex;gap:6px;margin-top:13px;padding-top:13px;border-top:.5px solid var(--line2)}
+.idb{flex:1;font:inherit;font-size:13px;font-weight:550;padding:10px 8px;border-radius:10px;
+ border:.5px solid var(--line);background:transparent;color:var(--mut);cursor:pointer;
+ min-height:42px;transition:.18s var(--ease);letter-spacing:-.01em}
+.idb:hover{border-color:var(--line2);color:var(--ink)}
+.idb.yes.on{background:var(--grn);border-color:var(--grn);color:var(--onfill);font-weight:650}
+.idb.no.on{background:var(--red);border-color:var(--red);color:var(--onfill);font-weight:650}
+.idb.maybe.on{background:var(--amb);border-color:var(--amb);color:var(--onfill);font-weight:650}
+.idb:active{transform:scale(.97)}
+.tbdg.am{background:var(--amb)}
+
+/* ---- gap marker ---- */
+.gap{position:relative;padding:6px 0 6px 0;margin:2px 0}
+.gap span{font-size:11px;color:var(--dim);letter-spacing:.02em;font-style:italic}
+.gap:before{content:"";position:absolute;left:calc(-1 * var(--s5) + 4px);top:4px;bottom:4px;width:3px;
+ border-radius:2px;background:repeating-linear-gradient(180deg,var(--line2) 0 3px,transparent 3px 9px)}
+/* ---- inline actions on an event ---- */
+.ev.act{cursor:pointer;border-radius:11px;margin-left:-10px;padding:9px 10px;transition:background .2s}
+.ev.act:hover{background:var(--surf2)}
+.ev.act:before{left:calc(-1 * var(--s5) + 11px)}
+.lk{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
+ text-transform:uppercase;letter-spacing:.05em;color:var(--acctx);background:var(--accbg);
+ padding:3px 8px;border-radius:5px;margin-left:8px;vertical-align:1.5px}
+.inact{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.inact a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:12.5px;
+ font-weight:550;padding:8px 13px;border-radius:99px;min-height:38px;
+ background:var(--surf2);border:.5px solid var(--line);color:var(--ink2);transition:.18s}
+.inact a:hover{border-color:var(--acc);color:var(--acctx)}
+.inact a svg{width:12px;height:12px}
+/* ---- today marker ---- */
+.day.today{box-shadow:var(--shadow2),0 0 0 1.5px var(--acc)}
+.tdy{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
+ background:var(--acc);color:var(--onfill);padding:3px 8px;border-radius:5px;margin-left:8px;vertical-align:2px}
 
 /* ---- day meta strip ---- */
 .dmeta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 var(--s4);padding-bottom:var(--s3);
@@ -417,23 +494,7 @@ textarea::placeholder{color:var(--dim)}
 .badge.fb{background:var(--grn)}
 
 /* ================= NAV ================= */
-nav{position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;justify-content:center;
- background:var(--glass);backdrop-filter:saturate(180%) blur(22px);
- -webkit-backdrop-filter:saturate(180%) blur(22px);
- border-top:.5px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-.navin{display:flex;width:100%;max-width:520px}
-nav button{flex:1;background:none;border:none;padding:9px 4px 10px;color:var(--mut);
- cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;
- position:relative;min-height:56px;transition:color .22s}
-nav button svg{width:24px;height:24px;transition:transform .3s var(--ease)}
-nav button b{font-size:10.5px;font-weight:500;letter-spacing:-.005em}
-nav button.on{color:var(--acc)}
-nav button.on svg{transform:scale(1.06)}
-nav button:active svg{transform:scale(.9)}
-.badge{position:absolute;top:5px;left:calc(50% + 7px);background:var(--red);color:#fff;
- font-size:10px;font-weight:600;min-width:17px;height:17px;border-radius:99px;
- display:none;align-items:center;justify-content:center;padding:0 5px}
-.badge.show{display:flex}
+
 
 footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
  padding:var(--s6) var(--s3) 0;letter-spacing:-.005em}
@@ -448,7 +509,6 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
  .ibp{padding-left:var(--s4)}
  dl{grid-template-columns:92px 1fr} dt{font-size:12.5px} dd{font-size:14px}
  .btn{flex:1 1 auto;min-width:140px}
- .prog{top:56px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -463,6 +523,13 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.6A8.6 8.6 0 019.4 3.5a8.6 8.6 0 1011.1 11.1z"/></svg>
     </button>
   </div>
+    <div class="tabs" id="tabs">
+      <button class="on" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
+      <button data-p="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2.2 2.2L19 6.5"/><path d="M20 12.5V18a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h8"/></svg><b>Bookings</b><i class="tbdg" id="bdg"></i></button>
+      <button data-p="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a2.5 2.5 0 002.5 2.5H9V21M6 3v5M9.5 3v5M17.5 3c-1.3 1.4-2 3.4-2 5.4s.7 3.4 2 4.4V21"/></svg><b>Food</b><i class="tbdg gr" id="fbdg"></i></button>
+      <button data-p="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21.5h4M12 2.5a6.5 6.5 0 00-3.8 11.8c.5.4.8 1 .8 1.7h6c0-.7.3-1.3.8-1.7A6.5 6.5 0 0012 2.5z"/></svg><b>Ideas</b><i class="tbdg am" id="ibdg"></i></button>
+      <button data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
+    </div>
 </header>
 
 <div class="heroWrap"><div class="hero">
@@ -506,6 +573,13 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
     </div>
     <div id="eatlist"></div>
   </div>
+  <div class="pane" id="p-idea">
+    <div class="fhead">
+      <h2 style="margin-top:2px">For you to decide</h2>
+      <p class="fsub">Things I'd change, and things I could still build. Mark each one and I'll action the yeses — nothing here is done yet.</p>
+    </div>
+    <div id="idealist"></div>
+  </div>
   <div class="pane" id="p-info"></div>
 
   <footer>
@@ -517,12 +591,7 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
   </footer>
 </div>
 
-<nav><div class="navin">
-  <button class="on" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
-  <button data-p="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2.2 2.2L19 6.5"/><path d="M20 12.5V18a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h8"/></svg><b>Bookings</b><i class="badge" id="bdg"></i></button>
-  <button data-p="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a2.5 2.5 0 002.5 2.5H9V21M6 3v5M9.5 3v5M17.5 3c-1.3 1.4-2 3.4-2 5.4s.7 3.4 2 4.4V21"/></svg><b>Food</b><i class="badge fb" id="fbdg"></i></button>
-  <button data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
-</div></nav>
+
 
 <script>
 /* g = commute leg: [minutes, mode, detail] */
@@ -652,6 +721,48 @@ const DAYS=[
  ["15:50","Fly","key",""]],
  f:{hot:1,b:"Today is National Day itself",x:"Expect parades and road closures across District 1, not just heavy traffic. Ask the front desk about the route before you leave, and tell the driver Terminal 2 — it's a different building from arrivals."}}
 ];
+
+const IDEAS=[
+{g:"Trip changes",items:[
+{id:"benduoc",t:"Switch Cu Chi to Bến Dược",
+ w:"Quieter, more authentic, far fewer coach parties. Costs you 40 min extra driving each way (1 hr 45 vs 1 hr 25) and about 130K ₫ more each way.",
+ why:"You'll be there on the busiest holiday Monday of the year. Bến Đình is where every tour bus goes."},
+{id:"banapm",t:"Take the after-3pm Ba Na ticket",
+ w:"1,050K ₫ instead of 1,000K, but it includes the dinner buffet, the crowds have gone and it's cooler. Kills the 6am start.",
+ why:"Trades the early morning for a cheaper effective price and a much better experience — but you lose the clear-weather morning window."},
+{id:"marble",t:"Marble Mountain at sunset on Saturday",
+ w:"It's 10 min from the villa and Saturday is empty until Sky36 at 21:00. Entry 40K ₫, lift 15K.",
+ why:"Verified as much closer than I first assumed. Saturday has a four-hour hole in it."},
+{id:"sontra",t:"Son Tra + Lady Buddha as the Ba Na fallback",
+ w:"If Thursday morning is clouded in, this is the swap. Scenic drive, big views, roughly half a day.",
+ why:"Ba Na sits in cloud often. Having the fallback decided in advance stops the day being wasted arguing."},
+{id:"tailor2",t:"Book a second tailor fitting",
+ w:"Ask for a Thursday interim fitting when you give measurements on Wednesday.",
+ why:"Two days is the minimum turnaround. A mid-point fitting is the difference between a suit that fits and one you never wear."},
+{id:"haivan",t:"Hải Vân Pass drive",
+ w:"Half a day, one of the best coastal roads in Asia. Would have to displace something.",
+ why:"Nothing in the current plan uses the mountain road north. Only worth it if a day collapses."}
+]},
+{g:"Site features I could build",items:[
+{id:"offline",t:"Make it work offline",
+ w:"Turn it into an installable app that caches itself, so it opens with no signal and adds to your home screen.",
+ why:"You'll be on patchy roaming in Vietnam. Right now a dead connection means no itinerary."},
+{id:"shared",t:"Shared state across the group",
+ w:"Everyone sees the same ticks and food picks. Needs a small backend — a day's work rather than an hour's.",
+ why:"Currently every person's ticks are private to their phone, so Harith booking Cu Chi doesn't show for anyone else."},
+{id:"budget",t:"Running budget tracker",
+ w:"Totals what's booked and what's still to pay, per person and for the group, in both currencies.",
+ why:"The Money tab lists prices but never adds them up. You have no idea what the trip costs until it's over."},
+{id:"today",t:"Opens on today once you're travelling",
+ w:"From 26 August it opens straight to the current day instead of the top of the list.",
+ why:"During the trip you want today, not a list of eight days."},
+{id:"photos",t:"Notes and receipts per day",
+ w:"Attach photos and receipts against each day for splitting costs afterwards.",
+ why:"Six people, a week of cash spending, and no record is a recipe for a bad conversation at the end."},
+{id:"map",t:"A map view",
+ w:"One map per city with everything pinned, so you can see what's near you rather than reading addresses.",
+ why:"Every place currently links out to Maps one at a time. You can't see clusters."}
+]}];
 
 const EATS=[
 {id:"thiago",city:"dn",emo:"🍜",name:"Thìa Gỗ",kind:"Southern Vietnamese",
@@ -936,7 +1047,7 @@ const INFO=[
 
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
-var st={},nt={},dop={},iop={},filt="all",eat={};
+var st={},nt={},dop={},iop={},filt="all",eat={},idea={};
 var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
@@ -947,12 +1058,21 @@ var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
 var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
 
-function save(){try{localStorage.setItem("vn2026a",JSON.stringify({s:st,n:nt,e:eat,t:document.documentElement.dataset.theme}))}catch(e){}}
+function save(){try{localStorage.setItem("vn2026a",JSON.stringify({s:st,n:nt,e:eat,i:idea,t:document.documentElement.dataset.theme}))}catch(e){}}
 function load(){try{var r=localStorage.getItem("vn2026a");if(!r)return;var d=JSON.parse(r);
- Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});
+ Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});Object.assign(idea,d.i||{});
  if(d.t)document.documentElement.dataset.theme=d.t}catch(e){}}
 function esc(x){return x}
 function noteHTML(f){return f?'<div class="note'+(f.hot?' hot':'')+'"><b>'+f.b+'</b>'+f.x+'</div>':''}
+
+var LINKS=[["Lantern boat","lantern"],["Tailor","tailor"],["Collect the tailoring","tailor"],
+ ["Golden Bridge","bana"],["Cable car","bana"],["Han River cruise","cruise"],["Duck Stop","duck"],
+ ["basket boats","basket"],["Dragon Bridge bar","dragon"],["Fire and water","dragon"],["Sky36","sky36"],
+ ["Explore the tunnels","cuchi"],["Arrive at Cu Chi","cuchi"],["War Remnants","museum"],
+ ["Independence Palace","palace"],["Ban Thanh Market","banthanh"],["Dinner and drinks","dinner"],
+ ["At the airport","depart"],["Check in","depart"]];
+function linkFor(title){for(var i=0;i<LINKS.length;i++){if(title.indexOf(LINKS[i][0])>-1)return LINKS[i][1]}return null}
+function bookById(id){var r=null;BOOK.forEach(function(g){g.items.forEach(function(x){if(x.id===id)r=x})});return r}
 
 function days(){
  var h='<h2><i class="i-dn"></i>Da Nang &middot; 26–30 August</h2>';
@@ -995,7 +1115,11 @@ function days(){
   var band="",out="";
   function bandOf(k){var hh=Math.floor(k/60);
     return hh<12?["Morning","🌅"]:hh<17?["Afternoon","☀️"]:hh<22?["Evening","🌆"]:["Late","🌙"]}
-  seq.forEach(function(r){
+  seq.forEach(function(r,ix){
+   if(ix>0){var prev=seq[ix-1], d1=r.k-prev.k;
+    if(d1>=100 && prev.kind!=="go" && r.kind!=="go"){
+     var hrs=Math.round(d1/60*10)/10;
+     out+='<div class="gap"><span>'+(hrs>=1?hrs+' hr':d1+' min')+' free</span></div>';}}
    var bn=bandOf(r.k);
    if(bn[0]!==band){band=bn[0];out+='<div class="band"><span>'+bn[1]+' '+band+'</span></div>'}
    if(r.kind==="go"){
@@ -1019,13 +1143,24 @@ function days(){
    var dur="";
    var dm=note.match(/^(~?\d+[–\-]?\d*\s*(?:hrs?|min|minutes))\b[\s·]*/i);
    if(dm){dur='<span class="dur">'+dm[1]+'</span>';note=note.slice(dm[0].length)}
-   out+='<div class="ev'+(key?" key":"")+'"><div class="tm">'+e[0]+dur+'</div>'+
-     '<div class="ti">'+e[1]+'</div>'+(note?'<div class="nt">'+note+'</div>':'')+'</div>';
+   var lid=linkFor(e[1]), B=lid?bookById(lid):null;
+   var open2=B&&iop["tl-"+d.n+"-"+lid];
+   out+='<div class="ev'+(key?" key":"")+(B?" act":"")+'"'+(B?' data-tl="'+d.n+'-'+lid+'" role="button" tabindex="0"':'')+'>'+
+     '<div class="tm">'+e[0]+dur+'</div>'+
+     '<div class="ti">'+e[1]+(B?'<span class="lk">'+(open2?'hide':'book')+'</span>':'')+'</div>'+
+     (note?'<div class="nt">'+note+'</div>':'')+
+     (open2?'<div class="inact">'+
+        (B.l?B.l.map(function(l){return '<a href="'+l[1]+'" target="_blank" rel="noopener">'+EXT+l[0]+'</a>'}).join(''):'')+
+        (B.tel?B.tel.map(function(t){return '<a href="tel:'+t[1]+'">'+PHN+t[0]+'</a>'}).join(''):'')+
+        (B.map?'<a href="https://www.google.com/maps/search/?api=1&query='+B.map[1]+'" target="_blank" rel="noopener">'+PIN+B.map[0]+'</a>':'')+
+      '</div>':'')+
+     '</div>';
   });
 
-  h+='<div class="day '+d.c+(dop[d.n]?" open":"")+'" data-d="'+d.n+'">'+
+  var td=new Date(), isT=(td.getFullYear()===2026)&&((td.getMonth()===7&&td.getDate()===25+d.n)||(td.getMonth()===8&&25+d.n>31&&td.getDate()===25+d.n-31));
+  h+='<div class="day '+d.c+(dop[d.n]?" open":"")+(isT?" today":"")+'" data-d="'+d.n+'">'+
    '<div class="dh" role="button" tabindex="0"><div class="dnum"><b>'+d.d+'</b><i>'+d.dow+'</i></div>'+
-   '<div class="dt"><b>'+d.t+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
+   '<div class="dt"><b>'+d.t+(isT?'<span class="tdy">Today</span>':'')+'</b><span>'+d.s+'</span></div><div class="chev">'+CHV+'</div></div>'+
    '<div class="db"><div class="dbi"><div class="dbp">'+meta+'<div class="tl">'+out+'</div>'+noteHTML(d.f)+'</div></div></div></div>';
  });
  $("p-days").innerHTML=h;
@@ -1033,6 +1168,12 @@ function days(){
   var go=function(){var n=x.parentNode.dataset.d;dop[n]=!dop[n];days()};
   x.onclick=go;
   x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}};
+ });
+ $("p-days").querySelectorAll("[data-tl]").forEach(function(x){
+  var go=function(ev){ if(ev)ev.stopPropagation();
+   var k="tl-"+x.dataset.tl; iop[k]=!iop[k]; days(); };
+  x.onclick=go;
+  x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
  $("p-days").querySelectorAll("[data-add]").forEach(function(x){
   var go=function(ev){ if(ev)ev.stopPropagation();
@@ -1151,6 +1292,33 @@ function foodPane(){
  });
 }
 
+function ideaPane(){
+ var h="";
+ IDEAS.forEach(function(g){
+  h+='<h2>'+g.g+'</h2>';
+  g.items.forEach(function(it){
+   var v=idea[it.id]||"";
+   h+='<div class="idc '+(v||"")+'">'+
+    '<div class="idt">'+it.t+(v?'<span class="idst '+v+'">'+(v==="yes"?"Do it":v==="no"?"Skip":"Maybe")+'</span>':'')+'</div>'+
+    '<p class="idw">'+it.w+'</p>'+
+    '<p class="idy"><b>Why:</b> '+it.why+'</p>'+
+    '<div class="idbtns">'+
+      ['yes','maybe','no'].map(function(k){
+       return '<button class="idb '+k+(v===k?" on":"")+'" data-i="'+it.id+'" data-v="'+k+'">'+
+         (k==="yes"?"✓ Do it":k==="maybe"?"~ Maybe":"✕ Skip")+'</button>'}).join("")+
+    '</div></div>';
+  });
+ });
+ $("idealist").innerHTML=h;
+ $("idealist").querySelectorAll(".idb").forEach(function(b){
+  b.onclick=function(){
+   var i=b.dataset.i,v=b.dataset.v;
+   if(idea[i]===v) delete idea[i]; else idea[i]=v;
+   save();ideaPane();tally();
+  };
+ });
+}
+
 function tally(){
  var t=0,d=0,u=0;
  BOOK.forEach(function(g){g.items.forEach(function(i){t++;if(st[i.id])d++;else if(i.p==="now")u++})});
@@ -1163,6 +1331,9 @@ function tally(){
  var bd=$("bdg");bd.textContent=u;bd.classList.toggle("show",u>0);
  var ec=Object.keys(eat).length,fb=$("fbdg");
  fb.textContent=ec;fb.classList.toggle("show",ec>0);
+ var total=IDEAS.reduce(function(a,g){return a+g.items.length},0);
+ var undec=total-Object.keys(idea).length, ib=$("ibdg");
+ ib.textContent=undec; ib.classList.toggle("show",undec>0);
 }
 
 function countdown(){
@@ -1174,9 +1345,9 @@ function countdown(){
  else{$("s1").textContent="✓";$("s1l").textContent="that was that"}
 }
 
-document.querySelectorAll("nav button").forEach(function(b){
+document.querySelectorAll("#tabs button").forEach(function(b){
  b.onclick=function(){
-  document.querySelectorAll("nav button").forEach(function(x){x.classList.remove("on")});
+  document.querySelectorAll("#tabs button").forEach(function(x){x.classList.remove("on")});
   document.querySelectorAll(".pane").forEach(function(x){x.classList.remove("on")});
   b.classList.add("on");$("p-"+b.dataset.p).classList.add("on");
   var w=document.querySelector(".wrap");
@@ -1196,7 +1367,7 @@ $("tt").onclick=function(){
  save();
 };
 
-load();days();book();foodPane();info();countdown();
+load();days();book();foodPane();ideaPane();info();countdown();
 </script>
 </body>
 </html>
