@@ -97,6 +97,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.47 var(--f);
  transition:background .35s var(--ease),color .35s var(--ease)}
 ::selection{background:var(--acc);color:#fff}
 :focus-visible{outline:2.5px solid var(--acc);outline-offset:3px;border-radius:6px}
+/* these sit inside overflow:hidden cards, so the ring has to go inwards */
+.itx:focus-visible,.bx:focus-visible,.ev:focus-visible,.dh:focus-visible{outline-offset:-3px}
 button{font-family:inherit}
 
 /* ================= HEADER — floating island, detached from the top ================= */
@@ -256,6 +258,9 @@ h2 i{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
 .segs{display:flex;gap:var(--s1);background:var(--line2);padding:3px;border-radius:11px;
  margin-bottom:var(--s3);overflow-x:auto;scrollbar-width:none}
 .segs::-webkit-scrollbar{display:none}
+.fs{display:none}
+@media(max-width:440px){.fl{display:none}.fs{display:inline}}
+@media(max-width:370px){.segs{gap:1px}.segs button{padding-left:7px;padding-right:7px;font-size:12.5px}}
 .segs button{flex:1 0 auto;border:none;background:transparent;color:var(--mut);
  font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:8px;cursor:pointer;
  white-space:nowrap;letter-spacing:-.01em;transition:.22s var(--ease);min-height:36px}
@@ -384,6 +389,9 @@ textarea::placeholder{color:var(--dim)}
  .tabs button b{font-size:10.5px;font-weight:600;letter-spacing:-.01em;
   overflow:hidden;text-overflow:ellipsis;max-width:100%}
  .tabs button svg{width:19px;height:19px}
+ .tabs button.sostab{width:42px}
+ .tabs button.sostab svg{width:22px;height:22px}
+ .tsep{margin:0 2px 0 5px;height:26px}
  .tbdg.show{position:absolute;top:3px;right:calc(50% - 20px);font-size:9px;min-width:15px;height:15px}
 }
 @media(max-width:370px){
@@ -698,6 +706,9 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
  padding-top:12px;border-top:1px solid var(--line)}
 .clips{display:flex;flex-wrap:wrap;gap:6px}
 .idbtns+.cliprow{border-top:none;padding-top:0;margin-top:11px}
+.cmk{display:inline-flex;align-items:center;gap:3px;flex:none}
+.cmk svg{width:14px;height:14px;opacity:.78}
+
 .ev .clips,.eatc .clips{margin-top:7px}
 .clip{position:relative;display:inline-flex;align-items:center;gap:7px;max-width:100%;
  padding:8px 14px 8px 11px;border-radius:999px;background:var(--accbg);color:var(--acctx);
@@ -734,6 +745,34 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 .csn{font-size:12.5px;color:var(--mut);margin:0 0 8px}
 .csa{width:100%}
 
+/* the four numbers, before anything else on the page */
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 16px}
+.dial{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+ min-height:74px;padding:11px 8px;border-radius:16px;background:var(--red);color:var(--onfill);
+ text-decoration:none;text-align:center;
+ transition:transform .45s var(--ease)}
+.dial b{color:inherit;font-size:23px;font-weight:680;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.dial span{color:inherit;font-size:11.5px;font-weight:550;opacity:.88;line-height:1.2}
+.dial:active{transform:scale(.97)}
+.dialn{font-size:12.5px;line-height:1.5;color:var(--ink2);margin:0 0 7px}
+.dialn b{font-variant-numeric:tabular-nums;color:var(--red);margin-right:4px}
+@media(min-width:520px){.dials{grid-template-columns:repeat(4,1fr)}}
+
+/* ---- SOS: the numbers stay out, the rest folds ---- */
+.sacc{border-top:1px solid var(--line);margin:0}
+.sacc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;padding:15px 0}
+.sacc summary::-webkit-details-marker{display:none}
+.sacc summary::marker{content:""}
+.sacc summary i{width:30px;height:30px;border-radius:9px;background:var(--redbg);color:var(--red);
+ display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:15px}
+.sacc summary:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:10px}
+.sacc .acv{color:var(--dim)}
+.sacc[open] .acv{transform:rotate(90deg);color:var(--red)}
+.sacc summary:hover .acv{color:var(--red)}
+.saccb{padding:2px 0 18px}
+.saccb>*:last-child{margin-bottom:0}
+.sosg.open{margin-bottom:4px}
+
 /* ---- Essentials as an accordion: a menu you can read in one screen ---- */
 .acc{padding-top:0;padding-bottom:0}
 .acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;
@@ -757,9 +796,16 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 .accb>*:last-child{margin-bottom:0}
 
 /* ---- the SOS tab reads red, so it is findable in a panic ---- */
-.tabs button.sostab{color:var(--red)}
+/* SOS is not a sixth planning tab — a rule sets it apart and it carries no label */
+.tsep{flex:0 0 auto;align-self:center;width:1px;height:22px;border-radius:1px;
+ background:var(--line);margin:0 3px 0 7px}
+.srt{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;
+ overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.tabs button.sostab{flex:0 0 auto;width:48px;padding:7px 0;justify-content:center;color:var(--red)}
+.tabs button.sostab svg{width:22px;height:22px}
 .tabs button.sostab:hover{color:var(--red);background:var(--redbg)}
-.tabs button.sostab.on{background:var(--redtab);color:var(--redtx)}
+.tabs button.sostab.on{background:var(--red);color:var(--onfill)}
+.tabs button.sostab.on svg{stroke-width:1.7}
 
 /* On the SOS tab the hero and footer are noise: you land here in a hurry
    and the first thing on screen must be the number you dial. */
@@ -802,6 +848,12 @@ body[data-tab="sos"] #p-sos{padding-top:var(--s5)}
 .vch.add{border-style:dashed;color:var(--dim)}
 
 /* ---- the driver sheet ---- */
+/* a name or description typed by a person must not push the layout sideways */
+.spt{min-width:0}
+.spt b,.spt span{overflow-wrap:anywhere}
+.crewl .vch{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drvt{overflow-wrap:anywhere}
+body.sheeting{overflow:hidden}
 .drv{position:fixed;inset:0;z-index:var(--z-toast);display:flex;align-items:flex-end;
  justify-content:center;padding:14px;background:rgba(10,12,18,.5);
  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
@@ -845,7 +897,7 @@ button.pl{font:inherit;cursor:pointer}
 .crewrow{margin-bottom:14px}
 .crewl{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .splist{margin-top:14px}
-.sprow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
+.sprow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;
  padding:12px 13px;border-radius:13px;background-color:var(--surf);
  border:.5px solid var(--line);margin-bottom:6px}
 .spt b{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.012em}
@@ -1052,13 +1104,14 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.6A8.6 8.6 0 019.4 3.5a8.6 8.6 0 1011.1 11.1z"/></svg>
     </button></div>
   </div>
-    <div class="tabs" id="tabs">
-      <button class="on" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
-      <button data-p="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2.2 2.2L19 6.5"/><path d="M20 12.5V18a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h8"/></svg><b>Bookings</b><i class="tbdg" id="bdg"></i></button>
-      <button data-p="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a2.5 2.5 0 002.5 2.5H9V21M6 3v5M9.5 3v5M17.5 3c-1.3 1.4-2 3.4-2 5.4s.7 3.4 2 4.4V21"/></svg><b>Food</b><i class="tbdg gr" id="fbdg"></i></button>
-      <button data-p="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21.5h4M12 2.5a6.5 6.5 0 00-3.8 11.8c.5.4.8 1 .8 1.7h6c0-.7.3-1.3.8-1.7A6.5 6.5 0 0012 2.5z"/></svg><b>Ideas</b><i class="tbdg am" id="ibdg"></i></button>
-      <button data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
-      <button class="sostab" data-p="sos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.7L1.9 18a2 2 0 001.7 3h16.8a2 2 0 001.7-3L13.7 3.7a2 2 0 00-3.4 0z"/><path d="M12 9.5v4.2M12 17.2h.01"/></svg><b>SOS</b></button>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Sections">
+      <button class="on" role="tab" aria-selected="true" aria-controls="p-days" data-p="days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3.5"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg><b>Itinerary</b></button>
+      <button role="tab" aria-selected="false" aria-controls="p-book" data-p="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2.2 2.2L19 6.5"/><path d="M20 12.5V18a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h8"/></svg><b>Bookings</b><i class="tbdg" id="bdg"></i></button>
+      <button role="tab" aria-selected="false" aria-controls="p-food" data-p="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a2.5 2.5 0 002.5 2.5H9V21M6 3v5M9.5 3v5M17.5 3c-1.3 1.4-2 3.4-2 5.4s.7 3.4 2 4.4V21"/></svg><b>Food</b><i class="tbdg gr" id="fbdg"></i></button>
+      <button role="tab" aria-selected="false" aria-controls="p-idea" data-p="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21.5h4M12 2.5a6.5 6.5 0 00-3.8 11.8c.5.4.8 1 .8 1.7h6c0-.7.3-1.3.8-1.7A6.5 6.5 0 0012 2.5z"/></svg><b>Ideas</b><i class="tbdg am" id="ibdg"></i></button>
+      <button role="tab" aria-selected="false" aria-controls="p-info" data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
+      <i class="tsep" aria-hidden="true"></i>
+      <button class="sostab" role="tab" aria-selected="false" aria-controls="p-sos" data-p="sos" title="Emergency numbers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.7L1.9 18a2 2 0 001.7 3h16.8a2 2 0 001.7-3L13.7 3.7a2 2 0 00-3.4 0z"/><path d="M12 9.5v4.2M12 17.2h.01"/></svg><b class="srt">SOS</b></button>
     </div>
 </header></div>
 
@@ -1074,9 +1127,9 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 </div></div>
 
 <div class="wrap">
-  <div class="pane on" id="p-days"></div>
+  <div class="pane on" id="p-days" role="tabpanel" aria-label="Itinerary"></div>
 
-  <div class="pane" id="p-book">
+  <div class="pane" id="p-book" role="tabpanel" aria-label="Bookings">
     <div class="prog">
       <div class="pr1">
         <div class="big"><span id="nd">0</span><em> of <span id="nt">0</span> booked</em></div>
@@ -1091,11 +1144,11 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <span class="hi">2</span><p><b>Tap the row</b> to open prices, booking links, phone numbers and a notes box.</p>
     </div>
     <div class="segs">
-      <button class="on" data-f="all">All</button>
-      <button data-f="now">Book now</button>
-      <button data-f="soon">Soon</button>
-      <button data-f="walk">Walk up</button>
-      <button data-f="todo">Outstanding</button>
+      <button class="on" data-f="all"><span class="fl">All</span><span class="fs">All</span></button>
+      <button data-f="now"><span class="fl">Book now</span><span class="fs">Now</span></button>
+      <button data-f="soon"><span class="fl">Soon</span><span class="fs">Soon</span></button>
+      <button data-f="walk"><span class="fl">Walk up</span><span class="fs">Walk</span></button>
+      <button data-f="todo"><span class="fl">Not booked</span><span class="fs">To do</span></button>
     </div>
     <div id="lst"></div>
     <div class="fhead" style="margin-top:34px">
@@ -1110,25 +1163,25 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
     <div id="spendbox"></div>
   </div>
 
-  <div class="pane" id="p-food">
+  <div class="pane" id="p-food" role="tabpanel" aria-label="Food">
     <div class="fhead">
       <h2 style="margin-top:2px">Suggestions</h2>
       <p class="fsub">Six places worth eating at. Pick a slot and it drops into that day's plan — nothing is fixed until you add it.</p>
     </div>
     <div id="eatlist"></div>
   </div>
-  <div class="pane" id="p-idea">
+  <div class="pane" id="p-idea" role="tabpanel" aria-label="Ideas">
     <div class="fhead">
       <h2 style="margin-top:2px">For you to decide</h2>
-      <p class="fsub">Things I'd change, and things I could still build. Mark each one and I'll action the yeses — nothing here is done yet.</p>
+      <p class="fsub">Things I'd change, and things I could still build. Mark each one and I'll action the yeses — the ones marked Built are already in the plan.</p>
     </div>
     <div id="idealist"></div>
   </div>
-  <div class="pane" id="p-info">
+  <div class="pane" id="p-info" role="tabpanel" aria-label="Essentials">
     <div id="infolist"></div>
   </div>
 
-  <div class="pane" id="p-sos">
+  <div class="pane" id="p-sos" role="tabpanel" aria-label="Emergency">
     <div class="card sos"><h3><i>🚨</i>If something goes wrong</h3><div id="sosbox"></div></div>
   </div>
 
@@ -1357,7 +1410,7 @@ const IDEAS=[
  why:"Currently every person's ticks are private to their phone, so Harith booking Cu Chi doesn't show for anyone else.",dn:"Done, without a backend. Essentials → Share with the group gives you a link that carries your whole state to anyone who opens it."},
 {id:"budget",t:"Running budget tracker",
  w:"Totals what's booked and what's still to pay, per person and for the group, in both currencies.",
- why:"The Money tab lists prices but never adds them up. You have no idea what the trip costs until it's over.",dn:"Done — Bookings tab, below the checklist. Per person and for the group, in dong and rupees, with a paid tick on each line."},
+ why:"Essentials lists prices but never adds them up. You have no idea what the trip costs until it's over.",dn:"Done — Bookings tab, below the checklist. Per person and for the group, in dong and rupees, with a paid tick on each line."},
 {id:"today",t:"Opens on today once you're travelling",
  w:"From 26 August it opens straight to the current day instead of the top of the list.",
  why:"During the trip you want today, not a list of eight days.",dn:"Done — from 26 August it opens on the current day, expanded and scrolled to."},
@@ -1589,7 +1642,7 @@ const BOOK=[
 ]}];
 
 const INFO=[
-{h:"Before you fly",d:"Passport, e-visa, offline maps and the {n} things to pack",ic:"M9 6.5V4.2A1.7 1.7 0 0110.7 2.5h2.6A1.7 1.7 0 0115 4.2v2.3M4.5 6.5h15A1.5 1.5 0 0121 8v11.5a2 2 0 01-2 2H5a2 2 0 01-2-2V8a1.5 1.5 0 011.5-1.5z",
+{h:"Before you fly",d:"{n} things to sort before you fly — passport, e-visa, offline maps and the rest",ic:"M9 6.5V4.2A1.7 1.7 0 0110.7 2.5h2.6A1.7 1.7 0 0115 4.2v2.3M4.5 6.5h15A1.5 1.5 0 0121 8v11.5a2 2 0 01-2 2H5a2 2 0 01-2-2V8a1.5 1.5 0 011.5-1.5z",
  emo:"🎒",type:"pack",rows:[
  ["🛂","Passport","Must have <b>6 months validity</b> beyond 26 August"],
  ["📄","Vietnam e-visa ✅","Sorted. Two things left: check the <b>name and passport number on it match your passport exactly</b> — a typo means refused boarding — and confirm the entry date covers 26 August. Save a PDF offline."],
@@ -1667,7 +1720,7 @@ const INFO=[
  ["\ud83d\udcde","Worth one phone call each",
   "Sky36 (the six-person minimum spend) \u00b7 the tailor (Thursday fitting <b>and</b> holiday staffing before cloth is cut) \u00b7 the C\u1ee7 Chi driver (say B\u1ebfn D\u01b0\u1ee3c out loud, and ask for a van not a 7-seater) \u00b7 the H\u00e0n River cruise (the 20:30 sailing)."]]},
 
-{h:"Addresses changed in 2025",d:"Why every Vietnamese address here looks unfamiliar",emo:"\U0001f5c2️",ic:"M3 7.5h18M3 12h18M3 16.5h18",
+{h:"Addresses changed in 2025",d:"Why every Vietnamese address here looks unfamiliar",emo:"🗂️",ic:"M3 7.5h18M3 12h18M3 16.5h18",
  type:"list",rows:[
  "On <b>1 July 2025 Vietnam abolished the district level entirely</b> and cut 63 provinces to 34. Addresses now read <i>ward, then city</i> \\u2014 no district.",
  "<b>Quảng Nam no longer exists as a province.</b> It was merged into Đà Nẵng, so Hội An is now <b>phường Hội An, thành phố Đà Nẵng</b>. Every guidebook and older booking confirmation still says Quảng Nam.",
@@ -1675,7 +1728,7 @@ const INFO=[
  "Củ Chi Bến Dược is now <b>xã An Nhơn Tây</b>. The War Remnants Museum is <b>phường Xuân Hòa</b>. Independence Palace and Bến Thành are <b>phường Bến Thành</b>. FV Hospital is <b>phường Tân Mỹ</b>.",
  "Every address in Show the driver has been updated. If a booking confirmation disagrees, it is probably just out of date \\u2014 the landmark name is what the driver actually needs."]},
 
-{h:"Practical",d:"Cash, ATMs, haggling, and the notes that look identical",emo:"\U0001f9ed",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
+{h:"Practical",d:"Cash, ATMs, haggling, and the notes that look identical",emo:"🧭",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
  type:"list",rows:[
  "Carry cash — museums, boat booths and market stalls are dong only.",
  "<b>ATMs:</b> BIDV or MB let you take out ~5M ₫ for a ~50K fee, which beats Vietcombank's ~2M ceiling for the same fee. Old advice that TPBank and VPBank are fee-free is no longer reliable — <b>read the fee on the screen and cancel if it's ugly.</b>",
@@ -1829,11 +1882,14 @@ const VNA=[
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
 var st={},nt={},dop={},iop={},filt="all",eat={},idea={},plan={},dnote={},pay={},grp=6,gdet={};
-var own={},shift={},spend=[],crew=[],addr={},clip={},TS={};
+var own={},shift={},spend=[],crew=[],addr={},clip={},spdel={},TS={};
 var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
 var PLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.2A2.2 2.2 0 016.7 4h10.6a2.2 2.2 0 012.2 2.2v11.6a2.2 2.2 0 01-2.2 2.2H6.7a2.2 2.2 0 01-2.2-2.2z"/><path d="M10.2 9.4l4.4 2.6-4.4 2.6z"/></svg>';
+var ICO_TT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 3.2v10.9a3.4 3.4 0 11-2.6-3.3"/><path d="M13.4 3.2c.3 2.4 2.2 4.2 4.6 4.4"/></svg>';
+var ICO_IG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="4.9"/><circle cx="12" cy="12" r="3.9"/><circle cx="16.9" cy="7.1" r=".95" fill="currentColor" stroke="none"/></svg>';
+var ICO_YT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="5.4" width="19.2" height="13.2" rx="4.1"/><path d="M10.3 9.4l4.8 2.6-4.8 2.6z"/></svg>';
 var PLUS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>';
 var PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 var ARR='<i class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></i>';
@@ -1845,7 +1901,7 @@ var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
 var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
 
-function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp,o:own,sh:shift,sp:spend,cr:crew,ad:addr,cl:clip,ts:TS}}
+function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp,o:own,sh:shift,sp:spend,cr:crew,ad:addr,cl:clip,sd:spdel,ts:TS}}
 function save(){try{var o=stateObj();o.t=document.documentElement.dataset.theme;
  localStorage.setItem("vn2026a",JSON.stringify(o))}catch(e){}}
 /* per-key timestamps so two people can merge instead of clobbering */
@@ -1872,7 +1928,7 @@ function applyState(d,merge){
   Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});Object.assign(idea,d.i||{});
   Object.assign(plan,d.p||{});Object.assign(dnote,d.dn||{});Object.assign(pay,d.y||{});
   Object.assign(own,d.o||{});Object.assign(shift,d.sh||{});Object.assign(addr,d.ad||{});
-  Object.assign(clip,d.cl||{});
+  Object.assign(clip,d.cl||{});Object.assign(spdel,d.sd||{});
   if(d.sp)spend=d.sp; if(d.cr)crew=d.cr; if(d.g)grp=d.g;
   Object.assign(TS,d.ts||{});
   return -1;
@@ -1885,10 +1941,13 @@ function applyState(d,merge){
  n+=mergeMap(shift,d.sh,"sh",inTS); n+=mergeMap(addr,d.ad,"ad",inTS);
  n+=mergeMap(clip,d.cl,"cl",inTS);
  /* expenses are an append-only log — union by id, newest wins per id */
+ Object.keys(d.sd||{}).forEach(function(k){if(!spdel[k]){spdel[k]=d.sd[k];n++}});
  if(d.sp&&d.sp.length){
   var byId={}; spend.forEach(function(x){byId[x.id]=x});
   d.sp.forEach(function(x){ if(!byId[x.id]||(x.at||0)>(byId[x.id].at||0)){byId[x.id]=x;n++} });
-  spend=Object.keys(byId).map(function(k){return byId[k]}).sort(function(a,b){return (a.at||0)-(b.at||0)});
+  /* a payment someone deleted must not come back on the next merge */
+  spend=Object.keys(byId).filter(function(k){return !spdel[k]})
+    .map(function(k){return byId[k]}).sort(function(a,b){return (a.at||0)-(b.at||0)});
  }
  if(d.cr&&d.cr.length){
   d.cr.forEach(function(nm){if(crew.indexOf(nm)<0){crew.push(nm);n++}});
@@ -1923,8 +1982,20 @@ var LINKS=[["Lantern boat","lantern"],["Tailor","tailor"],["Collect the tailorin
  ["basket boats","basket"],["Dragon Bridge bar","dragon"],["Fire and water","dragon"],["Sky36","sky36"],
  ["Explore the tunnels","cuchi"],["Arrive at Cu Chi","cuchi"],["War Remnants","museum"],
  ["Independence Palace","palace"],["Ban Thanh Market","banthanh"],["Dinner and drinks","dinner"],
- ["At the airport","depart"],["Check in","depart"]];
-function linkFor(title){for(var i=0;i<LINKS.length;i++){if(title.indexOf(LINKS[i][0])>-1)return LINKS[i][1]}return null}
+ ["Marble Mountain","marble"],["At the airport","transfer",5],
+ ["At the airport","depart",8],["Check in","depart",8]];
+/* "At the airport" and "Check in" appear on the Saigon flight day AND on the
+   departure day. An unscoped substring match bound the departure booking to
+   Sunday — and dropped it from Wednesday's list entirely. A third field pins
+   an entry to a single day. */
+function linkFor(title,dayN){
+ for(var i=0;i<LINKS.length;i++){
+  var L=LINKS[i];
+  if(L.length>2 && dayN!=null && +L[2]!==+dayN) continue;
+  if(title.indexOf(L[0])>-1) return L[1];
+ }
+ return null;
+}
 function bookById(id){var r=null;BOOK.forEach(function(g){g.items.forEach(function(x){if(x.id===id)r=x})});return r}
 
 function tripDate(n){return new Date(2026,7,25+n)}
@@ -2016,10 +2087,10 @@ function days(){
    var dur="";
    var dm=note.match(/^(~?\d+[\u2013\-]?\d*\s*(?:hrs?|min|minutes))\b[\s\u00b7]*/i);
    if(dm){dur='<span class="dur">'+dm[1]+'</span>';note=note.slice(dm[0].length)}
-   var lid=linkFor(e[1]), B=lid?bookById(lid):null;
+   var lid=linkFor(e[1],d.n), B=lid?bookById(lid):null;
    var done=B&&st[lid];
    var open2=B&&iop["tl-"+d.n+"-"+lid];
-   out+='<div class="ev'+(kk?" key":"")+(B?" act":"")+(done?" bkd":"")+'"'+(B?' data-tl="'+d.n+'-'+lid+'" role="button" tabindex="0"':'')+'>'+
+   out+='<div class="ev'+(kk?" key":"")+(B?" act":"")+(done?" bkd":"")+'"'+(B?' data-tl="'+d.n+'-'+lid+'" role="button" tabindex="0" aria-expanded="'+(!!open2)+'"':'')+'>'+
      '<div class="tm">'+e[0]+dur+'</div>'+
      '<div class="ti">'+e[1]+(B?'<span class="lk'+(done?" ok":"")+'">'+(done?'\u2713 booked':(open2?'hide':'book'))+'</span>':'')+'</div>'+
      (note?'<div class="nt">'+note+'</div>':'')+
@@ -2060,9 +2131,9 @@ function days(){
  $("p-days").innerHTML=h;
  if(typeof reveal==="function")reveal("p-days",".day");
  $("p-days").querySelectorAll(".dh").forEach(function(x){
-  var go=function(){var n=x.parentNode.dataset.d;dop[n]=!dop[n];hap("select");days()};
+  var go=function(ev){if(inner(ev))return;var n=x.parentNode.dataset.d;dop[n]=!dop[n];hap("select");days()};
   x.onclick=go;
-  x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}};
+  x.onkeydown=function(ev){if(inner(ev))return;if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
  $("p-days").querySelectorAll("[data-pd]").forEach(function(x){
   x.onclick=function(ev){ev.stopPropagation();
@@ -2074,10 +2145,10 @@ function days(){
   x.onclick=function(ev){ev.stopPropagation();var n=x.dataset.g;gdet[n]=!gdet[n];days();};
  });
  $("p-days").querySelectorAll("[data-tl]").forEach(function(x){
-  var go=function(ev){ if(ev)ev.stopPropagation();
+  var go=function(ev){ if(inner(ev))return; if(ev)ev.stopPropagation();
    var k="tl-"+x.dataset.tl; iop[k]=!iop[k]; days(); };
   x.onclick=go;
-  x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
+  x.onkeydown=function(ev){if(inner(ev))return;if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
  $("p-days").querySelectorAll("[data-jb]").forEach(function(x){
   x.onclick=function(ev){ev.preventDefault();ev.stopPropagation();openBooking(x.dataset.jb)};
@@ -2092,13 +2163,13 @@ function days(){
   t.oninput=function(){dnote[t.dataset.dn]=t.value;stamp("dn."+t.dataset.dn);save()};
  });
  $("p-days").querySelectorAll("[data-add]").forEach(function(x){
-  var go=function(ev){ if(ev)ev.stopPropagation();
+  var go=function(ev){ if(inner(ev))return; if(ev)ev.stopPropagation();
    var id=x.dataset.add,dd=+x.dataset.d,tt=x.dataset.t;
    if(eat[id]&&eat[id].d===dd&&eat[id].t===tt) delete eat[id]; else eat[id]={d:dd,t:tt};
    stamp("e."+id);hap("commit");save();days();foodPane();tally();
   };
   x.onclick=go;
-  x.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
+  x.onkeydown=function(ev){if(inner(ev))return;if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(ev)}};
  });
 }
 
@@ -2107,7 +2178,7 @@ document.addEventListener("click",function(e){
  if(!b)return;
  e.preventDefault();e.stopPropagation();
  placeSheet(decodeURIComponent(b.dataset.pl||""), b.dataset.pq||"");
-});
+},true);
 function goTab(p){var b=document.querySelector('#tabs button[data-p="'+p+'"]');if(b)b.click()}
 function openBooking(id){
  filt="all";
@@ -2124,7 +2195,7 @@ function openDay(n){
 function dayForBooking(id){
  for(var i=0;i<DAYS.length;i++){var d=DAYS[i];
   var evs=d.e.concat((d.alts||[]).reduce(function(a,x){return a.concat(x.e)},[]));
-  for(var j=0;j<evs.length;j++){if(evs[j][0]!=="g"&&linkFor(evs[j][1])===id)return d}}
+  for(var j=0;j<evs.length;j++){if(evs[j][0]!=="g"&&linkFor(evs[j][1],d.n)===id)return d}}
  return null;
 }
 
@@ -2157,21 +2228,24 @@ function book(){
     '<div class="more"><span>'+(iop[it.id]?'Hide details':(it.l||it.tel?'Prices, links & numbers':'Details'))+'</span>'+CHV+'</div>'+
     '</div><div class="ichev">'+CHV+'</div></div>'+
     '<div class="ib"><div class="ibi"><div class="ibp">'+dl+acts(it)+noteHTML(it.f)+clipRow("b:"+it.id,it.t)+
-    '<textarea placeholder="Notes — confirmation number, who you spoke to…" data-n="'+it.id+'">'+(nt[it.id]||"")+'</textarea>'+
+    '<textarea placeholder="Notes — confirmation number, who you spoke to…" data-n="'+it.id+'">'+hesc(nt[it.id]||"")+'</textarea>'+
     '</div></div></div></div>';
   });
  });
  if(typeof reveal==="function")setTimeout(function(){reveal("p-book",".it")},0);
- $("lst").innerHTML=h||'<div class="card"><p>Nothing here — try another filter.</p></div>';
+ $("lst").innerHTML=h||'<div class="card"><p>'+(filt==="todo"
+  ? "Everything is booked. That is the whole list done."
+  : "Nothing in this filter — try another.")+'</p></div>';
  $("lst").querySelectorAll(".bx").forEach(function(b){
-  var go=function(e){if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];stamp("s."+b.dataset.c);hap("commit");save();book()};
+  var go=function(e){if(inner(e))return;if(e)e.stopPropagation();st[b.dataset.c]=!st[b.dataset.c];stamp("s."+b.dataset.c);hap("commit");save();book()};
   b.onclick=go;
-  b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go(e)}};
+  b.onkeydown=function(e){if(inner(e))return;if(e.key==="Enter"||e.key===" "){e.preventDefault();go(e)}};
  });
  $("lst").querySelectorAll(".itx").forEach(function(x){
-  var go=function(){iop[x.dataset.t]=!iop[x.dataset.t];book()};
+  var go=function(e){if(inner(e))return;iop[x.dataset.t]=!iop[x.dataset.t];
+   x.setAttribute("aria-expanded",!!iop[x.dataset.t]);book()};
   x.onclick=go;
-  x.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}};
+  x.onkeydown=function(e){if(inner(e))return;if(e.key==="Enter"||e.key===" "){e.preventDefault();go(e)}};
  });
  $("lst").querySelectorAll("[data-jd]").forEach(function(b){
   b.onclick=function(e){e.stopPropagation();openDay(+b.dataset.jd)};
@@ -2182,10 +2256,12 @@ function book(){
  tally();
 }
 
+var CHEVI='<svg class="acv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+
 function info(){
  /* Essentials is a menu, not a wall: each section collapses to a title and a
     one-line description so the page is scannable in one screen. */
- var CHEV='<svg class="acv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+ var CHEV=CHEVI;
  function shell(emo,head,blurb,body,cls){
   return '<details class="card acc'+(cls?" "+cls:"")+'"><summary>'+
    '<i>'+(emo||'')+'</i><span class="ach"><b>'+head+'</b><em>'+blurb+'</em></span>'+CHEV+
@@ -2195,7 +2271,7 @@ function info(){
         "Every address in Vietnamese, in big type — works with no signal",
         '<div id="addrbox"></div>')+
        shell("🔗","Share with the group",
-        "Pass your ticks, notes, clips and expenses to the other five",
+        "Send your ticks, notes, clips and expenses to the other five \u2014 and export the plan to your calendar",
         '<div id="sharebox"></div>',"share");
 
  h+=INFO.map(function(s){
@@ -2450,6 +2526,14 @@ function placeSheet(label,query){
    the app keeps working with no signal. Clips ride the share code like
    every other bit of state. */
 
+/* A row that is itself a button will otherwise swallow every link, phone
+   number and clip chip inside it — opening the link AND toggling the row. */
+function inner(e){
+ try{return !!(e && e.target && e.target.closest &&
+   e.target !== e.currentTarget &&
+   e.target.closest('a,button,input,textarea,select,summary,[data-clip],[data-dclip]'))}
+ catch(_){return false}
+}
 function hesc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){
  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 
@@ -2463,16 +2547,17 @@ function safeUrl(u){
   return p.href}catch(e){return ""}
 }
 
-function clipSrc(u){
+function clipWhere(u){
  var h=""; try{h=new URL(u).hostname.replace(/^www\./,"").toLowerCase()}catch(e){}
- if(/(^|\.)tiktok\./.test(h))return "TikTok";
- if(/(^|\.)instagram\./.test(h))return "Instagram";
- if(/(^|\.)(youtube\.com|youtu\.be)$/.test(h))return "YouTube";
- if(/(^|\.)(facebook\.com|fb\.watch)$/.test(h))return "Facebook";
- if(/(^|\.)threads\./.test(h))return "Threads";
- if(/(^|\.)(x\.com|twitter\.com)$/.test(h))return "X";
- return h||"Link";
+ if(/(^|\.)tiktok\./.test(h))return {n:"TikTok",i:ICO_TT};
+ if(/(^|\.)instagram\./.test(h))return {n:"Instagram",i:ICO_IG};
+ if(/(^|\.)(youtube\.com|youtu\.be)$/.test(h))return {n:"YouTube",i:ICO_YT};
+ if(/(^|\.)(facebook\.com|fb\.watch)$/.test(h))return {n:"Facebook",i:PLAY};
+ if(/(^|\.)threads\./.test(h))return {n:"Threads",i:ICO_IG};
+ if(/(^|\.)(x\.com|twitter\.com)$/.test(h))return {n:"X",i:PLAY};
+ return {n:h||"Link",i:PLAY};
 }
+function clipSrc(u){return clipWhere(u).n}
 
 function clipsOf(k){var a=clip[k];return (a&&a.length)?a:[]}
 
@@ -2494,16 +2579,20 @@ function clipChips(k){
  var a=clipsOf(k);
  if(!a.length)return "";
  return '<div class="clips">'+a.map(function(c){
-  return '<a class="clip" href="'+hesc(c.u)+'" target="_blank" rel="noopener noreferrer">'+
-   PLAY+'<span>'+hesc(c.l||clipSrc(c.u))+'</span></a>'}).join("")+'</div>';
+  var w=clipWhere(c.u);
+  return '<a class="clip" href="'+hesc(c.u)+'" target="_blank" rel="noopener noreferrer" title="Opens in '+hesc(w.n)+'">'+
+   w.i+'<span>'+hesc(c.l||w.n)+'</span></a>'}).join("")+'</div>';
 }
 
 /* chips + the button that opens the editor */
 function clipRow(k,label){
  var n=clipsOf(k).length;
+ var marks='<i class="cmk">'+ICO_TT+ICO_IG+ICO_YT+'</i>';
  return '<div class="cliprow">'+clipChips(k)+
   '<button class="clipb'+(n?" has":"")+'" data-clip="'+hesc(k)+'" data-cll="'+hesc(label)+'">'+
-   (n?PLAY:PLUS)+'<span>'+(n?(n===1?'1 clip':n+' clips'):'Add a clip')+'</span></button></div>';
+   (n?PLAY+'<span>'+(n===1?'1 clip':n+' clips')+'</span>'
+     :marks+'<span>Add a TikTok or Reel</span>')+
+  '</button></div>';
 }
 
 function addClip(k,label){
@@ -2529,11 +2618,12 @@ function clipSheet(items,title){
     return '<div class="csg">'+
      (items.length>1?'<div class="csh">'+hesc(it.label)+'</div>':'')+
      (a.length?a.map(function(c,ci){
+       var w=clipWhere(c.u);
        return '<div class="csr"><a href="'+hesc(c.u)+'" target="_blank" rel="noopener noreferrer">'+
-        PLAY+'<b>'+hesc(c.l||clipSrc(c.u))+'</b><i>'+hesc(clipSrc(c.u))+'</i></a>'+
+        w.i+'<b>'+hesc(c.l||w.n)+'</b><i>'+hesc(w.n)+'</i></a>'+
         '<button class="csx" data-rm="'+ii+'" data-ri="'+ci+'" aria-label="Remove">&times;</button></div>'}).join("")
       :'<p class="csn">Nothing pinned here yet.</p>')+
-     '<button class="btn ghost noic csa" data-ad="'+ii+'">'+(a.length?'Add another':'Add a clip')+'</button>'+
+     '<button class="btn ghost noic csa" data-ad="'+ii+'">'+(a.length?'Add another link':'Add a TikTok, Reel or Short')+'</button>'+
     '</div>'}).join("")+
    '<p class="drvn">Links open in the TikTok, Instagram or YouTube app. Nothing is embedded, so no video loads until someone asks for it — and the rest of the app still works with no signal. <b>Clips travel in the share code</b>, so pass one to the group after you add some.</p>'+
    '<button class="btn ghost noic wide" id="drvx">Close</button>';
@@ -2552,12 +2642,9 @@ function clipSheet(items,title){
  }
  function redraw(){w.querySelector(".drvi").innerHTML=body();wire()}
  function refresh(){days();book();foodPane();ideaPane()}
- w.innerHTML='<div class="drvi cs" role="dialog" aria-label="Clips">'+body()+'</div>';
- document.body.appendChild(w);requestAnimationFrame(function(){w.classList.add("go")});
- var close=function(){w.classList.remove("go");setTimeout(function(){w.remove();drvOpen=null},320)};
+ w.innerHTML='<div class="drvi cs" role="dialog" aria-modal="true" aria-label="Clips">'+body()+'</div>';
+ var close=mountSheet(w);
  wire();
- w.onclick=function(e){if(e.target===w)close()};
- drvOpen=close;
 }
 
 /* one delegated handler covers every clip button in the app */
@@ -2586,7 +2673,8 @@ function copyText(t,label){
 }
 function toast(msg,ok){
  var old=document.querySelector(".toast");if(old)old.remove();
- var b=document.createElement("div");b.className="toast"+(ok?"":" bad");b.textContent=msg;
+ var b=document.createElement("div");b.className="toast"+(ok?"":" bad");
+ b.setAttribute("role","status");b.setAttribute("aria-live","polite");b.textContent=msg;
  document.body.appendChild(b);requestAnimationFrame(function(){b.classList.add("go")});
  setTimeout(function(){b.classList.remove("go");setTimeout(function(){b.remove()},400)},4200);
 }
@@ -2660,6 +2748,49 @@ function downloadICS(){
 
 /* ---- show the driver ---- */
 var drvOpen=null;
+
+/* Both sheets were unusable with a keyboard: Escape did nothing, focus stayed
+   on the trigger behind the scrim, Tab walked the page underneath, and the
+   page scrolled behind the overlay. One helper now owns all of it. */
+function mountSheet(w){
+ if(drvOpen)drvOpen();
+ var prev=document.activeElement, closed=false;
+ function focusable(){
+  return [].slice.call(w.querySelectorAll(
+   'a[href],button:not([disabled]),input:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'
+  )).filter(function(el){return el.offsetParent!==null});
+ }
+ function onKey(e){
+  if(e.key==="Escape"){e.preventDefault();e.stopPropagation();close();return}
+  if(e.key!=="Tab")return;
+  var f=focusable(); if(!f.length)return;
+  var first=f[0], last=f[f.length-1];
+  if(e.shiftKey && (document.activeElement===first||!w.contains(document.activeElement))){
+   e.preventDefault(); last.focus();
+  } else if(!e.shiftKey && document.activeElement===last){
+   e.preventDefault(); first.focus();
+  }
+ }
+ function close(){
+  if(closed)return; closed=true;
+  document.removeEventListener("keydown",onKey,true);
+  document.body.classList.remove("sheeting");
+  /* only release the global handle if it is still ours — a close scheduled
+     for an earlier sheet must not null out the one that replaced it */
+  if(drvOpen===close)drvOpen=null;
+  w.classList.remove("go");
+  setTimeout(function(){ w.remove();
+   if(prev&&prev.focus){try{prev.focus({preventScroll:true})}catch(_){}} },320);
+ }
+ document.body.appendChild(w);
+ document.body.classList.add("sheeting");
+ document.addEventListener("keydown",onKey,true);
+ requestAnimationFrame(function(){ w.classList.add("go");
+  var f=focusable(); if(f.length){try{f[0].focus({preventScroll:true})}catch(_){}} });
+ w.onclick=function(e){if(e.target===w)close()};
+ drvOpen=close;
+ return close;
+}
 /* A place sheet that is useful with ZERO signal: the Vietnamese address is in the
    cached page, so it renders offline. geo: hands it to whatever offline map app
    they have; the Google link is the online path. */
@@ -2668,10 +2799,10 @@ function driverCard(label,vn,q,H,warn){
  var geo="geo:0,0?q="+encodeURIComponent(vn||label);
  var gmap=H?H.pin:("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q||vn||label));
  var w=document.createElement("div");w.className="drv";
- w.innerHTML='<div class="drvi" role="dialog" aria-label="'+label+'">'+
+ w.innerHTML='<div class="drvi" role="dialog" aria-modal="true" aria-label="'+hesc(label)+'">'+
   '<div class="drvl">Hold this up to the driver</div>'+
-  '<div class="drvt'+(vn?"":" empty")+'">'+(vn||"No Vietnamese address saved yet")+'</div>'+
-  '<div class="drvs">'+label+(H?' \u00b7 '+H.city:'')+'</div>'+
+  '<div class="drvt'+(vn?"":" empty")+'">'+hesc(vn||"No Vietnamese address saved yet")+'</div>'+
+  '<div class="drvs">'+hesc(label)+(H?' \u00b7 '+hesc(H.city):'')+'</div>'+
   (warn?'<p class="drvwn">Sources disagree on this address. Two other listings give a different street. <b>Check the pin before you set off</b>, and ring them if it matters.</p>':'')+
   (H&&!vn?'<p class="drvw">'+(H.city?'Open the booking confirmation, copy the Vietnamese address and paste it in \u2014 this is the one you will show a driver most nights.':'No verified Vietnamese address for this one, and I will not guess at it. Get it from whoever you book with and paste it here.')+'<br><button class="btn sec noic" id="drvadd">Paste it now</button></p>':'')+
   '<div class="drvb">'+
@@ -2681,8 +2812,7 @@ function driverCard(label,vn,q,H,warn){
   '</div>'+
   '<p class="drvn">The address above needs no signal — it is stored in the app. <b>Open in a map app</b> will use your offline maps if you downloaded them.</p>'+
   '<button class="btn ghost noic wide" id="drvx">Close</button></div>';
- document.body.appendChild(w);requestAnimationFrame(function(){w.classList.add("go")});
- var close=function(){w.classList.remove("go");setTimeout(function(){w.remove();drvOpen=null},320)};
+ var close=mountSheet(w);
  w.querySelector("#drvx").onclick=close;
  w.querySelector("#drvc").onclick=function(){
   if(!vn){toast("Nothing to copy yet — paste the address first.",0);return}
@@ -2690,45 +2820,88 @@ function driverCard(label,vn,q,H,warn){
  var ab=w.querySelector("#drvadd");
  if(ab)ab.onclick=function(){
   var v=prompt("Paste the Vietnamese address for "+H.name+"\n(from the booking confirmation or the operator's map pin)","");
-  if(v&&v.trim()){addr[H.key]=v.trim();stamp("ad."+H.key);save();addrPane();days();close();
+  if(v&&v.trim()){addr[H.key]=v.trim().slice(0,160);stamp("ad."+H.key);save();addrPane();days();close();
    setTimeout(function(){driverCard(H.name,v.trim(),null,H)},340)}
  };
- w.onclick=function(e){if(e.target===w)close()};
- drvOpen=close;
 }
 function sosPane(){
  var el=$("sosbox"); if(!el)return;
- var h='<p class="shp"><b>112 is officially toll-free</b> from any Vietnamese line and connects through to police, fire and ambulance \u2014 use it if you are unsure about credit. Operators may not speak much English: give the <b>ward</b>, then the street, slowly.</p>';
- SOS.forEach(function(g){
-  h+='<div class="sosg"><h4>'+g.g+'</h4>';
-  g.items.forEach(function(i){
-   h+='<div class="sosr">'+
+
+ /* The numbers you dial are always on screen. Everything else folds away,
+    because a 10,000px emergency page is not an emergency page. */
+ function fold(emo,head,blurb,body,open){
+  return '<details class="sacc"'+(open?' open':'')+'><summary>'+
+   '<i>'+emo+'</i><span class="ach"><b>'+head+'</b><em>'+blurb+'</em></span>'+CHEVI+
+   '</summary><div class="saccb">'+body+'</div></details>';
+ }
+ function rows(g){
+  return g.items.map(function(i){
+   return '<div class="sosr">'+
     '<div class="sost"><b>'+i.t+'</b><p>'+i.w+'</p></div>'+
     '<div class="sosa"><a class="btn noic sos" href="tel:'+i.n+'">'+i.n.replace(/^\+84/,"+84 ")+'</a>'+
      (i.vn?'<button class="btn sec noic tiny" data-vn="'+encodeURIComponent(i.vn)+'" data-vl="'+i.t+'" data-mq="'+(i.map||'')+'">Show driver</button>':'')+
      (i.map?'<a class="btn ghost noic tiny" href="https://www.google.com/maps/search/?api=1&query='+i.map+'" target="_blank" rel="noopener">Map</a>':'')+
     '</div></div>';
-  });
-  h+='</div>';
+  }).join("");
+ }
+ /* the blurb lists what is actually inside, straight from the data,
+    so it can never describe a group that has changed */
+ function names(g){
+  var head=g.items.map(function(i){return i.t.split(" — ")[0]});
+  var tail=g.items.map(function(i){var x=i.t.split(" — ");return x.length>1?x.slice(1).join(" — "):""});
+  var uniq={}; head.forEach(function(x){uniq[x]=1});
+  /* "Family Medical Practice · Family Medical Practice" helps nobody:
+     when the names collide, name it once and list where instead */
+  if(Object.keys(uniq).length===1 && head.length>1 && tail.every(Boolean)){
+   var last=tail.pop();
+   return head[0]+" — "+(tail.length?tail.join(", ")+" and "+last:last);
+  }
+  return head.join(" \u00b7 ");
+ }
+
+ var ICON=["☎️","🏥","🩺","🛂"];
+
+ /* Four buttons, above everything, no scrolling and no reading first. */
+ var dial=SOS[0].items.map(function(i){
+  return '<a class="dial" href="tel:'+i.n+'"><b>'+i.n+'</b><span>'+i.t+'</span></a>'}).join("");
+ var notes=SOS[0].items.filter(function(i){return i.w}).map(function(i){
+  return '<p class="dialn"><b>'+i.n+'</b> '+i.w+'</p>'}).join("");
+
+ var h='<div class="dials">'+dial+'</div>'+
+  '<p class="shp">Operators may not speak much English: give the <b>ward</b>, then the street, slowly. <b>112 is toll-free even if your SIM has no credit.</b></p>';
+ h+=fold("☎️","What to say, and which number",
+   "Why 112 over 115, and the report you need for insurance", notes);
+
+ SOS.forEach(function(g,gi){
+  if(gi===0)return;
+  h+=fold(ICON[gi]||"", g.g, names(g), rows(g));
  });
- h+='<div class="sosg"><h4>Say it in Vietnamese</h4><div class="phr">'+
+
+ h+=fold("🗣️","Say it in Vietnamese",
+   PHRASE.length+" lines to hold up — doctor, hospital, police, passport",
+   '<div class="phr">'+
    PHRASE.map(function(p){return '<div class="phrr"><b>'+p[0]+'</b><div class="phv">'+p[1]+'</div>'+
      '<span>'+p[2]+'</span><button class="vch tinyc" data-say="'+encodeURIComponent(p[1])+'" data-sl="'+p[0]+'">Show</button></div>'}).join("")+
-   '</div><p class="bdis">Show the Vietnamese, do not rely on the pronunciation.</p></div>';
- h+='<div class="sosg"><h4>Lost passport — in order</h4><ol class="soso">'+
-   SOSSTEPS.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ol></div>';
- h+='<div class="sosg"><h4>Your own details</h4>'+
+   '</div><p class="bdis">Show the Vietnamese, do not rely on the pronunciation.</p>');
+
+ h+=fold("📋","Lost passport — the running order",
+   SOSSTEPS.length+" steps. Doing them out of order costs days over the holiday.",
+   '<ol class="soso">'+SOSSTEPS.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ol>');
+
+ h+=fold("🔒","Your own details",
+   "Insurance numbers and next of kin — fill this in before you fly",
    '<label class="shl">Insurance policy numbers, emergency contacts, anything you would want at 3am</label>'+
-   '<textarea id="sosnote" placeholder="e.g. Aki — AXA 88-2231-114, +44 7700 900123 (mum). Harith — Allianz 55-9087."></textarea>'+
-   '<p class="bdis">Saved on this phone and carried in your share link. Fill it in before you fly.</p></div>';
+   '<textarea id="sosnote" placeholder="e.g. Aki — AXA 88-2231-114, +94 77 123 4567 (mum). Harith — Allianz 55-9087."></textarea>'+
+   '<p class="bdis">Saved on this phone and carried in your share link.</p>');
+
  el.innerHTML=h;
  el.querySelectorAll("[data-vn]").forEach(function(b){
   b.onclick=function(){driverCard(b.dataset.vl,decodeURIComponent(b.dataset.vn),b.dataset.mq||'')}});
  el.querySelectorAll("[data-say]").forEach(function(b){
   b.onclick=function(){driverCard(b.dataset.sl,decodeURIComponent(b.dataset.say),null)}});
  var ta=el.querySelector("#sosnote");
- ta.value=addr["_sos"]||"";
- ta.oninput=function(){addr["_sos"]=ta.value;stamp("ad._sos");save()};
+ if(ta){ta.value=addr["_sos"]||"";
+  ta.oninput=function(){addr["_sos"]=ta.value;stamp("ad._sos");save()}}
 }
 
 function addrPane(){
@@ -2766,30 +2939,44 @@ function addrPane(){
 
 /* ---- who paid what ---- */
 function money(v){return fmtV(Math.round(v))}
-function crewNames(){ return crew.length?crew:["You","Harith","3","4","5","6"].slice(0,grp) }
+function crewNames(){
+ if(crew.length)return crew;
+ var seed=["You","Harith"], out=[];
+ for(var i=0;i<grp;i++) out.push(seed[i]||("Person "+(i+1)));
+ return out;
+}
+/* whoever actually paid must appear in the settle-up, even if the crew
+   list was edited afterwards — otherwise their money silently inflates
+   everyone else's share */
+function payerNames(){
+ var n=crewNames().slice();
+ spend.forEach(function(x){ if(x.by && n.indexOf(x.by)<0) n.push(x.by) });
+ return n;
+}
 function spendPane(){
  var el=$("spendbox"); if(!el)return;
  var names=crewNames();
  var h='<div class="crewrow"><span class="shl" style="margin:0">Who is on the trip</span>'+
    '<div class="crewl">'+names.map(function(n,i){
-     return '<button class="vch" data-cn="'+i+'">'+n+'</button>'}).join("")+
+     return '<button class="vch" data-cn="'+i+'">'+hesc(n)+'</button>'}).join("")+
    '<button class="vch add" data-cadd="1">+ add</button></div></div>';
  h+='<div class="acts"><button class="btn noic" id="addsp">Log a payment</button></div>';
  if(!spend.length){
   h+='<div class="none">Nothing logged yet. Every time someone pays for the group — the Cu Chi car, a dinner, the lantern boats — log it here and the maths at the end is done for you.</div>';
  }else{
   h+='<div class="splist">'+spend.slice().reverse().map(function(x){
-   return '<div class="sprow"><div class="spt"><b>'+x.w+'</b>'+
-     '<span>'+x.by+' paid \u00b7 split '+(x.n||names.length)+' ways</span></div>'+
+   return '<div class="sprow"><div class="spt"><b>'+hesc(x.w)+'</b>'+
+     '<span>'+hesc(x.by)+' paid \u00b7 split '+(x.n||names.length)+' ways</span></div>'+
      '<div class="spv">'+money(x.v)+'<i>'+money(x.v/(x.n||names.length))+' each</i></div>'+
      '<button class="spx" data-del="'+x.id+'" aria-label="Delete">\u00d7</button></div>';
   }).join("")+'</div>';
   /* settle up */
+  var settle=payerNames();
   var paid={},total=0;
-  names.forEach(function(n){paid[n]=0});
+  settle.forEach(function(n){paid[n]=0});
   spend.forEach(function(x){paid[x.by]=(paid[x.by]||0)+x.v;total+=x.v});
-  var share=total/names.length;
-  var bal=names.map(function(n){return {n:n,b:(paid[n]||0)-share}}).sort(function(a,b){return a.b-b.b});
+  var share=total/settle.length;
+  var bal=settle.map(function(n){return {n:n,b:(paid[n]||0)-share}}).sort(function(a,b){return a.b-b.b});
   var owe=bal.filter(function(x){return x.b<-1000}).map(function(x){return {n:x.n,b:-x.b}});
   var get=bal.filter(function(x){return x.b>1000}).map(function(x){return {n:x.n,b:x.b}});
   var moves=[],gi=0;
@@ -2814,7 +3001,8 @@ function spendPane(){
  $("addsp").onclick=function(){
   var names=crewNames();
   var w=prompt("What was it? (e.g. Cu Chi car, dinner at Missteak)");
-  if(!w)return;
+  if(!w||!w.trim())return;
+  w=w.trim().slice(0,60);
   var raw=prompt("How much, in dong? You can write 1.6m or 450k","");
   if(!raw)return;
   var v=String(raw).trim().toLowerCase().replace(/[, ₫]/g,"");
@@ -2829,7 +3017,7 @@ function spendPane(){
  };
  var cp=$("cpsp");
  if(cp)cp.onclick=function(){
-  var names=crewNames(),paid={},total=0;
+  var names=payerNames(),paid={},total=0;
   names.forEach(function(n){paid[n]=0});
   spend.forEach(function(x){paid[x.by]=(paid[x.by]||0)+x.v;total+=x.v});
   var share=total/names.length;
@@ -2839,38 +3027,63 @@ function spendPane(){
   copyText(L.join("\n"),"Settle-up");
  };
  el.querySelectorAll("[data-del]").forEach(function(b){
-  b.onclick=function(){spend=spend.filter(function(x){return x.id!==b.dataset.del});save();spendPane()}});
+  b.onclick=function(){
+   var row=null; spend.forEach(function(x){if(x.id===b.dataset.del)row=x});
+   if(row&&!confirm("Delete \u201c"+row.w+"\u201d ("+money(row.v)+")?\nThis also removes it for anyone you share a code with."))return;
+   spdel[b.dataset.del]=Date.now();
+   spend=spend.filter(function(x){return x.id!==b.dataset.del});
+   hap("select");save();spendPane()}});
  el.querySelectorAll("[data-cn]").forEach(function(b){
   b.onclick=function(){
    var names=crewNames(),i=+b.dataset.cn;
-   var v=prompt("Name",names[i]);
+   var v=prompt("Rename this person, or clear the box to remove them",names[i]);
    if(v===null)return;
-   var c=names.slice(); c[i]=v.trim()||c[i]; crew=c; grp=c.length; stamp("g"); save(); spendPane(); budget();
+   var old=names[i], nw=v.trim(), c=names.slice();
+   if(!nw){
+    if(spend.some(function(x){return x.by===old})){
+     toast("Rename them instead — "+old+" has payments logged and removing them would break the settle-up.",0);return}
+    if(c.length<2){toast("You need at least one person.",0);return}
+    c.splice(i,1);
+   } else {
+    c[i]=nw.slice(0,24);
+    /* payments store a name, so the rename has to follow the money */
+    spend.forEach(function(x){ if(x.by===old){x.by=nw; x.at=Date.now()} });
+   }
+   crew=c; grp=c.length; stamp("g"); save(); spendPane(); budget();
   }});
  var ad=el.querySelector("[data-cadd]");
  if(ad)ad.onclick=function(){
   var c=crewNames().slice();
   var v=prompt("Name of the person to add");
-  if(!v)return;
-  c.push(v.trim()); crew=c; grp=c.length; stamp("g"); save(); spendPane(); budget();
+  if(!v||!v.trim())return;
+  c.push(v.trim().slice(0,24)); crew=c; grp=c.length; stamp("g"); save(); spendPane(); budget();
  };
 }
 
 function tally(){
+ function tabName(key,label,n,what){
+  var b=document.querySelector('#tabs button[data-p="'+key+'"]'); if(!b)return;
+  b.setAttribute("aria-label", n>0 ? label+", "+n+" "+what : label);
+ }
  var t=0,d=0,u=0;
  BOOK.forEach(function(g){g.items.forEach(function(i){t++;if(st[i.id])d++;else if(i.p==="now")u++})});
  $("nd").textContent=d;$("nt").textContent=t;$("s3").textContent=d+"/"+t;
  var p=t?Math.round(d/t*100):0;
  $("pc").textContent=p+"%";$("fl").style.width=p+"%";
- $("put").textContent=u+" urgent "+(u===1?"item":"items")+" outstanding";
+ $("put").textContent=u+(u===1?" item":" items")+" still to book now";
  $("pu").classList.toggle("show",u>0);
  $("pa").classList.toggle("show",t>0&&d===t);
  var bd=$("bdg");bd.textContent=u;bd.classList.toggle("show",u>0);
+ tabName("book","Bookings",u,"still to book now");
  var ec=Object.keys(eat).length,fb=$("fbdg");
  fb.textContent=ec;fb.classList.toggle("show",ec>0);
- var pend=0;IDEAS.forEach(function(g){g.items.forEach(function(i){if(!i.dn&&!idea[i.id])pend++})});
- var undec=pend, ib=$("ibdg");
+ tabName("food","Food",ec,"added to the plan");
+ /* every idea already carries a "what I did", so counting undecided ones
+    only ever produced 0 — count the ones you have not voted on instead */
+ var undec=0;IDEAS.forEach(function(g){g.items.forEach(function(i){if(!idea[i.id])undec++})});
+ var ib=$("ibdg");
  ib.textContent=undec; ib.classList.toggle("show",undec>0);
+ tabName("idea","Ideas",undec,"you have not decided on");
 }
 
 function countdown(){
@@ -2887,7 +3100,16 @@ document.querySelectorAll(".segs button").forEach(function(b){
  b.onclick=function(){
   document.querySelectorAll(".segs button").forEach(function(x){x.classList.remove("on")});
   b.classList.add("on");filt=b.dataset.f;book()}});
-$("reset").onclick=function(){for(var k in st)delete st[k];save();book()};
+$("reset").onclick=function(){
+ var n=Object.keys(st).length+Object.keys(pay).length;
+ if(!n){toast("Nothing ticked yet.",0);return}
+ if(!confirm("Clear all "+n+" ticks?\n\nThis unticks every booking and every paid line. Notes, food picks, expenses and clips are kept."))return;
+ /* stamp each removal, or the next merged share code brings them all back */
+ Object.keys(st).forEach(function(k){delete st[k];stamp("s."+k)});
+ Object.keys(pay).forEach(function(k){delete pay[k];stamp("y."+k)});
+ hap("commit");save();book();days();budget();tally();
+ toast("Cleared "+n+" tick"+(n===1?"":"s")+".",1);
+};
 /* ================= TIME OF DAY =================
    The theme follows the clock on the reader's own device: dark from 19:00
    to 07:00, light in between. A manual tap pins it and stops the clock
@@ -2959,6 +3181,10 @@ function tick(){
    (there&&there!==here ? '<s>\u00b7</s><s>Vietnam</s><i>'+there+'</i>' : '');
  }
  if(!pinned() && paintTheme(byClock())) themeHint();
+ /* a phone left open overnight was still showing yesterday's day count
+    and ringing yesterday's card */
+ var dk=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+ if(dk!==tick._day){ tick._day=dk; if(typeof countdown==="function"){countdown();days()} }
 }
 tick(); setInterval(tick,10000);
 document.addEventListener("visibilitychange",function(){if(!document.hidden)tick()});
@@ -3065,7 +3291,7 @@ function showTab(i,dir,vel){
  if(i===curTab)return;
  var from=paneEl(), to=PANES[i];
  var w=window.innerWidth;
- TABS.forEach(function(x,ix){x.classList.toggle("on",ix===i)});
+ TABS.forEach(function(x,ix){x.classList.toggle("on",ix===i);x.setAttribute("aria-selected",ix===i)});
  from.classList.remove("on"); from.style.transform="";
  to.classList.add("on");
  curTab=i;
@@ -3094,6 +3320,11 @@ TABS.forEach(function(b,i){
 });
 addEventListener("resize",layoutInd);
 layoutInd();
+/* Geist arrives with font-display:swap, so the first measurement is taken
+   against the fallback metrics and the pill lands under the wrong tab */
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){
+ layoutInd(); if(indSpring)indSpring.set(curTab); applyInd(curTab);
+});
 
 /* --- horizontal swipe between panes: 1:1 tracking, rubber-banded edges,
        momentum projection at release, interruptible at any point --- */
@@ -3207,7 +3438,9 @@ load();days();book();foodPane();ideaPane();info();countdown();budget();sharePane
  if(n){dop[n]=true;days();
   setTimeout(function(){var el=$("day"+n);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})},300);}
  if(window.__synced){var b=document.createElement("div");b.className="toast";
-  b.textContent="Loaded someone else’s copy — ticks, plans and notes are now theirs.";
+  b.textContent=(window.__synced==="nothing new")
+   ? "Merged their copy \u2014 nothing new to add."
+   : "Merged their copy \u2014 "+window.__synced+" pulled in. Nothing of yours was lost.";
   document.body.appendChild(b);setTimeout(function(){b.classList.add("go")},60);
   setTimeout(function(){b.remove()},6000);}
 })();
