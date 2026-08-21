@@ -40,7 +40,7 @@
   --line:#d2d2d7; --line2:#e8e8ed;
   --ink:#1d1d1f; --ink2:#3a3a3d; --mut:#57575c; --dim:#5f5f66;
   --acc:#0071e3; --acc2:#0058b9; --acctx:#0059ba; --btn:#0071e3; --accbg:rgba(0,113,227,.12);
-  --red:#c9372c; --redbg:rgba(201,55,44,.09); --redtx:#a3271d; --onfill:#fff; --altc:#7d3ab8;
+  --red:#c9372c; --redbg:rgba(201,55,44,.09); --redtx:#a3271d; --redtab:rgba(201,55,44,.16); --onfill:#fff; --altc:#7d3ab8;
   --amb:#8a6100; --ambbg:rgba(180,130,10,.11);
   --grn:#1d7a4a; --grnbg:rgba(29,122,74,.10);
   --shadow:0 1px 1px rgba(28,40,64,.03),0 4px 12px rgba(28,40,64,.045),0 14px 38px rgba(28,40,64,.05);
@@ -57,7 +57,7 @@
   --line:#38383a; --line2:#2a2a2c;
   --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
   --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
-  --red:#ff6961; --redbg:rgba(255,105,97,.14); --redtx:#ff8a83; --onfill:#14141a; --altc:#da8fff;
+  --red:#ff6961; --redbg:rgba(255,105,97,.14); --redtx:#ff8a83; --redtab:rgba(255,105,97,.22); --onfill:#14141a; --altc:#da8fff;
   --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
   --grn:#30d158; --grnbg:rgba(48,209,88,.13);
   --shadow:0 1px 1px rgba(0,0,0,.45),0 5px 16px rgba(0,0,0,.42),0 16px 44px rgba(0,0,0,.4);
@@ -75,7 +75,7 @@
     --line:#38383a; --line2:#2a2a2c;
     --ink:#f5f5f7; --ink2:#dcdce0; --mut:#a1a1a7; --dim:#8a8a90;
     --acc:#0a84ff; --acc2:#409cff; --acctx:#5aaeff; --btn:#0071e3; --accbg:rgba(10,132,255,.22);
-    --red:#ff6961; --redbg:rgba(255,105,97,.14); --redtx:#ff8a83; --onfill:#14141a; --altc:#da8fff;
+    --red:#ff6961; --redbg:rgba(255,105,97,.14); --redtx:#ff8a83; --redtab:rgba(255,105,97,.22); --onfill:#14141a; --altc:#da8fff;
     --amb:#ffb340; --ambbg:rgba(255,179,64,.13);
     --grn:#30d158; --grnbg:rgba(48,209,88,.13);
     --shadow:0 1px 1px rgba(0,0,0,.45),0 5px 16px rgba(0,0,0,.42),0 16px 44px rgba(0,0,0,.4);
@@ -697,19 +697,22 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 .cliprow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:12px;
  padding-top:12px;border-top:1px solid var(--line)}
 .clips{display:flex;flex-wrap:wrap;gap:6px}
+.idbtns+.cliprow{border-top:none;padding-top:0;margin-top:11px}
 .ev .clips,.eatc .clips{margin-top:7px}
-.clip{display:inline-flex;align-items:center;gap:6px;max-width:100%;
- padding:5px 11px 5px 8px;border-radius:999px;background:var(--accbg);color:var(--acctx);
- font-size:11.5px;font-weight:600;letter-spacing:.005em;text-decoration:none;
+.clip{position:relative;display:inline-flex;align-items:center;gap:7px;max-width:100%;
+ padding:8px 14px 8px 11px;border-radius:999px;background:var(--accbg);color:var(--acctx);
+ font-size:12.5px;font-weight:600;letter-spacing:.005em;text-decoration:none;
  transition:transform .45s var(--ease),opacity .3s var(--ease)}
-.clip svg{width:14px;height:14px;flex:none;opacity:.8}
+.clip:after{content:"";position:absolute;inset:-5px -2px}
+.clip svg{width:15px;height:15px;flex:none;opacity:.8}
 .clip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .clip:active{transform:scale(.97)}
-.clipb{display:inline-flex;align-items:center;gap:5px;
- padding:5px 11px 5px 8px;border-radius:999px;border:1px dashed var(--bzline);
- background:none;color:var(--mut);font-family:inherit;font-size:11.5px;font-weight:600;
+.clipb{position:relative;display:inline-flex;align-items:center;gap:6px;
+ padding:8px 14px 8px 11px;border-radius:999px;border:1px dashed var(--bzline);
+ background:none;color:var(--mut);font-family:inherit;font-size:12.5px;font-weight:600;
  cursor:pointer;transition:transform .45s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
-.clipb svg{width:14px;height:14px;flex:none}
+.clipb:after{content:"";position:absolute;inset:-5px -2px}
+.clipb svg{width:15px;height:15px;flex:none}
 .clipb.has{border-style:solid;color:var(--acc)}
 .clipb:active{transform:scale(.97)}
 .clipb:hover{color:var(--acc);border-color:var(--acc)}
@@ -756,9 +759,16 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 /* ---- the SOS tab reads red, so it is findable in a panic ---- */
 .tabs button.sostab{color:var(--red)}
 .tabs button.sostab:hover{color:var(--red);background:var(--redbg)}
-.tabs button.sostab.on{background:var(--redbg);color:var(--redtx)}
+.tabs button.sostab.on{background:var(--redtab);color:var(--redtx)}
+
+/* On the SOS tab the hero and footer are noise: you land here in a hurry
+   and the first thing on screen must be the number you dial. */
+body[data-tab="sos"] .heroWrap,
+body[data-tab="sos"] footer{display:none}
+body[data-tab="sos"] #p-sos{padding-top:var(--s5)}
 
 /* ---- emergency ---- */
+.card.sos h3 i{background:var(--redbg);color:var(--red)}
 .card.sos:before{background-color:var(--surf);
  background-image:linear-gradient(180deg,var(--redbg),var(--surf) 62%)}
 .sosg{margin-top:18px}
@@ -3059,6 +3069,7 @@ function showTab(i,dir,vel){
  from.classList.remove("on"); from.style.transform="";
  to.classList.add("on");
  curTab=i;
+ document.body.dataset.tab=TABS[i].dataset.p;
  indSpring.go(i,null,{damping:1,response:0.34});
  setTimeout(litSweep,90); setTimeout(litSweep,520);
  if(reduced()){to.style.transform="";return}
@@ -3188,6 +3199,7 @@ function reveal(paneId,sel){
  });
 }
 
+document.body.dataset.tab=TABS[curTab].dataset.p;
 load();days();book();foodPane();ideaPane();info();countdown();budget();sharePane();sosPane();addrPane();spendPane();themeHint();
 
 /* open on today once the trip has started */
