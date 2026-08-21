@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="VT-AW-2026 — Da Nang &amp; Saigon. Itinerary, bookings, essentials.">
 <meta name="theme-color" content="#f5f5f7">
+<script>(function(){try{
+ var t=null;
+ if(localStorage.getItem("vn2026thm")){
+  var r=localStorage.getItem("vn2026a");
+  if(r){try{t=(JSON.parse(r)||{}).t||null}catch(e){}}
+ }
+ if(t!=="light"&&t!=="dark"){var h=new Date().getHours();t=(h>=19||h<7)?"dark":"light";}
+ document.documentElement.dataset.theme=t;
+ var m=document.querySelector('meta[name="theme-color"]');
+ if(m)m.setAttribute("content",t==="dark"?"#000000":"#f5f5f7");
+}catch(e){}})();</script>
 <title>VT-AW-2026</title>
 <style>
 @font-face{
@@ -661,9 +672,20 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 /* ---- dark-mode hint ---- */
 .ttw{display:flex;align-items:center;gap:7px}
 .tth{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--dim);
- opacity:.85;transition:opacity .5s var(--ease);white-space:nowrap}
-.tth.used{opacity:0;pointer-events:none}
+ opacity:.85;transition:opacity .5s var(--ease),color .3s var(--ease);white-space:nowrap;
+ border:none;background:none;padding:2px 0;cursor:pointer;font-family:inherit}
+.tth.auto{color:var(--acc);opacity:1}
 @media(max-width:360px){.tth{display:none}}
+
+/* ---- live clock ---- */
+.bwrap{display:flex;flex-direction:column;gap:1px;min-width:0}
+.clk{display:flex;align-items:baseline;gap:6px;white-space:nowrap;
+ font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.005em;
+ font-variant-numeric:tabular-nums;min-height:14px}
+.clk b{font-weight:650;color:var(--ink);font-size:11.5px}
+.clk i{font-style:normal;font-weight:650;color:var(--acc)}
+.clk s{text-decoration:none;opacity:.5}
+@media(max-width:400px){.clk{font-size:10.5px;gap:5px}.clk b{font-size:11px}}
 
 /* ---- emergency ---- */
 .card.sos:before{background-color:var(--surf);
@@ -938,8 +960,11 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
 <div class="grain" aria-hidden="true"></div>
 <div class="topwrap"><header class="top">
   <div class="topin">
-    <div class="brand">VT-AW<span>-2026</span></div>
-    <div class="ttw"><span class="tth" id="tth">dark mode</span>
+    <div class="bwrap">
+      <div class="brand">VT-AW<span>-2026</span></div>
+      <div class="clk" id="clk"></div>
+    </div>
+    <div class="ttw"><button type="button" class="tth" id="tth">dark mode</button>
     <button class="tt" id="tt" aria-label="Switch between light and dark">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.6A8.6 8.6 0 019.4 3.5a8.6 8.6 0 1011.1 11.1z"/></svg>
@@ -1784,7 +1809,8 @@ function applyState(d,merge){
  return n;
 }
 function load(){try{var r=localStorage.getItem("vn2026a");if(r){var d=JSON.parse(r);applyState(d);
- if(d.t)document.documentElement.dataset.theme=d.t}}catch(e){}
+ /* the stored theme only wins if the reader pinned it; otherwise the clock decides */
+ if(d.t&&localStorage.getItem("vn2026thm"))document.documentElement.dataset.theme=d.t}}catch(e){}
  try{var m=location.hash.match(/[#&]s=([A-Za-z0-9_\-]+)/);
   if(m){var inc=decode(m[1]); if(inc){var n=applyState(inc,true);save();
    history.replaceState(null,"",location.pathname+location.search);
@@ -2621,22 +2647,80 @@ document.querySelectorAll(".segs button").forEach(function(b){
   document.querySelectorAll(".segs button").forEach(function(x){x.classList.remove("on")});
   b.classList.add("on");filt=b.dataset.f;book()}});
 $("reset").onclick=function(){for(var k in st)delete st[k];save();book()};
-function themeHint(){
- var el=document.documentElement, cur=el.dataset.theme;
- var isDark = cur==="dark" || (cur==="auto" && matchMedia("(prefers-color-scheme:dark)").matches);
- var h=$("tth"); if(!h)return;
- h.textContent = isDark ? "light mode" : "dark mode";
- h.classList.toggle("used", !!localStorage.getItem("vn2026thm"));
-}
-$("tt").onclick=function(){
- var el=document.documentElement, cur=el.dataset.theme;
- var isDark = cur==="dark" || (cur==="auto" && matchMedia("(prefers-color-scheme:dark)").matches);
- el.dataset.theme = isDark ? "light" : "dark";
- try{localStorage.setItem("vn2026thm","1")}catch(e){}
+/* ================= TIME OF DAY =================
+   The theme follows the clock on the reader's own device: dark from 19:00
+   to 07:00, light in between. A manual tap pins it and stops the clock
+   touching it; the "auto" button hands control back. */
+var NIGHT_FROM=19, NIGHT_TO=7;
+
+function pinned(){try{return !!localStorage.getItem("vn2026thm")}catch(e){return false}}
+function byClock(){var h=new Date().getHours();return (h>=NIGHT_FROM||h<NIGHT_TO)?"dark":"light"}
+function isDarkNow(){return document.documentElement.dataset.theme==="dark"}
+
+function paintTheme(t){
+ var el=document.documentElement;
+ if(el.dataset.theme===t)return false;
+ el.dataset.theme=t;
  var m=document.querySelector('meta[name="theme-color"]');
- if(m)m.setAttribute("content", isDark ? "#f5f5f7" : "#000000");
+ if(m)m.setAttribute("content", t==="dark" ? "#000000" : "#f5f5f7");
+ return true;
+}
+
+function themeHint(){
+ var h=$("tth"); if(!h)return;
+ if(pinned()){
+  h.textContent="auto";
+  h.classList.add("auto");
+  h.title="Follow the time of day again";
+ }else{
+  h.textContent=isDarkNow() ? "light mode" : "dark mode";
+  h.classList.remove("auto");
+  h.title="Switch theme";
+ }
+}
+
+$("tt").onclick=function(){
+ paintTheme(isDarkNow() ? "light" : "dark");
+ try{localStorage.setItem("vn2026thm","1")}catch(e){}
  themeHint(); hap("select"); save();
 };
+
+$("tth").onclick=function(){
+ if(pinned()){
+  try{localStorage.removeItem("vn2026thm")}catch(e){}
+  paintTheme(byClock());
+ }else{
+  $("tt").onclick();
+  return;
+ }
+ themeHint(); hap("select"); save();
+};
+
+/* ---- the live clock, and the theme that follows it ---- */
+var VNTZ="Asia/Ho_Chi_Minh";
+function hhmm(d,tz){
+ try{return new Intl.DateTimeFormat("en-GB",
+  {hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:tz}).format(d)}
+ catch(e){
+  var h=d.getHours(),m=d.getMinutes();
+  return (h<10?"0":"")+h+":"+(m<10?"0":"")+m;}
+}
+function longDate(d,tz){
+ try{return new Intl.DateTimeFormat("en-GB",
+  {weekday:"short",day:"numeric",month:"short",timeZone:tz}).format(d)}
+ catch(e){return d.toDateString().slice(0,10)}
+}
+function tick(){
+ var d=new Date(), el=$("clk");
+ if(el){
+  var here=hhmm(d), there=hhmm(d,VNTZ);
+  el.innerHTML='<b>'+here+'</b><span>'+longDate(d)+'</span>'+
+   (there&&there!==here ? '<s>\u00b7</s><s>Vietnam</s><i>'+there+'</i>' : '');
+ }
+ if(!pinned() && paintTheme(byClock())) themeHint();
+}
+tick(); setInterval(tick,10000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)tick()});
 
 
 /* ================= FLUID LAYER =================
