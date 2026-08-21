@@ -386,6 +386,12 @@ textarea::placeholder{color:var(--dim)}
  .tabs button svg{width:19px;height:19px}
  .tbdg.show{position:absolute;top:3px;right:calc(50% - 20px);font-size:9px;min-width:15px;height:15px}
 }
+@media(max-width:370px){
+ .tabs button{padding:7px 1px 6px}
+ .tabs button b{font-size:9.3px;letter-spacing:-.025em}
+ .tabs button svg{width:18px;height:18px}
+ .tbdg.show{right:calc(50% - 17px)}
+}
 
 /* ---- plans, commutes, map, day notes ---- */
 .plans{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
@@ -725,6 +731,33 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 .csn{font-size:12.5px;color:var(--mut);margin:0 0 8px}
 .csa{width:100%}
 
+/* ---- Essentials as an accordion: a menu you can read in one screen ---- */
+.acc{padding-top:0;padding-bottom:0}
+.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;
+ padding:calc(var(--s5) + var(--bz)) 0;margin:0}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::marker{content:""}
+.acc summary i{width:30px;height:30px;border-radius:9px;background:var(--accbg);color:var(--acc);
+ display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:15px}
+.ach{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ach b{font-size:16.5px;font-weight:600;letter-spacing:-.022em;line-height:1.25}
+.ach em{font-style:normal;font-size:12.5px;font-weight:450;color:var(--mut);
+ letter-spacing:-.005em;line-height:1.35}
+.acv{width:19px;height:19px;flex:0 0 auto;color:var(--dim);
+ transition:transform .4s var(--ease),color .3s var(--ease)}
+.acc[open] .acv{transform:rotate(90deg);color:var(--acc)}
+.acc summary:hover .acv{color:var(--acc)}
+.acc summary:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:10px}
+.accb{padding:2px 0 calc(var(--s5) + var(--bz));margin-top:2px;
+ border-top:1px solid var(--line);padding-top:var(--s4)}
+.acc[open] summary{padding-bottom:var(--s4)}
+.accb>*:last-child{margin-bottom:0}
+
+/* ---- the SOS tab reads red, so it is findable in a panic ---- */
+.tabs button.sostab{color:var(--red)}
+.tabs button.sostab:hover{color:var(--red);background:var(--redbg)}
+.tabs button.sostab.on{background:var(--redbg);color:var(--redtx)}
+
 /* ---- emergency ---- */
 .card.sos:before{background-color:var(--surf);
  background-image:linear-gradient(180deg,var(--redbg),var(--surf) 62%)}
@@ -1015,6 +1048,7 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
       <button data-p="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a2.5 2.5 0 002.5 2.5H9V21M6 3v5M9.5 3v5M17.5 3c-1.3 1.4-2 3.4-2 5.4s.7 3.4 2 4.4V21"/></svg><b>Food</b><i class="tbdg gr" id="fbdg"></i></button>
       <button data-p="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21.5h4M12 2.5a6.5 6.5 0 00-3.8 11.8c.5.4.8 1 .8 1.7h6c0-.7.3-1.3.8-1.7A6.5 6.5 0 0012 2.5z"/></svg><b>Ideas</b><i class="tbdg am" id="ibdg"></i></button>
       <button data-p="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.6v-5.2M12 7.9h.01"/></svg><b>Essentials</b></button>
+      <button class="sostab" data-p="sos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.7L1.9 18a2 2 0 001.7 3h16.8a2 2 0 001.7-3L13.7 3.7a2 2 0 00-3.4 0z"/><path d="M12 9.5v4.2M12 17.2h.01"/></svg><b>SOS</b></button>
     </div>
 </header></div>
 
@@ -1081,10 +1115,11 @@ footer{color:var(--mut);font-size:12.5px;line-height:1.6;text-align:center;
     <div id="idealist"></div>
   </div>
   <div class="pane" id="p-info">
-    <div class="card sos"><h3><i>🚨</i>If something goes wrong</h3><div id="sosbox"></div></div>
-    <div class="card"><h3><i>🗺️</i>Show the driver</h3><div id="addrbox"></div></div>
-    <div class="card share"><h3><i>🔗</i>Share with the group</h3><div id="sharebox"></div></div>
     <div id="infolist"></div>
+  </div>
+
+  <div class="pane" id="p-sos">
+    <div class="card sos"><h3><i>🚨</i>If something goes wrong</h3><div id="sosbox"></div></div>
   </div>
 
   <footer>
@@ -1544,7 +1579,7 @@ const BOOK=[
 ]}];
 
 const INFO=[
-{h:"Before you fly",ic:"M9 6.5V4.2A1.7 1.7 0 0110.7 2.5h2.6A1.7 1.7 0 0115 4.2v2.3M4.5 6.5h15A1.5 1.5 0 0121 8v11.5a2 2 0 01-2 2H5a2 2 0 01-2-2V8a1.5 1.5 0 011.5-1.5z",
+{h:"Before you fly",d:"Passport, e-visa, offline maps and the {n} things to pack",ic:"M9 6.5V4.2A1.7 1.7 0 0110.7 2.5h2.6A1.7 1.7 0 0115 4.2v2.3M4.5 6.5h15A1.5 1.5 0 0121 8v11.5a2 2 0 01-2 2H5a2 2 0 01-2-2V8a1.5 1.5 0 011.5-1.5z",
  emo:"🎒",type:"pack",rows:[
  ["🛂","Passport","Must have <b>6 months validity</b> beyond 26 August"],
  ["📄","Vietnam e-visa ✅","Sorted. Two things left: check the <b>name and passport number on it match your passport exactly</b> — a typo means refused boarding — and confirm the entry date covers 26 August. Save a PDF offline."],
@@ -1563,7 +1598,7 @@ const INFO=[
  ["🗺️","Offline maps, both cities","In Google Maps, search Da Nang, tap the name, then <b>Download offline map</b>. Do the same for Ho Chi Minh City. Do it on wifi before you fly — every address in this app then works with no signal."],
  ["📸","Tailor reference photos","Save pictures of the cuts and cloth you want before Wednesday."],
  ["🧾","Travel insurance","Policy number saved offline, not just in your inbox."]]},
-{h:"Money",ic:"M12 2.5v19M16.8 6.8c0-1.7-2.1-2.8-4.8-2.8s-4.8 1-4.8 2.8 2.1 2.5 4.8 3.3 4.8 1.5 4.8 3.3-2.1 2.8-4.8 2.8-4.8-1-4.8-2.8",
+{h:"Money",d:"What {n} things actually cost, in dong and rupees",ic:"M12 2.5v19M16.8 6.8c0-1.7-2.1-2.8-4.8-2.8s-4.8 1-4.8 2.8 2.1 2.5 4.8 3.3 4.8 1.5 4.8 3.3-2.1 2.8-4.8 2.8-4.8-1-4.8-2.8",
  emo:"💰",type:"cols",head:["","Dong","Rupees"],rows:[
  ["Ba Na Hills entry","1M ₫","Rs 12.6K"],
  ["Ba Na after 3pm","1.05M ₫","Rs 13.3K"],
@@ -1580,7 +1615,7 @@ const INFO=[
  ["Marble Mountain","40K ₫","Rs 505"],
  ["War Remnants Museum","40K ₫","Rs 505"],
  ["Independence Palace","40K ₫","Rs 505"]]},
-{h:"Getting around",emo:"🚕",ic:"M5 17.5h14M6.5 17.5v2M17.5 17.5v2M4.2 12.5l1.4-4.6A2.4 2.4 0 018 6h8a2.4 2.4 0 012.4 1.9l1.4 4.6M4 12.5h16v3.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 16z",
+{h:"Getting around",d:"Every journey, how long it takes, what a fair fare looks like",emo:"🚕",ic:"M5 17.5h14M6.5 17.5v2M17.5 17.5v2M4.2 12.5l1.4-4.6A2.4 2.4 0 018 6h8a2.4 2.4 0 012.4 1.9l1.4 4.6M4 12.5h16v3.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 16z",
  type:"list",rows:[
  "<b>Da Nang airport → villa</b> — 20 min, ~120K ₫.",
  "<b>Villa → Hoi An</b> — 40 min on the coastal road, ~300K ₫ by Grab.",
@@ -1590,26 +1625,26 @@ const INFO=[
  "<b>Hotel → Củ Chi</b> — 1 hr 25 to Bến Đình (48km), 1 hr 45 to Bến Dược (58km).",
  "Museum, Post Office, Notre-Dame and the Palace are all within a kilometre — walk it."]},
 
-{h:"The holiday",emo:"🎏",ic:"M8 2.5v4M16 2.5v4M3.5 10.5h17M6 4.5h12a2.5 2.5 0 012.5 2.5v12a2.5 2.5 0 01-2.5 2.5H6a2.5 2.5 0 01-2.5-2.5V7A2.5 2.5 0 016 4.5z",
+{h:"The holiday",d:"National Day, 29 Aug \u2013 2 Sep, and what it does to your week",emo:"🎏",ic:"M8 2.5v4M16 2.5v4M3.5 10.5h17M6 4.5h12a2.5 2.5 0 012.5 2.5v12a2.5 2.5 0 01-2.5 2.5H6a2.5 2.5 0 01-2.5-2.5V7A2.5 2.5 0 016 4.5z",
  type:"text",rows:[
  "Vietnam's National Day break runs <b>Saturday 29 August to Wednesday 2 September 2026</b> — five days, confirmed by the government.",
  "Your whole Saigon leg sits inside it, and the last two Da Nang days too. Fuller flights, busier hotels, heavier traffic, packed nightlife.",
  "Anything marked <b>Book now</b> genuinely means now. Cu Chi and restaurants are the ones that bite."]},
 
-{h:"Airports",emo:"✈️",ic:"M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z",
+{h:"Airports",d:"Which terminal, how early, and the one that catches people out",emo:"✈️",ic:"M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z",
  type:"list",rows:[
  "<b>Da Nang (DAD)</b> — 20 min from the villa. Small and quick; 2 hrs is plenty.",
  "<b>Saigon arrival, 30 Aug</b> — domestic. Terminal 3 for Vietnam Airlines and Bamboo, otherwise Terminal 1.",
  "<b>Saigon departure, 2 Sep</b> — international, <b>Terminal 2</b>. Different building from arrivals.",
  "Allow the full three hours on 2 September. Gates have been known to close 45 minutes before departure."]},
 
-{h:"If a day falls through",emo:"🌧️",ic:"M21 12a9 9 0 11-6.2-8.6M21 3.5v6h-6",type:"list",rows:[
+{h:"If a day falls through",d:"Fallbacks for rain, or a Ba Na Hills that is clouded in",emo:"🌧️",ic:"M21 12a9 9 0 11-6.2-8.6M21 3.5v6h-6",type:"list",rows:[
  "<b>Marble Mountain</b> — 3–4 hrs, 20 min out, best early or at sunset. 40K ₫.",
  "<b>Son Tra peninsula</b> — scenic drive, Lady Buddha, viewpoints over the bay.",
  "<b>Beach bars on My Khe</b> — five minutes on foot, the reliable washout fallback.",
  "Both Da Nang options are the natural swap if Ba Na Hills is clouded in."]},
 
-{h:"What's actually been checked",emo:"🔍",ic:"M11 4a7 7 0 105.2 11.7L21 20.5M11 4a7 7 0 010 14",
+{h:"What's actually been checked",d:"What is verified, what is not, and two things I got wrong",emo:"🔍",ic:"M11 4a7 7 0 105.2 11.7L21 20.5M11 4a7 7 0 010 14",
  type:"pack",rows:[
  ["\u2705","Verified against a primary or operator source",
   "Ba Na 1M \u20ab standard and 1.05M \u20ab after-15:00 with the Beer Plaza buffet, bookable online \u00b7 Marble Mountain 40/15/20K and a 17:00 close \u00b7 sunset 18:02 on the 29th \u00b7 Th\u00eca G\u1ed7 and Missteak addresses, hours and phones \u00b7 Ph\u1edf Vi\u1ec7t Nam 06:00\u201303:00 \u00b7 Duck Stop 08:30\u201317:00 at 100K \u00b7 international departures at T2 \u00b7 S\u01a1n Tr\u00e0 routes open 07:30\u201318:30 \u00b7 National Day is a five-day break, 22 August is the make-up workday."],
@@ -1622,7 +1657,7 @@ const INFO=[
  ["\ud83d\udcde","Worth one phone call each",
   "Sky36 (the six-person minimum spend) \u00b7 the tailor (Thursday fitting <b>and</b> holiday staffing before cloth is cut) \u00b7 the C\u1ee7 Chi driver (say B\u1ebfn D\u01b0\u1ee3c out loud, and ask for a van not a 7-seater) \u00b7 the H\u00e0n River cruise (the 20:30 sailing)."]]},
 
-{h:"Addresses changed in 2025",emo:"\U0001f5c2️",ic:"M3 7.5h18M3 12h18M3 16.5h18",
+{h:"Addresses changed in 2025",d:"Why every Vietnamese address here looks unfamiliar",emo:"\U0001f5c2️",ic:"M3 7.5h18M3 12h18M3 16.5h18",
  type:"list",rows:[
  "On <b>1 July 2025 Vietnam abolished the district level entirely</b> and cut 63 provinces to 34. Addresses now read <i>ward, then city</i> \\u2014 no district.",
  "<b>Quảng Nam no longer exists as a province.</b> It was merged into Đà Nẵng, so Hội An is now <b>phường Hội An, thành phố Đà Nẵng</b>. Every guidebook and older booking confirmation still says Quảng Nam.",
@@ -1630,7 +1665,7 @@ const INFO=[
  "Củ Chi Bến Dược is now <b>xã An Nhơn Tây</b>. The War Remnants Museum is <b>phường Xuân Hòa</b>. Independence Palace and Bến Thành are <b>phường Bến Thành</b>. FV Hospital is <b>phường Tân Mỹ</b>.",
  "Every address in Show the driver has been updated. If a booking confirmation disagrees, it is probably just out of date \\u2014 the landmark name is what the driver actually needs."]},
 
-{h:"Practical",emo:"\U0001f9ed",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
+{h:"Practical",d:"Cash, ATMs, haggling, and the notes that look identical",emo:"\U0001f9ed",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
  type:"list",rows:[
  "Carry cash — museums, boat booths and market stalls are dong only.",
  "<b>ATMs:</b> BIDV or MB let you take out ~5M ₫ for a ~50K fee, which beats Vietcombank's ~2M ceiling for the same fee. Old advice that TPBank and VPBank are fee-free is no longer reliable — <b>read the fee on the screen and cancel if it's ugly.</b>",
@@ -2138,8 +2173,22 @@ function book(){
 }
 
 function info(){
- if(typeof reveal==="function")setTimeout(function(){reveal("p-info",".card")},0);
- $("infolist").innerHTML=INFO.map(function(s){
+ /* Essentials is a menu, not a wall: each section collapses to a title and a
+    one-line description so the page is scannable in one screen. */
+ var CHEV='<svg class="acv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+ function shell(emo,head,blurb,body,cls){
+  return '<details class="card acc'+(cls?" "+cls:"")+'"><summary>'+
+   '<i>'+(emo||'')+'</i><span class="ach"><b>'+head+'</b><em>'+blurb+'</em></span>'+CHEV+
+   '</summary><div class="accb">'+body+'</div></details>';
+ }
+ var h=shell("🗺️","Show the driver",
+        "Every address in Vietnamese, in big type — works with no signal",
+        '<div id="addrbox"></div>')+
+       shell("🔗","Share with the group",
+        "Pass your ticks, notes, clips and expenses to the other five",
+        '<div id="sharebox"></div>',"share");
+
+ h+=INFO.map(function(s){
   var b="";
   if(s.type==="rows")b=s.rows.map(function(r){return '<div class="row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'}).join("");
   else if(s.type==="cols"){
@@ -2150,8 +2199,13 @@ function info(){
   else if(s.type==="food")b=s.rows.map(function(r){return '<div class="eat"><b>'+r[0]+'</b><p>'+r[1]+'</p></div>'}).join("");
   else if(s.type==="list")b='<ul>'+s.rows.map(function(r){return '<li>'+r+'</li>'}).join("")+'</ul>';
   else b=s.rows.map(function(r){return '<p>'+r+'</p>'}).join("");
-  return '<div class="card"><h3><i>'+(s.emo||'')+'</i>'+s.h+'</h3>'+b+'</div>'
+  /* {n} in a blurb is filled from the section itself, so counts cannot go stale */
+  var blurb=String(s.d||"").replace(/\{n\}/g,s.rows.length);
+  return shell(s.emo,s.h,blurb,b);
  }).join("");
+
+ $("infolist").innerHTML=h;
+ if(typeof reveal==="function")setTimeout(function(){reveal("p-info",".card")},0);
 }
 
 function foodPane(){
