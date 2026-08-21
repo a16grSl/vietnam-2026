@@ -878,6 +878,7 @@ button.pl{font:inherit;cursor:pointer}
 .bdg.bib{background:var(--redbg);color:var(--redtx)}
 .bdg.sel{background:var(--accbg);color:var(--acctx)}
 .bdg.warn{background:var(--ambbg);color:var(--amb)}
+.wn{color:var(--amb)}
 .ekind{font-size:13.5px;color:var(--mut);margin-top:3px;letter-spacing:-.01em}
 .pr{color:var(--grn);font-weight:600;letter-spacing:1px}
 .pro{opacity:.28;color:var(--mut)}
@@ -1347,7 +1348,8 @@ const BOOK=[
     ["Included","Return cable car, Golden Bridge, French Village, Fantasy Park, gardens"],
     ["Pay extra","Alpine coaster 70K · wax museum 100K · wine cellar 100–300K"],
     ["Getting there","29km, 48 min. Grab is ~430K ₫ each way; a pre-booked return car runs 650–900K ₫. Book the return — taxis are scarce coming down."],
-    ["Open","07:00–22:00 · cable cars stop earlier in bad weather"]],
+    ["Open","07:00–22:00 · cable cars stop earlier in bad weather"],
+    ["New for 2026","<b>The ticket is valid 72 hours from first use</b>, unlimited cable car rides. If Thursday is clouded in you can go back Friday or Saturday on the same ticket — confirm it at the gate before you rely on it."]],
  l:[["Official — Sun World","https://booking.sunworld.vn/en",1],
     ["Klook","https://www.klook.com/en-US/activity/13283-ba-na-hills-ticket-da-nang/",0],
     ["KKday","https://www.kkday.com/en/product/26212-ba-na-hills-da-nang-cable-car-ticket",0],
@@ -1644,16 +1646,18 @@ const SOS=[
 {g:"Serious — go to a hospital",items:[
  {t:"Vinmec Đà Nẵng",n:"+84931121261",w:"Đường 30 Tháng 4, phường Hòa Cường. <b>24/7 emergency department with ICU and surgery.</b> This is where you go for trauma, chest pain, stroke or anything needing admission. Switchboard 0236 3711 111.",
   vn:"Bệnh viện Đa khoa Quốc tế Vinmec Đà Nẵng, đường 30 Tháng 4, phường Hòa Cường, thành phố Đà Nẵng",map:"Vinmec+Da+Nang+International+Hospital"},
+ {t:"Hoàn Mỹ Đà Nẵng",n:"+842363650676",w:"291 Nguyễn Văn Linh, phường Thanh Khê. Large 24-hour private hospital, and the <b>closer of the two</b> if you are in town rather than on the beach. Vinmec is the better bet for major trauma; this one is faster to reach.",
+  vn:"Bệnh viện Hoàn Mỹ Đà Nẵng, 291 Nguyễn Văn Linh, phường Thanh Khê, thành phố Đà Nẵng",map:"Hoan+My+Da+Nang+Hospital"},
  {t:"FV Hospital — Saigon",n:"+842835113500",w:"6 Nguyễn Lương Bằng, phường Tân Mỹ. Full 24/7 A&E — the one to go to for anything serious in Saigon. About 25 min from the hotel.",
   vn:"Bệnh viện FV, 6 Nguyễn Lương Bằng, phường Tân Mỹ, TP. Hồ Chí Minh",map:"FV+Hospital+Ho+Chi+Minh"}]},
 {g:"Minor — English-speaking clinics",items:[
- {t:"Family Medical Practice — Da Nang",n:"+84913917303",w:"96–98 Nguyễn Văn Linh, phường Hải Châu. <b>24-hour emergency line and ambulance</b>, but the clinic is Mon–Sat 08:00–17:00 — it is not an inpatient hospital. Ring them for advice, go to Vinmec for anything major.",
+ {t:"Family Medical Practice — Da Nang",n:"+84913917303",w:"96–98 Nguyễn Văn Linh, phường Hải Châu. <b>24-hour emergency line and ambulance</b>, but the clinic is Mon–Sat 08:00–17:00 — it is not an inpatient hospital. Ring them for advice, go to Vinmec for anything major. Clinic switchboard 0236 3582 699.",
   vn:"Family Medical Practice, 96–98 Nguyễn Văn Linh, phường Hải Châu, thành phố Đà Nẵng",map:"Family+Medical+Practice+Da+Nang"},
- {t:"Family Medical Practice — Saigon",n:"+842837449000",w:"Diamond Plaza, 34 Lê Duẩn, phường Sài Gòn. 24-hour line and ambulance, and it is walking distance from the hotel.",
+ {t:"Family Medical Practice — Saigon",n:"+842837449000",w:"Diamond Plaza, 34 Lê Duẩn, phường Sài Gòn. The number above is the <b>24-hour emergency and ambulance line</b> (from a Vietnamese phone you can also dial <b>*9999</b>). Reception is 028 3822 7848. Walking distance from the hotel.",
   vn:"Family Medical Practice, Diamond Plaza, 34 Lê Duẩn, phường Sài Gòn, TP. Hồ Chí Minh",map:"Family+Medical+Practice+Diamond+Plaza"}]},
 {g:"If a passport goes missing",items:[
- {t:"Sri Lankan Honorary Consul — Saigon",n:"+842835353292",w:"<b>Start here, not Hanoi.</b> Mrs Shirley Marguerite Hopman-Aluwihare, Fideco Compound, 14A35 Thảo Điền, phường An Khánh. <b>By appointment only</b> — mobile 0933 296 202.",
-  vn:"Lãnh sự danh dự Sri Lanka, Fideco Compound, 14A35 đường Thảo Điền, phường An Khánh, TP. Hồ Chí Minh",map:"Fideco+Compound+Thao+Dien+Ho+Chi+Minh"},
+ {t:"Sri Lankan Honorary Consul — Saigon",n:"+842835353292",w:"<b>Start here, not Hanoi.</b> Mrs Shirley Marguerite Hopman-Aluwihare · aluwihare.margo@gmail.com<br>Weekdays 09:00–16:00, Sat 09:00–12:00. Appointments on mobile <b>0933 296 202</b>.<br><span class='wn'>The embassy publishes the phone and email but <b>not a street address</b>. Three sources give three different ones. Ring first and get the address from her — do not turn up somewhere on a guess.</span>",
+  vn:"Lãnh sự danh dự Sri Lanka tại TP. Hồ Chí Minh — xin gọi số 0933 296 202 để hỏi địa chỉ",map:"Sri+Lanka+Honorary+Consulate+Ho+Chi+Minh+City"},
  {t:"Sri Lankan Embassy, Hanoi",n:"+842437341894",w:"55B Trần Phú, Ba Đình, Hà Nội · slemb.hanoi@mfa.gov.lk<br>The embassy issues the travel document; the Saigon consul is the nearer first call. <b>Nothing in Da Nang</b> — if it happens up north, you are dealing with Hanoi by phone.",
   vn:"Đại sứ quán Sri Lanka, 55B Trần Phú, Ba Đình, Hà Nội",map:"Sri+Lanka+Embassy+Hanoi"}]}];
 const PHRASE=[
@@ -1678,6 +1682,7 @@ const VNA=[
  {k:"Da Nang",v:[
   ["Serenity Villa (our villa)","Serenity Villa, 33 An Thượng 34, thành phố Đà Nẵng"],
   ["Da Nang airport","Sân bay quốc tế Đà Nẵng"],
+  ["Hoàn Mỹ hospital","Bệnh viện Hoàn Mỹ Đà Nẵng, 291 Nguyễn Văn Linh, phường Thanh Khê, thành phố Đà Nẵng"],
   ["Ba Na Hills","Sun World Bà Nà Hills, thành phố Đà Nẵng"],
   ["Marble Mountain","Danh thắng Ngũ Hành Sơn, 81 Huyền Trân Công Chúa, phường Ngũ Hành Sơn, thành phố Đà Nẵng"],
   ["Son Tra / Lady Buddha","Chùa Linh Ứng Bãi Bụt, bán đảo Sơn Trà, thành phố Đà Nẵng"],
@@ -1710,7 +1715,6 @@ const VNA=[
   ["Bui Vien street","Phố đi bộ Bùi Viện, phường Bến Thành, TP. Hồ Chí Minh"],
   ["Bánh Mì Huỳnh Hoa","Bánh mì Huỳnh Hoa, 26 Lê Thị Riêng, phường Bến Thành, TP. Hồ Chí Minh"],
   ["Phở Việt Nam","Phở Việt Nam, 14 Phạm Hồng Thái, phường Bến Thành, TP. Hồ Chí Minh"],
-  ["Sri Lanka Honorary Consul","Fideco Compound, 14A35 đường Thảo Điền, phường An Khánh, TP. Hồ Chí Minh"],
   ["FV Hospital","Bệnh viện FV, 6 Nguyễn Lương Bằng, phường Tân Mỹ, TP. Hồ Chí Minh"]]}];
 
 /* ================= APP ================= */
