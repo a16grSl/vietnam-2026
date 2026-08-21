@@ -687,6 +687,44 @@ h2 .eb i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
 .clk s{text-decoration:none;opacity:.5}
 @media(max-width:400px){.clk{font-size:10.5px;gap:5px}.clk b{font-size:11px}}
 
+/* ---- clips: a reel pinned to a place ---- */
+.cliprow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:12px;
+ padding-top:12px;border-top:1px solid var(--line)}
+.clips{display:flex;flex-wrap:wrap;gap:6px}
+.ev .clips,.eatc .clips{margin-top:7px}
+.clip{display:inline-flex;align-items:center;gap:6px;max-width:100%;
+ padding:5px 11px 5px 8px;border-radius:999px;background:var(--accbg);color:var(--acctx);
+ font-size:11.5px;font-weight:600;letter-spacing:.005em;text-decoration:none;
+ transition:transform .45s var(--ease),opacity .3s var(--ease)}
+.clip svg{width:14px;height:14px;flex:none;opacity:.8}
+.clip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.clip:active{transform:scale(.97)}
+.clipb{display:inline-flex;align-items:center;gap:5px;
+ padding:5px 11px 5px 8px;border-radius:999px;border:1px dashed var(--bzline);
+ background:none;color:var(--mut);font-family:inherit;font-size:11.5px;font-weight:600;
+ cursor:pointer;transition:transform .45s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.clipb svg{width:14px;height:14px;flex:none}
+.clipb.has{border-style:solid;color:var(--acc)}
+.clipb:active{transform:scale(.97)}
+.clipb:hover{color:var(--acc);border-color:var(--acc)}
+
+/* the clip editor sheet */
+.drvi.cs{text-align:left}
+.cs .cs-t{text-align:center;margin-bottom:16px}
+.csg{margin-bottom:14px}
+.csh{font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.01em;margin-bottom:7px}
+.csr{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.csr a{flex:1;min-width:0;display:flex;align-items:center;gap:9px;text-decoration:none;
+ padding:10px 12px;border-radius:12px;background:var(--raise);color:var(--ink)}
+.csr a svg{width:17px;height:17px;flex:none;color:var(--acc)}
+.csr a b{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.csr a i{margin-left:auto;font-style:normal;font-size:11px;font-weight:600;color:var(--mut);flex:none}
+.csx{flex:none;width:32px;height:32px;border:none;border-radius:10px;background:var(--raise);
+ color:var(--mut);font-size:19px;line-height:1;cursor:pointer;font-family:inherit}
+.csx:hover{color:var(--red)}
+.csn{font-size:12.5px;color:var(--mut);margin:0 0 8px}
+.csa{width:100%}
+
 /* ---- emergency ---- */
 .card.sos:before{background-color:var(--surf);
  background-image:linear-gradient(180deg,var(--redbg),var(--surf) 62%)}
@@ -756,7 +794,8 @@ button.pl{font:inherit;cursor:pointer}
 .inact button.pl.inl svg{width:12px;height:12px}
 
 /* ---- copy for whatsapp ---- */
-.wax{margin-top:14px;padding-top:13px;border-top:.5px solid var(--line2)}
+.wax{margin-top:14px;padding-top:13px;border-top:.5px solid var(--line2);display:flex;flex-wrap:wrap;gap:8px}
+.wax .btn{flex:1 1 auto}
 .wax .btn{width:100%}
 
 /* ---- expenses ---- */
@@ -1745,10 +1784,12 @@ const VNA=[
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
 var st={},nt={},dop={},iop={},filt="all",eat={},idea={},plan={},dnote={},pay={},grp=6,gdet={};
-var own={},shift={},spend=[],crew=[],addr={},TS={};
+var own={},shift={},spend=[],crew=[],addr={},clip={},TS={};
 var TICK='<svg viewBox="0 0 16 16" fill="none"><path d="M2.6 8.4l3.4 3.4 7.4-7.4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h5.5"/><path d="M15 3h6v6M10.5 13.5L21 3"/></svg>';
 var PHN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
+var PLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.2A2.2 2.2 0 016.7 4h10.6a2.2 2.2 0 012.2 2.2v11.6a2.2 2.2 0 01-2.2 2.2H6.7a2.2 2.2 0 01-2.2-2.2z"/><path d="M10.2 9.4l4.4 2.6-4.4 2.6z"/></svg>';
+var PLUS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>';
 var PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 var ARR='<i class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></i>';
 var TEL='<i class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></i>';
@@ -1759,7 +1800,7 @@ var WALK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 var PLANE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8L16 14l-4-1.5V8a2 2 0 10-4 0v4.5L4 14l-1.8 5.8 5.8-2.3 2 2.5v2l2-1 2 1v-2l2-2.5z"/></svg>';
 var TAG={now:["Book now","t-now"],soon:["Soon","t-soon"],walk:["Walk up","t-walk"]};
 
-function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp,o:own,sh:shift,sp:spend,cr:crew,ad:addr,ts:TS}}
+function stateObj(){return {s:st,n:nt,e:eat,i:idea,p:plan,dn:dnote,y:pay,g:grp,o:own,sh:shift,sp:spend,cr:crew,ad:addr,cl:clip,ts:TS}}
 function save(){try{var o=stateObj();o.t=document.documentElement.dataset.theme;
  localStorage.setItem("vn2026a",JSON.stringify(o))}catch(e){}}
 /* per-key timestamps so two people can merge instead of clobbering */
@@ -1786,6 +1827,7 @@ function applyState(d,merge){
   Object.assign(st,d.s||{});Object.assign(nt,d.n||{});Object.assign(eat,d.e||{});Object.assign(idea,d.i||{});
   Object.assign(plan,d.p||{});Object.assign(dnote,d.dn||{});Object.assign(pay,d.y||{});
   Object.assign(own,d.o||{});Object.assign(shift,d.sh||{});Object.assign(addr,d.ad||{});
+  Object.assign(clip,d.cl||{});
   if(d.sp)spend=d.sp; if(d.cr)crew=d.cr; if(d.g)grp=d.g;
   Object.assign(TS,d.ts||{});
   return -1;
@@ -1796,6 +1838,7 @@ function applyState(d,merge){
  n+=mergeMap(plan,d.p,"p",inTS); n+=mergeMap(dnote,d.dn,"dn",inTS);
  n+=mergeMap(pay,d.y,"y",inTS); n+=mergeMap(own,d.o,"o",inTS);
  n+=mergeMap(shift,d.sh,"sh",inTS); n+=mergeMap(addr,d.ad,"ad",inTS);
+ n+=mergeMap(clip,d.cl,"cl",inTS);
  /* expenses are an append-only log — union by id, newest wins per id */
  if(d.sp&&d.sp.length){
   var byId={}; spend.forEach(function(x){byId[x.id]=x});
@@ -1919,7 +1962,7 @@ function days(){
       '<div class="ti">'+E.emo+' '+E.name+
         '<span class="fchip">'+(on?'\u2713 added':'+ add')+'</span></div>'+
       '<div class="nt">'+E.kind+' \u00b7 '+E.walk+' min walk \u00b7 '+E.spend+
-        (E.badge?' \u00b7 '+E.badge:'')+'</div></div>';
+        (E.badge?' \u00b7 '+E.badge:'')+'</div>'+clipChips("e:"+E.id)+'</div>';
     return;
    }
    var e=r.raw;
@@ -1935,6 +1978,7 @@ function days(){
      '<div class="tm">'+e[0]+dur+'</div>'+
      '<div class="ti">'+e[1]+(B?'<span class="lk'+(done?" ok":"")+'">'+(done?'\u2713 booked':(open2?'hide':'book'))+'</span>':'')+'</div>'+
      (note?'<div class="nt">'+note+'</div>':'')+
+     clipChips("a:"+d.n+":"+e[1])+
      (open2?'<div class="inact">'+
         (B.l?B.l.map(function(l){return '<a href="'+l[1]+'" target="_blank" rel="noopener">'+EXT+l[0]+'</a>'}).join(''):'')+
         (B.tel?B.tel.map(function(t){return '<a href="tel:'+t[1]+'">'+PHN+t[0]+'</a>'}).join(''):'')+
@@ -1955,7 +1999,9 @@ function days(){
    '</div>';
 
   // ---- day note
-  var wa='<div class="wax"><button class="btn sec noic" data-wa="'+d.n+'">Copy this day for WhatsApp</button></div>';
+  var nclip=dayClipItems(d.n).reduce(function(a,x){return a+clipsOf(x.k).length},0);
+  var wa='<div class="wax"><button class="btn sec noic" data-wa="'+d.n+'">Copy this day for WhatsApp</button>'+
+    '<button class="btn ghost noic" data-dclip="'+d.n+'">'+(nclip?nclip+' clip'+(nclip===1?'':'s')+' on this day':'Pin a clip to a stop')+'</button></div>';
   var dnb='<div class="dnote"><label>\ud83d\udcdd Notes for the day \u2014 what you spent, who paid, what to remember</label>'+
     '<textarea data-dn="'+d.n+'" placeholder="e.g. Harith paid the Cu Chi car, 1.6M. Everyone owes him 265K.">'+
     (dnote[d.n]||"").replace(/</g,"&lt;")+'</textarea></div>';
@@ -2065,7 +2111,7 @@ function book(){
       return D?'<button class="jday" data-jd="'+D.n+'">'+D.dow+' '+D.d+' \u2192</button>':''})()+'</div>'+
     '<div class="more"><span>'+(iop[it.id]?'Hide details':(it.l||it.tel?'Prices, links & numbers':'Details'))+'</span>'+CHV+'</div>'+
     '</div><div class="ichev">'+CHV+'</div></div>'+
-    '<div class="ib"><div class="ibi"><div class="ibp">'+dl+acts(it)+noteHTML(it.f)+
+    '<div class="ib"><div class="ibi"><div class="ibp">'+dl+acts(it)+noteHTML(it.f)+clipRow("b:"+it.id,it.t)+
     '<textarea placeholder="Notes — confirmation number, who you spoke to…" data-n="'+it.id+'">'+(nt[it.id]||"")+'</textarea>'+
     '</div></div></div></div>';
   });
@@ -2137,7 +2183,7 @@ function foodPane(){
       (E.url?'<a class="btn sec" href="'+E.url+'" target="_blank" rel="noopener"><span>Website</span>'+ARR+'</a>':'')+
       (E.tel?'<a class="btn sec" href="tel:'+E.tel+'"><span>Call</span>'+TEL+'</a>':'')+
       '<button class="btn ghost pl" data-pl="'+encodeURIComponent(E.name)+'" data-pq="'+E.map+'"><span>Map</span>'+MAP+'</button>'+
-    '</div></div>';
+    '</div>'+clipRow("e:"+E.id,E.name)+'</div>';
   });
  });
  $("eatlist").innerHTML=h;
@@ -2169,7 +2215,7 @@ function ideaPane(){
       ['yes','maybe','no'].map(function(k){
        return '<button class="idb '+k+(v===k?" on":"")+'" data-i="'+it.id+'" data-v="'+k+'">'+
          (k==="yes"?(dn?"✓ Keep":"✓ Do it"):k==="maybe"?"~ Maybe":(dn?"✕ Undo":"✕ Skip"))+'</button>'}).join("")+
-    '</div></div>';
+    '</div>'+clipRow("i:"+it.id,it.t)+'</div>';
   });
  });
  $("idealist").innerHTML=h;
@@ -2332,6 +2378,137 @@ function placeSheet(label,query){
     pin:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query||label)}); return }
  driverCard(label, vn||label, query||label);
 }
+
+
+/* ================= CLIPS =================
+   A TikTok / Reel / Short pinned to a place. Deliberately NOT embedded:
+   the link opens the native app, so nothing third-party loads in here and
+   the app keeps working with no signal. Clips ride the share code like
+   every other bit of state. */
+
+function hesc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){
+ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+
+/* user-pasted, so treat it as hostile: https only, nothing else gets an href */
+function safeUrl(u){
+ u=String(u||"").trim();
+ if(!u)return "";
+ if(!/^[a-z][a-z0-9+.-]*:/i.test(u)) u="https://"+u.replace(/^\/+/,"");
+ try{var p=new URL(u);
+  if(p.protocol!=="http:"&&p.protocol!=="https:")return "";
+  return p.href}catch(e){return ""}
+}
+
+function clipSrc(u){
+ var h=""; try{h=new URL(u).hostname.replace(/^www\./,"").toLowerCase()}catch(e){}
+ if(/(^|\.)tiktok\./.test(h))return "TikTok";
+ if(/(^|\.)instagram\./.test(h))return "Instagram";
+ if(/(^|\.)(youtube\.com|youtu\.be)$/.test(h))return "YouTube";
+ if(/(^|\.)(facebook\.com|fb\.watch)$/.test(h))return "Facebook";
+ if(/(^|\.)threads\./.test(h))return "Threads";
+ if(/(^|\.)(x\.com|twitter\.com)$/.test(h))return "X";
+ return h||"Link";
+}
+
+function clipsOf(k){var a=clip[k];return (a&&a.length)?a:[]}
+
+/* every stop on a day, so one button covers the lot */
+function dayClipItems(n){
+ var d=null;DAYS.forEach(function(x){if(x.n===n)d=x});
+ if(!d)return [];
+ var pi=d.alts?(plan[d.n]||0):0, EV=pi?d.alts[pi-1].e:d.e, out=[], seen={};
+ EV.forEach(function(e){ if(e[0]==="g")return;
+  var k="a:"+d.n+":"+e[1]; if(seen[k])return; seen[k]=1;
+  out.push({k:k,label:e[1]}) });
+ EATS.forEach(function(E){ var pk=eat[E.id];
+  if(pk&&pk.d===d.n){var k="e:"+E.id; if(seen[k])return; seen[k]=1; out.push({k:k,label:E.name})} });
+ return out;
+}
+
+/* the chips themselves — safe to drop anywhere */
+function clipChips(k){
+ var a=clipsOf(k);
+ if(!a.length)return "";
+ return '<div class="clips">'+a.map(function(c){
+  return '<a class="clip" href="'+hesc(c.u)+'" target="_blank" rel="noopener noreferrer">'+
+   PLAY+'<span>'+hesc(c.l||clipSrc(c.u))+'</span></a>'}).join("")+'</div>';
+}
+
+/* chips + the button that opens the editor */
+function clipRow(k,label){
+ var n=clipsOf(k).length;
+ return '<div class="cliprow">'+clipChips(k)+
+  '<button class="clipb'+(n?" has":"")+'" data-clip="'+hesc(k)+'" data-cll="'+hesc(label)+'">'+
+   (n?PLAY:PLUS)+'<span>'+(n?(n===1?'1 clip':n+' clips'):'Add a clip')+'</span></button></div>';
+}
+
+function addClip(k,label){
+ var raw=prompt("Paste a TikTok, Instagram, YouTube or any other link for\n"+label,"");
+ if(raw===null)return false;
+ var u=safeUrl(raw);
+ if(!u){toast("That is not a link I can open. Paste the full URL.",0);return false}
+ var note=prompt("Label it? (optional — leave blank for "+clipSrc(u)+")","");
+ if(!clip[k])clip[k]=[];
+ clip[k].push({u:u,l:(note||"").trim().slice(0,48)});
+ stamp("cl."+k);hap("commit");save();
+ return true;
+}
+
+function clipSheet(items,title){
+ if(drvOpen)drvOpen();
+ var w=document.createElement("div");w.className="drv";
+ function body(){
+  return '<div class="drvl">Clips</div>'+
+   '<div class="drvs cs-t">'+hesc(title)+'</div>'+
+   items.map(function(it,ii){
+    var a=clipsOf(it.k);
+    return '<div class="csg">'+
+     (items.length>1?'<div class="csh">'+hesc(it.label)+'</div>':'')+
+     (a.length?a.map(function(c,ci){
+       return '<div class="csr"><a href="'+hesc(c.u)+'" target="_blank" rel="noopener noreferrer">'+
+        PLAY+'<b>'+hesc(c.l||clipSrc(c.u))+'</b><i>'+hesc(clipSrc(c.u))+'</i></a>'+
+        '<button class="csx" data-rm="'+ii+'" data-ri="'+ci+'" aria-label="Remove">&times;</button></div>'}).join("")
+      :'<p class="csn">Nothing pinned here yet.</p>')+
+     '<button class="btn ghost noic csa" data-ad="'+ii+'">'+(a.length?'Add another':'Add a clip')+'</button>'+
+    '</div>'}).join("")+
+   '<p class="drvn">Links open in the TikTok, Instagram or YouTube app. Nothing is embedded, so no video loads until someone asks for it — and the rest of the app still works with no signal. <b>Clips travel in the share code</b>, so pass one to the group after you add some.</p>'+
+   '<button class="btn ghost noic wide" id="drvx">Close</button>';
+ }
+ function wire(){
+  w.querySelector("#drvx").onclick=close;
+  w.querySelectorAll("[data-ad]").forEach(function(b){
+   b.onclick=function(){var it=items[+b.dataset.ad];
+    if(addClip(it.k,it.label)){redraw();refresh()}}});
+  w.querySelectorAll("[data-rm]").forEach(function(b){
+   b.onclick=function(){
+    var it=items[+b.dataset.rm], ci=+b.dataset.ri;
+    clip[it.k].splice(ci,1);
+    if(!clip[it.k].length)delete clip[it.k];
+    stamp("cl."+it.k);hap("select");save();redraw();refresh()}});
+ }
+ function redraw(){w.querySelector(".drvi").innerHTML=body();wire()}
+ function refresh(){days();book();foodPane();ideaPane()}
+ w.innerHTML='<div class="drvi cs" role="dialog" aria-label="Clips">'+body()+'</div>';
+ document.body.appendChild(w);requestAnimationFrame(function(){w.classList.add("go")});
+ var close=function(){w.classList.remove("go");setTimeout(function(){w.remove();drvOpen=null},320)};
+ wire();
+ w.onclick=function(e){if(e.target===w)close()};
+ drvOpen=close;
+}
+
+/* one delegated handler covers every clip button in the app */
+document.addEventListener("click",function(e){
+ if(!e.target.closest)return;
+ var b=e.target.closest("[data-clip]");
+ if(b){ e.preventDefault();e.stopPropagation();
+  clipSheet([{k:b.dataset.clip,label:b.dataset.cll}],b.dataset.cll); return }
+ var g=e.target.closest("[data-dclip]");
+ if(g){ e.preventDefault();e.stopPropagation();
+  var n=+g.dataset.dclip, D=null; DAYS.forEach(function(x){if(x.n===n)D=x});
+  var items=dayClipItems(n);
+  if(!items.length){toast("Nothing on this day to pin a clip to yet.",0);return}
+  clipSheet(items, D?(D.dow+" "+D.d+" \u00b7 "+String(D.t).replace(/^[^\w]+\s*/,"")):"This day"); }
+},true);
 
 function copyText(t,label){
  function done(ok){ toast(ok?(label+" copied — paste it into the group chat."):"Copy failed. Long-press to select instead.",ok) }
