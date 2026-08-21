@@ -764,6 +764,20 @@ button.pl{font:inherit;cursor:pointer}
  background-color:var(--accbg);border-radius:12px;padding:12px 13px;margin:0 0 14px}
 .drvw .btn{margin-top:10px}
 .mapr button.pl.home{background-color:var(--accbg);color:var(--acctx);border-color:transparent;font-weight:650}
+.phr{display:grid;gap:8px}
+.phrr{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;
+ padding:11px 13px;border-radius:13px;background-color:var(--surf);border:.5px solid var(--line)}
+.phrr b{font-size:13.5px;font-weight:600;letter-spacing:-.01em;grid-column:1}
+.phrr .phv{grid-column:1;font-size:16px;font-weight:600;letter-spacing:-.015em;color:var(--acctx)}
+.phrr span{grid-column:1;font-size:12px;color:var(--mut);font-style:italic}
+.phrr .vch{grid-column:2;grid-row:1 / span 3;align-self:center}
+.vch.tinyc{min-height:36px;padding:8px 12px;font-size:12.5px}
+.vch i.wrn{display:inline-flex;align-items:center;justify-content:center;
+ width:15px;height:15px;border-radius:99px;background:var(--ambbg);color:var(--amb);
+ font-size:10px;font-weight:800;margin-left:1px}
+.vch.warn{border-color:var(--amb)}
+.drvwn{font-size:12.5px;line-height:1.5;color:var(--amb);text-align:center;
+ background-color:var(--ambbg);border-radius:11px;padding:10px 12px;margin:0 0 14px}
 /* ---- ideas ---- */
 .idc{margin-bottom:var(--s3);box-shadow:var(--shadow);transition:.25s var(--ease)}
 .idt{font-size:17px;font-weight:620;letter-spacing:-.025em;margin-bottom:7px;line-height:1.3}
@@ -1346,7 +1360,7 @@ const BOOK=[
     ["Price","~150K ₫ a head on a basic boat · 350–390K on Poseidon and the other premium boats"],
     ["The sailing you want","<b>20:30, Fri/Sat/Sun</b> — about an hour, and it sits by the Dragon Bridge for the 21:00 show. Thursday has no show, so any sailing does."],
     ["Boats","Vinh Anh and Poseidon are the two main operators"],
-    ["Pier","36 Bach Dang · same street as Sky36"]],
+    ["Pier","<b>Confirm the boarding wharf when you book.</b> Different operators board at different points on Bạch Đằng — 36 Bạch Đằng is not universal. Get their pin and paste it into Show the driver."]],
  l:[["Klook — evening cruise","https://www.klook.com/activity/28414-han-river-evening-cruise-da-nang/",1],
     ["Klook — Poseidon","https://www.klook.com/en-US/activity/95290-poseidon-cruise-han-river-da-nang/",0],
     ["KKday — with dinner","https://www.kkday.com/en-id/product/36431",0],
@@ -1542,7 +1556,15 @@ const INFO=[
  ["\ud83d\udcde","Worth one phone call each",
   "Sky36 (the six-person minimum spend) \u00b7 the tailor (Thursday fitting <b>and</b> holiday staffing before cloth is cut) \u00b7 the C\u1ee7 Chi driver (say B\u1ebfn D\u01b0\u1ee3c out loud, and ask for a van not a 7-seater) \u00b7 the H\u00e0n River cruise (the 20:30 sailing)."]]},
 
-{h:"Practical",emo:"🧭",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
+{h:"Addresses changed in 2025",emo:"\U0001f5c2️",ic:"M3 7.5h18M3 12h18M3 16.5h18",
+ type:"list",rows:[
+ "On <b>1 July 2025 Vietnam abolished the district level entirely</b> and cut 63 provinces to 34. Addresses now read <i>ward, then city</i> \\u2014 no district.",
+ "<b>Quảng Nam no longer exists as a province.</b> It was merged into Đà Nẵng, so Hội An is now <b>phường Hội An, thành phố Đà Nẵng</b>. Every guidebook and older booking confirmation still says Quảng Nam.",
+ "Quận 1, Quận 3, Quận 7, huyện Củ Chi, quận Hải Châu, quận Sơn Trà and the rest are legacy names. Drivers still use them in speech; they are just no longer the official address.",
+ "Củ Chi Bến Dược is now <b>xã An Nhơn Tây</b>. The War Remnants Museum is <b>phường Xuân Hòa</b>. Independence Palace and Bến Thành are <b>phường Bến Thành</b>. FV Hospital is <b>phường Tân Mỹ</b>.",
+ "Every address in Show the driver has been updated. If a booking confirmation disagrees, it is probably just out of date \\u2014 the landmark name is what the driver actually needs."]},
+
+{h:"Practical",emo:"\U0001f9ed",ic:"M12 21.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM15.5 9l-2.2 5.3L8 16.5l2.2-5.3z",
  type:"list",rows:[
  "Carry cash — museums, boat booths and market stalls are dong only.",
  "<b>ATMs:</b> BIDV or MB let you take out ~5M ₫ for a ~50K fee, which beats Vietcombank's ~2M ceiling for the same fee. Old advice that TPBank and VPBank are fee-free is no longer reliable — <b>read the fee on the screen and cancel if it's ugly.</b>",
@@ -1572,7 +1594,13 @@ const HOME={
      q:"Serenity+Villa+Da+Nang",key:"Da Nang|0"},
  hc:{name:"El Pino Realm",city:"Saigon",pin:"https://maps.app.goo.gl/bVEzfNUZxMuy4N5JA",
      q:"El+Pino+Realm+Ho+Chi+Minh+City",key:"Saigon|0"}};
-function homeAddr(c){return (addr[HOME[c].key]||"").trim()}
+function homeAddr(c){
+ var saved=(addr[HOME[c].key]||"").trim();
+ if(saved)return saved;
+ var p=HOME[c].key.split("|"), row=null;
+ VNA.forEach(function(x){ if(x.k===p[0]) row=x.v[+p[1]] });
+ return row&&row[1]?row[1]:"";
+}
 const BASE={dn:"Serenity+Villa+Da+Nang",hc:"El+Pino+Realm+Ho+Chi+Minh+City"};
 function baseFor(c){var a=homeAddr(c);return a?encodeURIComponent(a):BASE[c]}
 
@@ -1609,64 +1637,81 @@ const COSTS=[
 /* ---- emergency: verified 20 Aug 2026 ---- */
 const SOS=[
 {g:"Call first",items:[
- {t:"Ambulance",n:"115",w:"Free from any phone. Operators may not speak English — say the district name and repeat the address slowly."},
- {t:"Police",n:"113",w:"Free. For theft you will also need a written report for insurance — ask for it at the ward station."},
- {t:"Fire",n:"114",w:"Free."},
- {t:"Search & rescue",n:"112",w:"Free. Floods, sea, mountains."}]},
-{g:"Hospitals with English-speaking doctors",items:[
- {t:"Family Medical Practice — Da Nang",n:"+84913917303",w:"96–98 Nguyễn Văn Linh, Hải Châu. <b>24-hour emergency line</b>; the clinic itself is Mon–Sat 08:00–17:00, Sun 08:00–12:00.",
-  vn:"96–98 Nguyễn Văn Linh, Hải Châu, Đà Nẵng",map:"Family+Medical+Practice+Da+Nang"},
- {t:"FV Hospital — Saigon",n:"+842835113500",w:"6 Nguyễn Lương Bằng, District 7. Full A&E, the one to go to for anything serious in HCMC. About 25 min from District 1.",
-  vn:"Bệnh viện FV, 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh",map:"FV+Hospital+Ho+Chi+Minh"},
- {t:"Family Medical Practice — Saigon",n:"+842837449000",w:"Diamond Plaza, 34 Lê Duẩn, District 1. <b>24-hour emergency line</b>, and it is walking distance from the hotel.",
-  vn:"Family Medical Practice, Diamond Plaza, 34 Lê Duẩn, Quận 1",map:"Family+Medical+Practice+Diamond+Plaza"}]},
+ {t:"Ambulance",n:"115",w:"Operators may not speak English — give the ward name, then the street, slowly."},
+ {t:"Police",n:"113",w:"For theft you also need a written report for insurance — ask at the ward station the same day."},
+ {t:"Fire",n:"114",w:""},
+ {t:"National emergency line",n:"112",w:"Officially toll-free from fixed and mobile phones, 24/7, and connected through to 113/114/115. <b>Use this one if you are not sure your SIM has credit</b> — the others are widely reported as free but that is not officially documented for every SIM."}]},
+{g:"Serious — go to a hospital",items:[
+ {t:"Vinmec Đà Nẵng",n:"+84931121261",w:"Đường 30 Tháng 4, phường Hòa Cường. <b>24/7 emergency department with ICU and surgery.</b> This is where you go for trauma, chest pain, stroke or anything needing admission. Switchboard 0236 3711 111.",
+  vn:"Bệnh viện Đa khoa Quốc tế Vinmec Đà Nẵng, đường 30 Tháng 4, phường Hòa Cường, thành phố Đà Nẵng",map:"Vinmec+Da+Nang+International+Hospital"},
+ {t:"FV Hospital — Saigon",n:"+842835113500",w:"6 Nguyễn Lương Bằng, phường Tân Mỹ. Full 24/7 A&E — the one to go to for anything serious in Saigon. About 25 min from the hotel.",
+  vn:"Bệnh viện FV, 6 Nguyễn Lương Bằng, phường Tân Mỹ, TP. Hồ Chí Minh",map:"FV+Hospital+Ho+Chi+Minh"}]},
+{g:"Minor — English-speaking clinics",items:[
+ {t:"Family Medical Practice — Da Nang",n:"+84913917303",w:"96–98 Nguyễn Văn Linh, phường Hải Châu. <b>24-hour emergency line and ambulance</b>, but the clinic is Mon–Sat 08:00–17:00 — it is not an inpatient hospital. Ring them for advice, go to Vinmec for anything major.",
+  vn:"Family Medical Practice, 96–98 Nguyễn Văn Linh, phường Hải Châu, thành phố Đà Nẵng",map:"Family+Medical+Practice+Da+Nang"},
+ {t:"Family Medical Practice — Saigon",n:"+842837449000",w:"Diamond Plaza, 34 Lê Duẩn, phường Sài Gòn. 24-hour line and ambulance, and it is walking distance from the hotel.",
+  vn:"Family Medical Practice, Diamond Plaza, 34 Lê Duẩn, phường Sài Gòn, TP. Hồ Chí Minh",map:"Family+Medical+Practice+Diamond+Plaza"}]},
 {g:"If a passport goes missing",items:[
- {t:"Sri Lankan Embassy, Hanoi",n:"+842437341894",w:"55B Trần Phú, Ba Đình, Hà Nội · slemb.hanoi@mfa.gov.lk<br><b>There is no consulate in Da Nang or Saigon</b> — everything goes through Hanoi, so start the call early in the day.",
+ {t:"Sri Lankan Honorary Consul — Saigon",n:"+842835353292",w:"<b>Start here, not Hanoi.</b> Mrs Shirley Marguerite Hopman-Aluwihare, Fideco Compound, 14A35 Thảo Điền, phường An Khánh. <b>By appointment only</b> — mobile 0933 296 202.",
+  vn:"Lãnh sự danh dự Sri Lanka, Fideco Compound, 14A35 đường Thảo Điền, phường An Khánh, TP. Hồ Chí Minh",map:"Fideco+Compound+Thao+Dien+Ho+Chi+Minh"},
+ {t:"Sri Lankan Embassy, Hanoi",n:"+842437341894",w:"55B Trần Phú, Ba Đình, Hà Nội · slemb.hanoi@mfa.gov.lk<br>The embassy issues the travel document; the Saigon consul is the nearer first call. <b>Nothing in Da Nang</b> — if it happens up north, you are dealing with Hanoi by phone.",
   vn:"Đại sứ quán Sri Lanka, 55B Trần Phú, Ba Đình, Hà Nội",map:"Sri+Lanka+Embassy+Hanoi"}]}];
+const PHRASE=[
+ ["I need a doctor","Tôi cần bác sĩ","toy kun bak see"],
+ ["Take me to the hospital","Xin đưa tôi đến bệnh viện","sin doo-uh toy den bayn vee-en"],
+ ["Call the police","Gọi cảnh sát","goy kain sat"],
+ ["I've lost my passport","Tôi bị mất hộ chiếu","toy bee mut ho chee-oo"],
+ ["I'm allergic to…","Tôi bị dị ứng với…","toy bee zee oong voy"],
+ ["Take me to this address","Xin đưa tôi đến địa chỉ này","sin doo-uh toy den dee-uh chee nai"],
+ ["Please use the meter","Xin bật đồng hồ tính cước","sin but dong ho tinh koo-uk"],
+ ["How much?","Bao nhiêu tiền?","bao nyew tee-en"],
+ ["Too expensive","Đắt quá","dut kwa"]];
 const SOSSTEPS=[
  "Police report at the nearest ward station <b>the same day</b> — the embassy and your insurer will both ask for it.",
  "Photos of the passport, the e-visa and the entry stamp. Take them <b>now</b>, before you fly.",
- "Ring the embassy in Hanoi for an emergency travel document. Allow days, not hours, over the National Day break.",
+ "Ring the <b>Honorary Consul in Saigon</b> first \u2014 appointment only, but far nearer than Hanoi. The embassy in Hanoi issues the emergency travel document. Allow days, not hours, over the National Day break.",
  "Tell the airline early — an ETD usually needs the ticket reissuing.",
  "Insurance first, not last: most policies want to authorise treatment before you pay."];
 
 /* ---- Vietnamese address cards: hold the phone up to the driver ---- */
 const VNA=[
  {k:"Da Nang",v:[
-  ["Serenity Villa (our villa)","",1],
+  ["Serenity Villa (our villa)","Serenity Villa, 33 An Thượng 34, thành phố Đà Nẵng"],
   ["Da Nang airport","Sân bay quốc tế Đà Nẵng"],
-  ["Ba Na Hills","Khu du lịch Sun World Bà Nà Hills, Hoà Ninh, Hoà Vang, Đà Nẵng"],
-  ["Marble Mountain","Danh thắng Ngũ Hành Sơn, 81 Huyền Trân Công Chúa, Hoà Hải, Đà Nẵng"],
-  ["Son Tra / Lady Buddha","Chùa Linh Ứng Bãi Bụt, bán đảo Sơn Trà, Đà Nẵng"],
-  ["Dragon Bridge","Cầu Rồng, Bạch Đằng, Hải Châu, Đà Nẵng"],
-  ["Sky36","Sky36, tầng 36, khách sạn Novotel, 36 Bạch Đằng, Hải Châu, Đà Nẵng"],
-  ["Han River pier","Bến du thuyền sông Hàn, 36 Bạch Đằng, Hải Châu, Đà Nẵng"],
-  ["My Khe beach","Bãi biển Mỹ Khê, Phước Mỹ, Sơn Trà, Đà Nẵng"],
-  ["Han Market","Chợ Hàn, 119 Trần Phú, Hải Châu, Đà Nẵng"],
-  ["Thìa Gỗ","Nhà hàng Thìa Gỗ, 53 Phan Thúc Duyện, Đà Nẵng"],
-  ["Missteak","Missteak, 99 Mai Thúc Lân, Ngũ Hành Sơn, Đà Nẵng"],
-  ["2 Ladies Kitchen","2 Ladies Kitchen, 28 An Thượng 4, Bắc Mỹ Phú, Đà Nẵng"],
-  ["Miss Nhi","Miss Nhi, 39 An Thượng 30, Bắc Mỹ Phú, Đà Nẵng"],
-  ["Hai Van Pass","Đèo Hải Vân, quận Liên Chiểu, Đà Nẵng"],
-  ["Family Medical Practice","Family Medical Practice, 96–98 Nguyễn Văn Linh, Hải Châu, Đà Nẵng"]]},
+  ["Ba Na Hills","Sun World Bà Nà Hills, thành phố Đà Nẵng"],
+  ["Marble Mountain","Danh thắng Ngũ Hành Sơn, 81 Huyền Trân Công Chúa, phường Ngũ Hành Sơn, thành phố Đà Nẵng"],
+  ["Son Tra / Lady Buddha","Chùa Linh Ứng Bãi Bụt, bán đảo Sơn Trà, thành phố Đà Nẵng"],
+  ["Dragon Bridge","Cầu Rồng, thành phố Đà Nẵng"],
+  ["Sky36","SKY36 – Novotel Premier Danang Han River, 36–38 Bạch Đằng, thành phố Đà Nẵng"],
+  ["Han River pier (ask operator)","",1],
+  ["My Khe beach","Bãi biển Mỹ Khê, thành phố Đà Nẵng"],
+  ["Han Market","Chợ Hàn, 119 Trần Phú, phường Hải Châu, thành phố Đà Nẵng"],
+  ["Thìa Gỗ","Nhà hàng Thìa Gỗ, 53 Phan Thúc Duyện, thành phố Đà Nẵng"],
+  ["Missteak","Missteak, tầng 2, 95–97–99 Mai Thúc Lân, phường Ngũ Hành Sơn, thành phố Đà Nẵng"],
+  ["2 Ladies Kitchen","2 Ladies Kitchen, 28 An Thượng 4, thành phố Đà Nẵng",0,1],
+  ["Miss Nhi","Miss Nhi, 39 An Thượng 30, thành phố Đà Nẵng",0,1],
+  ["Hai Van Pass","Đèo Hải Vân – đỉnh đèo Hải Vân"],
+  ["Vinmec hospital (serious)","Bệnh viện Đa khoa Quốc tế Vinmec Đà Nẵng, đường 30 Tháng 4, phường Hòa Cường, thành phố Đà Nẵng"],
+  ["Family Medical Practice","Family Medical Practice, 96–98 Nguyễn Văn Linh, phường Hải Châu, thành phố Đà Nẵng"]]},
  {k:"Hoi An",v:[
-  ["Hoi An old town","Phố cổ Hội An, phường Minh An, Hội An, Quảng Nam"],
-  ["An Hoi bridge (boats)","Cầu An Hội, Hội An, Quảng Nam"],
-  ["Bay Mau coconut forest","Rừng dừa Bảy Mẫu, thôn Vạn Lăng, Cẩm Thanh, Hội An"],
-  ["The Duck Stop","The Duck Stop, Cẩm Thanh, Hội An, Quảng Nam"],
-  ["Tailors (Trần Phú)","Đường Trần Phú, phường Minh An, Hội An, Quảng Nam"],
-  ["Bánh mì Phượng","Bánh mì Phượng, 2B Phan Châu Trinh, phường Minh An, Hội An"]]},
+  ["Hoi An old town","Phố cổ Hội An, phường Hội An, thành phố Đà Nẵng"],
+  ["An Hoi bridge (boats)","Cầu An Hội, phường Hội An, thành phố Đà Nẵng"],
+  ["Bay Mau coconut forest","Rừng dừa Bảy Mẫu Cẩm Thanh, Vạn Lăng, phường Hội An Đông, thành phố Đà Nẵng"],
+  ["The Duck Stop","The Duck Stop Hội An, Cẩm Thanh, phường Hội An Đông, thành phố Đà Nẵng",0,1],
+  ["Tailors (Trần Phú)","Đường Trần Phú, phường Hội An, thành phố Đà Nẵng"],
+  ["Bánh mì Phượng","Bánh mì Phượng, 2B Phan Châu Trinh, phường Hội An, thành phố Đà Nẵng"]]},
  {k:"Saigon",v:[
-  ["El Pino Realm (our hotel)","",1],
-  ["Tan Son Nhat — international","Sân bay Tân Sơn Nhất, ga quốc tế T2, Tân Bình, TP. Hồ Chí Minh"],
-  ["Cu Chi — Bến Dược","Địa đạo Bến Dược, xã Phú Mỹ Hưng, huyện Củ Chi, TP. Hồ Chí Minh"],
-  ["War Remnants Museum","Bảo tàng Chứng tích Chiến tranh, 28 Võ Văn Tần, Quận 3"],
-  ["Independence Palace","Dinh Độc Lập, 135 Nam Kỳ Khởi Nghĩa, Quận 1"],
-  ["Ben Thanh Market","Chợ Bến Thành, Lê Lợi, Quận 1, TP. Hồ Chí Minh"],
-  ["Bui Vien street","Phố đi bộ Bùi Viện, Phạm Ngũ Lão, Quận 1"],
-  ["Bánh Mì Huỳnh Hoa","Bánh Mì Huỳnh Hoa, 26 Lê Thị Riêng, Quận 1"],
-  ["Phở Việt Nam","Phở Việt Nam, 14 Phạm Hồng Thái, Quận 1"],
-  ["FV Hospital","Bệnh viện FV, 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh"]]}];
+  ["El Pino Realm (our hotel)","CityHouse – El Pino Realm Hotel, đường Phó Đức Chính, phường Bến Thành, TP. Hồ Chí Minh"],
+  ["Tan Son Nhat — international","Sân bay quốc tế Tân Sơn Nhất – Ga quốc tế T2, TP. Hồ Chí Minh"],
+  ["Cu Chi — Bến Dược","Khu di tích Địa đạo Củ Chi – Bến Dược, xã An Nhơn Tây, TP. Hồ Chí Minh"],
+  ["War Remnants Museum","Bảo tàng Chứng tích Chiến tranh, 28 Võ Văn Tần, phường Xuân Hòa, TP. Hồ Chí Minh"],
+  ["Independence Palace","Dinh Độc Lập, 135 Nam Kỳ Khởi Nghĩa, phường Bến Thành, TP. Hồ Chí Minh"],
+  ["Ben Thanh Market","Chợ Bến Thành, phường Bến Thành, TP. Hồ Chí Minh"],
+  ["Bui Vien street","Phố đi bộ Bùi Viện, phường Bến Thành, TP. Hồ Chí Minh"],
+  ["Bánh Mì Huỳnh Hoa","Bánh mì Huỳnh Hoa, 26 Lê Thị Riêng, phường Bến Thành, TP. Hồ Chí Minh"],
+  ["Phở Việt Nam","Phở Việt Nam, 14 Phạm Hồng Thái, phường Bến Thành, TP. Hồ Chí Minh"],
+  ["Sri Lanka Honorary Consul","Fideco Compound, 14A35 đường Thảo Điền, phường An Khánh, TP. Hồ Chí Minh"],
+  ["FV Hospital","Bệnh viện FV, 6 Nguyễn Lương Bằng, phường Tân Mỹ, TP. Hồ Chí Minh"]]}];
 
 /* ================= APP ================= */
 var $=function(i){return document.getElementById(i)};
@@ -2196,22 +2241,28 @@ function sharePane(){
 
 /* ================= TOOLS ================= */
 /* map query -> Vietnamese address, so every pin works with no signal */
+var VNKEY={};   /* label -> "City|index" for rows the user fills in themselves */
 var VNLOOK=(function(){
  var m={};
- VNA.forEach(function(c){c.v.forEach(function(a){ if(a[1])m[a[0].toLowerCase()]=a[1] })});
+ VNA.forEach(function(c){c.v.forEach(function(a,i){
+   if(a[1])m[a[0].toLowerCase()]=a[1];
+   if(a[2])VNKEY[a[0].toLowerCase()]=c.k+"|"+i;
+ })});
  var alias={
   "hoai river, hoi an":"an hoi bridge (boats)","hoai river boats":"an hoi bridge (boats)",
   "hoai river":"an hoi bridge (boats)","hoi an old town":"hoi an old town",
   "cu chi — ben duoc":"cu chi — bến dược","cu chi - ben duoc":"cu chi — bến dược",
   "ben duoc":"cu chi — bến dược","banh mi phuong":"bánh mì phượng",
   "2 ladies kitchen":"2 ladies kitchen","miss nhi":"miss nhi","hai van pass":"hai van pass",
+  "han river pier":"han river pier (ask operator)",
   "sun world ba na hills":"ba na hills","ba na hills":"ba na hills",
   "golden bridge":"ba na hills","marble mountains":"marble mountain",
   "cu chi — bến dược":"cu chi — bến dược","cu chi tunnels":"cu chi — bến dược",
+  "vinmec":"vinmec hospital (serious)","hoi an":"hoi an old town",
   "war remnants museum":"war remnants museum","independence palace":"independence palace",
   "ben thanh market":"ben thanh market","ban thanh market":"ben thanh market",
   "bui vien street":"bui vien street","dragon bridge":"dragon bridge",
-  "sky36":"sky36","han river pier":"han river pier","my khe beach":"my khe beach",
+  "sky36":"sky36","my khe beach":"my khe beach",
   "han market":"han market","da nang airport":"da nang airport",
   "tan son nhat t2":"tan son nhat — international","tan son nhat":"tan son nhat — international",
   "bay mau coconut forest":"bay mau coconut forest","the duck stop":"the duck stop",
@@ -2224,9 +2275,12 @@ var VNLOOK=(function(){
   "bánh mì huỳnh hoa":"bánh mì huỳnh hoa","phở việt nam":"phở việt nam",
   "hoi an, quang nam":"hoi an old town"
  };
+ /* aliases inherit the editable-row key too */
+ Object.keys(alias).forEach(function(k){ if(VNKEY[alias[k]]) VNKEY[k]=VNKEY[alias[k]] });
  return function(label){
   if(!label)return "";
   var L=String(label).toLowerCase().trim();
+  if(VNKEY[L]&&addr[VNKEY[L]])return addr[VNKEY[L]];   /* what they saved wins */
   if(m[L])return m[L];
   var a=alias[L]; if(a&&m[a])return m[a];
   var hit="";
@@ -2240,6 +2294,12 @@ function placeSheet(label,query){
  ["dn","hc"].forEach(function(c){ if(String(label).indexOf(HOME[c].name)===0) H=HOME[c] });
  if(H){ driverCard(H.name, homeAddr(H===HOME.dn?"dn":"hc"), null, H); return }
  var vn=VNLOOK(label)||VNLOOK(String(query||"").replace(/\+/g," "));
+ /* a place I deliberately will not guess an address for — offer to save the real one */
+ var L=String(label).toLowerCase().trim(), k=VNKEY[L];
+ if(!k){ var alt=String(query||"").replace(/\+/g," ").toLowerCase().trim(); k=VNKEY[alt] }
+ if(k&&!vn){ driverCard(label,"",query||label,
+   {name:label,city:"",key:k,
+    pin:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query||label)}); return }
  driverCard(label, vn||label, query||label);
 }
 
@@ -2332,7 +2392,7 @@ var drvOpen=null;
 /* A place sheet that is useful with ZERO signal: the Vietnamese address is in the
    cached page, so it renders offline. geo: hands it to whatever offline map app
    they have; the Google link is the online path. */
-function driverCard(label,vn,q,H){
+function driverCard(label,vn,q,H,warn){
  if(drvOpen)drvOpen();
  var geo="geo:0,0?q="+encodeURIComponent(vn||label);
  var gmap=H?H.pin:("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q||vn||label));
@@ -2341,7 +2401,8 @@ function driverCard(label,vn,q,H){
   '<div class="drvl">Hold this up to the driver</div>'+
   '<div class="drvt'+(vn?"":" empty")+'">'+(vn||"No Vietnamese address saved yet")+'</div>'+
   '<div class="drvs">'+label+(H?' \u00b7 '+H.city:'')+'</div>'+
-  (H&&!vn?'<p class="drvw">Open the booking confirmation, copy the Vietnamese address and paste it in \u2014 this is the one you will show a driver most nights.<br><button class="btn sec noic" id="drvadd">Paste it now</button></p>':'')+
+  (warn?'<p class="drvwn">Sources disagree on this address. Two other listings give a different street. <b>Check the pin before you set off</b>, and ring them if it matters.</p>':'')+
+  (H&&!vn?'<p class="drvw">'+(H.city?'Open the booking confirmation, copy the Vietnamese address and paste it in \u2014 this is the one you will show a driver most nights.':'No verified Vietnamese address for this one, and I will not guess at it. Get it from whoever you book with and paste it here.')+'<br><button class="btn sec noic" id="drvadd">Paste it now</button></p>':'')+
   '<div class="drvb">'+
    '<a class="btn noic" href="'+geo+'">Open in a map app</a>'+
    '<button class="btn sec noic" id="drvc">Copy address</button>'+
@@ -2357,7 +2418,7 @@ function driverCard(label,vn,q,H){
   copyText(vn,"Address")};
  var ab=w.querySelector("#drvadd");
  if(ab)ab.onclick=function(){
-  var v=prompt("Paste the Vietnamese address for "+H.name+"\n(from the booking confirmation)","");
+  var v=prompt("Paste the Vietnamese address for "+H.name+"\n(from the booking confirmation or the operator's map pin)","");
   if(v&&v.trim()){addr[H.key]=v.trim();stamp("ad."+H.key);save();addrPane();days();close();
    setTimeout(function(){driverCard(H.name,v.trim(),null,H)},340)}
  };
@@ -2366,7 +2427,7 @@ function driverCard(label,vn,q,H){
 }
 function sosPane(){
  var el=$("sosbox"); if(!el)return;
- var h='<p class="shp">Vietnamese emergency lines are free from any phone, including one with no credit. Operators may not speak much English — say the district first, then the street, slowly.</p>';
+ var h='<p class="shp"><b>112 is officially toll-free</b> from any Vietnamese line and connects through to police, fire and ambulance \u2014 use it if you are unsure about credit. Operators may not speak much English: give the <b>ward</b>, then the street, slowly.</p>';
  SOS.forEach(function(g){
   h+='<div class="sosg"><h4>'+g.g+'</h4>';
   g.items.forEach(function(i){
@@ -2379,6 +2440,10 @@ function sosPane(){
   });
   h+='</div>';
  });
+ h+='<div class="sosg"><h4>Say it in Vietnamese</h4><div class="phr">'+
+   PHRASE.map(function(p){return '<div class="phrr"><b>'+p[0]+'</b><div class="phv">'+p[1]+'</div>'+
+     '<span>'+p[2]+'</span><button class="vch tinyc" data-say="'+encodeURIComponent(p[1])+'" data-sl="'+p[0]+'">Show</button></div>'}).join("")+
+   '</div><p class="bdis">Show the Vietnamese, do not rely on the pronunciation.</p></div>';
  h+='<div class="sosg"><h4>Lost passport — in order</h4><ol class="soso">'+
    SOSSTEPS.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ol></div>';
  h+='<div class="sosg"><h4>Your own details</h4>'+
@@ -2388,6 +2453,8 @@ function sosPane(){
  el.innerHTML=h;
  el.querySelectorAll("[data-vn]").forEach(function(b){
   b.onclick=function(){driverCard(b.dataset.vl,decodeURIComponent(b.dataset.vn),b.dataset.mq||'')}});
+ el.querySelectorAll("[data-say]").forEach(function(b){
+  b.onclick=function(){driverCard(b.dataset.sl,decodeURIComponent(b.dataset.say),null)}});
  var ta=el.querySelector("#sosnote");
  ta.value=addr["_sos"]||"";
  ta.oninput=function(){addr["_sos"]=ta.value;stamp("ad._sos");save()};
@@ -2401,8 +2468,8 @@ function addrPane(){
   c.v.forEach(function(a,i){
    var key=c.k+"|"+i, custom=addr[key]||"";
    var vn=a[1]||custom;
-   h+='<button class="vch'+(a[2]&&!custom?" need":"")+'" data-vk="'+key+'" data-vl="'+a[0]+'" data-vn="'+encodeURIComponent(vn)+'" data-edit="'+(a[2]?1:0)+'">'+
-     a[0]+(a[2]?(custom?'<i>\u2713</i>':'<i>tap to add</i>'):'')+'</button>';
+   h+='<button class="vch'+(a[2]&&!custom?" need":"")+(a[3]?" warn":"")+'" data-vk="'+key+'" data-vl="'+a[0]+'" data-vn="'+encodeURIComponent(vn)+'" data-edit="'+(a[2]?1:0)+'" data-warn="'+(a[3]?1:0)+'">'+
+     a[0]+(a[2]?(custom?'<i>\u2713</i>':'<i>tap to add</i>'):'')+(a[3]?'<i class="wrn">?</i>':'')+'</button>';
   });
   h+='</div></div>';
  });
@@ -2421,7 +2488,7 @@ function addrPane(){
    ["dn","hc"].forEach(function(c){ if(HOME[c].key===b.dataset.vk) HH=HOME[c] });
    if(HH){driverCard(HH.name,vn,null,HH);return}
    if(!vn){toast("No address saved for that one yet.",0);return}
-   driverCard(b.dataset.vl,vn);
+   driverCard(b.dataset.vl,vn,null,null,b.dataset.warn==="1");
   };
  });
 }
